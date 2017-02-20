@@ -15,8 +15,7 @@ public interface Login {
 	/*
 	 * Validates the username and password
 	 */
-	public boolean validateUSer(String username, String password);
-	
+	public boolean validateUser(String username, String password);	
 	
 	/*
 	 * Close the session and logout the user.

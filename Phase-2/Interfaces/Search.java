@@ -17,7 +17,7 @@ public interface Search {
 	/*
 	* sends these parameters to the query builder
 	*/
-	public void search(Map<String, String> searchParams);
+	public void search(Map<String, String> searchParam);
 	
 	/*
 	* Displays the results returned by the search function; in proper format
@@ -33,5 +33,10 @@ public interface Search {
 	* saves the author in the database for future use of the user
 	*/
 	public void saveAuthor (Author authorObject);
+
+	/*
+	* details of the Author
+	*/
+	public void candidateDetails(Author authorObject);
 
 }
