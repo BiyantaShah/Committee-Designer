@@ -13,11 +13,11 @@ public interface QueryBuilder {
 	/*
 	 * validate the query and look for evil inputs for enhanced security
 	 */
-	
 	public boolean validateQuery(String searchQuery);
 	
 	/*
 	 * send the query to Database
 	 */
-	public void sendQuery(String searchQuery);
+	public Object sendQuery(String searchQuery);  //This object will be of type ResultSet
+           
 }

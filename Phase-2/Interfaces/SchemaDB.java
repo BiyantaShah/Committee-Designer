@@ -5,7 +5,7 @@ import java.util.List;
 public interface SchemaDB {
 
 	/*
-	 * Creates creates objects based on the incoming data and returns them
+	 * Creates objects based on the incoming data and returns them
 	 * Objects will be of type publications, journal, author, article 
 	 */
 	public <T> List<T> objectCreation(String className, String attributeName);
@@ -13,7 +13,7 @@ public interface SchemaDB {
 	/*
 	 * Create connection to RDBMS 
 	 */
-	public Integer getConnectionType();
+	public Connection getConnection();
 
 	/*
 	 * Insert the objects created to Database
