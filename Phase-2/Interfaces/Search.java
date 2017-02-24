@@ -27,16 +27,17 @@ public interface Search {
 	/*
 	* sends email to the author selected
 	*/
-	public void sendEmail(Author authorObject);
+	public void sendEmail(Object authorObject); //This will be an object of author class
 
 	/*
 	* saves the author in the database for future use of the user
 	*/
-	public void saveAuthor (Author authorObject);
+	public void saveAuthor (Object authorObject); //This will be an object of author class
 
 	/*
 	* details of the Author
 	*/
-	public void candidateDetails(Author authorObject);
+	public void candidateDetails(Object authorObject); //This will be an object of author class
+
 
 }
