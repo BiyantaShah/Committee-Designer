@@ -27,7 +27,7 @@ public interface Search {
 	/*
 	* sends email to the author selected
 	*/
-	public void sendEmail(Object authorObject); //This will be an object of author class
+	public void sendEmail(Author authorObject);
 
 	/*
 	* saves the author in the database for future use of the user
@@ -37,8 +37,7 @@ public interface Search {
 	/*
 	* details of the Author
 	*/
-	public void candidateDetails(Object authorObject); //This will be an object of author class
-
+	public void candidateDetails(Author authorObject); 
 
 
 }
