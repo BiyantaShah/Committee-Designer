@@ -1,12 +1,13 @@
 package team7;
 
+import java.sql.Connection;
 import java.util.List;
 
 public interface SchemaDB {
 
 	/*
 	 * Creates objects based on the incoming data and returns them
-	 * Objects will be of type publications, journal, author, article 
+	 * List of <T> will be List <Object> where Object will be of type either publications or journal or author or article
 	 */
 	public <T> List<T> objectCreation(String className, String attributeName);
 	
@@ -17,6 +18,7 @@ public interface SchemaDB {
 
 	/*
 	 * Insert the objects created to Database
+	 *
 	 */
 	public <T> void insertData(List<T> object_name);
 	

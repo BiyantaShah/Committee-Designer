@@ -7,12 +7,12 @@ public interface Search {
 	/*
 	* saves the search parameter
 	*/
-	public void saveFilterValues (String filterCriteria);
+	public void saveFilterValues(String filterCriteria);
 
 	/*
 	* adds the search parameters to a list to create the query together
 	*/
-	public Map<String, String> addFilterValue (String filterCriteria, String filterValue);
+	public Map<String, String> addFilterValue(String filterCriteria, String filterValue);
 
 	/*
 	* sends these parameters to the query builder
@@ -32,11 +32,12 @@ public interface Search {
 	/*
 	* saves the author in the database for future use of the user
 	*/
-	public void saveAuthor (Author authorObject);
+	public void saveAuthor(Author authorObject);
 
 	/*
 	* details of the Author
 	*/
 	public void candidateDetails(Author authorObject);
+
 
 }

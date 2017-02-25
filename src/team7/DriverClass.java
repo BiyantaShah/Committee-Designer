@@ -6,7 +6,7 @@ public class DriverClass {
 	 * This class contains main method.
 	 */
 	
-	//	public static void main (String []args) {
-	//		System.out.println("Start");
-	//	}
+		public static void main (String []args) {
+		   System.out.println("Start");
+		}
 }
