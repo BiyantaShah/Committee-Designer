@@ -1,2 +1,5 @@
 ## team7
-Biyanta Shah, Sravani Beeram, Vivek Malik, Swayambita Das
+Biyanta Shah, 
+Sravani Beeram, 
+Vivek Malik, 
+Swayambita Das
