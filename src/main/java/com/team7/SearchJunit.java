@@ -1,4 +1,4 @@
-package team7;
+package com.team7;
 import org.junit.Test;
 
 import junit.framework.TestCase;
