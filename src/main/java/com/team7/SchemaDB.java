@@ -1,4 +1,4 @@
-package team7;
+package com.team7;
 
 import java.sql.Connection;
 import java.util.List;
