@@ -3,10 +3,7 @@ import org.junit.Test;
 
 import junit.framework.TestCase;
 
-import static org.junit.Assert.*;
-
-
-public class SearchJunit extends TestCase {
+public class SearchJunitTest extends TestCase {
 
 	@Test
 	public void testAdd1() {

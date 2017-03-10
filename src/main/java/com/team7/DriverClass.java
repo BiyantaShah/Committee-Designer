@@ -1,7 +1,5 @@
 package com.team7;
 
-import junit.framework.*;
-
 public class DriverClass {
 
 	/*
@@ -9,10 +7,10 @@ public class DriverClass {
 	 */
 
 	public static void main (String []args) {
-		TestSuite suite = new TestSuite(SearchJunit.class);
-		TestResult result = new TestResult();
-		suite.run(result);
-		System.out.println("Number of test cases = " + result.runCount());
-//		System.out.println("Start");
+//		TestSuite suite = new TestSuite(SearchJunit.class);
+//		TestResult result = new TestResult();
+//		suite.run(result);
+//		System.out.println("Number of test cases = " + result.runCount());
+		System.out.println("Start");
 	}
 }
