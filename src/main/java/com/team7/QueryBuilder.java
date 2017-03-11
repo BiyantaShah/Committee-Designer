@@ -13,7 +13,7 @@ public interface QueryBuilder {
 	/*
 	 * validate the query and look for evil inputs for enhanced security
 	 */
-	public boolean validateQuery(String searchQuery);
+	public boolean validateQuery(Map<String, String>  searchParam);
 	
 	/*
 	 * send the query to Database
