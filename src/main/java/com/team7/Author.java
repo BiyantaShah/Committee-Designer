@@ -7,7 +7,21 @@ public class Author {
  private  Article article;
  private String email;
 
-    public String getName() {
+ 	public Author(String name, Journal journal, Article article) {
+	// TODO Auto-generated constructor stub
+    	this.name = name;
+    	this.journal = journal;
+	   	this.article = article;
+ 	}
+
+ 	public Author(String name, Article article, Journal journal) {
+ 		// TODO Auto-generated constructor stub
+ 		this.name = name;
+ 		this.journal = journal;
+ 		this.article = article;
+ 	}
+
+	public String getName() {
         return name;
     }
 

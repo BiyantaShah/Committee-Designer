@@ -7,7 +7,16 @@ public class Journal {
     private  Publications publications;
     private  String volume;
 
-    public String getJournalName() {
+    public Journal(String name) {
+ 		// TODO Auto-generated constructor stub
+     	this.journalName = name;
+ 	}
+
+ 	public Journal() {
+ 		// TODO Auto-generated constructor stub
+ 	}
+
+	public String getJournalName() {
         return journalName;
     }
 
