@@ -8,5 +8,5 @@ public interface ParseDatabase {
 	/*
 	 * Parses XML to human readable format
 	 */
-	public void parseXml(File xmlDataFile);
+	public String parseXml(File xmlDataFile);
 }

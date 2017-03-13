@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class SearchJunitTest extends TestCase {
+public class SearchTest extends TestCase {
 
 	@Test
 	public void testUpdateFilters() {
@@ -117,7 +117,7 @@ public class SearchJunitTest extends TestCase {
 	
 	@Test
 	public void testSendEmail() {
-		User u = new User("Biyanta", "pass", "Associate Editor", "OOPSLA", "xyz@gmail.com");
+		User u = new User("xyz@gmail.com", "pass", "Associate Editor", "OOPSLA");
 		SearchDisplay searchDisplay = new SearchDisplay();
 		List<String> result  = searchDisplay.sendEmail(u);
 		
