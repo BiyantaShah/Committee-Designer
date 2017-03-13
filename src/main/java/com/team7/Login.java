@@ -5,12 +5,12 @@ public interface Login {
 	/*
 	 * Create a new user, if not present
 	 */
-	public void createUser(User userObject);
+	public String createUser(String userName, String password, String role, String confName);
 	
 	/*
 	 * Login to the application
 	 */
-	public void login(String username, String password);
+	public String login(String username, String password);
 	
 	/*
 	 * Validates the username and password
@@ -20,5 +20,5 @@ public interface Login {
 	/*
 	 * Close the session and logout the user.
 	 */
-	public void logout(User userObject);
+	public String logout(User userObject);
 }

@@ -6,15 +6,13 @@ public class User {
     private String password;
     private String role;
     private String confName;
-    private String email;
 
-    public User(String userName, String password, String role, String confName, String email) {
+    public User(String userName, String password, String role, String confName) {
 		// TODO Auto-generated constructor stub
-    	this.userName = userName;
+    	this.userName = userName; //email id 
     	this.password = password;
     	this.role = role;
     	this.confName = confName;
-    	this.email = email;
 	}
 
 	public String getUserName() {
@@ -48,12 +46,4 @@ public class User {
     public void setConfName(String confName) {
         this.confName = confName;
     }
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 }
