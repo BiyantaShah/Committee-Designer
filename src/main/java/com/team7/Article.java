@@ -10,7 +10,16 @@ public class Article {
     private Journal journalName;
     private  String url;
 
-    public Author getAuthor() {
+    public Article(String title) {
+		// TODO Auto-generated constructor stub
+    	this.title = title;
+	}
+
+	public Article() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Author getAuthor() {
         return author;
     }
 
