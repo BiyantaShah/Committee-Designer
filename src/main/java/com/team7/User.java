@@ -2,10 +2,10 @@ package com.team7;
 
 public class User {
 
-    private String userName;
-    private String password;
-    private String role;
-    private String confName;
+     String userName;
+     String password;
+     String role;
+     String confName;
 
     public User(String userName, String password, String role, String confName) {
 		// TODO Auto-generated constructor stub

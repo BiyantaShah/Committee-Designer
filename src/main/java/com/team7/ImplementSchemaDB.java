@@ -3,52 +3,153 @@ package com.team7;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.List;
+import java.sql.Statement;
 
-import com.jcabi.jdbc.JdbcSession;
+import java.sql.PreparedStatement;
 
 public class ImplementSchemaDB implements SchemaDB {
-	
-//	private static final String PORT = System.getProperty("mysql.port");
+			
+	public void dbSetUp() throws ClassNotFoundException, SQLException{
+		
+		   // JDBC driver name and database URL
+		   String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+		   String DB_URL = "jdbc:mysql://localhost/";
+		   
+		   //Database credentials
+		   String userName = "root";
+		   String password = "root";
+		   
+		   Connection conn = null;
+		   Statement stmt = null;
+	   
+		   try{
+			      //Register JDBC driver
+			      Class.forName(JDBC_DRIVER);
 
-	public <T> List<T> objectCreation(String className, String attributeName) {
-		// TODO Auto-generated method stub
-		return null;
+			      //Open a connection
+			      conn = DriverManager.getConnection(DB_URL, userName, password);
+			      
+			      stmt = conn.createStatement();			      
+			      String sql = "DROP DATABASE IF EXISTS DBLP";
+			      stmt.executeUpdate(sql);
+			      System.out.println("Dblp database deleted successfully...");
+
+			      //Execute a query
+			      stmt = conn.createStatement();			      
+			      sql = "CREATE DATABASE DBLP";
+			      stmt.executeUpdate(sql);
+			      System.out.println("Dblp database created successfully...");
+			   
+			      //selecting database created above
+				  String connected_db = "jdbc:mysql://localhost/DBLP";
+				  conn = DriverManager.getConnection(connected_db, userName, password);
+ 			      stmt = conn.createStatement();
+ 			      
+				  //creating conference table
+			      sql = "CREATE TABLE conference " +
+				        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
+				        " conf_key    VARCHAR(255),"  + 
+	     	            " name        TEXT, " + 
+				        " conf_detail TEXT,"  +
+				        " PRIMARY     KEY(id))"; 
+
+				  stmt.executeUpdate(sql);
+				  System.out.println("Created conference table in dblp database...");
+
+			      			      
+ 			      //creating user table
+			      sql = "CREATE TABLE user " +
+			            "(id       INTEGER      AUTO_INCREMENT NOT NULL, " +
+			            " username VARCHAR(255) UNIQUE, " + 
+			            " password VARCHAR(255), " + 
+			            " role     VARCHAR(255), " + 
+			            " confName VARCHAR(255),"+
+			            " PRIMARY  KEY(id))"; 
+
+			      stmt.executeUpdate(sql);
+			      System.out.println("Created user table in dblp database...");
+			      
+			      //creating Author table
+			      sql = "CREATE TABLE author " +
+				        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
+				        " name        VARCHAR(255), " + 
+				        " paper_key   VARCHAR(255), " + 
+				        " PRIMARY   KEY(id))"; 
+
+				  stmt.executeUpdate(sql);
+				  System.out.println("Created author table in dblp database...");
+								  
+				  //creating paper table
+			      sql = "CREATE TABLE paper " +
+				        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
+				        " title       TEXT," + 
+	     	            " year        INTEGER, "      + 
+				        " pages		  TEXT,"  +
+				        " paperKey    VARCHAR(255),"  +
+				        " PRIMARY     KEY(id))"; 
+
+				  stmt.executeUpdate(sql);
+				  System.out.println("Created paper table in dblp database...");
+				 			      
+			   }catch(SQLException se){
+			      //Handle errors for JDBC
+			      se.printStackTrace();
+			      
+			   }catch(Exception e){
+			      //Handle errors for Class.forName
+			      e.printStackTrace();
+			      
+			   }
+		   conn.close();
+
 	}
 
 	public Connection getConnection() {
-//		System.out.println("Connecting to MySQL on: "+PORT);
-		Connection conn = null;
+
+		  Connection conn = null;
+		  
+		  //Database to be connected
+		  String connected_db = "jdbc:mysql://localhost/DBLP";
+		  
+		  //Database credentials
+		   String userName = "root";
+		   String password = "root";
+		 
 		try {
-			conn = DriverManager.getConnection(
-					String.format(
-							"jdbc:mysql://localhost:%s/ProjectTest?user=root",
-							3306 //SchemaDBTest.PORT
-							)
-					);
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			  conn = DriverManager.getConnection(connected_db, userName, password);
+			  
+		    } catch (SQLException e) {
+		    	
+			  e.printStackTrace();
 		}
 		return conn;
 	}
 
-	public <T> void insertData(List<T> object_name) {
-		Connection conn = getConnection();
+	public <T> void insertData(Object object_name) throws SQLException {
+		
+		Connection conn = getConnection();		
+		
 		try {
-			new JdbcSession(conn)
-			.sql("CREATE TABLE foo (id INT PRIMARY KEY)")
-			.execute()
-			.sql("INSERT INTO foo (id) VALUES (1112211)")
-			.execute()
-			.sql("select * from foo")
-			.execute()
-			.commit();
+			
+			if(object_name instanceof User)
+			{
+				PreparedStatement statement_inproceedings = conn.prepareStatement("insert into User(userName,password,role,confName) values(?,?,?,?)");
+				statement_inproceedings.setString(1,(((User) object_name).userName));
+				statement_inproceedings.setString(2,((User) object_name).password);
+				statement_inproceedings.setString(3,  ((User) object_name).role);
+				statement_inproceedings.setString(4, ((User) object_name).confName);
+     			statement_inproceedings.executeUpdate();
+     			
+			}
+						
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
+		
+		conn.close();
+
 	}
 
 }
