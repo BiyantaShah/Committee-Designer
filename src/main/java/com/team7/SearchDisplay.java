@@ -3,7 +3,7 @@ package com.team7;
 import java.util.List;
 import java.util.Map;
 
-public interface Search {
+public interface SearchDisplay {
 	
 	/*
 	* updates the search parameter

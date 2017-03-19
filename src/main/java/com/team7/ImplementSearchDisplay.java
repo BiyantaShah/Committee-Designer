@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SearchDisplay implements Search {
+public class ImplementSearchDisplay implements SearchDisplay {
 	
 	// Keeps track of all filter criteria and their values
 	Map<String, String> filterMap = new HashMap<String, String>();
