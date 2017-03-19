@@ -2,23 +2,17 @@ package com.team7;
 
 public class Author {
 
- private  String name;
- private  Journal journal;
- private  Article article;
- private String email;
+   String name;
+   String key;
 
- 	public Author(String name, Journal journal, Article article) {
+ 	public Author() {
 	// TODO Auto-generated constructor stub
-    	this.name = name;
-    	this.journal = journal;
-	   	this.article = article;
  	}
 
- 	public Author(String name, Article article, Journal journal) {
+ 	public Author(String name, String key) {
  		// TODO Auto-generated constructor stub
  		this.name = name;
- 		this.journal = journal;
- 		this.article = article;
+ 		this.key = key;
  	}
 
 	public String getName() {
@@ -28,28 +22,13 @@ public class Author {
     public void setName(String name) {
         this.name = name;
     }
+    
 
-    public Journal getJournal() {
-        return journal;
+    public String getKey() {
+        return key;
     }
 
-    public void setJournal(Journal journal) {
-        this.journal = journal;
-    }
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setKey(String key) {
+        this.key = key;
     }
 }
