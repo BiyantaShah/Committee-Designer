@@ -8,9 +8,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @SuppressWarnings("restriction")
 @XmlRootElement
 public class dblp {
-	
+
 	List<Paper> inproceedings;
 	List<Conference> proceedings;
+	List<Garbage> garbage; // only for testing purposes
 
 	public List<Paper> getInproceedings() {
 		return inproceedings;
@@ -29,6 +30,17 @@ public class dblp {
 	public void setProceedings(List<Conference> proceedings) {
 		this.proceedings = proceedings;
 	}
+
+	public List<Garbage> getGarbage() {
+		return garbage;
+	}
+	
+	@XmlElement
+	public void setGarbage(List<Garbage> garbage) {
+		this.garbage = garbage;
+	}
+	
+
 
 	
 }

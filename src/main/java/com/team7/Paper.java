@@ -1,4 +1,4 @@
- package com.team7;
+package com.team7;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlElement;
 
 @SuppressWarnings("restriction")
 public class Paper {
-
 
 	List<String> author;
 	String title;

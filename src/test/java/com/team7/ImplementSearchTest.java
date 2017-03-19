@@ -2,9 +2,6 @@ package com.team7;
 import org.junit.Test;
 
 import junit.framework.TestCase;
-
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -85,36 +82,7 @@ public class ImplementSearchTest extends TestCase {
 		assertEquals("Aki Matsumoto , Dong-Soo Han, Takao Tsuda", result);
 		
 	}
-	
-	/*@Test
-	public void testSaveAuthorValid() {
-		Author a = new Author("Aki Matsumoto", new Journal(), new Article());
-		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay();
-		String result = searchdisplay.saveAuthor(a);
 		
-		assertEquals("Author saved correctly", result);
-	}
-	
-	@Test
-	public void testSaveAuthorInvalid() {
-		Author a = new Author("Aki Matsumoto", new Article(), new Journal());
-		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
-		String result = searchDisplay.saveAuthor(a);
-		
-		// author should be saved in a particular format, 
-		// here instead of article we have journal, which is an incorrect format
-		assertNotEquals("Author saved correctly", result);
-	}
-	
-	@Test
-	public void testCandidateDetails() {
-		Author a = new Author("Roberto Bruni", new Article("Revisiting causality, coalgebraically"), new Journal("Acta Inf."));
-		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
-		String result = searchDisplay.candidateDetails(a);
-		
-		assertEquals("Roberto Bruni Revisiting causality, coalgebraically Acta Inf.", result);
-	}*/
-	
 	@Test
 	public void testSendEmail() {
 		User u = new User("xyz@gmail.com", "pass", "Associate Editor", "OOPSLA");

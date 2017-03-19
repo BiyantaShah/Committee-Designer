@@ -2,25 +2,25 @@ package com.team7;
 
 public class Author {
 
- public  String author;
- public  String key;
+   String name;
+   String key;
 
  	public Author() {
 	// TODO Auto-generated constructor stub
  	}
 
- 	public Author(String author, String key) {
+ 	public Author(String name, String key) {
  		// TODO Auto-generated constructor stub
- 		this.author = author;
+ 		this.name = name;
  		this.key = key;
  	}
 
 	public String getAuthor() {
-        return author;
+        return name;
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        this.name = author;
     }
     
 

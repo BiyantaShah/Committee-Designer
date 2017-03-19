@@ -12,20 +12,19 @@ public class DriverClass {
 	 * This class contains main method.
 	 */
 
-	public static void main (String []args) throws ClassNotFoundException, SQLException, JAXBException {
-		
+	public static void main (String []args) throws JAXBException, ClassNotFoundException, SQLException {
+	
 		System.out.println("Start");
-
-		File file = new File("input/dblp.xml");
-		ImplementSchemaDB db = new ImplementSchemaDB();
-		ImplementParseDatabase parse = new ImplementParseDatabase();
-		System.setProperty("jdk.xml.entityExpansionLimit", "0");	
 		
+		File file = new File("input/dblp.xml");
+		// Parsing the xml to create objects
+		ImplementParseDatabase parse = new ImplementParseDatabase();
+		ImplementSchemaDB db = new ImplementSchemaDB();
 		db.dbSetUp();
 		parse.parseXml(file);
-		
-		System.out.println("end");
-		
+		System.out.println("ENDD");
 	}
 
 }
+
+	

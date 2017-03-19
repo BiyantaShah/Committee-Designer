@@ -11,5 +11,5 @@ public interface ParseDatabase {
 	/*
 	 * Parses XML to human readable format
 	 */
-	public void parseXml(File xmlDataFile) throws JAXBException,SQLException;
+	public String parseXml(File xmlDataFile) throws JAXBException, SQLException;
 }
