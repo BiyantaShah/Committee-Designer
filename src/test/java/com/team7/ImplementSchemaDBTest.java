@@ -79,8 +79,7 @@ public class ImplementSchemaDBTest extends TestCase {
 			e.printStackTrace();
 		}
 		conn.close();
-	}
-	
+	}	
 }
 	
 	/*

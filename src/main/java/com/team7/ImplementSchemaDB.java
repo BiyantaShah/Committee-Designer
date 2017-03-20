@@ -13,7 +13,8 @@ public class ImplementSchemaDB implements SchemaDB {
 		
 		   // JDBC driver name and database URL
 		   String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-		   String DB_URL = "jdbc:mysql://localhost/";
+		   String DB_URL = "jdbc:mysql://localhost";
+		   
 		   
 		   //Database credentials
 		   String userName = "root";
@@ -45,20 +46,9 @@ public class ImplementSchemaDB implements SchemaDB {
 				  conn = DriverManager.getConnection(connected_db, userName, password);
  			      stmt = conn.createStatement();
  			      
-				  //creating conference table
-			      sql = "CREATE TABLE conference " +
-				        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
-				        " conf_key    VARCHAR(255),"  + 
-	     	            " name        TEXT, " + 
-				        " conf_detail TEXT,"  +
-				        " PRIMARY     KEY(id))"; 
-
-				  stmt.executeUpdate(sql);
-				  System.out.println("Created conference table in dblp database...");
-
-			      			      
+ 			      
  			      //creating user table
-			      sql = "CREATE TABLE user " +
+			      sql = "CREATE TABLE User " +
 			            "(id       INTEGER      AUTO_INCREMENT NOT NULL, " +
 			            " username VARCHAR(255) UNIQUE, " + 
 			            " password VARCHAR(255), " + 
@@ -68,20 +58,23 @@ public class ImplementSchemaDB implements SchemaDB {
 
 			      stmt.executeUpdate(sql);
 			      System.out.println("Created user table in dblp database...");
+
 			      
-			      //creating Author table
-			      sql = "CREATE TABLE author " +
+				  //creating conference table
+			      sql = "CREATE TABLE Conference " +
 				        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
-				        " name        VARCHAR(255), " + 
-				        " paper_key   VARCHAR(255), " + 
-				        " PRIMARY   KEY(id))"; 
+				        " conf_key    VARCHAR(255),"  + 
+	     	            " name        TEXT, " + 
+				        " conf_detail TEXT,"  +
+				        " PRIMARY     KEY(id))"; 
 
 				  stmt.executeUpdate(sql);
-				  System.out.println("Created author table in dblp database...");
-								  
+				  System.out.println("Created Conference table in dblp database...");
+
+			      			      			      
 				  //creating paper table
-			      sql = "CREATE TABLE paper " +
-				        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
+			      sql = "CREATE TABLE Paper " +
+				        "(id          INTEGER   AUTO_INCREMENT NOT NULL, " +
 				        " title       TEXT," + 
 	     	            " year        INTEGER, "      + 
 				        " pages		  TEXT,"  +
@@ -89,8 +82,25 @@ public class ImplementSchemaDB implements SchemaDB {
 				        " PRIMARY     KEY(id))"; 
 
 				  stmt.executeUpdate(sql);
-				  System.out.println("Created paper table in dblp database...");
-				 			      
+				  System.out.println("Created Paper table in dblp database...");
+				  
+
+			     //creating Author table
+			      sql = "CREATE TABLE Author " +
+				        "(id        INTEGER      AUTO_INCREMENT NOT NULL, " +
+				        " name      VARCHAR(255), " + 
+				        " paperKey  VARCHAR(255), " + 
+				        " PRIMARY   KEY(id))" ;
+
+				  stmt.executeUpdate(sql);
+				  System.out.println("Created author table in dblp database...");
+				  
+//				  //Foreign key constraint on Author table
+//				  sql = "ALTER TABLE Author ADD FOREIGN KEY (paperKey) REFERENCES Paper(paperKey)";
+//				  stmt.executeUpdate(sql);
+//				  System.out.println("Created Foreign key constraint on author table...");
+
+								  				 			      
 			   }catch(SQLException se){
 			      //Handle errors for JDBC
 			      se.printStackTrace();
@@ -133,6 +143,7 @@ public class ImplementSchemaDB implements SchemaDB {
 		try {
 			
 			if(object_name instanceof User)
+				
 			{
 				PreparedStatement statement_inproceedings = conn.prepareStatement("insert into User(userName,password,role,confName) values(?,?,?,?)");
 				statement_inproceedings.setString(1,(((User) object_name).userName));

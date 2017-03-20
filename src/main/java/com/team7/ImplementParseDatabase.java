@@ -1,11 +1,8 @@
 package com.team7;
 
 import java.io.*;
-<<<<<<< HEAD
-=======
 import java.sql.Connection;
 import java.sql.PreparedStatement;
->>>>>>> master
 import java.sql.SQLException;
 
 import javax.xml.bind.JAXBContext;
@@ -19,42 +16,6 @@ public class ImplementParseDatabase implements ParseDatabase {
 
 
 	public String parseXml(File file) throws JAXBException, SQLException {
-		
-		JAXBContext jaxbContext = JAXBContext.newInstance(dblp.class);
-		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		
-		System.setProperty("javax.xml.accessExternalDTD", "all");
-		System.setProperty("jdk.xml.maxGeneralEntitySizeLimit","0");
-		System.setProperty("jdk.xml.entityExpansionLimit","0");
-		
-		dblp data = (dblp)  jaxbUnmarshaller.unmarshal(file);	
-		
-		
-		if(data.getInproceedings() != null) {
-			
-			for (Paper paper: data.getInproceedings()) {
-				
-				db.insertData(paper);
-				
-				if(paper.getAuthor() == null)
-					continue;
-					
-				for (String author: paper.author) {
-					Author auth = new Author(author, paper.key);
-					db.insertData(auth);
-				}		
-			}
-			
-			for (Conference conf: data.getProceedings()) {
-	//			System.out.println(conf.booktitle);
-				db.insertData(conf);
-			}
-		}
-			
-	}
-
-
-	public String parseXml1(File file) throws JAXBException, SQLException {
 		
 			JAXBContext jaxbContext = JAXBContext.newInstance(dblp.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
