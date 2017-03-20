@@ -12,6 +12,7 @@ public class ImplementParseDatabaseTest extends TestCase{
 
 	@Test
 	public void testParseSuccess() throws JAXBException, SQLException {
+		
 		// to test the successful parsing of XML file
 		File file = new File("input/positiveTest.xml");
 		ImplementParseDatabase parse = new ImplementParseDatabase();
@@ -22,6 +23,7 @@ public class ImplementParseDatabaseTest extends TestCase{
 	
 	@Test
 	public void testParseFailure() throws JAXBException, SQLException {
+		
 		// to test the failure of parsing of XML file
 		File file = new File("input/negativeTest.xml");
 		ImplementParseDatabase parse = new ImplementParseDatabase();

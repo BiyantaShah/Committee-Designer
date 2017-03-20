@@ -13,7 +13,7 @@ public class ImplementSchemaDB implements SchemaDB {
 		
 		   // JDBC driver name and database URL
 		   String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-		   String DB_URL = "jdbc:mysql://localhost";
+		   String DB_URL = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
 		   
 		   
 		   //Database credentials
@@ -42,7 +42,7 @@ public class ImplementSchemaDB implements SchemaDB {
 			      System.out.println("Dblp database created successfully...");
 			   
 			      //selecting database created above
-				  String connected_db = "jdbc:mysql://localhost/DBLP";
+				  String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true";
 				  conn = DriverManager.getConnection(connected_db, userName, password);
  			      stmt = conn.createStatement();
  			      
@@ -99,6 +99,7 @@ public class ImplementSchemaDB implements SchemaDB {
 			      sql = "CREATE TABLE Committees " +
 				        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
 				        " name        VARCHAR(255), " + 
+				        " role        VARCHAR(255), " + 
 				        " confName    VARCHAR(255), " + 
 	     	            " year        INTEGER, "      +   
 				        " PRIMARY     KEY(id))" ;
@@ -124,7 +125,7 @@ public class ImplementSchemaDB implements SchemaDB {
 		  Connection conn = null;
 		  
 		  //Database to be connected
-		  String connected_db = "jdbc:mysql://localhost/DBLP";
+		  String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true";
 		  
 		  //Database credentials
 		   String userName = "root";
