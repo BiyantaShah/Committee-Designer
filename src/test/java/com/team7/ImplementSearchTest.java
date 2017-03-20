@@ -82,6 +82,27 @@ public class ImplementSearchTest extends TestCase {
 		assertEquals("Aki Matsumoto , Dong-Soo Han, Takao Tsuda", result);
 		
 	}
+	
+	
+	@Test
+	public void testSaveAuthorValid() {
+		Author a = new Author("Dong-Soo Han", "conf/aina/KimJH08");
+		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
+		String result = searchDisplay.saveAuthor(a);
+
+		assertEquals("Author saved correctly", result);
+	}
+	
+	
+	@Test
+	public void testCandidateDetails() {
+		Author a = new Author("Dong-Soo Han", "conf/aina/KimJH08");
+		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
+		String result = searchDisplay.candidateDetails(a);
+
+		assertEquals("Dong-Soo Han,  conf/aina/KimJH08", result);
+	}
+
 		
 	@Test
 	public void testSendEmail() {

@@ -15,12 +15,12 @@ public class Author {
  		this.key = key;
  	}
 
-	public String getAuthor() {
+	public String getName() {
         return name;
     }
 
-    public void setAuthor(String author) {
-        this.name = author;
+    public void setName(String name) {
+        this.name = name;
     }
     
 
