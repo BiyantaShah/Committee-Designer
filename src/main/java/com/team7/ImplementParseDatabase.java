@@ -34,7 +34,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 				PreparedStatement statement_inproceedings = conn.prepareStatement("insert into Paper(title,year,pages,paperKey)"
 					 	+ "values(?,?,?,?)");
 				
-				PreparedStatement statement_author = conn.prepareStatement("insert into author(name,paper_key) values (?,?)");
+				PreparedStatement statement_author = conn.prepareStatement("insert into author(name,paperKey) values (?,?)");
 			
 				for (Paper paper: data.getInproceedings()) {
 					
