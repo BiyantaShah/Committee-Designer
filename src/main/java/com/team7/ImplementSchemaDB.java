@@ -95,11 +95,16 @@ public class ImplementSchemaDB implements SchemaDB {
 				  stmt.executeUpdate(sql);
 				  System.out.println("Created author table in dblp database...");
 				  
-//				  //Foreign key constraint on Author table
-//				  sql = "ALTER TABLE Author ADD FOREIGN KEY (paperKey) REFERENCES Paper(paperKey)";
-//				  stmt.executeUpdate(sql);
-//				  System.out.println("Created Foreign key constraint on author table...");
+				     //creating Committees table
+			      sql = "CREATE TABLE Committees " +
+				        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
+				        " name        VARCHAR(255), " + 
+				        " confName    VARCHAR(255), " + 
+	     	            " year        INTEGER, "      +   
+				        " PRIMARY     KEY(id))" ;
 
+				  stmt.executeUpdate(sql);
+				  System.out.println("Created Committees table in dblp database...");
 								  				 			      
 			   }catch(SQLException se){
 			      //Handle errors for JDBC
