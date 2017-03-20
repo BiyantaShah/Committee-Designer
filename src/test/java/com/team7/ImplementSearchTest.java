@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class SearchTest extends TestCase {
+public class ImplementSearchTest extends TestCase {
 
 	@Test
 	public void testUpdateFilters() {
@@ -83,6 +83,7 @@ public class SearchTest extends TestCase {
 		
 	}
 	
+	
 	@Test
 	public void testSaveAuthorValid() {
 		Author a = new Author("Dong-Soo Han", "conf/aina/KimJH08");
@@ -92,6 +93,7 @@ public class SearchTest extends TestCase {
 		assertEquals("Author saved correctly", result);
 	}
 	
+	
 	@Test
 	public void testCandidateDetails() {
 		Author a = new Author("Dong-Soo Han", "conf/aina/KimJH08");
@@ -100,7 +102,8 @@ public class SearchTest extends TestCase {
 
 		assertEquals("Dong-Soo Han,  conf/aina/KimJH08", result);
 	}
-	
+
+		
 	@Test
 	public void testSendEmail() {
 		User u = new User("xyz@gmail.com", "pass", "Associate Editor", "OOPSLA");

@@ -1,15 +1,15 @@
 package com.team7;
 
 import java.sql.Connection;
-import java.util.List;
+import java.sql.SQLException;
 
 public interface SchemaDB {
 
-	/*
-	 * Creates objects based on the incoming data and returns them
-	 * List of <T> will be List <Object> where Object will be of type either publications or journal or author or article
+	
+	/* 
+	 * Creates database and tables
 	 */
-	public <T> List<T> objectCreation(String className, String attributeName);
+	public void dbSetUp() throws ClassNotFoundException, SQLException;
 	
 	/*
 	 * Create connection to RDBMS 
@@ -20,6 +20,6 @@ public interface SchemaDB {
 	 * Insert the objects created to Database
 	 *
 	 */
-	public <T> void insertData(List<T> object_name);
+	public <T> void insertData(Object object_name) throws SQLException;
 	
 }

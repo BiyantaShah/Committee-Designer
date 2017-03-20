@@ -30,7 +30,7 @@ public class dblp {
 	public void setProceedings(List<Conference> proceedings) {
 		this.proceedings = proceedings;
 	}
-	
+
 	public List<Garbage> getGarbage() {
 		return garbage;
 	}
@@ -40,6 +40,7 @@ public class dblp {
 		this.garbage = garbage;
 	}
 	
+
 
 	
 }

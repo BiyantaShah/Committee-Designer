@@ -1,6 +1,8 @@
 package com.team7;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.junit.runners.MethodSorters;
 import com.jcabi.jdbc.JdbcSession;
@@ -32,19 +34,26 @@ public class ImplementSchemaDBTest extends TestCase {
 	 */
 	
 	@Test
-	public void testBCreateTable() {
-		Connection conn = null;
-		conn = new ImplementSchemaDB().getConnection();
-		assertNotNull(conn);
+	public void testBSetUp() throws ClassNotFoundException, SQLException {
+		
+		ImplementSchemaDB db = new ImplementSchemaDB();
+		db.dbSetUp();
+		Connection conn = new ImplementSchemaDB().getConnection();
+          
 		try {
+			
+			PreparedStatement  test = conn.prepareStatement("show tables");
+            ResultSet rs = test.executeQuery();
+			
 			JdbcSession sessionObject = new JdbcSession(conn)
-					.sql("CREATE TABLE foo (id INT PRIMARY KEY)")
-					.execute();
+											.sql("show tables")
+											.execute();
 			assertNotNull(sessionObject);
 						
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		conn.close();
 	}
 	
 	/*
@@ -53,63 +62,24 @@ public class ImplementSchemaDBTest extends TestCase {
 	 */
 	
 	@Test
-	public void testCInsertData() {
-		Connection conn = null;
-		conn = new ImplementSchemaDB().getConnection();
+	public void testCInsertData() throws SQLException {
+		
+		ImplementSchemaDB db = new ImplementSchemaDB();
+		User test = new User("test@test.com","test","editor","OOPSLA");	
+        db.insertData(test);
+        
+      	Connection conn = new ImplementSchemaDB().getConnection();
 		assertNotNull(conn);
 		try {
 			JdbcSession sessionObject = new JdbcSession(conn)
-					.sql("INSERT INTO foo (id) VALUES (1112211)")
+					.sql("select id from user where userName like 'test@test.com'")
 					.execute();
 			assertNotNull(sessionObject);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	/*
-	 * Test Case to test getting data
-	 * Test will fail if connection object is null Or data is not fetched correctly
-	 */
-	
-	@Test
-	public void testDGetData() {
-		Connection conn = null;
-		conn = new ImplementSchemaDB().getConnection();
-		assertNotNull(conn);
-		System.out.println("Getting Data");
-		try {
-			String valueFromDB = new JdbcSession(conn)
-					.sql("select * from foo")
-					.select(new SingleOutcome<String>(String.class));
-			System.out.println(valueFromDB);
-			assertEquals(valueFromDB, "1112211");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
-	/*
-	 * Delete Test Table after running tests
-	 * Test will fail if connection object is null
-	 * Deletes Table on success
-	 */
-	
-	@After
-	public void testEDeleteTable() {
-		Connection conn = null;
-		conn = new ImplementSchemaDB().getConnection();
-		assertNotNull(conn);
-		try {
-			JdbcSession sessionObject = new JdbcSession(conn)
-			.sql("DROP table foo")
-			.execute();			
-			assertNotNull(sessionObject);			
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}		
-	}
+		conn.close();
+	}	
 }
 	
 	/*
