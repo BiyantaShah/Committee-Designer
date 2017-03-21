@@ -1,6 +1,12 @@
 package com.team7;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -14,9 +20,9 @@ public class ImplementParseDatabase implements ParseDatabase {
 	
 	ImplementSchemaDB db = new ImplementSchemaDB();
 
-
 	public String parseXml(File file) throws JAXBException, SQLException {
 		
+
 			JAXBContext jaxbContext = JAXBContext.newInstance(dblp.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			
@@ -24,6 +30,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 			System.setProperty("jdk.xml.maxGeneralEntitySizeLimit","0");
 			System.setProperty("jdk.xml.entityExpansionLimit","0");
 			
+
 			dblp data = (dblp)  jaxbUnmarshaller.unmarshal(file);
 
 			System.out.println("BLIHH");
@@ -31,49 +38,92 @@ public class ImplementParseDatabase implements ParseDatabase {
 			final int batchSize = 10000;
 			int i=0, j=0, k=0, l=0;
 			
-			if (data.getInproceedings() != null) {
-				PreparedStatement statement_inproceedings = conn.prepareStatement("insert into Paper(title,year,pages,paperKey)"
-					 	+ "values(?,?,?,?)");
+			
+
+			
+			if(data.getWww() != null){
 				
-				PreparedStatement statement_author = conn.prepareStatement("insert into author(name,paperKey) values (?,?)");
+				PreparedStatement statement_author =  conn.prepareStatement("insert into author(name,url) values (?,?)");
+								
+				for(Author auth : data.getWww()){
+					
+					if(auth.author != null && auth.url != null){
+												
+						for(String name : auth.author)
+		        			{
+								statement_author.setString(1,name);
+								statement_author.setString(2,auth.url);
+								statement_author.addBatch();
+							}
+							
+							if (++i % batchSize == 0){
+								
+							    statement_author.executeBatch();
+						    }
+										
+						}
+				}	
+				
+ 				statement_author.executeBatch();
+
+			}
+			
+			if (data.getInproceedings() != null) {
+				
+				System.out.println("www1");
+
+				PreparedStatement statement_inproceedings = conn.prepareStatement("insert into Paper(author,title,year,pages,confName,journalName)"
+					 	+ "values(?,?,?,?,?,?)");
+				
 			
 				for (Paper paper: data.getInproceedings()) {
 					
 					if ((paper.getAuthor() == null)) 
-						// author is null then don't make an 
-						// object of either paper or author
+						// author is null then don't make an object of either paper 
 						continue;
 					
-					statement_inproceedings.setString(1,paper.title);
-					statement_inproceedings.setInt(2,paper.year);
-					statement_inproceedings.setString(3,  paper.pages);
-					statement_inproceedings.setString(4, paper.key);
-	     			statement_inproceedings.addBatch();
+					if(!isUTF8MisInterpreted(paper.getTitle(),"Windows-1252")){
+						continue;
+					}
+										
+				    String[] output  = new String[3];
+				    output = paper.key.split("/");
+				    String confName = null;
+				    String journalName = null;
+				    
+				    if (output[0].equals("conf")){
+				    	
+				    	confName = output[1];
+				    	
+				    }else if(output[0].equals("journals")){
+				    	
+				    	 journalName = output[1];
+				    	
+				    }
+					
 					
 					for (String author: paper.author) {
-						Author auth = new Author(author, paper.key);
-						
-						statement_author.setString(1, auth.name); 
-						statement_author.setString(2, auth.key);
-						statement_author.addBatch();
+												
+						statement_inproceedings.setString(1,author);
+						statement_inproceedings.setString(2,paper.title);
+						statement_inproceedings.setInt(3,paper.year);
+						statement_inproceedings.setString(4,paper.pages);
+						statement_inproceedings.setString(5,confName);
+						statement_inproceedings.setString(6,journalName);
+		     			statement_inproceedings.addBatch();
 					}
 					
-					if (++i % batchSize == 0){
-						statement_inproceedings.executeBatch();
-					}
-
 					if (++j % batchSize == 0){
-						statement_author.executeBatch();
+						statement_inproceedings.executeBatch();
 					}
 					
 				}
 				statement_inproceedings.executeBatch();
-				statement_author.executeBatch();
 			}
 			
 			if (data.getProceedings() != null) {
 				
-				PreparedStatement statement_conference = conn.prepareStatement("insert into conference(conf_key,name,conf_detail) values (?,?,?)");
+				PreparedStatement statement_conference = conn.prepareStatement("insert into conference(confKey,name,confDetail) values (?,?,?)");
 				
 				for (Conference conf: data.getProceedings()) {
 					statement_conference.setString(1, conf.key);
@@ -123,5 +173,27 @@ public class ImplementParseDatabase implements ParseDatabase {
 			}
 			
 			return "success";
-		}		
+		}
+
+	private boolean isUTF8MisInterpreted(String input, String encoding) {
+		// TODO Auto-generated method stub
+	    CharsetDecoder decoder = Charset.forName("UTF-8").newDecoder();
+	    CharsetEncoder encoder = Charset.forName(encoding).newEncoder();
+	    ByteBuffer tmp;
+	    try {
+	        tmp = encoder.encode(CharBuffer.wrap(input));
+	    }
+
+	    catch(CharacterCodingException e) {
+	        return false;
+	    }
+
+	    try {
+	        decoder.decode(tmp);
+	        return true;
+	    }
+	    catch(CharacterCodingException e){
+	        return false;
+	    }       
+	 }		
 	}
