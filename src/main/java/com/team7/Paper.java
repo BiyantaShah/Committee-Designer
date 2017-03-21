@@ -55,9 +55,9 @@ public class Paper {
 	}
 
 	@XmlAttribute
-	public void setKey(String key) {
-		this.key = key;
-	}
+	public void setKey(String key) {		
+		 this.key = key;
+       	}
 
 	@Override
 	public String toString() {

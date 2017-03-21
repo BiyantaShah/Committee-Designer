@@ -11,7 +11,9 @@ public class dblp {
 
 	List<Paper> inproceedings;
 	List<Conference> proceedings;
+	List<Author> www;
 	List<Garbage> garbage; // only for testing purposes
+	
 
 	public List<Paper> getInproceedings() {
 		return inproceedings;
@@ -31,6 +33,15 @@ public class dblp {
 		this.proceedings = proceedings;
 	}
 
+	public List<Author> getWww() {
+		return www;
+	}
+
+	@XmlElement
+	public void setWww(List<Author> www) {
+		this.www = www;
+	}
+
 	public List<Garbage> getGarbage() {
 		return garbage;
 	}
@@ -39,9 +50,6 @@ public class dblp {
 	public void setGarbage(List<Garbage> garbage) {
 		this.garbage = garbage;
 	}
-	
-
-
-	
+		
 }
 

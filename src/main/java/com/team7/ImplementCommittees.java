@@ -19,10 +19,10 @@ public class ImplementCommittees implements Committees {
 		
 		ImplementSchemaDB db = new ImplementSchemaDB();
 		Connection conn = db.getConnection();
-		PreparedStatement stmt = conn.prepareStatement("insert into Committees(name,role,confName,year) values(?,?,?,?)");
+		PreparedStatement stmt = conn.prepareStatement("insert into Committee(confName,year,authoreName,role) values(?,?,?,?)");
 
 		String rec = null;
-		String name = null;
+		String authorName = null;
 		String role = null;
 		String confName = null;
 		int year;
@@ -33,7 +33,15 @@ public class ImplementCommittees implements Committees {
 		for(File fName : textFile.listFiles()){
 			
 			BufferedReader bf = new BufferedReader(new FileReader(fName));		
-			String fileName = fName.getName();			
+			String fileName = fName.getName();	
+			
+			// .DS_Store is a file that stores custom attributes of its containing folder, 
+	    	 // such as the position of icons or the choice of a background image
+			 // This file is created in a folder by the mac OS operating system, and since we don't need to
+			 // use that for parsing, removing it while parsing.
+			
+			if (!fileName.equals(".DS_Store")){
+							
 		    List<String> output = new ArrayList<String>();
 		    Matcher match = Pattern.compile("[0-9]+|[a-z]+|[A-Z]").matcher(fileName);
 		    while (match.find()) {
@@ -47,21 +55,21 @@ public class ImplementCommittees implements Committees {
 		    	if(rec.contains(":")){
 		    		
 		    		 role = rec.substring(0,rec.indexOf(':'));
-		    		 name = rec.substring(rec.indexOf(':')+1,rec.length());	
+		    		 authorName = rec.substring(rec.indexOf(':')+1,rec.length());	
 		    		 
 		    	}else{
 		    		
 		    		 role = null;
-		    		 name = rec;
+		    		 authorName = rec;
 		    	}
 		    	
 		    	   confName = output.get(0);
 		    	   year = Integer.parseInt(output.get(1));	
 		    	   
-		    	   stmt.setString(1,name);
-		    	   stmt.setString(2,role);
-		    	   stmt.setString(3,confName);
-		    	   stmt.setInt(4,year);
+		    	   stmt.setString(1,confName);
+		    	   stmt.setInt(2,year);
+		    	   stmt.setString(3,authorName);
+		    	   stmt.setString(4,role);
 		    	   stmt.addBatch();
 		    	   
 		    	   if(confName.equals("test")){ //for testing purposes						
@@ -78,9 +86,10 @@ public class ImplementCommittees implements Committees {
 		    }
 		    
 		    bf.close();
+		 }
 		}
 		stmt.executeBatch();
 		return "success";
-	}
+	  }
 
 }

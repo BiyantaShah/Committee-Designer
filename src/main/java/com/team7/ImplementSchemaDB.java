@@ -63,9 +63,9 @@ public class ImplementSchemaDB implements SchemaDB {
 				  //creating conference table
 			      sql = "CREATE TABLE Conference " +
 				        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
-				        " conf_key    VARCHAR(255),"  + 
+				        " confKey     VARCHAR(255),"  + 
 	     	            " name        TEXT, " + 
-				        " conf_detail TEXT,"  +
+				        " confDetail  TEXT,"  +
 				        " PRIMARY     KEY(id))"; 
 
 				  stmt.executeUpdate(sql);
@@ -74,12 +74,14 @@ public class ImplementSchemaDB implements SchemaDB {
 			      			      			      
 				  //creating paper table
 			      sql = "CREATE TABLE Paper " +
-				        "(id          INTEGER   AUTO_INCREMENT NOT NULL, " +
-				        " title       TEXT," + 
-	     	            " year        INTEGER, "      + 
-				        " pages		  TEXT,"  +
-				        " paperKey    VARCHAR(255),"  +
-				        " PRIMARY     KEY(id))"; 
+				        "(id           INTEGER   AUTO_INCREMENT NOT NULL, " +
+				        " author       VARCHAR(255),"  + 
+				        " title        TEXT,"          + 
+				        " pages		   VARCHAR(255),"  +
+	     	            " year         INTEGER, "      + 
+				        " confName     VARCHAR(255),"  +
+				        " journalName  VARCHAR(255),"  +
+				        " PRIMARY      KEY(id))"; 
 
 				  stmt.executeUpdate(sql);
 				  System.out.println("Created Paper table in dblp database...");
@@ -89,23 +91,23 @@ public class ImplementSchemaDB implements SchemaDB {
 			      sql = "CREATE TABLE Author " +
 				        "(id        INTEGER      AUTO_INCREMENT NOT NULL, " +
 				        " name      VARCHAR(255), " + 
-				        " paperKey  VARCHAR(255), " + 
+				        " url       TEXT, " + 
 				        " PRIMARY   KEY(id))" ;
 
 				  stmt.executeUpdate(sql);
 				  System.out.println("Created author table in dblp database...");
 				  
 				     //creating Committees table
-			      sql = "CREATE TABLE Committees " +
-				        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
-				        " name        VARCHAR(255), " + 
-				        " role        VARCHAR(255), " + 
-				        " confName    VARCHAR(255), " + 
-	     	            " year        INTEGER, "      +   
-				        " PRIMARY     KEY(id))" ;
+			      sql = "CREATE TABLE Committee " +
+				        "(id              INTEGER      AUTO_INCREMENT NOT NULL, " +
+				        " confName        VARCHAR(255), " + 
+	     	            " year            INTEGER, "      +   
+				        " authoreName     VARCHAR(255), " + 
+				        " role            VARCHAR(255), " + 
+				        " PRIMARY         KEY(id))" ;
 
 				  stmt.executeUpdate(sql);
-				  System.out.println("Created Committees table in dblp database...");
+				  System.out.println("Created Committee table in dblp database...");
 								  				 			      
 			   }catch(SQLException se){
 			      //Handle errors for JDBC
@@ -125,7 +127,7 @@ public class ImplementSchemaDB implements SchemaDB {
 		  Connection conn = null;
 		  
 		  //Database to be connected
-		  String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true";
+		  String connected_db = "jdbc:mysql://localhost/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true&verifyServerCertificate=false&useSSL=true";
 		  
 		  //Database credentials
 		   String userName = "root";

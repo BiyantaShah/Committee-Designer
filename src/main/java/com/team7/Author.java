@@ -1,34 +1,42 @@
 package com.team7;
 
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
+
+@SuppressWarnings("restriction")
 public class Author {
 
-   String name;
-   String key;
-
+   List<String> author;
+   String url;
+  
  	public Author() {
 	// TODO Auto-generated constructor stub
  	}
-
- 	public Author(String name, String key) {
- 		// TODO Auto-generated constructor stub
- 		this.name = name;
- 		this.key = key;
+ 	
+ 	public Author(List<String> name,String url) {
+ 		
+	// TODO Auto-generated constructor stub
+ 		this.author = name;
+ 		this.url = url;
+ 	
  	}
 
-	public String getName() {
-        return name;
+	public 	List<String> getAuthor() {
+        return 	author;
     }
 
-    public void setName(String name) {
-        this.name = name;
+	@XmlElement
+    public void setAuthor(List<String> name) {
+        this.author = name;
     }
-    
-
-    public String getKey() {
-        return key;
+	
+    public String getUrl() {
+        return url;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+	@XmlElement
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
