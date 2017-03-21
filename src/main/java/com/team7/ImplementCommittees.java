@@ -19,7 +19,7 @@ public class ImplementCommittees implements Committees {
 		
 		ImplementSchemaDB db = new ImplementSchemaDB();
 		Connection conn = db.getConnection();
-		PreparedStatement stmt = conn.prepareStatement("insert into Committee(confName,year,authoreName,role) values(?,?,?,?)");
+		PreparedStatement stmt = conn.prepareStatement("insert into Committee(confName,year,authorName,role) values(?,?,?,?)");
 
 		String rec = null;
 		String authorName = null;

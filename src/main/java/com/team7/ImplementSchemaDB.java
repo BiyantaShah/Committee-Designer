@@ -102,7 +102,7 @@ public class ImplementSchemaDB implements SchemaDB {
 				        "(id              INTEGER      AUTO_INCREMENT NOT NULL, " +
 				        " confName        VARCHAR(255), " + 
 	     	            " year            INTEGER, "      +   
-				        " authoreName     VARCHAR(255), " + 
+				        " authorName      VARCHAR(255), " + 
 				        " role            VARCHAR(255), " + 
 				        " PRIMARY         KEY(id))" ;
 
