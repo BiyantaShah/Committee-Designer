@@ -12,6 +12,7 @@ public class dblp {
 	List<Paper> inproceedings;
 	List<Conference> proceedings;
 	List<Author> www;
+	List<Article> article;
 	List<Garbage> garbage; // only for testing purposes
 	
 
@@ -31,6 +32,15 @@ public class dblp {
 	@XmlElement
 	public void setProceedings(List<Conference> proceedings) {
 		this.proceedings = proceedings;
+	}
+	
+	public List<Article> getArticle() {
+		return article;
+	}
+	
+	@XmlElement
+	public void setArticle(List<Article> article) {
+		this.article = article;
 	}
 
 	public List<Author> getWww() {
