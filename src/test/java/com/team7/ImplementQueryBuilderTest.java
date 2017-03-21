@@ -9,26 +9,25 @@ import junit.framework.TestCase;
 
 public class ImplementQueryBuilderTest extends TestCase {
 
-	private static String query1 = "SELECT AuthorName, PapersPublished FROM TABLE_NAME WHERE AuthorName='ABC'";
-	private static String query2 = "SELECT AuthorName, PapersPublished FROM TABLE_NAME WHERE YearsActive>2";
-	private static String query3 = "SELECT AuthorName, PapersPublished FROM TABLE_NAME WHERE Region='Boston'";
-	private static String query4 = "SELECT AuthorName, PapersPublished FROM TABLE_NAME WHERE Papers LIKE '%Chemistry%'";
-	private static String query5 = "SELECT AuthorName, PapersPublished FROM TABLE_NAME WHERE Papers LIKE '%Chemistry%' OR Papers LIKE '%Biology%'";
-
-	
+	private static String query1 = "SELECT a.name, p.title FROM Author a INNER JOIN Paper p ON a.author = p.author INNER JOIN Conference c INNER JOIN ON p.confName = c.name WHERE a.name='ABC'";
+	private static String query2 = "SELECT a.name, p.title FROM Author a INNER JOIN Paper p ON a.author = p.author INNER JOIN Conference c INNER JOIN ON p.confName = c.name WHERE p.year>2";
+	private static String query4 = "SELECT a.name, p.title FROM Author a INNER JOIN Paper p ON a.author = p.author INNER JOIN Conference c INNER JOIN ON p.confName = c.name WHERE p.title LIKE '%Chemistry%'";
+	private static String query5 = "SELECT a.name, p.title FROM Author a INNER JOIN Paper p ON a.author = p.author INNER JOIN Conference c INNER JOIN ON p.confName = c.name WHERE p.title LIKE '%Chemistry%' OR p.title LIKE '%Biology%'";
+ 
 	@Test
 	public void testValidAuthorName(){
 		Map<String, String> searchParam = new HashMap<String, String>();
-		searchParam.put("AuthorName", "=,ABC");
+		searchParam.put("name", "=,ABC");
 
 		String queryFormed = new ImplementQueryBuilder().createQuery(searchParam);
+		System.out.println("***" + queryFormed );
 		assertEquals(query1, queryFormed);
 	}
 
 	@Test
 	public void testInvalidAuthorNameWithSpecialCharacters(){
 		Map<String, String> searchParam = new HashMap<String, String>();
-		searchParam.put("AuthorName", "=,ABC#");
+		searchParam.put("name", "=,ABC#");
 
 		String queryFormed = new ImplementQueryBuilder().createQuery(searchParam);
 		assertEquals(null, queryFormed);
@@ -37,7 +36,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testInvalidAuthorNameWithNumbers(){
 		Map<String, String> searchParam = new HashMap<String, String>();
-		searchParam.put("AuthorName", "=,ABC2");
+		searchParam.put("name", "=,ABC2");
 
 		String queryFormed = new ImplementQueryBuilder().createQuery(searchParam);
 		assertEquals(null, queryFormed);
@@ -46,7 +45,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testValidYearsActive(){
 		Map<String, String> searchParam = new HashMap<String, String>();
-		searchParam.put("YearsActive", ">,2");
+		searchParam.put("year", ">,2");
 
 		String queryFormed = new ImplementQueryBuilder().createQuery(searchParam);
 		assertEquals(query2, queryFormed);
@@ -55,34 +54,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testInvalidYearsActive(){
 		Map<String, String> searchParam = new HashMap<String, String>();
-		searchParam.put("YearsActive", ">,-1");
-
-		String queryFormed = new ImplementQueryBuilder().createQuery(searchParam);
-		assertEquals(null, queryFormed);
-	}
-
-	@Test
-	public void testValidRegion(){
-		Map<String, String> searchParam = new HashMap<String, String>();
-		searchParam.put("Region", "=,Boston");
-
-		String queryFormed = new ImplementQueryBuilder().createQuery(searchParam);
-		assertEquals(query3, queryFormed);
-	}
-
-	@Test
-	public void testInvalidRegionWithSpecialCharacter(){
-		Map<String, String> searchParam = new HashMap<String, String>();
-		searchParam.put("Region", "=,Boston#");
-
-		String queryFormed = new ImplementQueryBuilder().createQuery(searchParam);
-		assertEquals(null, queryFormed);
-	}
-
-	@Test
-	public void testInvalidRegionWithNumbers(){
-		Map<String, String> searchParam = new HashMap<String, String>();
-		searchParam.put("Region", "=,Boston123");
+		searchParam.put("year", ">,-1");
 
 		String queryFormed = new ImplementQueryBuilder().createQuery(searchParam);
 		assertEquals(null, queryFormed);
@@ -91,7 +63,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testValidKeyword(){
 		Map<String, String> searchParam = new HashMap<String, String>();
-		searchParam.put("Keyword", "LIKE,Chemistry");
+		searchParam.put("keyword", "LIKE,Chemistry");
 
 		String queryFormed = new ImplementQueryBuilder().createQuery(searchParam);
 		assertEquals(query4, queryFormed);
@@ -100,7 +72,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testValidMultipleKeyword(){
 		Map<String, String> searchParam = new HashMap<String, String>();
-		searchParam.put("Keyword", "LIKE,Chemistry,Biology");
+		searchParam.put("keyword", "LIKE,Chemistry,Biology");
 
 		String queryFormed = new ImplementQueryBuilder().createQuery(searchParam);
 		assertEquals(query5, queryFormed);
