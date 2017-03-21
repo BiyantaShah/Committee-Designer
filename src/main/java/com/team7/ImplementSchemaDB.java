@@ -106,6 +106,18 @@ public class ImplementSchemaDB implements SchemaDB {
 
 				  stmt.executeUpdate(sql);
 				  System.out.println("Created Committees table in dblp database...");
+				  
+				  sql = "CREATE TABLE Article " +
+					        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
+						    " author	  VARCHAR(255), " +
+					        " title       TEXT, " + 
+					        " year        INTEGER, " + 
+					        " month       VARCHAR(255), " + 
+		     	            " ee          TEXT, "      +   
+					        " PRIMARY     KEY(id))" ;
+
+					  stmt.executeUpdate(sql);
+					  System.out.println("Created Article table in dblp database...");
 								  				 			      
 			   }catch(SQLException se){
 			      //Handle errors for JDBC
