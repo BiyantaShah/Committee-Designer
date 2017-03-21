@@ -26,9 +26,10 @@ public class ImplementParseDatabase implements ParseDatabase {
 			
 			dblp data = (dblp)  jaxbUnmarshaller.unmarshal(file);
 
+			System.out.println("BLIHH");
 			Connection conn = db.getConnection();
 			final int batchSize = 10000;
-			int i=0, j=0, k=0;
+			int i=0, j=0, k=0, l=0;
 			
 			if (data.getInproceedings() != null) {
 				PreparedStatement statement_inproceedings = conn.prepareStatement("insert into Paper(title,year,pages,paperKey)"
@@ -85,6 +86,30 @@ public class ImplementParseDatabase implements ParseDatabase {
 					}
 				}
 				statement_conference.executeBatch();
+			}
+			
+			if (data.getArticle() != null) {
+				
+				PreparedStatement statement_article = conn.prepareStatement("insert into article(author,title,year,month,ee) values (?,?,?,?,?)");
+				
+				for (Article article: data.getArticle()) {
+					
+					if (article.author ==  null)
+						continue;
+					
+					for (String author: article.author) {
+						statement_article.setString(1, author);
+						statement_article.setString(2, article.title);
+						statement_article.setInt(3, article.year);
+						statement_article.setString(4, article.month);
+						statement_article.setString(5, article.ee);
+						
+						statement_article.addBatch();
+					}
+					if (++l % batchSize == 0)
+						statement_article.executeBatch();
+				}
+				statement_article.executeBatch();
 			}
 			
 			// only for testing purposes
