@@ -1,8 +1,14 @@
 package com.team7;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ImplementQueryBuilder implements QueryBuilder{
 	private static String AuthorTable = "Author";
@@ -88,7 +94,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			queryParams += entryKey + ","; 
 		}
 		return queryParams.substring(0, queryParams.length()-1);*/
-			queryParams = "a.name, p.title";
+			queryParams = "a.name AS Author, p.title As Title";
 			return queryParams;
 	}
 		else{
@@ -131,16 +137,27 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		
 		joinCondition = AuthorTable+ " " + AuthorTableAlias+ " INNER JOIN " +
 				        PaperTable+ " " + PaperTableAlias+ " ON " +
-				        AuthorTableAlias+ ".author = " + PaperTableAlias + ".author INNER JOIN " +
-				        ConferenceTable+ " " + ConferenceTableAlias + " INNER JOIN ON " +
+				        AuthorTableAlias+ ".name = " + PaperTableAlias + ".author INNER JOIN " +
+				        ConferenceTable+ " " + ConferenceTableAlias + " ON " +
 				        PaperTableAlias+ ".confName = " + ConferenceTableAlias + ".name";
 				        
 		return joinCondition;
 	}
 
-	public Object sendQuery(String searchQuery) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> sendQuery(String searchQuery) throws SQLException {
+		
+		ImplementSchemaDB implementSchemaObj = new ImplementSchemaDB();
+		Connection conn = implementSchemaObj.getConnection();
+		Statement stmt = conn.createStatement();
+		ResultSet rs =stmt.executeQuery(searchQuery);	
+		List<String> result = new ArrayList<String>();
+		
+		while (rs.next()) {
+            result.add(rs.getString("Author"));
+            result.add(rs.getString("Title"));
+        }
+		
+		return result;
 	}
 }
 
