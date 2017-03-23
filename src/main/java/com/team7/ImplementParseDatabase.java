@@ -33,7 +33,6 @@ public class ImplementParseDatabase implements ParseDatabase {
 
 			dblp data = (dblp)  jaxbUnmarshaller.unmarshal(file);
 
-			System.out.println("BLIHH");
 			Connection conn = db.getConnection();
 			final int batchSize = 10000;
 			int i=0, j=0, k=0, l=0;
@@ -70,8 +69,6 @@ public class ImplementParseDatabase implements ParseDatabase {
 			
 			if (data.getInproceedings() != null) {
 				
-				System.out.println("www1");
-
 				PreparedStatement statement_inproceedings = conn.prepareStatement("insert into Paper(author,title,year,pages,confName,journalName)"
 					 	+ "values(?,?,?,?,?,?)");
 				
@@ -146,6 +143,11 @@ public class ImplementParseDatabase implements ParseDatabase {
 					
 					if (article.author ==  null)
 						continue;
+					
+					if(!isUTF8MisInterpreted(article.getTitle(),"Windows-1252")){
+						continue;
+					}
+
 					
 					for (String author: article.author) {
 						statement_article.setString(1, author);

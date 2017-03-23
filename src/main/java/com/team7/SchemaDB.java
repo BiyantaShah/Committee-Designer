@@ -20,6 +20,6 @@ public interface SchemaDB {
 	 * Insert the objects created to Database
 	 *
 	 */
-	public <T> void insertData(Object object_name) throws SQLException;
+	public boolean insertData(Object object_name) throws SQLException;
 	
 }

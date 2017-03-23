@@ -29,15 +29,15 @@ public class ImplementSchemaDB implements SchemaDB {
 
 			      //Open a connection
 			      conn = DriverManager.getConnection(DB_URL, userName, password);
-			      
-			      stmt = conn.createStatement();			      
-			      String sql = "DROP DATABASE IF EXISTS DBLP";
-			      stmt.executeUpdate(sql);
-			      System.out.println("Dblp database deleted successfully...");
+			      String sql = null;
+//			      stmt = conn.createStatement();			      
+//			      String sql = "DROP DATABASE IF EXISTS DBLP";
+//			      stmt.executeUpdate(sql);
+//			      System.out.println("Dblp database deleted successfully...");
 
 			      //Execute a query
 			      stmt = conn.createStatement();			      
-			      sql = "CREATE DATABASE DBLP";
+			      sql = "CREATE DATABASE IF NOT EXISTS DBLP";
 			      stmt.executeUpdate(sql);
 			      System.out.println("Dblp database created successfully...");
 			   
@@ -48,7 +48,7 @@ public class ImplementSchemaDB implements SchemaDB {
  			      
  			      
  			      //creating user table
-			      sql = "CREATE TABLE User " +
+			      sql = "CREATE TABLE IF NOT EXISTS User " +
 			            "(id       INTEGER      AUTO_INCREMENT NOT NULL, " +
 			            " username VARCHAR(255) UNIQUE, " + 
 			            " password VARCHAR(255), " + 
@@ -61,7 +61,7 @@ public class ImplementSchemaDB implements SchemaDB {
 
 			      
 				  //creating conference table
-			      sql = "CREATE TABLE Conference " +
+			      sql = "CREATE TABLE IF NOT EXISTS Conference " +
 				        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
 				        " confKey     VARCHAR(255),"  + 
 	     	            " name        TEXT, " + 
@@ -73,7 +73,7 @@ public class ImplementSchemaDB implements SchemaDB {
 
 			      			      			      
 				  //creating paper table
-			      sql = "CREATE TABLE Paper " +
+			      sql = "CREATE TABLE IF NOT EXISTS Paper " +
 				        "(id           INTEGER   AUTO_INCREMENT NOT NULL, " +
 				        " author       VARCHAR(255),"  + 
 				        " title        TEXT,"          + 
@@ -88,7 +88,7 @@ public class ImplementSchemaDB implements SchemaDB {
 				  
 
 			     //creating Author table
-			      sql = "CREATE TABLE Author " +
+			      sql = "CREATE TABLE IF NOT EXISTS Author " +
 				        "(id        INTEGER      AUTO_INCREMENT NOT NULL, " +
 				        " name      VARCHAR(255), " + 
 				        " url       TEXT, " + 
@@ -98,7 +98,7 @@ public class ImplementSchemaDB implements SchemaDB {
 				  System.out.println("Created author table in dblp database...");
 				  
 				     //creating Committees table
-			      sql = "CREATE TABLE Committee " +
+			      sql = "CREATE TABLE IF NOT EXISTS Committee " +
 				        "(id              INTEGER      AUTO_INCREMENT NOT NULL, " +
 				        " confName        VARCHAR(255), " + 
 	     	            " year            INTEGER, "      +   
@@ -109,7 +109,7 @@ public class ImplementSchemaDB implements SchemaDB {
 				  stmt.executeUpdate(sql);
 				  System.out.println("Created Committees table in dblp database...");
 				  
-				  sql = "CREATE TABLE Article " +
+				  sql = "CREATE TABLE IF NOT EXISTS Article " +
 					        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
 						    " author	  VARCHAR(255), " +
 					        " title       TEXT, " + 
@@ -156,7 +156,7 @@ public class ImplementSchemaDB implements SchemaDB {
 		return conn;
 	}
 
-	public <T> void insertData(Object object_name) throws SQLException {
+	public boolean insertData(Object object_name) throws SQLException {
 		
 		Connection conn = getConnection();		
 		
@@ -177,9 +177,11 @@ public class ImplementSchemaDB implements SchemaDB {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 		
 		conn.close();
+		return true;
 
 	}
 
