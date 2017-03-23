@@ -12,6 +12,6 @@ public interface Register {
 	/*
 	 * Check if user already exists
 	 */
-	public boolean veryifyIfUserExists(String userName) throws SQLException;
+	public boolean verifyIfUserExists(String userName) throws SQLException;
 
 }

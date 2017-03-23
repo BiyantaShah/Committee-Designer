@@ -1,17 +1,15 @@
 package com.team7;
 
+import java.sql.SQLException;
+
 public interface Login {
 	
 	
 	/*
-	 * Login to the application
+	 * Login to the application by validating the username and password
 	 */
-	public String login(String username, String password);
+	public boolean login(String username, String password) throws SQLException;
 	
-	/*
-	 * Validates the username and password
-	 */
-	public boolean validateUser(String username, String password);	
 	
 	/*
 	 * Close the session and logout the user.

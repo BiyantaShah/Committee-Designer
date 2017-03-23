@@ -25,7 +25,7 @@ public class ImplementRegisterTest {
      public void testVerifyUserExistsSuccess() throws SQLException {
 		
 		RegisterUI user = new RegisterUI();
-		boolean  res = user.veryifyIfUserExists("xyz@gmail.com");
+		boolean  res = user.verifyIfUserExists("xyz@gmail.com");
 		assertEquals(true,res);
 		
 	}
@@ -35,7 +35,7 @@ public class ImplementRegisterTest {
      public void testVerifyUserExistsFailure() throws SQLException {
 		
 	    RegisterUI user = new RegisterUI();
-	    boolean  res = user.veryifyIfUserExists("test@gmail.com");
+	    boolean  res = user.verifyIfUserExists("test@gmail.com");
 		assertEquals(false,res);
 		
 	}

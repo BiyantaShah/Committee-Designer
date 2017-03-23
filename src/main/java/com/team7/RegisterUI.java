@@ -1,14 +1,13 @@
 package com.team7;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -30,12 +29,15 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
+import org.apache.commons.codec.binary.Base64;
+
 @SuppressWarnings("serial")
 public class RegisterUI extends JFrame implements Register {
 
 	private JPanel contentPane;
 	private JTextField UsernameTField;
 	private JPasswordField passwordField;
+	private static Base64 base64 = new Base64(true);
 
 	String userName;
 	String password;
@@ -43,28 +45,7 @@ public class RegisterUI extends JFrame implements Register {
 	String confName;
 	String secretKey = "SECRETKEY";
 	static Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-
-	static RegisterUI frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-
-					frame = new RegisterUI();
-					frame.setVisible(true);
-					frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
-					frame.setTitle("Register");
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	LoginUI log = new LoginUI();
 
 	/**
 	 * Create the frame.
@@ -72,6 +53,10 @@ public class RegisterUI extends JFrame implements Register {
 	 */
 	@SuppressWarnings("unchecked")
 	public RegisterUI() throws SQLException {
+		
+		setVisible(true);
+		setTitle("REGISTER");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, -28, 933, 579);
 		contentPane = new JPanel();
@@ -79,8 +64,8 @@ public class RegisterUI extends JFrame implements Register {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblUsername = new JLabel("Username");
-		lblUsername.setFont(new Font("Calibri", Font.BOLD, 20));
+		JLabel lblUsername = new JLabel("Username: ");
+		lblUsername.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 		lblUsername.setBounds(257, 86, 97, 28);
 		contentPane.add(lblUsername);
 
@@ -88,7 +73,7 @@ public class RegisterUI extends JFrame implements Register {
 
 		UIManager.put("ToolTip.background", Color.orange);
 		UIManager.getLookAndFeelDefaults()
-		.put("ToolTip.font", new Font("Arial", Font.BOLD, 14));
+		.put("ToolTip.font", new Font("Lucida Grande", Font.BOLD, 14));
 
 
 		UsernameTField.setToolTipText("Please enter valid Email-id");
@@ -96,8 +81,8 @@ public class RegisterUI extends JFrame implements Register {
 		UsernameTField.setBounds(521, 83, 191, 34);
 		contentPane.add(UsernameTField);
 
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("Calibri", Font.BOLD, 20));
+		JLabel lblPassword = new JLabel("Password: ");
+		lblPassword.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 		lblPassword.setBounds(257, 180, 81, 19);
 		contentPane.add(lblPassword);
 
@@ -106,8 +91,8 @@ public class RegisterUI extends JFrame implements Register {
 		contentPane.add(passwordField);
 
 
-		JLabel lblRole = new JLabel("Role");
-		lblRole.setFont(new Font("Calibri", Font.BOLD, 20));
+		JLabel lblRole = new JLabel("Role: ");
+		lblRole.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 		lblRole.setBounds(257, 264, 56, 16);
 		contentPane.add(lblRole);
 		String[] roleList = {"Conference Chair","General Chair","Member for External Review Committee","Program Chair"};
@@ -127,8 +112,8 @@ public class RegisterUI extends JFrame implements Register {
 		contentPane.add(role_combo);
 
 
-		JLabel lblConference = new JLabel("Conference");
-		lblConference.setFont(new Font("Calibri", Font.BOLD, 20));
+		JLabel lblConference = new JLabel("Conference: ");
+		lblConference.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 		lblConference.setBounds(257, 330, 97, 28);
 		contentPane.add(lblConference);
 		String[] confList = { "ASE", "ECOOP","ESOP","FSE", "ICFP","ICSE","ISMM","ISSTA","OOPSLA","PLDI","POPL","PPOPP"};
@@ -148,7 +133,7 @@ public class RegisterUI extends JFrame implements Register {
 
 
 		JButton btnRegister = new JButton("Register");
-		btnRegister.setFont(new Font("Calibri", Font.BOLD, 20));
+		btnRegister.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnRegister.setBounds(394, 451, 114, 34);
 		contentPane.add(btnRegister);
 		btnRegister.addActionListener(new ActionListener()
@@ -165,12 +150,12 @@ public class RegisterUI extends JFrame implements Register {
 
 				if(userName.equals("")){
 
-					errorMessage("Please enter  user name");
+					log.messageShow("Please enter  user name");
 
 
 				} else if(plainPwd.equals("")){
 
-					errorMessage("Please enter password");
+					log.messageShow("Please enter password");
 
 				} else{
 					//no duplicate entry  - encrypt password
@@ -180,8 +165,7 @@ public class RegisterUI extends JFrame implements Register {
 						SecretKeySpec skeyspec=new SecretKeySpec(secretKey.getBytes(),"Blowfish");
 						Cipher cipher = Cipher.getInstance("Blowfish");
 						cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
-						byte[] encrypted=cipher.doFinal(plainPwd.getBytes());
-						password=new String(encrypted);
+						password = base64.encodeToString(cipher.doFinal(plainPwd.getBytes("UTF8")));
 
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
@@ -199,29 +183,20 @@ public class RegisterUI extends JFrame implements Register {
 
 					if(res == true){
 						//connect to search page
-						errorMessage("registered successfully");
-						frame.dispose();	
+						log.messageShow("registered successfully");
+						setVisible(false);
 
 					}
 				}}});
 	}
 
 
-	public void errorMessage(String msg){
-
-		JDialog d = new JDialog(frame, msg, true);
-		d.setSize(300, 50);
-		d.setLocationRelativeTo(frame);
-		d.setVisible(true);
-		//frame.dispose();
-
-	}
 
 	public boolean createUser(String userName, String password, String role, String confName) throws SQLException {
 
-		if(veryifyIfUserExists(userName))
+		if(verifyIfUserExists(userName))
 		{			
-			errorMessage("Username already exists");
+			log.messageShow("Username already exists");
 
 		}else{
 
@@ -239,7 +214,7 @@ public class RegisterUI extends JFrame implements Register {
 
 	}
 
-	public boolean veryifyIfUserExists(String userName) throws SQLException {
+	public boolean verifyIfUserExists(String userName) throws SQLException {
 
 		if(userName != null)
 		{
