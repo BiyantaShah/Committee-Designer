@@ -4,15 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.junit.runners.MethodSorters;
 import com.jcabi.jdbc.JdbcSession;
-import com.jcabi.jdbc.SingleOutcome;
 import junit.framework.TestCase;
 import org.junit.Test;
-import org.junit.After;
-import org.junit.FixMethodOrder;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ImplementSchemaDBTest extends TestCase {
 
 	

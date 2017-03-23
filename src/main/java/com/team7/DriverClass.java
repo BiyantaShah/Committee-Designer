@@ -24,11 +24,11 @@ public class DriverClass {
 		ImplementSchemaDB db = new ImplementSchemaDB();
 		ImplementCommittees com = new ImplementCommittees();
 		
-		db.dbSetUp();   //set up initial database
-		parse.parseXml(file);	//parse xml data
-		com.ParseFiles(comData); //parse committee data
+//		db.dbSetUp();   //set up initial database
+//		parse.parseXml(file);	//parse xml data
+//		com.ParseFiles(comData); //parse committee data
 		
-		System.out.println("ENDD");
+		System.out.println("End");
 	}
 
 }

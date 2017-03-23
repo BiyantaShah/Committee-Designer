@@ -6,6 +6,10 @@ public class User {
      String password;
      String role;
      String confName;
+     
+    public User(){
+    	
+    }
 
     public User(String userName, String password, String role, String confName) {
 		// TODO Auto-generated constructor stub

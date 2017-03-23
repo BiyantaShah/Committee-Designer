@@ -2,10 +2,6 @@ package com.team7;
 
 public interface Login {
 	
-	/*
-	 * Create a new user, if not present
-	 */
-	public String createUser(String userName, String password, String role, String confName);
 	
 	/*
 	 * Login to the application
