@@ -2,7 +2,6 @@ package com.team7;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.sql.Connection;
@@ -11,38 +10,44 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ImplementQueryBuilder implements QueryBuilder{
+	
+	String whereClauseForPaperAuthor = "";
+	String whereClauseForCommittee = "";
+	
+	String groupByClause = "";
+	String queryPaperAuthor = null;
+	String queryCommitte = null;
+	
 	private static String AuthorTable = "Author";
 	private static String PaperTable = "Paper";
-	private static String ConferenceTable = "Conference";
-	
+
 	private static String AuthorTableAlias = "a";
 	private static String PaperTableAlias = "p";
-	private static String ConferenceTableAlias = "c";
+	private static String CommitteeTableAlias = "c";
 	
-	public String createQuery(List<SearchParameter> searchParam) {
-		String query = null;
-		
+	
+	public List<String> createQuery(List<SearchParameter> searchParam) {			
 		if(validateQuery(searchParam)){
 			
-			String columnNames = formQueryParams(searchParam, "colNames");
+			formQueryParams(searchParam);
 			
-			String joinCondition = formJoinCondition();
+			getPaperAuthorQuery();
 			
-			query = "SELECT " + columnNames + " FROM " + joinCondition + " WHERE ";  
-			
-			query += formQueryParams(searchParam, "whereParameters");		
+			getCommitteQuery();	
 	        }
 		
-		return query;
-		}
-	
-        public boolean validateQuery(List<SearchParameter> searchParam) {
-		        	
+		List<String> queries = new ArrayList<String>();
+		queries.add(0,queryPaperAuthor);
+		queries.add(1, queryCommitte);
+		
+		return queries;
+	}
+        
+	public boolean validateQuery(List<SearchParameter> searchParam) {        	
 		boolean result = false;
+				
 		for(SearchParameter s : searchParam){
-			
-			
-			if(s.getSearchFilter() == "name"){	
+			if(s.getSearchFilter() == "Name"){	
 				if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
@@ -50,7 +55,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 					result = true;
 			}
 			
-			if(s.getSearchFilter() == "Committe"){
+			if(s.getSearchFilter() == "ConfName"){	
 				if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
@@ -58,23 +63,33 @@ public class ImplementQueryBuilder implements QueryBuilder{
 					result = true;
 			}
 			
-            if(s.getSearchFilter() == "year" && Integer.parseInt(s.getSearchValue()) > 0){
+            if(s.getSearchFilter() == "Year" && Integer.parseInt(s.getSearchValue()) > 0){
             	result = true;
 			}
               
-            if(s.getSearchFilter() == "keyword"){
-            	
-            	for(int i =0;i<s.getSearchValue().split(",").length;i++){
-            	if(checkValidityOfSearchParameters(s.getSearchValue().split(",")[i])){
+            if(s.getSearchFilter() == "Keyword"){
+            	if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;				  
             	}
 				else
 					result = true; 	
-             }           	
-            }
+             } 
+            
+            if(s.getSearchFilter() == "Committe.Year" && Integer.parseInt(s.getSearchValue()) > 0){
+				return true;
+			}
+            
+            if(s.getSearchFilter() == "Committe.ConfName"){
+            	if(checkValidityOfSearchParameters(s.getSearchValue())){
+					return false;
+				}
+				else
+					result = true;
+			}
 		}
 		return result;
 	}
+        
         private boolean checkValidityOfSearchParameters(String searchParameter){
     		
     		Pattern p = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
@@ -82,82 +97,105 @@ public class ImplementQueryBuilder implements QueryBuilder{
     		return m.find();
     	}
         
-        private String formQueryParams(List<SearchParameter> searchParam, String clause){
-    		
-    		String queryParams = "";
-    		
-    		if(clause == "colNames"){		
-    			queryParams = "a.name AS Author, p.title AS Title";
-    			return queryParams;
-    	}
-    		else{
-    			
-    			for(SearchParameter s : searchParam){
-    				
-    				if(s.getSearchFilter() == "keyword"){
-    					
-    					if(!queryParams.contains("LIKE")){
-    						queryParams += "AND " + PaperTableAlias+ ".title " + s.getSearchComparator()+ " '%"+ s.getSearchValue()+ "%' ";
-    					}
-    					else{
-    						queryParams += " OR " + PaperTableAlias + ".title " + s.getSearchComparator()+ " '%"+ s.getSearchValue()+ "%' ";	
-    					}   					
-    					
+        private String getColumns(){
+        	return "a.name AS Author, p.title AS Title";
+        }
+        
+        private void formQueryParams(List<SearchParameter> searchParam){
+			   			
+        	for(SearchParameter s : searchParam){	
+    				if(s.getSearchFilter().contains("Committee")){
+    					formCommitteeWhereClause(s);
     				}
     				
-    				else if(s.getSearchFilter() == "year"){
-    					if(!queryParams.contains("year")){
-    						queryParams += "AND " + PaperTableAlias + "."+ s.getSearchFilter() + s.getSearchComparator()+ s.getSearchValue()+" ";
-    					}
-    					else{
-    						queryParams += " OR " + PaperTableAlias + "."+ s.getSearchFilter() + s.getSearchComparator()+ s.getSearchValue()+" ";	
-    					}
-    				}
-    				
-    				else if(s.getSearchFilter() == "name"){
-    					if(!queryParams.contains("name")){
-    						queryParams += "AND " + AuthorTableAlias + "."+ s.getSearchFilter() + s.getSearchComparator()+"'"+s.getSearchValue()+"' ";
-    					}
-    					else{
-    						queryParams += " OR " + AuthorTableAlias + "."+ s.getSearchFilter() + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' ";	
-    					}
-    				}   				
     				else{
-    				   queryParams += "' AND "+ AuthorTableAlias +"." +s.getSearchFilter() + s.getSearchComparator()+"'"+ s.getSearchValue()+" ";
+    					formPaperAuthorWhereClause(s);
     				}
     			}	
-    			queryParams = queryParams.substring(4, queryParams.length());
-    			return queryParams;
-    		}
+    			
+    			whereClauseForPaperAuthor = whereClauseForPaperAuthor.substring(0, whereClauseForPaperAuthor.length()-4);   			
+    			
+    			if(groupByClause.length()>0){
+    				whereClauseForPaperAuthor += groupByClause;
+    			}
+    			
+    			if(whereClauseForCommittee.length()>0){
+    			    whereClauseForCommittee = whereClauseForCommittee.substring(0, whereClauseForCommittee.length()-4);   			
+    			}		
     	}
         
         private String formJoinCondition(){
     		
-    		String joinCondition;
-    		
-    		joinCondition = AuthorTable+ " " + AuthorTableAlias+ " INNER JOIN " +
-    				        PaperTable+ " " + PaperTableAlias+ " ON " +
-    				        AuthorTableAlias+ ".name = " + PaperTableAlias + ".author INNER JOIN " +
-    				        ConferenceTable+ " " + ConferenceTableAlias + " ON " +
-    				        PaperTableAlias+ ".confName = " + ConferenceTableAlias + ".name";
-    				        
-    		return joinCondition;
+    		return AuthorTable+ " " + AuthorTableAlias+ " INNER JOIN " +
+			        PaperTable+ " " + PaperTableAlias+ " ON " +
+			        AuthorTableAlias+ ".paperKey = " + PaperTableAlias + ".paperKey";		
     	}
         
-        public List<String> sendQuery(String searchQuery) throws SQLException {
-    		
+        public List<String> sendQuery(List<String> searchQuery) throws SQLException {
     		ImplementSchemaDB implementSchemaObj = new ImplementSchemaDB();
     		Connection conn = implementSchemaObj.getConnection();
     		Statement stmt = conn.createStatement();
-    		ResultSet rs =stmt.executeQuery(searchQuery);	
-    		List<String> result = new ArrayList<String>();
+    		ResultSet paperAuthorResultSet =stmt.executeQuery(searchQuery.get(0));	
+    		List<String> paperAuthorResult = new ArrayList<String>();
     		
-    		while (rs.next()) {
-                result.add(rs.getString("Author"));
-                result.add(rs.getString("Title"));
+    		while (paperAuthorResultSet.next()) {
+    			paperAuthorResult.add(paperAuthorResultSet.getString("Author"));
             }
-    		
-    		return result;
+    		return paperAuthorResult;
     	}
+        
+        private void formGroupClause(SearchParameter search){ 	
+        	groupByClause = " GROUP BY " + AuthorTableAlias +".name HAVING COUNT(*) " + search.getSearchComparator() +search.getSearchValue();
+        }
+          
+        private void formPaperAuthorWhereClause(SearchParameter s){ 	
+        	if(s.getSearchFilter() == "Keyword"){
+				whereClauseForPaperAuthor += PaperTableAlias+ ".title " + s.getSearchComparator()+ " '%"+ s.getSearchValue()+ "%' " + s.getjoinFilter() + " ";   					
+			}
+			
+			else if(s.getSearchFilter() == "Year"){
+				whereClauseForPaperAuthor += PaperTableAlias + "."+ s.getSearchFilter() + s.getSearchComparator()+ s.getSearchValue()+ "" + s.getjoinFilter() + " ";
+			}
+			
+			else if(s.getSearchFilter() == "Name"){
+				whereClauseForPaperAuthor += AuthorTableAlias + "."+ s.getSearchFilter() + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
+			} 
+			
+			else if(s.getSearchFilter() == "ConfName"){
+				whereClauseForPaperAuthor += PaperTableAlias + "."+ s.getSearchFilter() + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
+			} 
+			
+			else if(s.getSearchFilter() == "CountNoOfPapers"){
+				formGroupClause(s);
+			}
+        }
+        
+      
+        private void formCommitteeWhereClause(SearchParameter s){  	
+        	if(s.getSearchFilter() == "Committee.ConfName"){
+        		whereClauseForCommittee += CommitteeTableAlias + "."+ s.getSearchFilter().split("\\.")[1] + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
+			} 
+			
+			else if(s.getSearchFilter() == "Committee.Year"){
+				whereClauseForCommittee += CommitteeTableAlias + "."+ s.getSearchFilter().split("\\.")[1] + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
+			} 
+        }
+        
+        
+        private void getPaperAuthorQuery(){
+            
+        	String columnNames = getColumns();
+			String joinCondition = formJoinCondition();
+			queryPaperAuthor = "SELECT a.name AS Author FROM " + joinCondition + " WHERE ";  
+			queryPaperAuthor += whereClauseForPaperAuthor;
+        }
+        
+        private void getCommitteQuery(){
+        	
+        	if(whereClauseForCommittee.length()>0){
+        		queryCommitte = "SELECT c.Author FROM  CommitteeTable c WHERE ";  
+        		queryCommitte += whereClauseForCommittee;
+        	}
+        }
 }
 

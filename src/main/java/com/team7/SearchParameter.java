@@ -5,12 +5,16 @@ public class SearchParameter {
 	String searchFilter;
 	String searchComparator;
 	String searchValue;
+	String joinFilter = "AND";      
 	
-	SearchParameter(String searchFilter, String searchComparator, String searchValue ){
+	SearchParameter(String searchFilter, String searchComparator, String searchValue, String joinFilter){
 		this.searchFilter =searchFilter;
 		this.searchComparator = searchComparator;
 		this.searchValue = searchValue;	
-	}
+		if(joinFilter != null){
+				this.joinFilter = joinFilter;
+			}
+		}
 	
 	public String getSearchFilter(){
 		return this.searchFilter;
@@ -22,6 +26,10 @@ public class SearchParameter {
 	
 	public String getSearchValue(){
 		return this.searchValue;
+	}
+	
+	public String getjoinFilter(){
+		return this.joinFilter;
 	}
 	
 	public String setSearchFilter(String newSearchFilter){
@@ -37,6 +45,11 @@ public class SearchParameter {
 	public String setSearchValue(String newSearchValue){
 		this.searchValue = newSearchValue;
 		return this.searchValue;
+	}
+	
+	public String setJoinFilter(String newJoinFilter ){
+		this.joinFilter = newJoinFilter;
+		return this.joinFilter;
 	}
 
 }
