@@ -5,7 +5,11 @@ public class SearchParameter {
 	String searchFilter;
 	String searchComparator;
 	String searchValue;
-	String joinFilter = "AND";      
+	String joinFilter;
+	
+	SearchParameter(){
+		
+	}
 	
 	SearchParameter(String searchFilter, String searchComparator, String searchValue, String joinFilter){
 		this.searchFilter =searchFilter;

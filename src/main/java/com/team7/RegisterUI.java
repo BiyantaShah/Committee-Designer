@@ -3,7 +3,6 @@ package com.team7;
 import java.awt.Color;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,7 +22,6 @@ import java.sql.Statement;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JButton;
@@ -58,7 +56,7 @@ public class RegisterUI extends JFrame implements Register {
 		setTitle("REGISTER");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, -28, 933, 579);
+		setBounds(10, -22, 933, 579);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -183,9 +181,11 @@ public class RegisterUI extends JFrame implements Register {
 
 					if(res == true){
 						//connect to search page
-						log.messageShow("registered successfully");
-						setVisible(false);
-
+						//log.messageShow("registered successfully");
+						//setVisible(false);
+						dispose();
+						SearchUI search = new SearchUI();
+						search.setLocationRelativeTo(null);
 					}
 				}}});
 	}
