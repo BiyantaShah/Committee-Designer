@@ -37,7 +37,6 @@ public class LoginUI extends JFrame implements Login {
 	private JPanel contentPane;
 	private JTextField userNameField;
 	private JPasswordField passwordField;
-	private static Base64 base64 = new Base64(true);
 
 	String userName;
 	String password;
@@ -130,10 +129,13 @@ public class LoginUI extends JFrame implements Login {
 
 							if (login(userName, plainText)) {
 								// let it go to the search page
-								messageShow("Logged In Successfully");
-								SavedAuthorsUI search = new SavedAuthorsUI(userName);
-								search.setLocationRelativeTo(null);
+
+								
+								//messageShow("Logged In Successfully");
 								frame.dispose();
+								SearchUI search = new SearchUI();
+								search.setLocationRelativeTo(null);
+								
 							}
 							else {
 								messageShow("Invalid Credentials");
@@ -213,7 +215,7 @@ public class LoginUI extends JFrame implements Login {
 	public void messageShow (String msg) {
 
 		JDialog d = new JDialog(frame, msg, true);
-		d.setSize(300, 50);
+		d.setSize(500, 100);
 		d.setLocationRelativeTo(frame);
 		d.setVisible(true);
 
