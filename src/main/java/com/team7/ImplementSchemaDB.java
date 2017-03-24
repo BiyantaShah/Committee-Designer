@@ -29,11 +29,12 @@ public class ImplementSchemaDB implements SchemaDB {
 
 			      //Open a connection
 			      conn = DriverManager.getConnection(DB_URL, userName, password);
-			      String sql = null; 
-//			      stmt = conn.createStatement();			      
-//			      String sql = "DROP DATABASE IF EXISTS DBLP";
-//			      stmt.executeUpdate(sql);
-//			      System.out.println("Dblp database deleted successfully...");
+//			      String sql = null; 
+			      stmt = conn.createStatement();
+			      
+			      String sql = "DROP DATABASE IF EXISTS DBLP";
+			      stmt.executeUpdate(sql);
+			      System.out.println("Dblp database deleted successfully...");
 
 			      //Execute a query
 			      stmt = conn.createStatement();			      
@@ -74,28 +75,44 @@ public class ImplementSchemaDB implements SchemaDB {
 			      			      			      
 				  //creating paper table
 			      sql = "CREATE TABLE IF NOT EXISTS Paper " +
-				        "(id           INTEGER   AUTO_INCREMENT NOT NULL, " +
-				        " author       VARCHAR(255),"  + 
+				        "(id           INTEGER   AUTO_INCREMENT NOT NULL, " + 
 				        " title        TEXT,"          + 
 				        " pages		   VARCHAR(255),"  +
 	     	            " year         INTEGER, "      + 
 				        " confName     VARCHAR(255),"  +
-				        " journalName  VARCHAR(255),"  +
+				        " paperKey     VARCHAR(255), " +
 				        " PRIMARY      KEY(id))"; 
 
 				  stmt.executeUpdate(sql);
 				  System.out.println("Created Paper table in dblp database...");
 				  
+				  sql = "ALTER TABLE Paper ADD INDEX keyP(paperKey)";
+			 		stmt.executeUpdate(sql);
+			 		System.out.println("Created index on Key in paper table...");
+				  
+				  // creating author table
+				  sql = "CREATE TABLE IF NOT EXISTS Author " +
+					        "(id        INTEGER      AUTO_INCREMENT NOT NULL, " +
+					        " name      VARCHAR(255), " + 
+					        " paperKey  VARCHAR(255), " + 
+					        " PRIMARY   KEY(id))" ;
 
-			     //creating Author table
-			      sql = "CREATE TABLE IF NOT EXISTS Author " +
+					  stmt.executeUpdate(sql);
+					  System.out.println("Created author table in dblp database...");
+					  
+					  sql = "ALTER TABLE Author ADD INDEX keyA(paperKey)";
+						 stmt.executeUpdate(sql);
+						 System.out.println("Created index on Key in author table...");
+
+			     //creating AuthorDetails table
+			      sql = "CREATE TABLE IF NOT EXISTS Author_Details " +
 				        "(id        INTEGER      AUTO_INCREMENT NOT NULL, " +
 				        " name      VARCHAR(255), " + 
 				        " url       TEXT, " + 
 				        " PRIMARY   KEY(id))" ;
 
 				  stmt.executeUpdate(sql);
-				  System.out.println("Created author table in dblp database...");
+				  System.out.println("Created author_details table in dblp database...");
 				  
 				     //creating Committees table
 			      sql = "CREATE TABLE IF NOT EXISTS Committee " +
@@ -120,6 +137,7 @@ public class ImplementSchemaDB implements SchemaDB {
 
 					  stmt.executeUpdate(sql);
 					  System.out.println("Created Article table in dblp database...");
+
 								  				 			      
 			   }catch(SQLException se){
 			      //Handle errors for JDBC
