@@ -11,8 +11,9 @@ public class ImplementSearchDisplay implements SearchDisplay {
 	// Keeps track of all filter criteria and their values
 	private static List<SearchParameter> filterMap = new ArrayList<SearchParameter>();
 
-	public List<SearchParameter> updateFilterValues(int index, SearchParameter newFilter) {
+	public List<SearchParameter> updateFilterValues(int index, String filterCriteria, String filterComparator, String filterValue, String filterJoin) {
 		
+		SearchParameter newFilter = new SearchParameter(filterCriteria, filterComparator, filterValue, filterJoin); 
 		ImplementSearchDisplay.filterMap.set(index, newFilter);
 		return ImplementSearchDisplay.filterMap;
 	} 
@@ -30,10 +31,10 @@ public class ImplementSearchDisplay implements SearchDisplay {
 		return ImplementSearchDisplay.filterMap;
 	}
 
-	public List<String> search(List<SearchParameter> searchParam) throws SQLException {
+	public List<String> search() throws SQLException {
 		
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
-		List<String> query = queryBuilderObject.createQuery(searchParam);
+		List<String> query = queryBuilderObject.createQuery(ImplementSearchDisplay.filterMap);
 		
 		if(query!=null){
 		    return queryBuilderObject.sendQuery(query);

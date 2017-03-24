@@ -9,7 +9,7 @@ public interface SearchDisplay {
 	/*
 	* updates the search parameter
 	*/
-	public List<SearchParameter> updateFilterValues(int index, SearchParameter newFilter);
+	public List<SearchParameter> updateFilterValues(int index, String filterCriteria, String filterComparator, String filterValue, String filterJoin);
 	
 	/*
 	* deletes the search parameter
@@ -24,7 +24,7 @@ public interface SearchDisplay {
 	/*
 	* sends these parameters to the query builder
 	*/
-	public List<String> search(List<SearchParameter> searchParam) throws SQLException;
+	public List<String> search() throws SQLException;
 	
 	/*
 	* Displays the results returned by the search function; in proper format

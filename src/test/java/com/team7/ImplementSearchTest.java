@@ -26,11 +26,11 @@ public class ImplementSearchTest extends TestCase {
 	@Test
 	public void testUpdateFilters() {
 		
-		SearchParameter newCriteria = new SearchParameter("Keyword", "LIKE","Biology","AND");
-		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay();
+		//SearchParameter newCriteria = new SearchParameter("Keyword", "LIKE","Biology","AND");
+		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay(); 
 		searchdisplay.clearFilterMap();
 		searchdisplay.saveFilterValue("Keyword", "LIKE","Chemistry",null);	
-		List<SearchParameter> result = searchdisplay.updateFilterValues(0, newCriteria);
+		List<SearchParameter> result = searchdisplay.updateFilterValues(0, "Keyword", "LIKE","Biology","AND");
 		assertEquals("Biology", result.get(0).getSearchValue());		
 	}
 	
