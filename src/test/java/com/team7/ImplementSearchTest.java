@@ -1,110 +1,100 @@
 package com.team7;
-import org.junit.Test;
 
-import junit.framework.TestCase;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Test;
+
+import junit.framework.TestCase;
 
 public class ImplementSearchTest extends TestCase {
-
+	
 	@Test
-	public void testUpdateFilters() {
-		Map <String, String> update = new HashMap<String, String>();
-		update.put("Keyword", "=,pointer");
+	public void testsaveFilters() {
 		
 		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay();
-		Map <String, String> result = searchdisplay.updateFilterValues("Keyword", "=,analysis");
-		// updating the search criteria 'keyword' from pointer to analysis
-		assertEquals("=,analysis", result.get("Keyword"));
+		searchdisplay.clearFilterMap();
+		List<SearchParameter> result = searchdisplay.saveFilterValue("Name", "=", "Michael Ley", null);			
+		// checking if year = 2010 in result map
+		assertEquals("Michael Ley", result.get(0).getSearchValue());
+	}
+	
+	@Test
+	public void testUpdateFilters() {
+		
+		//SearchParameter newCriteria = new SearchParameter("Keyword", "LIKE","Biology","AND");
+		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay(); 
+		searchdisplay.clearFilterMap();
+		searchdisplay.saveFilterValue("Keyword", "LIKE","Chemistry",null);	
+		List<SearchParameter> result = searchdisplay.updateFilterValues(0, "Keyword", "LIKE","Biology","AND");
+		assertEquals("Biology", result.get(0).getSearchValue());		
 	}
 	
 	@Test
 	public void testDeleteFilters() {
-		Map <String, String> delete = new HashMap<String, String>();
-		delete.put("Year Published", "2010");
-		delete.put("Keyword", "pointer");
 		
 		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay();
-		Map <String, String> result = searchdisplay.deleteFilterValues("Keyword", "pointer");
-		
+		searchdisplay.clearFilterMap();
+		searchdisplay.saveFilterValue("Name", "=","Michael Ley","AND");	
+		searchdisplay.saveFilterValue("Keyword", "LIKE","Chemistry",null);	
+		List<SearchParameter> result = searchdisplay.deleteFilterValues(1);
 		// deleting the search criteria 'keyword' from the map
-		assertEquals(false, result.containsKey("Keyword"));
+		assertEquals(false, result.contains(new SearchParameter("keyword", "LIKE","Chemistry",null)));
 	}
 	
-	@Test
-	public void testsaveFilters() {
-		Map <String, String> save = new HashMap<String, String>();
-		save.put("Year Published", "2010");
-		
-		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay();
-		Map <String, String> result = searchdisplay.saveFilterValue("Year Published", "2010");
-		
-		// checking if year = 2010 in result map
-		assertEquals("2010", result.get("Year Published"));
-	}
+	// The following test cases need  to added
 	
-	@Test
-	public void testSearchValid() {
-		Map <String, String> search = new HashMap<String, String>();
-		search.put("title", "pointer");
+	/*@Test
+	public void testSearchValid() throws SQLException {
 		
 		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay();
+		searchdisplay.clearFilterMap();
+		List<SearchParameter> search = searchdisplay.saveFilterValue("Name", "=","Michael Ley",null);
+
 		List<String> result = searchdisplay.search(search); // result will have the answer of the search function
 		
-		// first author in the list should be Aki Matsumoto
-		assertEquals("Aki Matsumoto", result.get(0));
-	}
+		assertEquals("Michael Ley", result.get(0));
+		//searchdisplay.clearFilterMap();
+	}*/
 	
-	@Test
-	public void testSearchInvalid() {
-		Map <String, String> search = new HashMap<String, String>();
-		search.put("title", "biyanta"); // search for title with Biyanta and return an empty String
-		
-		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay();
-		List<String> result = searchdisplay.search(search); 
-		
-		// will return an empty list
-		assertEquals(new ArrayList<String>(), result);
-	}
-	
-	
-	@Test
+	/*@Test
 	public void testDisplay() {
-		// result will have the answer of the display function
+		
 		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay();
+		searchdisplay.clearFilterMap();
+		List<SearchParameter> filter = searchdisplay.saveFilterValue("name", "=", "Michael Ley",null);	
+		
 		String result = searchdisplay.display("Aki Matsumoto , Dong-Soo Han, Takao Tsuda");
 		
 		// your search is such that these 3 authors should be returned		
 		assertEquals("Aki Matsumoto , Dong-Soo Han, Takao Tsuda", result);
-		
-	}
+	}*/
+	
+	/*@Test
+ 	public void testSaveAuthorValid() {
+		Author a = new Author("Dong-Soo Han", "conf/aina/KimJH08");
+		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
+		String result = searchDisplay.saveAuthor(a);
+
+		assertEquals("Author saved correctly", result);
+	}*/
 	
 	
-//	@Test
-//	public void testSaveAuthorValid() {
-//		Author a = new Author("Dong-Soo Han", "conf/aina/KimJH08");
-//		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
-//		String result = searchDisplay.saveAuthor(a);
-//
-//		assertEquals("Author saved correctly", result);
-//	}
-	
-	
-//	@Test
-//	public void testCandidateDetails() {
-//		Author a = new Author("Dong-Soo Han", "conf/aina/KimJH08");
-//		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
-//		String result = searchDisplay.candidateDetails(a);
-//
-//		assertEquals("Dong-Soo Han,  conf/aina/KimJH08", result);
-//	}
+/*	@Test
+	public void testCandidateDetails() {
+		Author a = new Author("Dong-Soo Han", "conf/aina/KimJH08");
+		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
+		String result = searchDisplay.candidateDetails(a);
+
+		assertEquals("Dong-Soo Han,  conf/aina/KimJH08", result);
+	}*/
 
 		
-	@Test
+	/*@Test
 	public void testSendEmail() {
 		User u = new User("xyz@gmail.com", "pass", "Associate Editor", "OOPSLA");
 		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
@@ -112,6 +102,6 @@ public class ImplementSearchTest extends TestCase {
 		
 		List<String> test = Arrays.asList("xyz@gmail.com");
 		assertEquals(test, result);
-	}
-	
+	}*/
+
 }
