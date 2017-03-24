@@ -1,7 +1,6 @@
 package com.team7;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,7 +10,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
@@ -22,8 +20,14 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 
 public class SavedAuthorsUI extends JFrame {
@@ -33,60 +37,67 @@ public class SavedAuthorsUI extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTable table;
-	Set<String> sendEmail = new HashSet<String>();
+	Set<String> sendMail = new HashSet<String>();
+	private Statement stmt;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SavedAuthorsUI frame = new SavedAuthorsUI();
-					frame.setVisible(true);
-					frame.setTitle("SAVED AUTHORS");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					SavedAuthorsUI frame = new SavedAuthorsUI();
+//					frame.setVisible(true);
+//					frame.setTitle("SAVED AUTHORS");
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public SavedAuthorsUI() {
+	public SavedAuthorsUI(final String userName) throws SQLException {
+		setVisible(true);
+		setTitle("SAVED AUTHORS");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(10, -22, 933, 579);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(3, 1));
+		contentPane.setLayout(null);
 		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
-		
+		JPanel panel = new JPanel();
+		panel.setBounds(6, 6, 921, 101);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
 		JLabel lblSavedAuthors = new JLabel("SAVED AUTHORS");
 		lblSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblSavedAuthors.setBounds(367, 43, 206, 24);
-		panel_1.add(lblSavedAuthors);
+		lblSavedAuthors.setBounds(345, 17, 206, 16);
+		panel.add(lblSavedAuthors);
 		
-		JLabel lblToSelectAuthors = new JLabel("To select authors for the committee, click \"select\" beside the row");
-		lblToSelectAuthors.setBounds(249, 97, 471, 16);
-		panel_1.add(lblToSelectAuthors);
+		JLabel lblNewLabel = new JLabel("To select authors for the committee, click \"select\" beside the row");
+		lblNewLabel.setBounds(242, 68, 433, 16);
+		panel.add(lblNewLabel);
 		
-		JPanel panel_2 = new JPanel();
-		contentPane.add(panel_2);
-		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(6, 119, 921, 357);
+		contentPane.add(panel_1);
+		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		DefaultTableModel dm = new DefaultTableModel();
-		dm.setDataVector(new Object[][] { {  "foo", "foo details", "select" },
-			{ "bar", "bar details", "select" } }, new Object[] { "Author", "Author Details", "Select" });
+		ImplementSchemaDB db = new ImplementSchemaDB();
+		Connection conn = db.getConnection();
+		stmt = conn.createStatement();
 		
-		table = new JTable(dm);
+		ResultSet rs = stmt.executeQuery("select title as TITLE,year from paper where id <50 ");
+		
+		JTable table = new JTable(buildTableModel(rs));
 		
 		JTableHeader header = table.getTableHeader();
 		header.setDefaultRenderer(new HeaderRenderer(table));
@@ -101,32 +112,67 @@ public class SavedAuthorsUI extends JFrame {
 		table.getColumn("Select").setCellEditor(
 				new ButtonEditor(new JCheckBox()));
 		
-		table.setPreferredScrollableViewportSize(new Dimension(350, 200));
+		table.setPreferredScrollableViewportSize(new Dimension(550, 350));
 		JScrollPane scroll = new JScrollPane(table);
 //		getContentPane().add(scroll, FlowLayout.CENTER);
 		setVisible(true);
 		
-		panel_2.add(scroll);
+		panel_1.add(scroll);
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel);
-		panel.setLayout(null);
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(6, 488, 921, 63);
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);
 		
 		JButton btnSendEmail = new JButton("Send Email");
 		btnSendEmail.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSendEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sendEmail = ButtonEditor.sendEmail;
-				for (String s : sendEmail) {
+				sendMail = ButtonEditor.sendEmail;
+				for (String s : sendMail) {
 					System.out.println("Values "+ s);
 				}
+				System.out.println("Username "+userName);
+				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
+				try {
+					searchDisplay.sendEmail(sendMail, userName);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
-				// searchDisplay.sendEmail(List<String>), 
-				// in the function, it will extract all the users from the currentUser whose conferences match and send this list to all of them	
 			}
 		});
-		btnSendEmail.setBounds(395, 65, 117, 29);
-		panel.add(btnSendEmail);
+		btnSendEmail.setBounds(383, 13, 155, 29);
+		panel_2.add(btnSendEmail);
 		
+		
+	}
+
+	public DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
+		// TODO Auto-generated method stub
+		
+		ResultSetMetaData metaData = rs.getMetaData();
+		
+		Vector<String> columnNames = new Vector<String>();
+		
+	    int columnCount = metaData.getColumnCount();
+	    
+	    for (int column = 1; column <= columnCount; column++) {
+	        columnNames.add(metaData.getColumnName(column));
+	    }
+	    columnNames.add("Select");
+	    
+	    Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+	    while (rs.next()) {
+	        Vector<Object> vector = new Vector<Object>();
+	        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+	            vector.add(rs.getObject(columnIndex));     
+	        }
+	        vector.add("select");
+	        data.add(vector);
+	    }
+	    
+	    return new DefaultTableModel(data, columnNames);
 	}
 }

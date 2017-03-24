@@ -17,16 +17,21 @@
 	    	<version>4.8.1</version>
 		</dependency>
 		<dependency>
+    		<groupId>javax.mail</groupId>
+    		<artifactId>mail</artifactId>
+    		<version>1.4</version>
+		</dependency>
+		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>javax.el-api</artifactId>
 			<version>3.0.1-b04</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-	<groupId>commons-codec</groupId>
-	<artifactId>commons-codec</artifactId>
-	<version>1.9</version>
-</dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		</dependency>
 		<dependency>
 			<groupId>com.jcabi</groupId>
 			<artifactId>jcabi-jdbc</artifactId>

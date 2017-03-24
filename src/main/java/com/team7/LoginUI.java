@@ -75,7 +75,7 @@ public class LoginUI extends JFrame implements Login {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblWelcome = new JLabel("Welcome !");
+		JLabel lblWelcome = new JLabel("WELCOME !");
 		lblWelcome.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblWelcome.setBounds(401, 39, 153, 32);
 		contentPane.add(lblWelcome);
@@ -131,8 +131,8 @@ public class LoginUI extends JFrame implements Login {
 							if (login(userName, plainText)) {
 								// let it go to the search page
 								messageShow("Logged In Successfully");
-//								SearchUI search = new SearchUI();
-//								search.setLocationRelativeTo(null);
+								SavedAuthorsUI search = new SavedAuthorsUI(userName);
+								search.setLocationRelativeTo(null);
 								frame.dispose();
 							}
 							else {
