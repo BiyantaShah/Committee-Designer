@@ -1,5 +1,7 @@
 package com.team7;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,29 +9,40 @@ import java.util.Map;
 public class ImplementSearchDisplay implements SearchDisplay {
 	
 	// Keeps track of all filter criteria and their values
-	Map<String, String> filterMap = new HashMap<String, String>();
+	private static List<SearchParameter> filterMap = new ArrayList<SearchParameter>();
 
-	public Map<String, String> updateFilterValues(String filterCriteria, String filterValue) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<SearchParameter> updateFilterValues(int index, SearchParameter newFilter) {
+		
+		ImplementSearchDisplay.filterMap.set(index, newFilter);
+		return ImplementSearchDisplay.filterMap;
+	} 
+
+	public List<SearchParameter> deleteFilterValues(int index) {
+		
+		ImplementSearchDisplay.filterMap.remove(index);
+		return ImplementSearchDisplay.filterMap;
 	}
 
-	public Map<String, String> deleteFilterValues(String filterCriteria, String filterValue) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<SearchParameter> saveFilterValue(String filterCriteria, String filterComparator, String filterValue, String filterJoin) {
+		
+		SearchParameter newCriteria = new SearchParameter(filterCriteria, filterComparator, filterValue, filterJoin); 
+		ImplementSearchDisplay.filterMap.add(newCriteria);
+		return ImplementSearchDisplay.filterMap;
 	}
 
-	public Map<String, String> saveFilterValue(String filterCriteria, String filterValue) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> search(List<SearchParameter> searchParam) throws SQLException {
+		
+		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
+		List<String> query = queryBuilderObject.createQuery(searchParam);
+		
+		if(query!=null){
+		    return queryBuilderObject.sendQuery(query);
+		}
+		else
+		    return null;
 	}
 
-	public List<String> search(Map<String, String> searchParam) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String display(String result) {
+	/*public String display(String result) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -47,6 +60,9 @@ public class ImplementSearchDisplay implements SearchDisplay {
 	public String candidateDetails(Author authorObject) {
 		// TODO Auto-generated method stub
 		return null;		
+	}*/
+	
+	public void clearFilterMap(){
+		ImplementSearchDisplay.filterMap.clear();
 	}
-
 }
