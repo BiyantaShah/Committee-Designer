@@ -35,48 +35,46 @@ public class ImplementParseDatabase implements ParseDatabase {
 
 			Connection conn = db.getConnection();
 			final int batchSize = 10000;
-			int i=0, j=0, k=0, l=0;
-			
-			
-
+			int i=0, j=0, k=0, l=0, m=0;
 			
 			if(data.getWww() != null){
 				
-				PreparedStatement statement_author =  conn.prepareStatement("insert into author(name,url) values (?,?)");
+				PreparedStatement statement_authorD =  conn.prepareStatement("insert into author_details(name,url) values (?,?)");
 								
-				for(Author auth : data.getWww()){
+				for(AuthorDetails auth : data.getWww()){
 					
 					if(auth.author != null && auth.url != null){
 												
 						for(String name : auth.author)
 		        			{
-								statement_author.setString(1,name);
-								statement_author.setString(2,auth.url);
-								statement_author.addBatch();
+								statement_authorD.setString(1,name);
+								statement_authorD.setString(2,auth.url);
+								statement_authorD.addBatch();
 							}
 							
 							if (++i % batchSize == 0){
 								
-							    statement_author.executeBatch();
+							    statement_authorD.executeBatch();
 						    }
 										
 						}
 				}	
 				
- 				statement_author.executeBatch();
+ 				statement_authorD.executeBatch();
 
 			}
 			
 			if (data.getInproceedings() != null) {
 				
-				PreparedStatement statement_inproceedings = conn.prepareStatement("insert into Paper(author,title,year,pages,confName,journalName)"
-					 	+ "values(?,?,?,?,?,?)");
+				PreparedStatement statement_inproceedings = conn.prepareStatement("insert into Paper(title,year,pages,confName,paperKey)"
+					 	+ "values(?,?,?,?,?)");
 				
+				PreparedStatement statement_author = conn.prepareStatement("insert into author(name,paperKey) values (?,?)");
 			
 				for (Paper paper: data.getInproceedings()) {
 					
 					if ((paper.getAuthor() == null)) 
-						// author is null then don't make an object of either paper 
+						// author is null then don't make an object of either paper or author 
 						continue;
 					
 					if(!isUTF8MisInterpreted(paper.getTitle(),"Windows-1252")){
@@ -86,36 +84,38 @@ public class ImplementParseDatabase implements ParseDatabase {
 				    String[] output  = new String[3];
 				    output = paper.key.split("/");
 				    String confName = null;
-				    String journalName = null;
 				    
-				    if (output[0].equals("conf")){
-				    	
+				    if (output[0].equals("conf")){    	
 				    	confName = output[1];
-				    	
-				    }else if(output[0].equals("journals")){
-				    	
-				    	 journalName = output[1];
-				    	
 				    }
-					
-					
+				    
+				    statement_inproceedings.setString(1,paper.title);
+					statement_inproceedings.setInt(2,paper.year);
+					statement_inproceedings.setString(3,paper.pages);
+					statement_inproceedings.setString(4,confName);
+					statement_inproceedings.setString(5, paper.key);
+	     			statement_inproceedings.addBatch();
+							
 					for (String author: paper.author) {
-												
-						statement_inproceedings.setString(1,author);
-						statement_inproceedings.setString(2,paper.title);
-						statement_inproceedings.setInt(3,paper.year);
-						statement_inproceedings.setString(4,paper.pages);
-						statement_inproceedings.setString(5,confName);
-						statement_inproceedings.setString(6,journalName);
-		     			statement_inproceedings.addBatch();
+							
+						Author auth = new Author(author, paper.key);
+						
+						statement_author.setString(1, auth.name);
+						statement_author.setString(2, auth.paperKey);
+						statement_author.addBatch();
 					}
 					
 					if (++j % batchSize == 0){
 						statement_inproceedings.executeBatch();
 					}
 					
+					if (++m % batchSize == 0) {
+						statement_author.executeBatch();
+					}
+					
 				}
 				statement_inproceedings.executeBatch();
+				statement_author.executeBatch();
 			}
 			
 			if (data.getProceedings() != null) {
