@@ -1,6 +1,5 @@
 package com.team7;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class SearchUI extends JFrame {
@@ -37,23 +37,9 @@ public class SearchUI extends JFrame {
 	boolean q5 = false;
 
 	List<SearchParameter> finalList = new ArrayList<SearchParameter>();
+	LoginUI log = new LoginUI();
 	ImplementQueryBuilder qb = new ImplementQueryBuilder();
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SearchUI frame = new SearchUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -61,13 +47,23 @@ public class SearchUI extends JFrame {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public SearchUI() {
 
+	    setVisible(true);
+	    setTitle("Search UI");
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 951, 625);
+		setBounds(10, -22, 933, 579);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JLabel lblSearch = new JLabel("Search");
+		lblSearch.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		lblSearch.setBounds(401, 39, 153, 32);
+		contentPane.add(lblSearch);
 
+		
 		final JPanel panel_2 = new JPanel();
 		panel_2.setVisible(false);
 
@@ -89,7 +85,6 @@ public class SearchUI extends JFrame {
 		final JComboBox ComparatorComboBox_3 = new JComboBox();
 		final JComboBox ComparatorComboBox_4 = new JComboBox();
 		final JComboBox ComparatorComboBox_5 = new JComboBox();
-
 
 
 		final JLabel JoinLabel_1 = new JLabel("Join Condition");
@@ -129,7 +124,7 @@ public class SearchUI extends JFrame {
 		/****************************************************** Panel -1 *******************************************/		
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(24, 57, 883, 41);
+		panel_1.setBounds(23, 134, 880, 41);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -210,13 +205,13 @@ public class SearchUI extends JFrame {
 				sp1.searchValue = ValueField_1.getText();
 				if(sp1.searchValue.equals("")){
 
-					System.out.println("pls enter value");
+					log.messageShow("please enter value for search before proceeding further");
 
 				}else{
 
 					JoinLabel_1.setVisible(true);
 					JoinComboBox_1.setVisible(true);
-					System.out.println(sp1.searchFilter +"---"+sp1.searchComparator + "---" + sp1.searchValue+ "-----"+sp1.joinFilter);
+//					System.out.println(sp1.searchFilter +"---"+sp1.searchComparator + "---" + sp1.searchValue+ "-----"+sp1.joinFilter);
 					panel_2.setVisible(true);
 					q2 = true;
 
@@ -242,7 +237,7 @@ public class SearchUI extends JFrame {
 
 		/****************************************************** Panel -2 ********************************************/		
 		panel_2.setLayout(null);
-		panel_2.setBounds(24, 97, 883, 41);
+		panel_2.setBounds(23, 175, 880, 41);
 		contentPane.add(panel_2);
 
 		JLabel CriteriaLabel_2 = new JLabel("Criteria");
@@ -321,12 +316,12 @@ public class SearchUI extends JFrame {
 				sp2.searchValue = ValueField_2.getText();
 				if(sp2.searchValue.equals("")){
 
-					System.out.println("pls enter value");
+					log.messageShow("please enter value for search before proceeding further");
 
 				}else{
 					JoinLabel_2.setVisible(true);
 					JoinComboBox_2.setVisible(true);
-					System.out.println(sp2.searchFilter +"---"+sp2.searchComparator + "---" + sp2.searchValue+ "-----"+sp2.joinFilter);
+//					System.out.println(sp2.searchFilter +"---"+sp2.searchComparator + "---" + sp2.searchValue+ "-----"+sp2.joinFilter);
 					panel_3.setVisible(true);
 					q3 = true;
 				}
@@ -350,7 +345,7 @@ public class SearchUI extends JFrame {
 		/************************************ Panel -3 ******************************************************/
 
 		panel_3.setLayout(null);
-		panel_3.setBounds(24, 137, 883, 41);
+		panel_3.setBounds(23, 214, 880, 41);
 		contentPane.add(panel_3);
 
 		JLabel CriteriaLabel_3 = new JLabel("Criteria");
@@ -427,12 +422,12 @@ public class SearchUI extends JFrame {
 				sp3.searchValue = ValueField_3.getText();
 				if(sp3.searchValue.equals("")){
 
-					System.out.println("pls enter value");
+					log.messageShow("please enter value for search before proceeding further");
 
 				}else{
 					JoinLabel_3.setVisible(true);
 					JoinComboBox_3.setVisible(true);
-					System.out.println(sp3.searchFilter +"---"+sp3.searchComparator + "---" + sp3.searchValue+ "-----"+sp3.joinFilter);
+//					System.out.println(sp3.searchFilter +"---"+sp3.searchComparator + "---" + sp3.searchValue+ "-----"+sp3.joinFilter);
 					panel_4.setVisible(true);
 					q4 = true;
 				}
@@ -455,7 +450,7 @@ public class SearchUI extends JFrame {
 		/****************************************** Panel-4 ******************************************************************/
 
 		panel_4.setLayout(null);
-		panel_4.setBounds(24, 176, 883, 41);
+		panel_4.setBounds(23, 255, 880, 41);
 		contentPane.add(panel_4);
 
 		JLabel CriteriaLabel_4 = new JLabel("Criteria");
@@ -536,13 +531,13 @@ public class SearchUI extends JFrame {
 				sp4.searchValue = ValueField_4.getText();
 				if(sp4.searchValue.equals("")){
 
-					System.out.println("pls enter value");
+					log.messageShow("please enter value for search before proceeding further");
 
 				}else{
 
 					JoinLabel_4.setVisible(true);
 					JoinComboBox_4.setVisible(true);
-					System.out.println(sp4.searchFilter +"---"+sp4.searchComparator + "---" + sp4.searchValue+ "-----"+sp4.joinFilter);
+//					System.out.println(sp4.searchFilter +"---"+sp4.searchComparator + "---" + sp4.searchValue+ "-----"+sp4.joinFilter);
 					panel_5.setVisible(true);
 					q5 = true;
 				}
@@ -565,7 +560,7 @@ public class SearchUI extends JFrame {
 
 		/*********************************** Panel - 5 **********************************************/	
 
-		panel_5.setBounds(24, 215, 883, 41);
+		panel_5.setBounds(23, 294, 880, 41);
 		contentPane.add(panel_5);
 		panel_5.setLayout(null);
 
@@ -636,10 +631,14 @@ public class SearchUI extends JFrame {
 		ValueField_5.setColumns(10);
 		ValueField_5.setBounds(417, 10, 116, 22);
 		panel_5.add(ValueField_5);
-
-		JButton btnNewButton = new JButton("Search");
-		btnNewButton.setBounds(363, 313, 97, 25);
+				
+				
+		JButton btnNewButton = new JButton("Submit");
+		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnNewButton.setBounds(394, 395, 97, 25);
 		contentPane.add(btnNewButton);
+			
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -651,6 +650,7 @@ public class SearchUI extends JFrame {
 
 				if(q1 == true)
 				{
+					finalList.clear();
 					if(!sp1.searchValue.equals("")){
 						finalList.add(sp1);
 						if(q2 == true)
@@ -670,31 +670,31 @@ public class SearchUI extends JFrame {
 													if(!sp5.searchValue.equals("")){
 														finalList.add(sp5);
 													}else{
-														System.out.println("Please enter a  value for search in fifth row");
+														log.messageShow("Please enter a  value for search in fifth row");
 													}
 												}												   
 											}										       
 											else{
-												System.out.println("Please enter a  value for search in fourth row");  
+												log.messageShow("Please enter a  value for search in fourth row");  
 											}										   
 										}
 									}else{
-										System.out.println("Please enter a  value for search in third row");
+										log.messageShow("Please enter a  value for search in third row");
 									}
 								}
 							}else{
-								System.out.println("Please enter a  value for search in second row");  
+								log.messageShow("Please enter a  value for search in second row");  
 							} 
 						}	   
 					}else{
-						System.out.println("Please enter a  value for search in first row"); 
+						log.messageShow("Please enter a  value for search in first row"); 
 					}
 				}
 
 				if(finalList.size() != 0){
 
-					// searchDisplay(qb.saveFilterValue(finalList));					
-					System.out.println("list size"+finalList.size() +"-----"+sp5.joinFilter);
+					// searchDisplay(qb.search(finalList));					
+					log.messageShow("list size"+finalList.size());
 
 				}				   
 			}
