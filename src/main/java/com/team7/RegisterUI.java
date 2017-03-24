@@ -3,7 +3,6 @@ package com.team7;
 import java.awt.Color;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,7 +22,6 @@ import java.sql.Statement;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JButton;

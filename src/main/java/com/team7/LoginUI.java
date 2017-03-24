@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -132,6 +131,8 @@ public class LoginUI extends JFrame implements Login {
 							if (login(userName, plainText)) {
 								// let it go to the search page
 								messageShow("Logged In Successfully");
+//								SearchUI search = new SearchUI();
+//								search.setLocationRelativeTo(null);
 								frame.dispose();
 							}
 							else {
