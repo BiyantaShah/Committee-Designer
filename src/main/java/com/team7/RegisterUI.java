@@ -161,23 +161,10 @@ public class RegisterUI extends JFrame implements Register {
 					log.messageShow("Please enter password");
 
 				} else{
-					//no duplicate entry  - encrypt password
-
-					try {
-
-						SecretKeySpec skeyspec=new SecretKeySpec(secretKey.getBytes(),"Blowfish");
-						Cipher cipher = Cipher.getInstance("Blowfish");
-						cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
-						password = base64.encodeToString(cipher.doFinal(plainPwd.getBytes("UTF8")));
-
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
+					
 					try {
 						//insert data into table
-						res = createUser(userName,password,role,confName);
+						res = createUser(userName,plainPwd,role,confName);
 
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -189,7 +176,7 @@ public class RegisterUI extends JFrame implements Register {
 						//log.messageShow("registered successfully");
 						//setVisible(false);
 						dispose();
-						SearchUI search = new SearchUI();
+						SearchUI search = new SearchUI(userName);
 						search.setLocationRelativeTo(null);
 					}
 				}}});
@@ -197,13 +184,24 @@ public class RegisterUI extends JFrame implements Register {
 
 
 
-	public boolean createUser(String userName, String password, String role, String confName) throws SQLException {
+	public boolean createUser(String userName, String plainPass, String role, String confName) throws SQLException {
 
 		if(verifyIfUserExists(userName))
 		{			
 			log.messageShow("Username already exists");
 
 		}else{
+			// encrypt the password
+			try {
+				SecretKeySpec skeyspec=new SecretKeySpec(secretKey.getBytes(),"Blowfish");
+				Cipher cipher = Cipher.getInstance("Blowfish");
+				cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
+				password = base64.encodeToString(cipher.doFinal(plainPass.getBytes("UTF8")));
+
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 			User user = new User(userName,password,role,confName);
 			ImplementSchemaDB db= new ImplementSchemaDB();
@@ -234,7 +232,7 @@ public class RegisterUI extends JFrame implements Register {
 			if(rs.next()){
 
 				if(rs.getInt(1) > 0){
-					System.out.println(rs.getString(1));
+//					System.out.println(rs.getString(1));
 					return true; 
 				}
 			}

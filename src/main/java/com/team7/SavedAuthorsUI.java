@@ -41,27 +41,11 @@ public class SavedAuthorsUI extends JFrame {
 	private Statement stmt;
 
 	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					SavedAuthorsUI frame = new SavedAuthorsUI();
-//					frame.setVisible(true);
-//					frame.setTitle("SAVED AUTHORS");
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
 	public SavedAuthorsUI(final String userName) throws SQLException {
+		
 		setVisible(true);
 		setTitle("SAVED AUTHORS");
 		
@@ -95,7 +79,8 @@ public class SavedAuthorsUI extends JFrame {
 		Connection conn = db.getConnection();
 		stmt = conn.createStatement();
 		
-		ResultSet rs = stmt.executeQuery("select title as TITLE,year from paper where id <50 ");
+		ResultSet rs = stmt.executeQuery("select a.name, p.title from paper p, author a where "
+						+ "p.paperKey=a.paperKey limit 50");
 		
 		JTable table = new JTable(buildTableModel(rs));
 		
@@ -132,7 +117,6 @@ public class SavedAuthorsUI extends JFrame {
 				for (String s : sendMail) {
 					System.out.println("Values "+ s);
 				}
-				System.out.println("Username "+userName);
 				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 				try {
 					searchDisplay.sendEmail(sendMail, userName);

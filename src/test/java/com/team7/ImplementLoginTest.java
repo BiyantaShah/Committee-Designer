@@ -15,7 +15,7 @@ public class ImplementLoginTest extends TestCase{
      public void testLoginSuccess() throws SQLException {
 		
 		LoginUI login = new LoginUI();
-		Boolean res = login.login("xyz@gmail.com","123");
+		Boolean res = login.login("xyz@gmail.com","132");
 		Boolean val = true;
 		assertEquals(val,res);
 		
@@ -27,7 +27,7 @@ public class ImplementLoginTest extends TestCase{
      public void testLoginFailure() throws SQLException {
 		
 		 LoginUI login = new LoginUI();
-		Boolean res = login.login("xyz@gmail.com","132");
+		Boolean res = login.login("xyz@gmail.com","123");
 		Boolean val = false;
 		assertEquals(val,res);
 		

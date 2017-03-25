@@ -2,7 +2,9 @@ package com.team7;
 
 import static org.junit.Assert.*;
 
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.junit.Test;
 
@@ -13,8 +15,16 @@ public class ImplementRegisterTest {
      public void testCreateUserSuccess() throws SQLException {
 		
 		RegisterUI user = new RegisterUI();
+		// After inserting delete it, so that the next time you run, it does not fail
+		ImplementSchemaDB db = new ImplementSchemaDB();
+		Connection conn = db.getConnection();
+		Statement stmt = conn.createStatement();
+
+		stmt.executeUpdate("delete from user where username='xyz@gmail.com'");
+		
 		boolean res = user.createUser("xyz@gmail.com","132","Associate Editor","OOPSLA");
-		assertEquals(true,res);
+			
+		assertEquals(true,res);		
 		
 	}
 	 

@@ -1,7 +1,6 @@
 package com.team7;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -41,27 +40,14 @@ public class DisplayUI extends JFrame {
 	Set<String> saveAuthors = new HashSet<String>();
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DisplayUI frame = new DisplayUI();
-					frame.setVisible(true);
-					frame.setTitle("SEARCH RESULTS");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public DisplayUI() throws SQLException {
+	public DisplayUI(final String userName) throws SQLException {
+		
+		setVisible(true);
+		setTitle("SEARCH RESULTS");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(10, -22, 933, 579);
 		contentPane = new JPanel();
@@ -125,6 +111,21 @@ public class DisplayUI extends JFrame {
 				for (String s : saveAuthors) {
 					System.out.println("Values "+ s);
 				}
+				
+				// Save author returns a result set containing saved authors and their details
+				// this will be sent to Saved Authors UI
+				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
+				searchDisplay.saveAuthor(saveAuthors);
+				
+				try {
+					dispose();
+					SavedAuthorsUI saved = new SavedAuthorsUI(userName);
+					saved.setLocationRelativeTo(null);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));

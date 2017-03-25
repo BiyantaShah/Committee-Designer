@@ -11,7 +11,6 @@ import java.util.Set;
 
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.activation.*;
 
 
 public class ImplementSearchDisplay implements SearchDisplay {
@@ -51,20 +50,20 @@ public class ImplementSearchDisplay implements SearchDisplay {
 		    return null;
 	}
 
-	/*public String display(String result) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public String display(String result) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
-	public String saveAuthor(Author authorObject) {
+	public String saveAuthor(Set<String> saveAuthors) {
 		// TODO Auto-generated method stub
 		return null;		
 	}
 
-	public String candidateDetails(Author authorObject) {
-		// TODO Auto-generated method stub
-		return null;		
-	}*/
+//	public String candidateDetails(Author authorObject) {
+//		// TODO Auto-generated method stub
+//		return null;		
+//	}
 	
 	public void clearFilterMap(){
 		ImplementSearchDisplay.filterMap.clear();

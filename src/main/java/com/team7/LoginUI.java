@@ -128,12 +128,9 @@ public class LoginUI extends JFrame implements Login {
 						if (register.verifyIfUserExists(userName)) {
 
 							if (login(userName, plainText)) {
-								// let it go to the search page
-
-								
-								//messageShow("Logged In Successfully");
+								// let it go to the search page if login is successful
 								frame.dispose();
-								SearchUI search = new SearchUI();
+								SearchUI search = new SearchUI(userName);
 								search.setLocationRelativeTo(null);
 								
 							}
@@ -180,16 +177,18 @@ public class LoginUI extends JFrame implements Login {
 			ImplementSchemaDB db = new ImplementSchemaDB();
 			Connection conn = db.getConnection();
 			Statement stmt = conn.createStatement();
+			
 			String sql = "select password from user where username = '" +username +"'";
 
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-
+				
 				String plainText = rs.getString(1);
 				String finalVal ="";
 				try { // decrypting the password
 					byte[] encryptedData = Base64.decodeBase64(plainText);
+					System.out.println("encrypted "+rs.getString(1).length());
 					SecretKeySpec skeyspec=new SecretKeySpec(secretKey.getBytes(),"Blowfish");
 					Cipher cipher=Cipher.getInstance("Blowfish");
 					cipher.init(Cipher.DECRYPT_MODE, skeyspec);
