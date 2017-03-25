@@ -13,11 +13,11 @@ import junit.framework.TestCase;
 
 public class ImplementSearchTest extends TestCase {
 	
-	@Test
+	/*@Test
 	public void testsaveFilters() {
 		
 		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay();
-		searchdisplay.clearFilterMap();
+		//searchdisplay.clearFilterMap();
 		List<SearchParameter> result = searchdisplay.saveFilterValue("Name", "=", "Michael Ley", null);			
 		// checking if year = 2010 in result map
 		assertEquals("Michael Ley", result.get(0).getSearchValue());
@@ -28,8 +28,8 @@ public class ImplementSearchTest extends TestCase {
 		
 		//SearchParameter newCriteria = new SearchParameter("Keyword", "LIKE","Biology","AND");
 		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay(); 
-		searchdisplay.clearFilterMap();
-		searchdisplay.saveFilterValue("Keyword", "LIKE","Chemistry",null);	
+		//searchdisplay.clearFilterMap();
+		//searchdisplay.saveFilterValue("Keyword", "LIKE","Chemistry",null);	
 		List<SearchParameter> result = searchdisplay.updateFilterValues(0, "Keyword", "LIKE","Biology","AND");
 		assertEquals("Biology", result.get(0).getSearchValue());		
 	}
@@ -38,28 +38,27 @@ public class ImplementSearchTest extends TestCase {
 	public void testDeleteFilters() {
 		
 		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay();
-		searchdisplay.clearFilterMap();
-		searchdisplay.saveFilterValue("Name", "=","Michael Ley","AND");	
-		searchdisplay.saveFilterValue("Keyword", "LIKE","Chemistry",null);	
+		//searchdisplay.clearFilterMap();
+		//searchdisplay.saveFilterValue("Name", "=","Michael Ley","AND");	
+		//searchdisplay.saveFilterValue("Keyword", "LIKE","Chemistry",null);	
 		List<SearchParameter> result = searchdisplay.deleteFilterValues(1);
 		// deleting the search criteria 'keyword' from the map
 		assertEquals(false, result.contains(new SearchParameter("keyword", "LIKE","Chemistry",null)));
-	}
+	}*/
 	
 	// The following test cases need  to added
 	
-	/*@Test
+	@Test
 	public void testSearchValid() throws SQLException {
 		
 		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay();
-		searchdisplay.clearFilterMap();
-		List<SearchParameter> search = searchdisplay.saveFilterValue("Name", "=","Michael Ley",null);
-
-		List<String> result = searchdisplay.search(search); // result will have the answer of the search function
-		
+		List<SearchParameter> searchParameterList = new ArrayList<SearchParameter>();
+		SearchParameter s = new SearchParameter("Name", "=","Michael Ley",null);
+		searchParameterList.add(0,s);
+		List<String> result = searchdisplay.search(searchParameterList); // result will have the answer of the search function		
 		assertEquals("Michael Ley", result.get(0));
-		//searchdisplay.clearFilterMap();
-	}*/
+
+	}
 	
 	/*@Test
 	public void testDisplay() {
@@ -84,14 +83,17 @@ public class ImplementSearchTest extends TestCase {
 	}*/
 	
 	
-/*	@Test
-	public void testCandidateDetails() {
-		Author a = new Author("Dong-Soo Han", "conf/aina/KimJH08");
+	@Test
+	public void testCandidateDetails() throws SQLException {   //add valid author names to this test
+		List<String> authorList = new ArrayList<String>();
+		authorList.add("ABC");
+		authorList.add("XYZ");
+		authorList.add("PQR");
 		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
-		String result = searchDisplay.candidateDetails(a);
+		List<String> result = searchDisplay.candidateDetails(authorList);
 
-		assertEquals("Dong-Soo Han,  conf/aina/KimJH08", result);
-	}*/
+		//assertEquals();
+	}
 
 		
 	/*@Test

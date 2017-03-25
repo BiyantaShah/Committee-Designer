@@ -132,7 +132,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(0,s1);
   		searchCriteria.add(1,s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
-  		List<String> result = new ImplementQueryBuilder().sendQuery(queryFormed);			
+  		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);			
   		assertEquals(result.get(0),"Petra Ludewig");
 	}
 	
@@ -144,7 +144,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(0,s1);
   		searchCriteria.add(1,s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
-		List<String> result = new ImplementQueryBuilder().sendQuery(queryFormed);	
+		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
 		assertEquals(result.get(0),"Michael Ley");
 	}
 	
@@ -156,7 +156,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(0,s1);
   		searchCriteria.add(1,s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
-		List<String> result = new ImplementQueryBuilder().sendQuery(queryFormed);	
+		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
 		assertEquals(result.size(),0);
 	}
 	
@@ -182,12 +182,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testSecondUseCase() throws SQLException{    //add another test fetching result from DB
 		List<String> query7 = new ArrayList<String>();
-  		query7.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE p.title = '%pointer%' OR p.title = '%analysis%'  GROUP BY a.name HAVING COUNT(*) >=1");
+  		query7.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE p.title LIKE '%pointer%' OR p.title LIKE '%analysis%'  GROUP BY a.name HAVING COUNT(*) >=1");
   		query7.add(1,null);	
   		
 
-		SearchParameter s1= new SearchParameter("Keyword", "=" ,"pointer","OR");
-		SearchParameter s2= new SearchParameter("Keyword", "=" ,"analysis", "AND");
+		SearchParameter s1= new SearchParameter("Keyword", "LIKE" ,"pointer","OR");
+		SearchParameter s2= new SearchParameter("Keyword", "LIKE" ,"analysis", "AND");
 		SearchParameter s3= new SearchParameter("CountNoOfPapers", ">=" ,"1", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s1);
@@ -197,19 +197,16 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(query7, queryFormed);
 	}
 	
-	/*@Test
-	public void testSendQueryWithCommitte() throws SQLException{    //add another test fetching result from DB
+	@Test
+	public void testThridUseCase() throws SQLException{    //add another test fetching result from DB
 	
-		SearchParameter s1= new SearchParameter("Keyword", "=" ,"pointer","OR");
-		SearchParameter s2= new SearchParameter("Keyword", "=" ,"analysis", "AND");
-		SearchParameter s3= new SearchParameter("CountNoOfPapers", ">=" ,"1", null);
-		SearchParameter s4= new SearchParameter("Committee.Year", "=" ,"2006", null);
+		SearchParameter s1= new SearchParameter("Keyword", "LIKE" ,"pointer","AND");
+		SearchParameter s2= new SearchParameter("Committee.Year", "=" ,"2006", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s1);
   		searchCriteria.add(1,s2);
-  		searchCriteria.add(1,s3);
-  		searchCriteria.add(1,s4);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
-		
-	}*/
+  		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
+		assertEquals(result.get(0),"ABC");   // add a real author name here
+	}
 }
