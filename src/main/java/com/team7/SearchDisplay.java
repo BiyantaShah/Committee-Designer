@@ -9,22 +9,22 @@ public interface SearchDisplay {
 	/*
 	* updates the search parameter
 	*/
-	public List<SearchParameter> updateFilterValues(int index, String filterCriteria, String filterComparator, String filterValue, String filterJoin);
+	//public List<SearchParameter> updateFilterValues(int index, String filterCriteria, String filterComparator, String filterValue, String filterJoin);
 	
 	/*
 	* deletes the search parameter
 	*/
-	public List<SearchParameter> deleteFilterValues(int index);
+	//public List<SearchParameter> deleteFilterValues(int index);
 
 	/*
 	* adds the search parameters to a list to create the query together
 	*/
-	public List<SearchParameter> saveFilterValue(String filterCriteria, String filterComparator, String filterValue, String filterJoin);
+	//public List<SearchParameter> saveFilterValue(String filterCriteria, String filterComparator, String filterValue, String filterJoin);
 
 	/*
 	* sends these parameters to the query builder
 	*/
-	public List<String> search() throws SQLException;
+	public List<String> search(List<SearchParameter> searchFilter) throws SQLException;
 	
 	/*
 	* Displays the results returned by the search function; in proper format
@@ -44,7 +44,5 @@ public interface SearchDisplay {
 	/*
 	* details of the Author
 	*/
-//	public String candidateDetails(Author authorObject);
-
-
+	public List<String> candidateDetails(List<String> authors) throws SQLException;
 }

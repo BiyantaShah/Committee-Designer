@@ -131,17 +131,33 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			        AuthorTableAlias+ ".paperKey = " + PaperTableAlias + ".paperKey";		
     	}
         
-        public List<String> sendQuery(List<String> searchQuery) throws SQLException {
+        public List<String> getResultForDisplay(List<String> searchQuery) throws SQLException{
+        	     ResultSet paperAuthorResultSet = sendQuery(searchQuery.get(0));
+        	     List<String> paperAuthorResult = new ArrayList<String>();
+         		
+         		 while (paperAuthorResultSet.next()) {
+         			paperAuthorResult.add(paperAuthorResultSet.getString("Author"));
+                 }
+         		 
+         		 if(searchQuery.get(1) != null){
+         			ResultSet committeeResultSet = sendQuery(searchQuery.get(1));
+           	        List<String> committeeResult = new ArrayList<String>();
+            		
+            		 while (committeeResultSet.next()) {
+            			 committeeResult.add(committeeResultSet.getString("Author"));
+                    }
+            		 
+            		 paperAuthorResult.retainAll(committeeResult);         		
+         		 }
+         			 return paperAuthorResult;     		
+        }
+         
+        public ResultSet sendQuery(String searchQuery) throws SQLException {
     		ImplementSchemaDB implementSchemaObj = new ImplementSchemaDB();
     		Connection conn = implementSchemaObj.getConnection();
     		Statement stmt = conn.createStatement();
-    		ResultSet paperAuthorResultSet =stmt.executeQuery(searchQuery.get(0));	
-    		List<String> paperAuthorResult = new ArrayList<String>();
-    		
-    		while (paperAuthorResultSet.next()) {
-    			paperAuthorResult.add(paperAuthorResultSet.getString("Author"));
-            }
-    		return paperAuthorResult;
+    		ResultSet result =stmt.executeQuery(searchQuery);	
+    		return result;
     	}
         
         private void formGroupClause(SearchParameter search){ 	
@@ -149,6 +165,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
         }
           
         private void formPaperAuthorWhereClause(SearchParameter s){ 	
+        	
         	if(s.getSearchFilter() == "Keyword"){
 				whereClauseForPaperAuthor += PaperTableAlias+ ".title " + s.getSearchComparator()+ " '%"+ s.getSearchValue()+ "%' " + s.getjoinFilter() + " ";   					
 			}
@@ -172,6 +189,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
         
       
         private void formCommitteeWhereClause(SearchParameter s){  	
+        	
         	if(s.getSearchFilter() == "Committee.ConfName"){
         		whereClauseForCommittee += CommitteeTableAlias + "."+ s.getSearchFilter().split("\\.")[1] + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
 			} 
@@ -182,8 +200,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
         }
         
         
-        private void getPaperAuthorQuery(){
-            
+        private void getPaperAuthorQuery(){ 
         	String columnNames = getColumns();
 			String joinCondition = formJoinCondition();
 			queryPaperAuthor = "SELECT a.name AS Author FROM " + joinCondition + " WHERE ";  
@@ -193,9 +210,20 @@ public class ImplementQueryBuilder implements QueryBuilder{
         private void getCommitteQuery(){
         	
         	if(whereClauseForCommittee.length()>0){
-        		queryCommitte = "SELECT c.Author FROM  CommitteeTable c WHERE ";  
+        		queryCommitte = "SELECT c.AuthorName AS Author FROM  Committee c WHERE ";  
         		queryCommitte += whereClauseForCommittee;
         	}
+        }
+        
+        public String createQueryForAuthorDetails(List<String> authors){
+        	
+        	String query = "SELECT a.name AS Author, p.title As PaperTitle, p.confName AS Conference,"
+        			+ "p.year as Year FROM AUTHOR a INNER JOIN PAPER p ON a.paperKey = p.paperKey where a.name IN (";   	
+        	for(String author : authors){
+        		query +="'" + author +"',";	
+        	}     	
+        	query = query.substring(0, query.length()-1) + ")"; 	
+        	return query;   	
         }
 }
 

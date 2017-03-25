@@ -1,5 +1,6 @@
 package com.team7;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -20,5 +21,5 @@ public interface QueryBuilder {
 	/*
 	 * send the query to Database
 	 */
-	public List<String> sendQuery(List<String> searchQuery) throws SQLException;  //This object will be of type ResultSet
+	public ResultSet sendQuery(String searchQuery) throws SQLException;  //This object will be of type ResultSet
 }
