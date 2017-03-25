@@ -2,10 +2,10 @@ package com.team7;
 
 public class SearchParameter {
 	
-	String searchFilter;
-	String searchComparator;
-	String searchValue;
-	String joinFilter;
+	String searchFilter = null;
+	String searchComparator = null;
+	String searchValue = null;
+	String joinFilter = null;
 	
 	SearchParameter(){
 		
@@ -15,9 +15,9 @@ public class SearchParameter {
 		this.searchFilter =searchFilter;
 		this.searchComparator = searchComparator;
 		this.searchValue = searchValue;	
-		if(joinFilter != null){
+//		if(joinFilter != null){
 				this.joinFilter = joinFilter;
-			}
+//			}
 		}
 	
 	public String getSearchFilter(){
