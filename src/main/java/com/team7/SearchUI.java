@@ -76,7 +76,7 @@ public class SearchUI extends JFrame {
 		final JPanel panel_5 = new JPanel();
 		panel_5.setVisible(false);
 
-		String[] CriteriaList = {"Author Name" ,"Committe Year","Committe Conf Name", "Conference Name", "Count Of Papers", "Keyword in Title", "Paper Published Year"};
+		String[] CriteriaList = {"Author Name" ,"Committee Year","Committee Conf Name", "Conference Name", "Count Of Papers", "Keyword in Title", "Paper Published Year"};
 		String[] JoinList = {"AND","OR"};
 
 
@@ -154,12 +154,12 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_1.addItem("NOT LIKE");
 
 
-				} else if(CriteriaComboBox_1.getSelectedItem() == "Author Name" || CriteriaComboBox_1.getSelectedItem() == "Conference Name" || CriteriaComboBox_1.getSelectedItem() == "Committe Conf Name" ){
+				} else if(CriteriaComboBox_1.getSelectedItem() == "Author Name" || CriteriaComboBox_1.getSelectedItem() == "Conference Name" || CriteriaComboBox_1.getSelectedItem() == "Committee Conf Name" ){
 
 					ComparatorComboBox_1.addItem("=");	
 					ComparatorComboBox_1.addItem("!=");
 
-				}else if(CriteriaComboBox_1.getSelectedItem() == "Committe Year" || CriteriaComboBox_1.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_1.getSelectedItem() == "Paper Published Year" ){
+				}else if(CriteriaComboBox_1.getSelectedItem() == "Committee Year" || CriteriaComboBox_1.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_1.getSelectedItem() == "Paper Published Year" ){
 
 					ComparatorComboBox_1.addItem(">");
 					ComparatorComboBox_1.addItem("<");
@@ -264,12 +264,12 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_2.addItem("NOT LIKE");
 
 
-				} else if(CriteriaComboBox_2.getSelectedItem() == "Author Name" || CriteriaComboBox_2.getSelectedItem() == "Conference Name" || CriteriaComboBox_2.getSelectedItem() == "Committe Conf Name" ){
+				} else if(CriteriaComboBox_2.getSelectedItem() == "Author Name" || CriteriaComboBox_2.getSelectedItem() == "Conference Name" || CriteriaComboBox_2.getSelectedItem() == "Committee Conf Name" ){
 
 					ComparatorComboBox_2.addItem("=");	
 					ComparatorComboBox_2.addItem("!=");
 
-				}else if(CriteriaComboBox_2.getSelectedItem() == "Committe Year" || CriteriaComboBox_2.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_2.getSelectedItem() == "Paper Published Year" ){
+				}else if(CriteriaComboBox_2.getSelectedItem() == "Committee Year" || CriteriaComboBox_2.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_2.getSelectedItem() == "Paper Published Year" ){
 
 					ComparatorComboBox_2.addItem(">");
 					ComparatorComboBox_2.addItem("<");
@@ -372,12 +372,12 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_3.addItem("NOT LIKE");
 
 
-				} else if(CriteriaComboBox_3.getSelectedItem() == "Author Name" || CriteriaComboBox_3.getSelectedItem() == "Conference Name" || CriteriaComboBox_3.getSelectedItem() == "Committe Conf Name" ){
+				} else if(CriteriaComboBox_3.getSelectedItem() == "Author Name" || CriteriaComboBox_3.getSelectedItem() == "Conference Name" || CriteriaComboBox_3.getSelectedItem() == "Committee Conf Name" ){
 
 					ComparatorComboBox_3.addItem("=");	
 					ComparatorComboBox_3.addItem("!=");
 
-				}else if(CriteriaComboBox_3.getSelectedItem() == "Committe Year" || CriteriaComboBox_3.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_3.getSelectedItem() == "Paper Published Year" ){
+				}else if(CriteriaComboBox_3.getSelectedItem() == "Committee Year" || CriteriaComboBox_3.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_3.getSelectedItem() == "Paper Published Year" ){
 
 					ComparatorComboBox_3.addItem(">");
 					ComparatorComboBox_3.addItem("<");
@@ -478,12 +478,12 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_4.addItem("NOT LIKE");
 
 
-				} else if(CriteriaComboBox_4.getSelectedItem() == "Author Name" || CriteriaComboBox_4.getSelectedItem() == "Conference Name" || CriteriaComboBox_4.getSelectedItem() == "Committe Conf Name" ){
+				} else if(CriteriaComboBox_4.getSelectedItem() == "Author Name" || CriteriaComboBox_4.getSelectedItem() == "Conference Name" || CriteriaComboBox_4.getSelectedItem() == "Committee Conf Name" ){
 
 					ComparatorComboBox_4.addItem("=");	
 					ComparatorComboBox_4.addItem("!=");
 
-				}else if(CriteriaComboBox_4.getSelectedItem() == "Committe Year" || CriteriaComboBox_4.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_4.getSelectedItem() == "Paper Published Year" ){
+				}else if(CriteriaComboBox_4.getSelectedItem() == "Committee Year" || CriteriaComboBox_4.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_4.getSelectedItem() == "Paper Published Year" ){
 
 					ComparatorComboBox_4.addItem(">");
 					ComparatorComboBox_4.addItem("<");
@@ -589,12 +589,12 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_5.addItem("NOT LIKE");
 
 
-				} else if(CriteriaComboBox_5.getSelectedItem() == "Author Name" || CriteriaComboBox_5.getSelectedItem() == "Conference Name" || CriteriaComboBox_5.getSelectedItem() == "Committe Conf Name" ){
+				} else if(CriteriaComboBox_5.getSelectedItem() == "Author Name" || CriteriaComboBox_5.getSelectedItem() == "Conference Name" || CriteriaComboBox_5.getSelectedItem() == "Committee Conf Name" ){
 
 					ComparatorComboBox_5.addItem("=");	
 					ComparatorComboBox_5.addItem("!=");
 
-				}else if(CriteriaComboBox_5.getSelectedItem() == "Committe Year" || CriteriaComboBox_5.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_5.getSelectedItem() == "Paper Published Year" ){
+				}else if(CriteriaComboBox_5.getSelectedItem() == "Committee Year" || CriteriaComboBox_5.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_5.getSelectedItem() == "Paper Published Year" ){
 
 					ComparatorComboBox_5.addItem(">");
 					ComparatorComboBox_5.addItem("<");

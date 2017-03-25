@@ -200,7 +200,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testThirdUseCase() throws SQLException{    //add another test fetching result from DB
 		SearchParameter s1= new SearchParameter("Keyword in Title", "LIKE" ,"pointer","AND");
-		SearchParameter s2= new SearchParameter("Committe Year", "=" ,"2006", null);
+		SearchParameter s2= new SearchParameter("Committee Year", "=" ,"2006", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s1);
   		searchCriteria.add(1,s2);
