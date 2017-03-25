@@ -46,9 +46,18 @@ public class ImplementQueryBuilder implements QueryBuilder{
         
 	public boolean validateQuery(List<SearchParameter> searchParam) {        	
 		boolean result = false;
-				
 		for(SearchParameter s : searchParam){
-			if(s.getSearchFilter() == "Name"){	
+			if(s.getSearchFilter() == "Author Name"){	
+				s.searchFilter = "Name";
+				if(checkValidityOfSearchParameters(s.getSearchValue())){					
+					return false;
+				}
+				else
+					result = true;
+			}
+			
+			if(s.getSearchFilter() == "Conference Name"){
+				s.searchFilter = "ConfName";
 				if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
@@ -56,19 +65,15 @@ public class ImplementQueryBuilder implements QueryBuilder{
 					result = true;
 			}
 			
-			if(s.getSearchFilter() == "ConfName"){	
-				if(checkValidityOfSearchParameters(s.getSearchValue())){
-					return false;
+			if(s.getSearchFilter() == "Paper Published Year"){
+				s.searchFilter = "Year";
+	            if(s.getSearchFilter() == "Year" && Integer.parseInt(s.getSearchValue()) > 0){
+	            	result = true;
 				}
-				else
-					result = true;
-			}
-			
-            if(s.getSearchFilter() == "Year" && Integer.parseInt(s.getSearchValue()) > 0){
-            	result = true;
 			}
               
-            if(s.getSearchFilter() == "Keyword"){
+            if(s.getSearchFilter() == "Keyword in Title"){
+            	s.searchFilter = "Keyword";
             	if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;				  
             	}
@@ -76,11 +81,22 @@ public class ImplementQueryBuilder implements QueryBuilder{
 					result = true; 	
              } 
             
-            if(s.getSearchFilter() == "Committe.Year" && Integer.parseInt(s.getSearchValue()) > 0){
-				return true;
+            if(s.getSearchFilter() == "Count Of Papers"){            	
+            	s.searchFilter = "CountNoOfPapers";
+	            if(s.getSearchFilter() == "CountNoOfPapers" && Integer.parseInt(s.getSearchValue()) > 0){
+					return true;
+				}
+            }    
+            
+	        if(s.getSearchFilter() == "Committee Year")  {  
+	        	s.searchFilter = "Committee.Year";
+	            if(s.getSearchFilter() == "Committee.Year" && Integer.parseInt(s.getSearchValue()) > 0){					
+	            	return true;
+	            }
 			}
             
-            if(s.getSearchFilter() == "Committe.ConfName"){
+            if(s.getSearchFilter() == "Committee Conf Name"){
+	        	s.searchFilter = "Committee.ConfName";
             	if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
@@ -117,7 +133,8 @@ public class ImplementQueryBuilder implements QueryBuilder{
     			}
     			
     			if(whereClauseForCommittee.length()>0){
-    			    whereClauseForCommittee = whereClauseForCommittee.substring(0, whereClauseForCommittee.length()-5);   			
+    			    whereClauseForCommittee = whereClauseForCommittee.substring(0, whereClauseForCommittee.length()-5);   
+
     			}		
     	}
         
@@ -177,6 +194,8 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			
 			else if(s.getSearchFilter() == "ConfName"){
 				whereClauseForPaperAuthor += PaperTableAlias + "."+ s.getSearchFilter() + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
+//				System.out.println("Where clasue "+ whereClauseForPaperAuthor +"---"+ s.getSearchComparator());
+
 			} 
 			
 			else if(s.getSearchFilter() == "CountNoOfPapers"){
@@ -188,11 +207,12 @@ public class ImplementQueryBuilder implements QueryBuilder{
         private void formCommitteeWhereClause(SearchParameter s){  	
         	
         	if(s.getSearchFilter() == "Committee.ConfName"){
-        		whereClauseForCommittee += CommitteeTableAlias + "."+ s.getSearchFilter().split("\\.")[1] + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
+        		whereClauseForCommittee += CommitteeTableAlias + "."+ s.getSearchFilter().split("\\.")[1] + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";
 			} 
 			
 			else if(s.getSearchFilter() == "Committee.Year"){
 				whereClauseForCommittee += CommitteeTableAlias + "."+ s.getSearchFilter().split("\\.")[1] + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
+
 			} 
         }
         
