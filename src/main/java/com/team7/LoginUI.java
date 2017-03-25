@@ -74,7 +74,7 @@ public class LoginUI extends JFrame implements Login {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblWelcome = new JLabel("Welcome !");
+		JLabel lblWelcome = new JLabel("WELCOME !");
 		lblWelcome.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblWelcome.setBounds(401, 39, 153, 32);
 		contentPane.add(lblWelcome);
@@ -130,11 +130,11 @@ public class LoginUI extends JFrame implements Login {
 
 							if (login(userName, plainText)) {
 								
-								// let it go to the search page
-								//messageShow("Logged In Successfully");
+								// let it go to the search page if login is successful
 								frame.dispose();
-								SearchUI search = new SearchUI();
-								search.setLocationRelativeTo(null);								
+								SearchUI search = new SearchUI(userName);
+								search.setLocationRelativeTo(null);
+								
 							}
 							else {
 								messageShow("Invalid Credentials");
@@ -180,16 +180,18 @@ public class LoginUI extends JFrame implements Login {
 			ImplementSchemaDB db = new ImplementSchemaDB();
 			Connection conn = db.getConnection();
 			Statement stmt = conn.createStatement();
+			
 			String sql = "select password from user where username = '" +username +"'";
 
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-
+				
 				String plainText = rs.getString(1);
 				String finalVal ="";
 				try { // decrypting the password
 					byte[] encryptedData = Base64.decodeBase64(plainText);
+					System.out.println("encrypted "+rs.getString(1).length());
 					SecretKeySpec skeyspec=new SecretKeySpec(secretKey.getBytes(),"Blowfish");
 					Cipher cipher=Cipher.getInstance("Blowfish");
 					cipher.init(Cipher.DECRYPT_MODE, skeyspec);

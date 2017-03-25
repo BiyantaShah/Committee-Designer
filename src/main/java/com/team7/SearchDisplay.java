@@ -2,7 +2,7 @@ package com.team7;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 public interface SearchDisplay {
 	
@@ -34,12 +34,12 @@ public interface SearchDisplay {
 	/*
 	* gets a list of email id's to send email to
 	*/
-	//public List<String> sendEmail(User userObject);
+	public void sendEmail(Set<String> authors, String userName) throws SQLException;
 
 	/*
 	* saves the author in the database for future use of the user
 	*/
-	///public String saveAuthor(Author authorObject);
+	public String saveAuthor(Set<String> saveAuthors);
 
 	/*
 	* details of the Author

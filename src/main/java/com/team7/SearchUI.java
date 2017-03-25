@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -45,7 +46,7 @@ public class SearchUI extends JFrame {
 	 * Create the frame.
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public SearchUI() {
+	public SearchUI(final String userName) {
 
 	    setVisible(true);
 	    setTitle("Search UI");
@@ -646,54 +647,79 @@ public class SearchUI extends JFrame {
 				sp3.searchValue = ValueField_3.getText();
 				sp4.searchValue = ValueField_4.getText();
 				sp5.searchValue = ValueField_5.getText();
+				
+				boolean error = false;
 
 				if(q1 == true)
 				{
 					finalList.clear();
 					if(!sp1.searchValue.equals("")){
+						error = false;
 						finalList.add(sp1);
 						if(q2 == true)
 						{
 							if(!sp2.searchValue.equals("")){
+								error = false;
 								finalList.add(sp2);
 								if(q3 == true)
 								{
 									if(!sp3.searchValue.equals("")){
+										error = false;
 										finalList.add(sp3);
 										if(q4 == true)
 										{
 											if(!sp4.searchValue.equals("")){
+												error = false;
 												finalList.add(sp4);
 												if(q5 == true)
 												{
 													if(!sp5.searchValue.equals("")){
+														error = false;
 														finalList.add(sp5);
 													}else{
+														error = true;
 														log.messageShow("Please enter a  value for search in fifth row");
 													}
 												}												   
 											}										       
 											else{
+												error = true;
 												log.messageShow("Please enter a  value for search in fourth row");  
 											}										   
 										}
 									}else{
+										error = true;
 										log.messageShow("Please enter a  value for search in third row");
 									}
 								}
 							}else{
+								error = true;
 								log.messageShow("Please enter a  value for search in second row");  
 							} 
 						}	   
 					}else{
+						error = true;
 						log.messageShow("Please enter a  value for search in first row"); 
 					}
 				}
 
-				if(finalList.size() != 0){
+				if(finalList.size() != 0 && error == false){
 
-					//searchDisplay(sd.search(finalList));					
+					// Display function will return a result set containing the search query results
+					// send these to displayUI to render the information there.
+					
+					// searchDisplay(qb.search(finalList));					
 					log.messageShow("list size"+finalList.size());
+					DisplayUI display;
+					try {
+						dispose();
+						display = new DisplayUI(userName);
+						display.setLocationRelativeTo(null);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 
 				}				   
 			}

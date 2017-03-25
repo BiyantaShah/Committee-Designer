@@ -29,12 +29,12 @@ public class ImplementSchemaDB implements SchemaDB {
 
 			      //Open a connection
 			      conn = DriverManager.getConnection(DB_URL, userName, password);
-//			      String sql = null; 
-			      stmt = conn.createStatement();
-			      
-			      String sql = "DROP DATABASE IF EXISTS DBLP";
-			      stmt.executeUpdate(sql);
-			      System.out.println("Dblp database deleted successfully...");
+			      String sql = null; 
+//			      stmt = conn.createStatement();
+//			      
+//			      String sql = "DROP DATABASE IF EXISTS DBLP";
+//			      stmt.executeUpdate(sql);
+//			      System.out.println("Dblp database deleted successfully...");
 
 			      //Execute a query
 			      stmt = conn.createStatement();			      
