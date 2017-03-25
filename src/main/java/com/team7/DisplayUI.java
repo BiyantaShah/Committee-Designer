@@ -19,6 +19,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
@@ -43,7 +44,7 @@ public class DisplayUI extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public DisplayUI(final String userName) throws SQLException {
+	public DisplayUI(List<String> authors, final String userName) throws SQLException {
 		
 		setVisible(true);
 		setTitle("SEARCH RESULTS");
@@ -74,11 +75,7 @@ public class DisplayUI extends JFrame {
 		Connection conn = db.getConnection();
 		Statement stmt = conn.createStatement();
 		
-		ResultSet rs = stmt.executeQuery
-				("select a.name, p.title from paper p, author a where "
-						+ "p.paperKey=a.paperKey limit 10");
-		
-		JTable table = new JTable(buildTableModel(rs));
+		JTable table = new JTable(buildTableModel(authors));
 		
 		JTableHeader header = table.getTableHeader();
 		header.setDefaultRenderer(new HeaderRenderer(table));
@@ -107,19 +104,23 @@ public class DisplayUI extends JFrame {
 		JButton btnSavedAuthors = new JButton("Saved Authors");
 		btnSavedAuthors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// List of authors who have been saved by the user
 				saveAuthors = ButtonEditor.sendEmail;
-				for (String s : saveAuthors) {
-					System.out.println("Values "+ s);
-				}
 				
-				// Save author returns a result set containing saved authors and their details
-				// this will be sent to Saved Authors UI
 				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
-				searchDisplay.saveAuthor(saveAuthors);
+				ResultSet result = null;
+				try {
+					// candidate details will give all the details of the authors present in 
+					// the saved list
+					result = searchDisplay.candidateDetails(saveAuthors);
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 				
 				try {
 					dispose();
-					SavedAuthorsUI saved = new SavedAuthorsUI(userName);
+					SavedAuthorsUI saved = new SavedAuthorsUI(result, userName);
 					saved.setLocationRelativeTo(null);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -133,28 +134,44 @@ public class DisplayUI extends JFrame {
 		panel_2.add(btnSavedAuthors);
 	}
 
-	private TableModel buildTableModel(ResultSet rs) throws SQLException {
+
+	private TableModel buildTableModel(List<String> authors) throws SQLException {
 		// TODO Auto-generated method stub
-		ResultSetMetaData metaData = rs.getMetaData();
+//		ResultSetMetaData metaData = rs.getMetaData();
 		
 		Vector<String> columnNames = new Vector<String>();
 		
-	    int columnCount = metaData.getColumnCount();
-	    
-	    for (int column = 1; column <= columnCount; column++) {
-	        columnNames.add(metaData.getColumnName(column));
-	    }
+//	    int columnCount = metaData.getColumnCount();
+//	   
+		columnNames.add("Author Name");
 	    columnNames.add("Save");
 	    
 	    Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-	    while (rs.next()) {
-	        Vector<Object> vector = new Vector<Object>();
-	        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-	            vector.add(rs.getObject(columnIndex));     
-	        }
-	        vector.add("save");
-	        data.add(vector);
+	    
+	    
+	    for (String author: authors) {
+	    	Vector<Object> vector = new Vector<Object>();
+	    	
+	    	for (int columnIndex= 1; columnIndex <=1; columnIndex++) {
+	    		vector.add(author);
+	    	}
+	    	vector.addElement("save");
+	    	data.addElement(vector);
 	    }
+	    
+//	    for (String author: authors) {
+//	    	vector.add(author);
+//	    	data.addElement(vector);
+//	    }	       
+//	    for (int columnIndex = 1; columnIndex <= 2; columnIndex++) {
+//	    	for (String author: authors) {
+//		    	vector.add(author);
+//		    }
+//	    } 
+//	    vector.add("save");
+//	    data.add(vector);
+	   
+ 
 	    
 	    return new DefaultTableModel(data, columnNames);
 		

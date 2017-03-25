@@ -174,7 +174,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s1);
   		searchCriteria.add(1,s2);
-  		searchCriteria.add(1,s3);
+  		searchCriteria.add(2,s3);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		assertEquals(query6, queryFormed);
 	}
@@ -192,14 +192,14 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s1);
   		searchCriteria.add(1,s2);
-  		searchCriteria.add(1,s3);
+  		searchCriteria.add(2,s3);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		assertEquals(query7, queryFormed);
 	}
 	
 	@Test
 	public void testThirdUseCase() throws SQLException{    //add another test fetching result from DB
-		System.out.println("Third test case");
+		
 		SearchParameter s1= new SearchParameter("Keyword", "LIKE" ,"pointer","AND");
 		SearchParameter s2= new SearchParameter("Committee.Year", "=" ,"2006", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
