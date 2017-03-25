@@ -2,6 +2,7 @@ package com.team7;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.sql.Connection;
@@ -97,10 +98,6 @@ public class ImplementQueryBuilder implements QueryBuilder{
     		return m.find();
     	}
         
-        private String getColumns(){
-        	return "a.name AS Author, p.title AS Title";
-        }
-        
         private void formQueryParams(List<SearchParameter> searchParam){
 			   			
         	for(SearchParameter s : searchParam){	
@@ -113,8 +110,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
     				}
     			}	
         
-    			whereClauseForPaperAuthor = whereClauseForPaperAuthor.substring(0, whereClauseForPaperAuthor.length()-5);   			
-//    			System.out.println("after computation "+ whereClauseForPaperAuthor);
+    			whereClauseForPaperAuthor = whereClauseForPaperAuthor.substring(0, whereClauseForPaperAuthor.length()-5);   		
     			
     			if(groupByClause.length()>0){
     				whereClauseForPaperAuthor += groupByClause;
@@ -168,9 +164,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
         private void formPaperAuthorWhereClause(SearchParameter s){ 	
         	
         	if(s.getSearchFilter() == "Keyword"){
-//        		System.out.println("Join filter " + s.getjoinFilter());
 				whereClauseForPaperAuthor += PaperTableAlias+ ".title " + s.getSearchComparator()+ " '%"+ s.getSearchValue()+ "%' " + s.getjoinFilter() + " ";   					
-//				System.out.println("Where clasue "+ whereClauseForPaperAuthor);
         	}
 			
 			else if(s.getSearchFilter() == "Year"){
@@ -204,11 +198,10 @@ public class ImplementQueryBuilder implements QueryBuilder{
         
         
         private void getPaperAuthorQuery(){ 
-        	String columnNames = getColumns();
+//        	String columnNames = getColumns();
 			String joinCondition = formJoinCondition();
 			queryPaperAuthor = "SELECT a.name AS Author FROM " + joinCondition + " WHERE ";  
 			queryPaperAuthor += whereClauseForPaperAuthor;
-			System.out.println("getpaperauthor query "+ queryPaperAuthor);
         }
         
         private void getCommitteQuery(){
@@ -216,11 +209,10 @@ public class ImplementQueryBuilder implements QueryBuilder{
         	if(whereClauseForCommittee.length()>0){
         		queryCommitte = "SELECT c.AuthorName AS Author FROM  Committee c WHERE ";  
         		queryCommitte += whereClauseForCommittee;
-        		System.out.println("getCommitteQuery "+ queryCommitte);
         	}
         }
         
-        public String createQueryForAuthorDetails(List<String> authors){
+        public String createQueryForAuthorDetails(Set<String> authors){
         	
         	String query = "SELECT a.name AS Author, p.title As PaperTitle, p.confName AS Conference,"
         			+ "p.year as Year FROM AUTHOR a INNER JOIN PAPER p ON a.paperKey = p.paperKey where a.name IN (";   	

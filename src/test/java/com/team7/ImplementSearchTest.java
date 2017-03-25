@@ -1,11 +1,11 @@
 package com.team7;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -27,37 +27,48 @@ public class ImplementSearchTest extends TestCase {
 	}
 	
 	
-	/*@Test
- 	public void testSaveAuthorValid() {
-		Author a = new Author("Dong-Soo Han", "conf/aina/KimJH08");
-		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
-		String result = searchDisplay.saveAuthor(a);
-
-		assertEquals("Author saved correctly", result);
-	}*/
-	
-	
 	@Test
 	public void testCandidateDetails() throws SQLException {   //add valid author names to this test
-		List<String> authorList = new ArrayList<String>();
-		authorList.add("ABC");
-		authorList.add("XYZ");
-		authorList.add("PQR");
+		Set<String> authorList = new HashSet<String>();
+		authorList.add("Amer Diwan");
+		authorList.add("Roger King");
+		authorList.add("Petra Ludewig");
 		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
-		List<String> result = searchDisplay.candidateDetails(authorList);
+		ResultSet res = searchDisplay.candidateDetails(authorList);
+		
+		String author = null;
+		while (res.next()) {
+			author = res.getString("Author");
+		}
 
-		//assertEquals();
+		assertEquals("Amer Diwan", author);
 	}
 
 		
-	/*@Test
-	public void testSendEmail() {
-		User u = new User("xyz@gmail.com", "pass", "Associate Editor", "OOPSLA");
-		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
-		List<String> result  = searchDisplay.sendEmail(u);
+	@Test
+	public void testSendEmailValid() throws SQLException {
+		Set<String> authors = new HashSet<String>();
+		authors.add("Roger King");
+		authors.add("Petra Ludewig");
 		
-		List<String> test = Arrays.asList("xyz@gmail.com");
-		assertEquals(test, result);
-	}*/
+		String username="shahbiyanta@gmail.com";
+		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
+		String res = searchDisplay.sendEmail(authors, username);
+				
+		assertEquals("success", res);
+	}
+	
+	@Test
+	public void testSendEmailInValid() throws SQLException {
+		Set<String> authors = new HashSet<String>();
+		authors.add("Roger King");
+		authors.add("Petra Ludewig");
+		
+		String username="abc@abc.com";
+		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
+		String res = searchDisplay.sendEmail(authors, username);
+				
+		assertEquals("failure", res);
+	}
 
 }

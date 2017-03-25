@@ -44,7 +44,7 @@ public class SavedAuthorsUI extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public SavedAuthorsUI(final String userName) throws SQLException {
+	public SavedAuthorsUI(ResultSet result, final String userName) throws SQLException {
 		
 		setVisible(true);
 		setTitle("SAVED AUTHORS");
@@ -79,10 +79,10 @@ public class SavedAuthorsUI extends JFrame {
 		Connection conn = db.getConnection();
 		stmt = conn.createStatement();
 		
-		ResultSet rs = stmt.executeQuery("select a.name, p.title from paper p, author a where "
-						+ "p.paperKey=a.paperKey limit 50");
+//		ResultSet rs = stmt.executeQuery("select a.name, p.title from paper p, author a where "
+//						+ "p.paperKey=a.paperKey limit 50");
 		
-		JTable table = new JTable(buildTableModel(rs));
+		JTable table = new JTable(buildTableModel(result));
 		
 		JTableHeader header = table.getTableHeader();
 		header.setDefaultRenderer(new HeaderRenderer(table));

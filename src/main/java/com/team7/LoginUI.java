@@ -188,7 +188,6 @@ public class LoginUI extends JFrame implements Login {
 				String finalVal ="";
 				try { // decrypting the password
 					byte[] encryptedData = Base64.decodeBase64(plainText);
-					System.out.println("encrypted "+rs.getString(1).length());
 					SecretKeySpec skeyspec=new SecretKeySpec(secretKey.getBytes(),"Blowfish");
 					Cipher cipher=Cipher.getInstance("Blowfish");
 					cipher.init(Cipher.DECRYPT_MODE, skeyspec);
