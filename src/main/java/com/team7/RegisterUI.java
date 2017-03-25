@@ -56,7 +56,6 @@ public class RegisterUI extends JFrame implements Register {
 		setTitle("REGISTER");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(10, -22, 933, 579);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -185,6 +184,7 @@ public class RegisterUI extends JFrame implements Register {
 						//setVisible(false);
 						dispose();
 						SearchUI search = new SearchUI();
+						search.setSize(950, 600);
 						search.setLocationRelativeTo(null);
 					}
 				}}});

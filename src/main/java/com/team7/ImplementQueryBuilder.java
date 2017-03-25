@@ -45,29 +45,34 @@ public class ImplementQueryBuilder implements QueryBuilder{
         
 	public boolean validateQuery(List<SearchParameter> searchParam) {        	
 		boolean result = false;
-				
 		for(SearchParameter s : searchParam){
-			if(s.getSearchFilter() == "Name"){	
-				if(checkValidityOfSearchParameters(s.getSearchValue())){
+			if(s.getSearchFilter() == "Author Name"){	
+				s.searchFilter = "Name";
+				if(checkValidityOfSearchParameters(s.searchFilter)){
 					return false;
 				}
 				else
 					result = true;
 			}
 			
-			if(s.getSearchFilter() == "ConfName"){	
-				if(checkValidityOfSearchParameters(s.getSearchValue())){
+			if(s.getSearchFilter() == "Conference Name"){
+				s.searchFilter = "ConfName";
+				if(checkValidityOfSearchParameters(s.searchFilter)){
 					return false;
 				}
 				else
 					result = true;
 			}
 			
-            if(s.getSearchFilter() == "Year" && Integer.parseInt(s.getSearchValue()) > 0){
-            	result = true;
+			if(s.getSearchFilter() == "Paper Published Year"){
+				s.searchFilter = "Year";
+	            if(s.getSearchFilter() == "Year" && Integer.parseInt(s.getSearchValue()) > 0){
+	            	result = true;
+				}
 			}
               
-            if(s.getSearchFilter() == "Keyword"){
+            if(s.getSearchFilter() == "Keyword in Title"){
+            	s.searchFilter = "Keyword";
             	if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;				  
             	}
@@ -75,11 +80,22 @@ public class ImplementQueryBuilder implements QueryBuilder{
 					result = true; 	
              } 
             
-            if(s.getSearchFilter() == "Committe.Year" && Integer.parseInt(s.getSearchValue()) > 0){
-				return true;
+            if(s.getSearchFilter() == "Count Of Papers"){            	
+            	s.searchFilter = "CountNoOfPapers";
+	            if(s.getSearchFilter() == "CountNoOfPapers" && Integer.parseInt(s.getSearchValue()) > 0){
+					return true;
+				}
+            }    
+            
+	        if(s.getSearchFilter() == "Committe Year")  {  
+	        	s.searchFilter = "Committe.Year";
+	            if(s.getSearchFilter() == "Committe.Year" && Integer.parseInt(s.getSearchValue()) > 0){					
+	            	return true;
+	            }
 			}
             
-            if(s.getSearchFilter() == "Committe.ConfName"){
+            if(s.getSearchFilter() == "Committe Conf Name"){
+	        	s.searchFilter = "Committe.ConfName";
             	if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}

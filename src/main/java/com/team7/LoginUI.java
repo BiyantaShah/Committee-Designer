@@ -68,7 +68,7 @@ public class LoginUI extends JFrame implements Login {
 	 */
 	public LoginUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(10, -22, 933, 579);
+		setSize(950, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -122,18 +122,19 @@ public class LoginUI extends JFrame implements Login {
 					RegisterUI register;
 					try {
 						register = new RegisterUI();
+						register.setLocationRelativeTo(null);
 						register.setVisible(false);
 						
 						// check if user exists or not and then validate the password.
 						if (register.verifyIfUserExists(userName)) {
 
 							if (login(userName, plainText)) {
+								
 								// let it go to the search page
 								//messageShow("Logged In Successfully");
 								frame.dispose();
 								SearchUI search = new SearchUI();
-								search.setLocationRelativeTo(null);
-								
+								search.setLocationRelativeTo(null);								
 							}
 							else {
 								messageShow("Invalid Credentials");
@@ -162,6 +163,7 @@ public class LoginUI extends JFrame implements Login {
 					// go to the register page
 					frame.dispose();
 					register = new RegisterUI();
+					register.setSize(950, 600);
 					register.setLocationRelativeTo(null);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
