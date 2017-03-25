@@ -16,32 +16,6 @@ import javax.mail.internet.*;
 public class ImplementSearchDisplay implements SearchDisplay {
 	
 	// Keeps track of all filter criteria and their values
-/*	private static List<SearchParameter> filterMap = new ArrayList<SearchParameter>();
-
-	public List<SearchParameter> updateFilterValues(int index, String filterCriteria, String filterComparator, String filterValue, String filterJoin) {
-		
-		SearchParameter newFilter = new SearchParameter(filterCriteria, filterComparator, filterValue, filterJoin); 
-		ImplementSearchDisplay.filterMap.set(index, newFilter);
-		return ImplementSearchDisplay.filterMap;
-	} 
-
-	public List<SearchParameter> deleteFilterValues(int index) {
-		
-		ImplementSearchDisplay.filterMap.remove(index);
-		return ImplementSearchDisplay.filterMap;
-	}
-
-	public List<SearchParameter> saveFilterValue(String filterCriteria, String filterComparator, String filterValue, String filterJoin) {
-		
-		SearchParameter newCriteria = new SearchParameter(filterCriteria, filterComparator, filterValue, filterJoin); 
-		ImplementSearchDisplay.filterMap.add(newCriteria);
-		return ImplementSearchDisplay.filterMap;
-	}*/
-	
-	/*public void clearFilterMap(){
-	ImplementSearchDisplay.filterMap.clear();
-	}*/
-
 	
 	// check
 	public List<String> search(List<SearchParameter> searchParameter) throws SQLException {
@@ -55,11 +29,6 @@ public class ImplementSearchDisplay implements SearchDisplay {
 		else
 		    return null;
 	}
-
-//	public String display(String result) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 	public String saveAuthor(Set<String> saveAuthors) {
 		// TODO Auto-generated method stub
