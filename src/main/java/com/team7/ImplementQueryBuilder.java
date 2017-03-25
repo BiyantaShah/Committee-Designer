@@ -48,7 +48,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		for(SearchParameter s : searchParam){
 			if(s.getSearchFilter() == "Author Name"){	
 				s.searchFilter = "Name";
-				if(checkValidityOfSearchParameters(s.searchFilter)){
+				if(checkValidityOfSearchParameters(s.getSearchValue())){					
 					return false;
 				}
 				else
@@ -57,7 +57,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			
 			if(s.getSearchFilter() == "Conference Name"){
 				s.searchFilter = "ConfName";
-				if(checkValidityOfSearchParameters(s.searchFilter)){
+				if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
 				else
@@ -88,14 +88,15 @@ public class ImplementQueryBuilder implements QueryBuilder{
             }    
             
 	        if(s.getSearchFilter() == "Committe Year")  {  
-	        	s.searchFilter = "Committe.Year";
+	        	s.searchFilter = "Committee.Year";
 	            if(s.getSearchFilter() == "Committe.Year" && Integer.parseInt(s.getSearchValue()) > 0){					
 	            	return true;
 	            }
 			}
             
             if(s.getSearchFilter() == "Committe Conf Name"){
-	        	s.searchFilter = "Committe.ConfName";
+	        	s.searchFilter = "Committee.ConfName";
+	        	System.out.println("val" +s.searchFilter);
             	if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
@@ -109,6 +110,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
         private boolean checkValidityOfSearchParameters(String searchParameter){
     		
     		Pattern p = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
+    		//System.out.println(searchParameter);
     		Matcher m = p.matcher(searchParameter);
     		return m.find();
     	}
@@ -125,19 +127,21 @@ public class ImplementQueryBuilder implements QueryBuilder{
     				}
     				
     				else{
+    					System.out.println(s);
     					formPaperAuthorWhereClause(s);
     				}
     			}	
         
     			whereClauseForPaperAuthor = whereClauseForPaperAuthor.substring(0, whereClauseForPaperAuthor.length()-5);   			
-//    			System.out.println("after computation "+ whereClauseForPaperAuthor);
     			
     			if(groupByClause.length()>0){
     				whereClauseForPaperAuthor += groupByClause;
     			}
     			
     			if(whereClauseForCommittee.length()>0){
-    			    whereClauseForCommittee = whereClauseForCommittee.substring(0, whereClauseForCommittee.length()-5);   			
+    			    whereClauseForCommittee = whereClauseForCommittee.substring(0, whereClauseForCommittee.length()-5);   
+        			System.out.println("after computation "+ whereClauseForCommittee);
+
     			}		
     	}
         
@@ -179,6 +183,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
         
         private void formGroupClause(SearchParameter search){ 	
         	groupByClause = " GROUP BY " + AuthorTableAlias +".name HAVING COUNT(*) " + search.getSearchComparator() +search.getSearchValue();
+//			System.out.println("groupByClause"+ groupByClause);
         }
           
         private void formPaperAuthorWhereClause(SearchParameter s){ 	
@@ -186,7 +191,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
         	if(s.getSearchFilter() == "Keyword"){
 //        		System.out.println("Join filter " + s.getjoinFilter());
 				whereClauseForPaperAuthor += PaperTableAlias+ ".title " + s.getSearchComparator()+ " '%"+ s.getSearchValue()+ "%' " + s.getjoinFilter() + " ";   					
-//				System.out.println("Where clasue "+ whereClauseForPaperAuthor);
+				System.out.println("Where clasue "+ whereClauseForPaperAuthor);
         	}
 			
 			else if(s.getSearchFilter() == "Year"){
@@ -199,6 +204,8 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			
 			else if(s.getSearchFilter() == "ConfName"){
 				whereClauseForPaperAuthor += PaperTableAlias + "."+ s.getSearchFilter() + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
+				System.out.println("Where clasue "+ whereClauseForPaperAuthor +"---"+ s.getSearchComparator());
+
 			} 
 			
 			else if(s.getSearchFilter() == "CountNoOfPapers"){
@@ -210,11 +217,14 @@ public class ImplementQueryBuilder implements QueryBuilder{
         private void formCommitteeWhereClause(SearchParameter s){  	
         	
         	if(s.getSearchFilter() == "Committee.ConfName"){
-        		whereClauseForCommittee += CommitteeTableAlias + "."+ s.getSearchFilter().split("\\.")[1] + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
+        		whereClauseForCommittee += CommitteeTableAlias + "."+ s.getSearchFilter().split("\\.")[1] + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";
+				System.out.println("whereClauseForCommittee clasue "+ whereClauseForCommittee);
 			} 
 			
 			else if(s.getSearchFilter() == "Committee.Year"){
 				whereClauseForCommittee += CommitteeTableAlias + "."+ s.getSearchFilter().split("\\.")[1] + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
+				System.out.println("whereClauseForCommittee clasue "+ whereClauseForCommittee);
+
 			} 
         }
         
@@ -232,7 +242,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
         	if(whereClauseForCommittee.length()>0){
         		queryCommitte = "SELECT c.AuthorName AS Author FROM  Committee c WHERE ";  
         		queryCommitte += whereClauseForCommittee;
-        		System.out.println("getCommitteQuery "+ queryCommitte);
+//        		System.out.println("getCommitteQuery "+ queryCommitte);
         	}
         }
         
