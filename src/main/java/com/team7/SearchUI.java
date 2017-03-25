@@ -707,13 +707,18 @@ public class SearchUI extends JFrame {
 
 					// Display function will return a result set containing the search query results
 					// send these to displayUI to render the information there.
-					
-					// searchDisplay(qb.search(finalList));					
-					log.messageShow("list size"+finalList.size());
+					ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
+					List<String> finalAuthors = null;
+					 try {
+						finalAuthors = searchDisplay.search(finalList);
+					} catch (SQLException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}					
 					DisplayUI display;
 					try {
 						dispose();
-						display = new DisplayUI(userName);
+						display = new DisplayUI(finalAuthors, userName);
 						display.setLocationRelativeTo(null);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block

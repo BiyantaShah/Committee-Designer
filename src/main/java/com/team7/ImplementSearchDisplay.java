@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -16,8 +15,6 @@ import javax.mail.internet.*;
 public class ImplementSearchDisplay implements SearchDisplay {
 	
 	// Keeps track of all filter criteria and their values
-	
-	// check
 	public List<String> search(List<SearchParameter> searchParameter) throws SQLException {
 		
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
@@ -30,35 +27,21 @@ public class ImplementSearchDisplay implements SearchDisplay {
 		    return null;
 	}
 
-	public String saveAuthor(Set<String> saveAuthors) {
-		// TODO Auto-generated method stub
-		return null;		
-	}
 
-
-	public List<String> candidateDetails(List<String> authors) throws SQLException {
+	public ResultSet candidateDetails(Set<String> authors) throws SQLException {
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
 		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
-		List<String> result = new ArrayList<String>();
-		
-		
+
 		if(query!=null){
 		    ResultSet detailsResultSet = queryBuilderObject.sendQuery(query);
-		    
-		    while (detailsResultSet.next()) {
-		    	result.add(detailsResultSet.getString("Author"));
-		    	result.add(detailsResultSet.getString("PaperTitle"));
-		    	result.add(detailsResultSet.getString("Conference"));
-		    	result.add(detailsResultSet.getString("Year"));
-             }    
-     	 return result; 
-		    
+    		    
+		    return detailsResultSet; 		    
 		}
 		else
 		    return null;	
 	}
 
-	public void sendEmail(Set<String> authors, String userName) throws SQLException {
+	public String sendEmail(Set<String> authors, String userName) throws SQLException {
 		// TODO Auto-generated method stub
 		// get the conference of the current user
 		ImplementSchemaDB db = new ImplementSchemaDB();
@@ -126,12 +109,14 @@ public class ImplementSearchDisplay implements SearchDisplay {
 				
 				Transport.send(message);
 				
-				System.out.println("Sent message successfully....");
+				return "success";
 			}
 			catch(MessagingException mex) {
 				mex.printStackTrace();
+				
 			}
 		}
+		return "failure";
 		
 	}
 }

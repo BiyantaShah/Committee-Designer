@@ -2,6 +2,7 @@ package com.team7;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.sql.Connection;
@@ -96,7 +97,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
             
             if(s.getSearchFilter() == "Committe Conf Name"){
 	        	s.searchFilter = "Committee.ConfName";
-	        	System.out.println("val" +s.searchFilter);
+//	        	System.out.println("val" +s.searchFilter);
             	if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
@@ -115,10 +116,6 @@ public class ImplementQueryBuilder implements QueryBuilder{
     		return m.find();
     	}
         
-        private String getColumns(){
-        	return "a.name AS Author, p.title AS Title";
-        }
-        
         private void formQueryParams(List<SearchParameter> searchParam){
 			   			
         	for(SearchParameter s : searchParam){	
@@ -127,12 +124,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
     				}
     				
     				else{
-    					System.out.println(s);
     					formPaperAuthorWhereClause(s);
     				}
     			}	
         
-    			whereClauseForPaperAuthor = whereClauseForPaperAuthor.substring(0, whereClauseForPaperAuthor.length()-5);   			
+    			whereClauseForPaperAuthor = whereClauseForPaperAuthor.substring(0, whereClauseForPaperAuthor.length()-5);   		
     			
     			if(groupByClause.length()>0){
     				whereClauseForPaperAuthor += groupByClause;
@@ -140,7 +136,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
     			
     			if(whereClauseForCommittee.length()>0){
     			    whereClauseForCommittee = whereClauseForCommittee.substring(0, whereClauseForCommittee.length()-5);   
-        			System.out.println("after computation "+ whereClauseForCommittee);
+//        			System.out.println("after computation "+ whereClauseForCommittee);
 
     			}		
     	}
@@ -189,9 +185,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
         private void formPaperAuthorWhereClause(SearchParameter s){ 	
         	
         	if(s.getSearchFilter() == "Keyword"){
-//        		System.out.println("Join filter " + s.getjoinFilter());
 				whereClauseForPaperAuthor += PaperTableAlias+ ".title " + s.getSearchComparator()+ " '%"+ s.getSearchValue()+ "%' " + s.getjoinFilter() + " ";   					
-				System.out.println("Where clasue "+ whereClauseForPaperAuthor);
         	}
 			
 			else if(s.getSearchFilter() == "Year"){
@@ -204,7 +198,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			
 			else if(s.getSearchFilter() == "ConfName"){
 				whereClauseForPaperAuthor += PaperTableAlias + "."+ s.getSearchFilter() + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
-				System.out.println("Where clasue "+ whereClauseForPaperAuthor +"---"+ s.getSearchComparator());
+//				System.out.println("Where clasue "+ whereClauseForPaperAuthor +"---"+ s.getSearchComparator());
 
 			} 
 			
@@ -218,23 +212,22 @@ public class ImplementQueryBuilder implements QueryBuilder{
         	
         	if(s.getSearchFilter() == "Committee.ConfName"){
         		whereClauseForCommittee += CommitteeTableAlias + "."+ s.getSearchFilter().split("\\.")[1] + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";
-				System.out.println("whereClauseForCommittee clasue "+ whereClauseForCommittee);
+//				System.out.println("whereClauseForCommittee clasue "+ whereClauseForCommittee);
 			} 
 			
 			else if(s.getSearchFilter() == "Committee.Year"){
 				whereClauseForCommittee += CommitteeTableAlias + "."+ s.getSearchFilter().split("\\.")[1] + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
-				System.out.println("whereClauseForCommittee clasue "+ whereClauseForCommittee);
+//				System.out.println("whereClauseForCommittee clasue "+ whereClauseForCommittee);
 
 			} 
         }
         
         
         private void getPaperAuthorQuery(){ 
-        	String columnNames = getColumns();
+//        	String columnNames = getColumns();
 			String joinCondition = formJoinCondition();
 			queryPaperAuthor = "SELECT a.name AS Author FROM " + joinCondition + " WHERE ";  
 			queryPaperAuthor += whereClauseForPaperAuthor;
-			System.out.println("getpaperauthor query "+ queryPaperAuthor);
         }
         
         private void getCommitteQuery(){
@@ -242,11 +235,10 @@ public class ImplementQueryBuilder implements QueryBuilder{
         	if(whereClauseForCommittee.length()>0){
         		queryCommitte = "SELECT c.AuthorName AS Author FROM  Committee c WHERE ";  
         		queryCommitte += whereClauseForCommittee;
-//        		System.out.println("getCommitteQuery "+ queryCommitte);
         	}
         }
         
-        public String createQueryForAuthorDetails(List<String> authors){
+        public String createQueryForAuthorDetails(Set<String> authors){
         	
         	String query = "SELECT a.name AS Author, p.title As PaperTitle, p.confName AS Conference,"
         			+ "p.year as Year FROM AUTHOR a INNER JOIN PAPER p ON a.paperKey = p.paperKey where a.name IN (";   	
