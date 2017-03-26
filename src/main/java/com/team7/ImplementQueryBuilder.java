@@ -1,6 +1,7 @@
 package com.team7;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -48,7 +49,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		boolean result = false;
 		for(SearchParameter s : searchParam){
 			if(s.getSearchFilter() == "Author Name"){	
-				s.searchFilter = "Name";
+				s.setSearchFilter("Name");
 				if(checkValidityOfSearchParameters(s.getSearchValue())){					
 					return false;
 				}
@@ -57,7 +58,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			}
 			
 			if(s.getSearchFilter() == "Conference Name"){
-				s.searchFilter = "ConfName";
+				s.setSearchFilter("ConfName");
 				if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
@@ -66,14 +67,14 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			}
 			
 			if(s.getSearchFilter() == "Paper Published Year"){
-				s.searchFilter = "Year";
+				s.setSearchFilter("Year");
 	            if(s.getSearchFilter() == "Year" && Integer.parseInt(s.getSearchValue()) > 0){
 	            	result = true;
 				}
 			}
               
             if(s.getSearchFilter() == "Keyword in Title"){
-            	s.searchFilter = "Keyword";
+            	s.setSearchFilter("Keyword");
             	if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;				  
             	}
@@ -82,21 +83,21 @@ public class ImplementQueryBuilder implements QueryBuilder{
              } 
             
             if(s.getSearchFilter() == "Count Of Papers"){            	
-            	s.searchFilter = "CountNoOfPapers";
+            	s.setSearchFilter("CountNoOfPapers");
 	            if(s.getSearchFilter() == "CountNoOfPapers" && Integer.parseInt(s.getSearchValue()) > 0){
 					return true;
 				}
             }    
             
 	        if(s.getSearchFilter() == "Committee Year")  {  
-	        	s.searchFilter = "Committee.Year";
+	        	s.setSearchFilter("Committee.Year");
 	            if(s.getSearchFilter() == "Committee.Year" && Integer.parseInt(s.getSearchValue()) > 0){					
 	            	return true;
 	            }
 			}
             
             if(s.getSearchFilter() == "Committee Conf Name"){
-	        	s.searchFilter = "Committee.ConfName";
+	        	s.setSearchFilter("Committee.ConfName");
             	if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
@@ -147,6 +148,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
         
         public List<String> getResultForDisplay(List<String> searchQuery) throws SQLException{
         	     ResultSet paperAuthorResultSet = sendQuery(searchQuery.get(0));
+        	     List<String> finalResult = new ArrayList<String>();
         	     List<String> paperAuthorResult = new ArrayList<String>();
          		
          		 while (paperAuthorResultSet.next()) {
@@ -163,7 +165,9 @@ public class ImplementQueryBuilder implements QueryBuilder{
             		 
             		 paperAuthorResult.retainAll(committeeResult);         		
          		 }
-         			 return paperAuthorResult;     		
+         		 
+         		     finalResult.addAll(new HashSet<String>(paperAuthorResult));        		 
+         			 return finalResult;     		
         }
          
         public ResultSet sendQuery(String searchQuery) throws SQLException {
@@ -189,7 +193,12 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			}
 			
 			else if(s.getSearchFilter() == "Name"){
-				whereClauseForPaperAuthor += AuthorTableAlias + "."+ s.getSearchFilter() + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
+				if(s.getSearchComparator() == "="){
+					whereClauseForPaperAuthor += AuthorTableAlias + "."+ s.getSearchFilter() + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
+				}
+				else{
+					whereClauseForPaperAuthor += AuthorTableAlias + "."+ s.getSearchFilter() + " "+ s.getSearchComparator()+ " '%"+ s.getSearchValue()+ "%' " + s.getjoinFilter() + " ";   					
+				}
 			} 
 			
 			else if(s.getSearchFilter() == "ConfName"){
