@@ -7,13 +7,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-
+import javax.xml.bind.JAXBException;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.JTextField;
@@ -41,8 +41,12 @@ public class LoginUI extends JFrame {
 
 	/**
 	 * Launch the application.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 * @throws IOException 
+	 * @throws JAXBException 
 	 */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException, JAXBException, IOException {
 
     	System.out.println("Start");
 
@@ -50,12 +54,18 @@ public class LoginUI extends JFrame {
     	File comData = new File("input/committees/");
     	// Parsing the xml to create objects
     	ImplementParseDatabase parse = new ImplementParseDatabase();
-    	ImplementSchemaDB db = new ImplementSchemaDB();
+    	ImplementSchemaDB db;
+		try {
+			db = new ImplementSchemaDB();
+	    	db.dbSetUp();   //set up initial database
+	    	parse.parseXml(file);	//parse xml data
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
     	ImplementCommittees com = new ImplementCommittees();
-
-    	//		db.dbSetUp();   //set up initial database
-    	//		parse.parseXml(file);	//parse xml data
-    	//		com.ParseFiles(comData); //parse committee data
+    	com.ParseFiles(comData); //parse committee data
 
     	EventQueue.invokeLater(new Runnable() {
     		public void run() {

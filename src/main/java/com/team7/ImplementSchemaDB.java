@@ -30,11 +30,11 @@ public class ImplementSchemaDB implements SchemaDB {
 			      //Open a connection
 			      conn = DriverManager.getConnection(DB_URL, userName, password);
 			      String sql = null; 
-//			      stmt = conn.createStatement();
-//			      
-//			      sql = "DROP DATABASE IF EXISTS DBLP";
-//			      stmt.executeUpdate(sql);
-//			      System.out.println("Dblp database deleted successfully...");
+			      stmt = conn.createStatement();
+			      
+			      sql = "DROP DATABASE IF EXISTS DBLP";
+			      stmt.executeUpdate(sql);
+			      System.out.println("Dblp database deleted successfully...");
 
 			      //Execute a query
 			      stmt = conn.createStatement();			      
@@ -130,6 +130,7 @@ public class ImplementSchemaDB implements SchemaDB {
 					        "(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
 						    " author	  VARCHAR(255), " +
 					        " title       TEXT, " + 
+					        " journal	  VARCHAR(255), " +
 					        " year        INTEGER, " + 
 					        " month       VARCHAR(255), " + 
 		     	            " ee          TEXT, "      +   

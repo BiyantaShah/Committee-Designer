@@ -157,7 +157,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 			
 			if (data.getArticle() != null) {
 				
-				PreparedStatement statement_article = conn.prepareStatement("insert into article(author,title,year,month,ee) values (?,?,?,?,?)");
+				PreparedStatement statement_article = conn.prepareStatement("insert into article(author,title,journal,year,month,ee) values (?,?,?,?,?,?)");
 				
 				for (Article article: data.getArticle()) {
 					
@@ -190,9 +190,10 @@ public class ImplementParseDatabase implements ParseDatabase {
 				    		for (String author: article.author) {
 				    			statement_article.setString(1, author);
 				    			statement_article.setString(2, article.title);
-				    			statement_article.setInt(3, article.year);
-				    			statement_article.setString(4, article.month);
-				    			statement_article.setString(5, article.ee);
+				    			statement_article.setString(3, journalName);
+				    			statement_article.setInt(4, article.year);
+				    			statement_article.setString(5, article.month);
+				    			statement_article.setString(6, article.ee);
 
 				    			statement_article.addBatch();
 
