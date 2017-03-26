@@ -14,6 +14,7 @@ import junit.framework.TestCase;
 public class ImplementSearchTest extends TestCase {
 	
 	
+	// Testing the final query result
 	@Test
 	public void testSearchValid() throws SQLException {
 		
@@ -21,14 +22,14 @@ public class ImplementSearchTest extends TestCase {
 		List<SearchParameter> searchParameterList = new ArrayList<SearchParameter>();
 		SearchParameter s = new SearchParameter("Author Name", "=","Shahar Maoz",null);
 		searchParameterList.add(0,s);
-		List<String> result = searchdisplay.search(searchParameterList); // result will have the answer of the search function		
+		List<String> result = searchdisplay.search(searchParameterList); 
 		assertEquals("Shahar Maoz", result.get(0));
 
 	}
 	
-	
+	// Valid candidate details extracted
 	@Test
-	public void testCandidateDetails() throws SQLException {   //add valid author names to this test
+	public void testCandidateDetails() throws SQLException {   
 		Set<String> authorList = new HashSet<String>();
 		authorList.add("Amer Diwan");
 		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
@@ -42,7 +43,8 @@ public class ImplementSearchTest extends TestCase {
 		assertEquals("Amer Diwan", author);
 	}
 
-		
+	
+	// Email sent successfully
 	@Test
 	public void testSendEmailValid() throws SQLException {
 		Set<String> authors = new HashSet<String>();
@@ -56,6 +58,7 @@ public class ImplementSearchTest extends TestCase {
 		assertEquals("success", res);
 	}
 	
+	// Incorrect email ID, so email not sent
 	@Test
 	public void testSendEmailInValid() throws SQLException {
 		Set<String> authors = new HashSet<String>();

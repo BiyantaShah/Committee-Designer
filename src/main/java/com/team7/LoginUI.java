@@ -22,7 +22,7 @@ import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
-
+// LoginUI window
 public class LoginUI extends JFrame {
 
 	/**
@@ -154,7 +154,7 @@ public class LoginUI extends JFrame {
 								
 							}
 							else {
-								messageShow("Invalid Credentials");
+								messageShow("Invalid Credentials: Username and password don't match");
 							}
 						}
 						else {

@@ -10,6 +10,8 @@ import junit.framework.TestCase;
 
 public class ImplementQueryBuilderTest extends TestCase {
 
+	// Testing queries of different types
+	
   	@Test
 	public void testValidAuthorName(){ 	
   		List<String> query1 = new ArrayList<String>();

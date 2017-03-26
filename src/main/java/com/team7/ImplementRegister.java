@@ -12,7 +12,7 @@ import org.apache.commons.codec.binary.Base64;
 
 public class ImplementRegister implements Register {
 	
-	String secretKey = "SECRETKEY";
+	String secretKey = "SECRETKEY"; // to encrypt the password before inserting in the DB
 	String password = null;
 
 	private static Base64 base64 = new Base64(true);
@@ -36,6 +36,7 @@ public class ImplementRegister implements Register {
 				e1.printStackTrace();
 			}
 
+			// if the password is correctly encrypted, insert the user into the DB.
 			User user = new User(userName,password,role,confName);
 			ImplementSchemaDB db= new ImplementSchemaDB();
 			boolean res = db.insertData(user);
@@ -48,6 +49,7 @@ public class ImplementRegister implements Register {
 
 	}
 
+	// checking if the user exists
 	public boolean verifyIfUserExists(String userName) throws SQLException {
 
 		if(userName != null)

@@ -28,7 +28,8 @@ public class ImplementRegisterTest {
 		
 	}
 	 
-     // CreateUserFailure Test is already included in testVerifyUserExistsFailure. Hence, there is no separate test case for the same 
+     // CreateUserFailure Test is already included in testVerifyUserExistsFailure. 
+	 // Hence, there is no separate test case for the same 
 	 
 	 @Test
      //Test to verify a successful user registration - should return success

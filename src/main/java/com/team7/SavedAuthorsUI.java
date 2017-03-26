@@ -103,7 +103,7 @@ public class SavedAuthorsUI extends JFrame {
 		btnSendEmail.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSendEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sendMail = ButtonEditor.sendEmail;
+				sendMail = ButtonEditor.savedAuthors;
 				
 				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 				try {

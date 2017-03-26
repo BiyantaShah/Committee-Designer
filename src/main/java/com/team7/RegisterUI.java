@@ -22,7 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
-
+// Register UI window
 @SuppressWarnings("serial")
 public class RegisterUI extends JFrame {
 
@@ -43,10 +43,10 @@ public class RegisterUI extends JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	public RegisterUI() throws SQLException {
-		
+
 		setVisible(true);
 		setTitle("REGISTER");
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -88,7 +88,7 @@ public class RegisterUI extends JFrame {
 
 		@SuppressWarnings("rawtypes")
 		final JComboBox role_combo = new JComboBox(roleList);
-		role = roleList[0];//setting initial value
+		role = roleList[0]; //setting initial value
 		role_combo.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -129,7 +129,7 @@ public class RegisterUI extends JFrame {
 		btnRegister.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnRegister.setBounds(394, 451, 114, 34);
 		contentPane.add(btnRegister);
-		
+
 		btnRegister.addActionListener(new ActionListener()
 		{
 
@@ -141,18 +141,13 @@ public class RegisterUI extends JFrame {
 				userName = UsernameTField.getText();
 				String plainPwd = new String(passwordField.getPassword());
 
-
-				if(userName.equals("")){
-
+				// empty username or password is not allowed
+				if(userName.equals("")) {
 					log.messageShow("Please enter  user name");
-
-
-				} else if(plainPwd.equals("")){
-
+				} else if(plainPwd.equals("")) {
 					log.messageShow("Please enter password");
+				} else {
 
-				} else{
-					
 					try {
 						//insert data into table
 						res = register.createUser(userName,plainPwd,role,confName);
@@ -169,7 +164,8 @@ public class RegisterUI extends JFrame {
 						search.setSize(950, 600);
 						search.setLocationRelativeTo(null);
 					}
-					
+
+					// if user already exists
 					else if (res.equals("exists")) {
 						log.messageShow("Username already exists");
 					}

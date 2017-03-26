@@ -9,13 +9,16 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
 
+// This class renders buttons into the table
 public class ButtonEditor extends DefaultCellEditor {
 
 	protected JButton button;
 
 	private String label;
-	static Set<String> sendEmail = new HashSet<String>();
-	
+
+	// A set which stores names of authors who have been saved or selected
+	static Set<String> savedAuthors = new HashSet<String>();
+
 	String data;
 
 	private boolean isPushed;
@@ -33,6 +36,7 @@ public class ButtonEditor extends DefaultCellEditor {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	// extracts information about the row where the button is clicked
 	public Component getTableCellEditorComponent(JTable table, Object value,
 			boolean isSelected, int row, int column) {
 		if (isSelected) {
@@ -43,25 +47,26 @@ public class ButtonEditor extends DefaultCellEditor {
 			button.setBackground(table.getBackground());
 		}
 		label = (value == null) ? "" : value.toString();
-		Object o = table.getValueAt(row, 0);
-		data = o.toString();
+
+		Object rowData = table.getValueAt(row, 0);
+		data = rowData.toString();
 		makeList();
+
 		button.setText(label);
 		isPushed = true;
 		return button;
 	}
 
+	// adds the names of the authors in the set, corresponding to the button selected
 	public Set<String> makeList() {
 		// TODO Auto-generated method stub
-		sendEmail.add(data);
-		return sendEmail;
-		
+		savedAuthors.add(data);
+		return savedAuthors;
+
 	}
 
 	public Object getCellEditorValue() {
-		if (isPushed) {
-			
-		}
+		if (isPushed) {}
 		isPushed = false;
 		return new String(label);
 	}

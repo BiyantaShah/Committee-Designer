@@ -5,6 +5,9 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+// This class represents the root element of the xml file.
+// Contains objects of all the tags whose information is required.
+// Information of all these objects will be extracted by JAXB parser.
 @SuppressWarnings("restriction")
 @XmlRootElement
 public class dblp {
@@ -14,8 +17,9 @@ public class dblp {
 	List<AuthorDetails> www;
 	List<Article> article;
 	List<Garbage> garbage; // only for testing purposes
-	
 
+
+	// getters and setters
 	public List<Paper> getInproceedings() {
 		return inproceedings;
 	}
@@ -33,11 +37,11 @@ public class dblp {
 	public void setProceedings(List<Conference> proceedings) {
 		this.proceedings = proceedings;
 	}
-	
+
 	public List<Article> getArticle() {
 		return article;
 	}
-	
+
 	@XmlElement
 	public void setArticle(List<Article> article) {
 		this.article = article;
@@ -55,11 +59,11 @@ public class dblp {
 	public List<Garbage> getGarbage() {
 		return garbage;
 	}
-	
+
 	@XmlElement
 	public void setGarbage(List<Garbage> garbage) {
 		this.garbage = garbage;
 	}
-		
+
 }
 

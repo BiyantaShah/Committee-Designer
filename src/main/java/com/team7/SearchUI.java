@@ -15,6 +15,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
+// Search Criteria page is created here
 @SuppressWarnings("serial")
 public class SearchUI extends JFrame {
 
@@ -40,7 +41,7 @@ public class SearchUI extends JFrame {
 	List<SearchParameter> finalList = new ArrayList<SearchParameter>();
 	LoginUI log = new LoginUI();
 	ImplementSearchDisplay sd = new ImplementSearchDisplay();
-	
+
 
 	/**
 	 * Create the frame.
@@ -48,22 +49,21 @@ public class SearchUI extends JFrame {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public SearchUI(final String userName) {
 
-	    setVisible(true);
-	    setTitle("Search UI");
-		
-		
+		setVisible(true);
+		setTitle("Search UI");
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblSearch = new JLabel("Search");
 		lblSearch.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblSearch.setBounds(401, 39, 153, 32);
 		contentPane.add(lblSearch);
 
-		
+
 		final JPanel panel_2 = new JPanel();
 		panel_2.setVisible(false);
 
@@ -142,6 +142,8 @@ public class SearchUI extends JFrame {
 		sp1.searchFilter = (String) CriteriaComboBox_1.getSelectedItem();
 		ComparatorComboBox_1.addItem("=");
 		ComparatorComboBox_1.addItem("!=");
+		ComparatorComboBox_1.addItem("LIKE");
+		ComparatorComboBox_1.addItem("NOT LIKE");
 
 		CriteriaComboBox_1.addActionListener(new ActionListener() {
 
@@ -158,6 +160,8 @@ public class SearchUI extends JFrame {
 
 					ComparatorComboBox_1.addItem("=");	
 					ComparatorComboBox_1.addItem("!=");
+					ComparatorComboBox_1.addItem("LIKE");
+					ComparatorComboBox_1.addItem("NOT LIKE");
 
 				}else if(CriteriaComboBox_1.getSelectedItem() == "Committee Year" || CriteriaComboBox_1.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_1.getSelectedItem() == "Paper Published Year" ){
 
@@ -251,6 +255,8 @@ public class SearchUI extends JFrame {
 		sp2.searchFilter = (String) CriteriaComboBox_2.getSelectedItem();
 		ComparatorComboBox_2.addItem("=");
 		ComparatorComboBox_2.addItem("!=");
+		ComparatorComboBox_2.addItem("LIKE");
+		ComparatorComboBox_2.addItem("NOT LIKE");
 
 		CriteriaComboBox_2.addActionListener(new ActionListener() {
 
@@ -267,6 +273,8 @@ public class SearchUI extends JFrame {
 
 					ComparatorComboBox_2.addItem("=");	
 					ComparatorComboBox_2.addItem("!=");
+					ComparatorComboBox_2.addItem("LIKE");
+					ComparatorComboBox_2.addItem("NOT LIKE");
 
 				}else if(CriteriaComboBox_2.getSelectedItem() == "Committee Year" || CriteriaComboBox_2.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_2.getSelectedItem() == "Paper Published Year" ){
 
@@ -313,11 +321,11 @@ public class SearchUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				sp2.searchValue = ValueField_2.getText();
-				if(sp2.searchValue.equals("")){
+				if(sp2.searchValue.equals("")) {
 
 					log.messageShow("please enter value for search before proceeding further");
 
-				}else{
+				} else {
 					JoinLabel_2.setVisible(true);
 					JoinComboBox_2.setVisible(true);
 					panel_3.setVisible(true);
@@ -356,7 +364,9 @@ public class SearchUI extends JFrame {
 
 		CriteriaComboBox_3.setSelectedItem(CriteriaList[0]);
 		ComparatorComboBox_3.addItem("="); //As initial criteria is AuthorName
-		ComparatorComboBox_3.addItem("!=");//it's corresponding comparator should be = and !=
+		ComparatorComboBox_3.addItem("!=");//it's corresponding comparator should be =, !=, LIKE and NOT LIKE
+		ComparatorComboBox_3.addItem("LIKE");
+		ComparatorComboBox_3.addItem("NOT LIKE");
 
 		CriteriaComboBox_3.addActionListener(new ActionListener() {
 
@@ -374,6 +384,8 @@ public class SearchUI extends JFrame {
 
 					ComparatorComboBox_3.addItem("=");	
 					ComparatorComboBox_3.addItem("!=");
+					ComparatorComboBox_3.addItem("LIKE");
+					ComparatorComboBox_3.addItem("NOT LIKE");
 
 				}else if(CriteriaComboBox_3.getSelectedItem() == "Committee Year" || CriteriaComboBox_3.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_3.getSelectedItem() == "Paper Published Year" ){
 
@@ -462,6 +474,8 @@ public class SearchUI extends JFrame {
 		sp4.searchFilter = (String) CriteriaComboBox_4.getSelectedItem();
 		ComparatorComboBox_4.addItem("=");
 		ComparatorComboBox_4.addItem("!=");
+		ComparatorComboBox_4.addItem("LIKE");
+		ComparatorComboBox_4.addItem("NOT LIKE");
 
 		CriteriaComboBox_4.addActionListener(new ActionListener() {
 
@@ -479,6 +493,8 @@ public class SearchUI extends JFrame {
 
 					ComparatorComboBox_4.addItem("=");	
 					ComparatorComboBox_4.addItem("!=");
+					ComparatorComboBox_4.addItem("LIKE");
+					ComparatorComboBox_4.addItem("NOT LIKE");
 
 				}else if(CriteriaComboBox_4.getSelectedItem() == "Committee Year" || CriteriaComboBox_4.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_4.getSelectedItem() == "Paper Published Year" ){
 
@@ -572,6 +588,8 @@ public class SearchUI extends JFrame {
 		sp5.searchFilter = (String) CriteriaComboBox_5.getSelectedItem();
 		ComparatorComboBox_5.addItem("=");
 		ComparatorComboBox_5.addItem("!=");
+		ComparatorComboBox_5.addItem("LIKE");
+		ComparatorComboBox_5.addItem("NOT LIKE");
 
 		CriteriaComboBox_5.addActionListener(new ActionListener() {
 
@@ -589,6 +607,8 @@ public class SearchUI extends JFrame {
 
 					ComparatorComboBox_5.addItem("=");	
 					ComparatorComboBox_5.addItem("!=");
+					ComparatorComboBox_5.addItem("LIKE");
+					ComparatorComboBox_5.addItem("NOT LIKE");
 
 				}else if(CriteriaComboBox_5.getSelectedItem() == "Committee Year" || CriteriaComboBox_5.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_5.getSelectedItem() == "Paper Published Year" ){
 
@@ -627,14 +647,14 @@ public class SearchUI extends JFrame {
 		ValueField_5.setColumns(10);
 		ValueField_5.setBounds(456, 10, 116, 22);
 		panel_5.add(ValueField_5);
-				
-				
+
+
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnNewButton.setBounds(394, 395, 97, 25);
 		contentPane.add(btnNewButton);
-			
-		
+
+
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -643,7 +663,7 @@ public class SearchUI extends JFrame {
 				sp3.searchValue = ValueField_3.getText();
 				sp4.searchValue = ValueField_4.getText();
 				sp5.searchValue = ValueField_5.getText();
-				
+
 				boolean error = false;
 
 				if(q1 == true)
@@ -705,7 +725,7 @@ public class SearchUI extends JFrame {
 					// send these to displayUI to render the information there.
 					ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 					List<String> finalAuthors = null;
-					 try {
+					try {
 						finalAuthors = searchDisplay.search(finalList);
 					} catch (SQLException e2) {
 						// TODO Auto-generated catch block
@@ -720,8 +740,6 @@ public class SearchUI extends JFrame {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
-
 				}				   
 			}
 		});

@@ -11,6 +11,7 @@ import junit.framework.TestCase;
 
 public class ImplementCommitteesTest extends TestCase {
 
+	// Test case for successful parsing
 	@Test
 	public void testParseSuccess() throws IOException, SQLException {
 		
@@ -21,6 +22,7 @@ public class ImplementCommitteesTest extends TestCase {
 		
 	}
 	
+	// Test case for unsuccessful parsing
 	@Test
 	public void testParseFailure() throws IOException, SQLException {
 		

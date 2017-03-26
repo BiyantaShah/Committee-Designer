@@ -7,45 +7,47 @@ import java.sql.Statement;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import javax.swing.JDialog;
 
 import org.apache.commons.codec.binary.Base64;
 
 public class ImplementLogin implements Login {
-	
-	String secretKey = "SECRETKEY";
+
+	String secretKey = "SECRETKEY"; // used for decryption of the password
 
 	public boolean login(String username, String password) throws SQLException {
+
 		if (username != null){
 			ImplementSchemaDB db = new ImplementSchemaDB();
 			Connection conn = db.getConnection();
 			Statement stmt = conn.createStatement();
-			
+
 			String sql = "select password from user where username = '" +username +"'";
 
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				
+
 				String plainText = rs.getString(1);
-				String finalVal ="";
-				try { // decrypting the password
+				String decryptPassword = "";
+				try { 
+					// decrypting the password
 					byte[] encryptedData = Base64.decodeBase64(plainText);
-					SecretKeySpec skeyspec=new SecretKeySpec(secretKey.getBytes(),"Blowfish");
-					Cipher cipher=Cipher.getInstance("Blowfish");
+					SecretKeySpec skeyspec = new SecretKeySpec(secretKey.getBytes(),"Blowfish");
+					Cipher cipher = Cipher.getInstance("Blowfish");
 					cipher.init(Cipher.DECRYPT_MODE, skeyspec);
-					byte[] decrypted=cipher.doFinal(encryptedData);
-					finalVal=new String(decrypted);
+					byte[] decrypted = cipher.doFinal(encryptedData);
+					decryptPassword = new String(decrypted);
 
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
 
-				if (finalVal.equals(password)) { // if inserted password and the one from the db
-					// is the same then let the user login
+				if (decryptPassword.equals(password)) {
+					// if inserted password is correct then allow the user to login
 					return true;
 				}
-				else { // if incorrect password then don't let the user enter
+				else { 
+					// if inserted password is incorrect the do not allow the user to login
 					return false;
 				}	
 			}
@@ -56,16 +58,6 @@ public class ImplementLogin implements Login {
 	public String logout(User userObject) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
-
-	public void messageShow (LoginUI frame, String msg) {
-
-		JDialog d = new JDialog(frame, msg, true);
-		d.setSize(500, 100);
-		d.setLocationRelativeTo(frame);
-		d.setVisible(true);
-
 	}
 
 }
