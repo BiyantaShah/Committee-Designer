@@ -57,15 +57,15 @@ public class LoginUI extends JFrame {
     	ImplementSchemaDB db;
 		try {
 			db = new ImplementSchemaDB();
-	    	db.dbSetUp();   //set up initial database
-	    	parse.parseXml(file);	//parse xml data
+//	    	db.dbSetUp();   //set up initial database
+//	    	parse.parseXml(file);	//parse xml data
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
     	ImplementCommittees com = new ImplementCommittees();
-    	com.ParseFiles(comData); //parse committee data
+//    	com.ParseFiles(comData); //parse committee data
 
     	EventQueue.invokeLater(new Runnable() {
     		public void run() {
@@ -149,6 +149,7 @@ public class LoginUI extends JFrame {
 								// let it go to the search page if login is successful
 								frame.dispose();
 								SearchUI search = new SearchUI(userName);
+								search.setSize(950, 600);
 								search.setLocationRelativeTo(null);
 								
 							}

@@ -224,7 +224,7 @@ public class SearchUI extends JFrame {
 		panel_1.add(JoinLabel_1);
 
 		//combo box for join comparator
-		JoinComboBox_1.setBounds(777, 10, 70, 22);
+		JoinComboBox_1.setBounds(777, 10, 86, 22);
 		panel_1.add(JoinComboBox_1);
 		JoinComboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -332,7 +332,7 @@ public class SearchUI extends JFrame {
 
 
 		//combo box for join comparator
-		JoinComboBox_2.setBounds(777, 10, 70, 22);
+		JoinComboBox_2.setBounds(777, 10, 86, 22);
 		panel_2.add(JoinComboBox_2);
 		JoinComboBox_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -436,7 +436,7 @@ public class SearchUI extends JFrame {
 		panel_3.add(JoinLabel_3);
 
 		//combo box for join comparator
-		JoinComboBox_3.setBounds(777, 10, 70, 22);
+		JoinComboBox_3.setBounds(777, 10, 86, 22);
 		panel_3.add(JoinComboBox_3);
 		JoinComboBox_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -545,7 +545,7 @@ public class SearchUI extends JFrame {
 		panel_4.add(JoinLabel_4);
 
 		//combo box for join comparator
-		JoinComboBox_4.setBounds(777, 10, 70, 22);
+		JoinComboBox_4.setBounds(777, 10, 86, 22);
 		panel_4.add(JoinComboBox_4);
 		JoinComboBox_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
