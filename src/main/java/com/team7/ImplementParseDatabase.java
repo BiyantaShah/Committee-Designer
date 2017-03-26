@@ -80,6 +80,11 @@ public class ImplementParseDatabase implements ParseDatabase {
 					if(!isUTF8MisInterpreted(paper.getTitle(),"Windows-1252")){
 						continue;
 					}
+					
+					if (paper.title.equals("")) {
+						continue;
+					}
+					
 										
 				    String[] output  = new String[3];
 				    output = paper.key.split("/");
@@ -89,30 +94,37 @@ public class ImplementParseDatabase implements ParseDatabase {
 				    	confName = output[1];
 				    }
 				    
-				    statement_inproceedings.setString(1,paper.title);
-					statement_inproceedings.setInt(2,paper.year);
-					statement_inproceedings.setString(3,paper.pages);
-					statement_inproceedings.setString(4,confName);
-					statement_inproceedings.setString(5, paper.key);
-	     			statement_inproceedings.addBatch();
-							
-					for (String author: paper.author) {
-							
-						Author auth = new Author(author, paper.key);
-						
-						statement_author.setString(1, auth.name);
-						statement_author.setString(2, auth.paperKey);
-						statement_author.addBatch();
-					}
-					
-					if (++j % batchSize == 0){
-						statement_inproceedings.executeBatch();
-					}
-					
-					if (++m % batchSize == 0) {
-						statement_author.executeBatch();
-					}
-					
+				    if(confName != null) {
+				    	if ((confName.equalsIgnoreCase("oopsla")) 
+				    		|| (confName.equalsIgnoreCase("pldi"))
+				    		|| (confName.equalsIgnoreCase("ecoop")) 
+				    		|| (confName.equalsIgnoreCase("icfp"))) {
+
+				    		statement_inproceedings.setString(1,paper.title);
+				    		statement_inproceedings.setInt(2,paper.year);
+				    		statement_inproceedings.setString(3,paper.pages);
+				    		statement_inproceedings.setString(4,confName);
+				    		statement_inproceedings.setString(5, paper.key);
+				    		statement_inproceedings.addBatch();
+
+				    		for (String author: paper.author) {
+
+				    			Author auth = new Author(author, paper.key);
+
+				    			statement_author.setString(1, auth.name);
+				    			statement_author.setString(2, auth.paperKey);
+				    			statement_author.addBatch();
+				    		}
+
+				    		if (++j % batchSize == 0){
+				    			statement_inproceedings.executeBatch();
+				    		}
+
+				    		if (++m % batchSize == 0) {
+				    			statement_author.executeBatch();
+				    		}
+				    	}
+				    }
 				}
 				statement_inproceedings.executeBatch();
 				statement_author.executeBatch();
@@ -123,13 +135,21 @@ public class ImplementParseDatabase implements ParseDatabase {
 				PreparedStatement statement_conference = conn.prepareStatement("insert into conference(confKey,name,confDetail) values (?,?,?)");
 				
 				for (Conference conf: data.getProceedings()) {
-					statement_conference.setString(1, conf.key);
-					statement_conference.setString(2, conf.booktitle);
-					statement_conference.setString(3, conf.title);
-					statement_conference.addBatch(); 
+					if (conf.booktitle != null) {
+						if ((conf.booktitle.equalsIgnoreCase("oopsla")) 
+							|| (conf.booktitle.equalsIgnoreCase("pldi"))
+							|| (conf.booktitle.equalsIgnoreCase("ecoop"))
+							|| (conf.booktitle.equalsIgnoreCase("icfp"))) {
 
-					if (++k % batchSize == 0){
-						statement_conference.executeBatch();
+							statement_conference.setString(1, conf.key);
+							statement_conference.setString(2, conf.booktitle);
+							statement_conference.setString(3, conf.title);
+							statement_conference.addBatch(); 
+
+							if (++k % batchSize == 0){
+								statement_conference.executeBatch();
+							}
+						}
 					}
 				}
 				statement_conference.executeBatch();
@@ -147,19 +167,40 @@ public class ImplementParseDatabase implements ParseDatabase {
 					if(!isUTF8MisInterpreted(article.getTitle(),"Windows-1252")){
 						continue;
 					}
-
 					
-					for (String author: article.author) {
-						statement_article.setString(1, author);
-						statement_article.setString(2, article.title);
-						statement_article.setInt(3, article.year);
-						statement_article.setString(4, article.month);
-						statement_article.setString(5, article.ee);
-						
-						statement_article.addBatch();
+					if (article.title.equals("")) {
+						continue;
 					}
-					if (++l % batchSize == 0)
-						statement_article.executeBatch();
+					
+					if (article.key == null) {
+						continue;
+					}
+					
+					String[] output  = new String[3];
+				    output = article.key.split("/");
+				    String journalName = null;
+				    
+				    if (output[0].equals("journals")){    	
+				    	journalName = output[1];
+				    }
+				    
+				    if (journalName != null) {
+				    	if (journalName.equalsIgnoreCase("tse") || 
+				    			journalName.equalsIgnoreCase("toplas")) {
+				    		for (String author: article.author) {
+				    			statement_article.setString(1, author);
+				    			statement_article.setString(2, article.title);
+				    			statement_article.setInt(3, article.year);
+				    			statement_article.setString(4, article.month);
+				    			statement_article.setString(5, article.ee);
+
+				    			statement_article.addBatch();
+
+				    			if (++l % batchSize == 0)
+				    				statement_article.executeBatch();
+				    		}
+				    	}
+				    }
 				}
 				statement_article.executeBatch();
 			}

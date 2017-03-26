@@ -20,11 +20,9 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
@@ -38,7 +36,6 @@ public class SavedAuthorsUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	Set<String> sendMail = new HashSet<String>();
-	private Statement stmt;
 
 	/**
 	 * Create the frame.
@@ -75,13 +72,6 @@ public class SavedAuthorsUI extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		ImplementSchemaDB db = new ImplementSchemaDB();
-		Connection conn = db.getConnection();
-		stmt = conn.createStatement();
-		
-//		ResultSet rs = stmt.executeQuery("select a.name, p.title from paper p, author a where "
-//						+ "p.paperKey=a.paperKey limit 50");
-		
 		JTable table = new JTable(buildTableModel(result));
 		
 		JTableHeader header = table.getTableHeader();
@@ -114,9 +104,7 @@ public class SavedAuthorsUI extends JFrame {
 		btnSendEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sendMail = ButtonEditor.sendEmail;
-				for (String s : sendMail) {
-					System.out.println("Values "+ s);
-				}
+				
 				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 				try {
 					searchDisplay.sendEmail(sendMail, userName);

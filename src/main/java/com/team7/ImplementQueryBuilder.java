@@ -194,8 +194,6 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			
 			else if(s.getSearchFilter() == "ConfName"){
 				whereClauseForPaperAuthor += PaperTableAlias + "."+ s.getSearchFilter() + s.getSearchComparator()+ "'"+ s.getSearchValue()+"' " + s.getjoinFilter() + " ";	
-//				System.out.println("Where clasue "+ whereClauseForPaperAuthor +"---"+ s.getSearchComparator());
-
 			} 
 			
 			else if(s.getSearchFilter() == "CountNoOfPapers"){

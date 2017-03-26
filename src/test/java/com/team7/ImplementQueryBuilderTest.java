@@ -133,19 +133,19 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(1,s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
   		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);			
-  		assertEquals(result.get(0),"Petra Ludewig");
+  		assertEquals(result.get(0),"Eric Van Wyk");
 	}
 	
 	@Test
 	public void testMultipleAuthorSearch() throws SQLException{
-		SearchParameter s1= new SearchParameter("Author Name", "=" ,"ABC","OR");
-		SearchParameter s2= new SearchParameter("Author Name", "=" ,"Michael Ley", null);
+		SearchParameter s1= new SearchParameter("Author Name", "=" ,"Shahar Maoz","OR");
+		SearchParameter s2= new SearchParameter("Author Name", "=" ,"Jan Oliver Ringert", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s1);
   		searchCriteria.add(1,s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
-		assertEquals(result.get(0),"Michael Ley");
+		assertEquals(result.get(0),"Shahar Maoz");
 	}
 	
 	@Test

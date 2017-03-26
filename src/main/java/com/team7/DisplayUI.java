@@ -13,11 +13,8 @@ import javax.swing.table.TableModel;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -71,9 +68,6 @@ public class DisplayUI extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		ImplementSchemaDB db = new ImplementSchemaDB();
-		Connection conn = db.getConnection();
-		Statement stmt = conn.createStatement();
 		
 		JTable table = new JTable(buildTableModel(authors));
 		

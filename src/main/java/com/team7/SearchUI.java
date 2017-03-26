@@ -211,7 +211,6 @@ public class SearchUI extends JFrame {
 
 					JoinLabel_1.setVisible(true);
 					JoinComboBox_1.setVisible(true);
-//					System.out.println(sp1.searchFilter +"---"+sp1.searchComparator + "---" + sp1.searchValue+ "-----"+sp1.joinFilter);
 					panel_2.setVisible(true);
 					q2 = true;
 
@@ -321,7 +320,6 @@ public class SearchUI extends JFrame {
 				}else{
 					JoinLabel_2.setVisible(true);
 					JoinComboBox_2.setVisible(true);
-//					System.out.println(sp2.searchFilter +"---"+sp2.searchComparator + "---" + sp2.searchValue+ "-----"+sp2.joinFilter);
 					panel_3.setVisible(true);
 					q3 = true;
 				}
@@ -427,7 +425,6 @@ public class SearchUI extends JFrame {
 				}else{
 					JoinLabel_3.setVisible(true);
 					JoinComboBox_3.setVisible(true);
-//					System.out.println(sp3.searchFilter +"---"+sp3.searchComparator + "---" + sp3.searchValue+ "-----"+sp3.joinFilter);
 					panel_4.setVisible(true);
 					q4 = true;
 				}
@@ -537,7 +534,6 @@ public class SearchUI extends JFrame {
 
 					JoinLabel_4.setVisible(true);
 					JoinComboBox_4.setVisible(true);
-//					System.out.println(sp4.searchFilter +"---"+sp4.searchComparator + "---" + sp4.searchValue+ "-----"+sp4.joinFilter);
 					panel_5.setVisible(true);
 					q5 = true;
 				}
