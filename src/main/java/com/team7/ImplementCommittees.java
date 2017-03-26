@@ -47,8 +47,6 @@ public class ImplementCommittees implements Committees {
 		    while (match.find()) {
 		        output.add(match.group());
 		    }
-		    
-		    //System.out.println(output.get(0)+ "--" + output.get(1));
 						
 		    while ((rec = bf.readLine()) != null)	    	
 		    {
@@ -64,25 +62,31 @@ public class ImplementCommittees implements Committees {
 		    	}
 		    	
 		    	   confName = output.get(0);
-		    	   year = Integer.parseInt(output.get(1));	
+		    	   year = Integer.parseInt(output.get(1));
+
+		    	   if ((confName.equalsIgnoreCase("oopsla")) 
+		    			|| (confName.equalsIgnoreCase("pldi"))
+				    	|| (confName.equalsIgnoreCase("ecoop")) 
+				    	|| (confName.equalsIgnoreCase("icfp"))) {
+		    		   stmt.setString(1,confName);
+			    	   stmt.setInt(2,year);
+			    	   stmt.setString(3,authorName);
+			    	   stmt.setString(4,role);
+			    	   stmt.addBatch(); 
+			    	   
+			    	   if (++i % batchSize == 0){
+							stmt.executeBatch();
+			    	   }
+		    	   }
 		    	   
-		    	   stmt.setString(1,confName);
-		    	   stmt.setInt(2,year);
-		    	   stmt.setString(3,authorName);
-		    	   stmt.setString(4,role);
-		    	   stmt.addBatch();
 		    	   
-		    	   if(confName.equals("test")){ //for testing purposes						
+		    	   else if(confName.equals("test")){ //for testing purposes						
 		    		   stmt.executeBatch(); 						
 		    	   }
 		    	   else if(confName.equals("fail")){//for testing purposes		    		    
 		    		    bf.close();
 		    		    return "failure";
 		    	   }
-		    	   else if (++i % batchSize == 0){
-						stmt.executeBatch();
-					}
-
 		    }
 		    
 		    bf.close();

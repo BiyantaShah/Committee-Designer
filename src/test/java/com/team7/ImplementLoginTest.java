@@ -14,7 +14,7 @@ public class ImplementLoginTest extends TestCase{
 	 //Test to verify a valid registered user - should return true and enter the search page
      public void testLoginSuccess() throws SQLException {
 		
-		LoginUI login = new LoginUI();
+		ImplementLogin login = new ImplementLogin();
 		Boolean res = login.login("xyz@gmail.com","132");
 		Boolean val = true;
 		assertEquals(val,res);
@@ -26,7 +26,7 @@ public class ImplementLoginTest extends TestCase{
      //Test to verify a  unregistered user or if details are incorrect - should return false
      public void testLoginFailure() throws SQLException {
 		
-		 LoginUI login = new LoginUI();
+		ImplementLogin login = new ImplementLogin();
 		Boolean res = login.login("xyz@gmail.com","123");
 		Boolean val = false;
 		assertEquals(val,res);
@@ -37,7 +37,7 @@ public class ImplementLoginTest extends TestCase{
      //Test to verify successful logout - should return success
      public void testLogoutSuccess() {
 		
-		 LoginUI login = new LoginUI();
+		 ImplementLogin login = new ImplementLogin();
 		User user = new User("xyz@gmail.com","132","Associate Editor","OOPSLA");
 		String res = login.logout(user);
 		assertEquals("success",res);
@@ -48,7 +48,7 @@ public class ImplementLoginTest extends TestCase{
      //Test to verify unsuccessful case of logout - should return failure
      public void testLogoutFailure() {
 		
-		 LoginUI login = new LoginUI();
+		 ImplementLogin login = new ImplementLogin();
 		User user = new User("xyz@gmail.com","132","Associate Editor","OOPSLA");
 		String res = login.logout(user);
 		assertEquals("failure",res);

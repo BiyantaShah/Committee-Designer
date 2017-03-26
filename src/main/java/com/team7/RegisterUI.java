@@ -8,8 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -17,31 +15,25 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.JComboBox;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
-import org.apache.commons.codec.binary.Base64;
 
 @SuppressWarnings("serial")
-public class RegisterUI extends JFrame implements Register {
+public class RegisterUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField UsernameTField;
 	private JPasswordField passwordField;
-	private static Base64 base64 = new Base64(true);
 
 	String userName;
 	String password;
 	String role;
 	String confName;
-	String secretKey = "SECRETKEY";
 	static Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	LoginUI log = new LoginUI();
 
@@ -113,7 +105,7 @@ public class RegisterUI extends JFrame implements Register {
 		lblConference.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 		lblConference.setBounds(257, 359, 97, 28);
 		contentPane.add(lblConference);
-		String[] confList = { "ASE", "ECOOP","ESOP","FSE", "ICFP","ICSE","ISMM","ISSTA","OOPSLA","PLDI","POPL","PPOPP"};
+		String[] confList = {"ECOOP","ICFP","OOPSLA","PLDI"};
 
 		@SuppressWarnings("rawtypes")
 		final JComboBox conf_combo = new JComboBox(confList);
@@ -141,11 +133,11 @@ public class RegisterUI extends JFrame implements Register {
 		btnRegister.addActionListener(new ActionListener()
 		{
 
-			boolean res;
+			String res = null;
 
 			public void actionPerformed(ActionEvent e)
 			{
-
+				ImplementRegister register = new ImplementRegister();
 				userName = UsernameTField.getText();
 				String plainPwd = new String(passwordField.getPassword());
 
@@ -163,81 +155,24 @@ public class RegisterUI extends JFrame implements Register {
 					
 					try {
 						//insert data into table
-						res = createUser(userName,plainPwd,role,confName);
+						res = register.createUser(userName,plainPwd,role,confName);
 
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} 
 
-					if(res == true){
+					if(res.equals("true")){
 						//connect to search page
-						//log.messageShow("registered successfully");
-						//setVisible(false);
 						dispose();
 						SearchUI search = new SearchUI(userName);
 						search.setSize(950, 600);
 						search.setLocationRelativeTo(null);
 					}
+					
+					else if (res.equals("exists")) {
+						log.messageShow("Username already exists");
+					}
 				}}});
-	}
-
-
-
-	public boolean createUser(String userName, String plainPass, String role, String confName) throws SQLException {
-
-		if(verifyIfUserExists(userName))
-		{			
-			log.messageShow("Username already exists");
-
-		}else{
-			// encrypt the password
-			try {
-				SecretKeySpec skeyspec=new SecretKeySpec(secretKey.getBytes(),"Blowfish");
-				Cipher cipher = Cipher.getInstance("Blowfish");
-				cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
-				password = base64.encodeToString(cipher.doFinal(plainPass.getBytes("UTF8")));
-
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-			User user = new User(userName,password,role,confName);
-			ImplementSchemaDB db= new ImplementSchemaDB();
-			boolean res = db.insertData(user);
-
-			if(res == true){
-
-				return true;
-
-			}
-		}
-		return false;
-
-	}
-
-	public boolean verifyIfUserExists(String userName) throws SQLException {
-
-		if(userName != null)
-		{
-			ImplementSchemaDB db = new ImplementSchemaDB();
-			Connection conn = db.getConnection();
-			Statement stmt = conn.createStatement();
-
-			String sql = "Select count(*) from user where username = " + "'" +userName+ "'"; 
-
-			ResultSet rs = stmt.executeQuery(sql);
-
-			if(rs.next()){
-
-				if(rs.getInt(1) > 0){
-//					System.out.println(rs.getString(1));
-					return true; 
-				}
-			}
-		}
-
-		return false;
 	}
 }

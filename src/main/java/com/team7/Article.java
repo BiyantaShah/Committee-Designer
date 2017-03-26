@@ -2,12 +2,14 @@ package com.team7;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 @SuppressWarnings("restriction")
 public class Article {
 	
 	List<String> author;
+	String key;
 	String title;
 	int year;
 	String month;
@@ -17,13 +19,24 @@ public class Article {
 		
 	}
 	
-	public Article (String title, int year, String month, String ee) {
+	public Article (List<String> author, String key, String title, int year, String month, String ee) {
+		this.author = author;
+		this.key = key;
 		this.title = title;
 		this.year = year;
 		this.month = month;
 		this.ee = ee;
 	}
 	
+	public String getKey() {
+		return key;
+	}
+
+	@XmlAttribute
+	public void setKey(String key) {
+		this.key = key;
+	}
+
 	public List<String> getAuthor() {
 		return author;
 	}

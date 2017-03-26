@@ -14,7 +14,7 @@ public class ImplementRegisterTest {
      //Test to verify a successful user registration - should return success
      public void testCreateUserSuccess() throws SQLException {
 		
-		RegisterUI user = new RegisterUI();
+		ImplementRegister user = new ImplementRegister();
 		// After inserting delete it, so that the next time you run, it does not fail
 		ImplementSchemaDB db = new ImplementSchemaDB();
 		Connection conn = db.getConnection();
@@ -22,9 +22,9 @@ public class ImplementRegisterTest {
 
 		stmt.executeUpdate("delete from user where username='xyz@gmail.com'");
 		
-		boolean res = user.createUser("xyz@gmail.com","132","Associate Editor","OOPSLA");
+		String res = user.createUser("xyz@gmail.com","132","Associate Editor","OOPSLA");
 			
-		assertEquals(true,res);		
+		assertEquals("true",res);		
 		
 	}
 	 
@@ -34,7 +34,7 @@ public class ImplementRegisterTest {
      //Test to verify a successful user registration - should return success
      public void testVerifyUserExistsSuccess() throws SQLException {
 		
-		RegisterUI user = new RegisterUI();
+		 ImplementRegister user = new ImplementRegister();
 		boolean  res = user.verifyIfUserExists("xyz@gmail.com");
 		assertEquals(true,res);
 		
@@ -44,7 +44,7 @@ public class ImplementRegisterTest {
      //Test to verify a successful user registration - should return success
      public void testVerifyUserExistsFailure() throws SQLException {
 		
-	    RegisterUI user = new RegisterUI();
+		 ImplementRegister user = new ImplementRegister();
 	    boolean  res = user.verifyIfUserExists("test@gmail.com");
 		assertEquals(false,res);
 		

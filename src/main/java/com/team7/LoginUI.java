@@ -7,28 +7,23 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-
+import javax.xml.bind.JAXBException;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.JDialog;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
-import org.apache.commons.codec.binary.Base64;
 
-public class LoginUI extends JFrame implements Login {
+public class LoginUI extends JFrame {
 
 	/**
 	 * 
@@ -42,33 +37,58 @@ public class LoginUI extends JFrame implements Login {
 	String password;
 	String secretKey = "SECRETKEY";
 
-    static LoginUI frame;
-
+    static LoginUI frame; 
 
 	/**
 	 * Launch the application.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 * @throws IOException 
+	 * @throws JAXBException 
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-				    frame = new LoginUI();
-					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
-					frame.setTitle("MSD PROJECT");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public static void main(String[] args) throws ClassNotFoundException, SQLException, JAXBException, IOException {
+
+    	System.out.println("Start");
+
+    	File file = new File("input/dblp.xml");
+    	File comData = new File("input/committees/");
+    	// Parsing the xml to create objects
+    	ImplementParseDatabase parse = new ImplementParseDatabase();
+    	ImplementSchemaDB db;
+		try {
+			db = new ImplementSchemaDB();
+	    	db.dbSetUp();   //set up initial database
+	    	parse.parseXml(file);	//parse xml data
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+    	ImplementCommittees com = new ImplementCommittees();
+    	com.ParseFiles(comData); //parse committee data
+
+    	EventQueue.invokeLater(new Runnable() {
+    		public void run() {
+    			try {
+    				frame = new LoginUI();
+    				frame.setVisible(true);
+    				frame.setLocationRelativeTo(null);
+    				frame.setTitle("MSD PROJECT");
+    			} catch (Exception e) {
+    				e.printStackTrace();
+    			}
+    		}
+    	});
+    	
+    	System.out.println("End");
+    }
 
 	/**
 	 * Create the frame.
 	 */
 	public LoginUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(950, 600);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -119,16 +139,12 @@ public class LoginUI extends JFrame implements Login {
 				else if (plainText.equals(""))
 					messageShow("Please enter password"); // password should not be empty
 				else {
-					RegisterUI register;
 					try {
-						register = new RegisterUI();
-						register.setLocationRelativeTo(null);
-						register.setVisible(false);
-						
+						ImplementRegister register = new ImplementRegister();
 						// check if user exists or not and then validate the password.
 						if (register.verifyIfUserExists(userName)) {
-
-							if (login(userName, plainText)) {
+							ImplementLogin login = new ImplementLogin();
+							if (login.login(userName, plainText)) {
 								
 								// let it go to the search page if login is successful
 								frame.dispose();
@@ -174,45 +190,6 @@ public class LoginUI extends JFrame implements Login {
 		});
 	}
 
-	public boolean login(String username, String password) throws SQLException {
-		// TODO Auto-generated method stub
-		if (username != null){
-			ImplementSchemaDB db = new ImplementSchemaDB();
-			Connection conn = db.getConnection();
-			Statement stmt = conn.createStatement();
-			
-			String sql = "select password from user where username = '" +username +"'";
-
-			ResultSet rs = stmt.executeQuery(sql);
-
-			while (rs.next()) {
-				
-				String plainText = rs.getString(1);
-				String finalVal ="";
-				try { // decrypting the password
-					byte[] encryptedData = Base64.decodeBase64(plainText);
-					SecretKeySpec skeyspec=new SecretKeySpec(secretKey.getBytes(),"Blowfish");
-					Cipher cipher=Cipher.getInstance("Blowfish");
-					cipher.init(Cipher.DECRYPT_MODE, skeyspec);
-					byte[] decrypted=cipher.doFinal(encryptedData);
-					finalVal=new String(decrypted);
-
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-
-				if (finalVal.equals(password)) { // if inserted password and the one from the db
-					// is the same then let the user login
-					return true;
-				}
-				else { // if incorrect password then don't let the user enter
-					return false;
-				}	
-			}
-		}
-		return false; // if user does not exist;
-	}
-
 	public void messageShow (String msg) {
 
 		JDialog d = new JDialog(frame, msg, true);
@@ -220,11 +197,6 @@ public class LoginUI extends JFrame implements Login {
 		d.setLocationRelativeTo(frame);
 		d.setVisible(true);
 
-	}
-
-	public String logout(User userObject) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
