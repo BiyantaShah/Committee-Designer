@@ -48,7 +48,6 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		queries.add(0, queryPaperAuthor);
 		queries.add(1, queryCommitte);
 		queries.add(2, queryArticle);
-
 		return queries;
 	}
 
