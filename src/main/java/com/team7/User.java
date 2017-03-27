@@ -1,5 +1,6 @@
 package com.team7;
 
+// This class contains information about the users of the application 
 public class User {
 
      String userName;
@@ -19,6 +20,7 @@ public class User {
     	this.confName = confName;
 	}
 
+    // getter and setters
 	public String getUserName() {
         return userName;
     }

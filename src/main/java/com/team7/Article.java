@@ -6,19 +6,20 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 @SuppressWarnings("restriction")
+// This class gives information about the article (authors, title, date of publishing)
 public class Article {
-	
-	List<String> author;
-	String key;
-	String title;
+
+	List<String> author; 
+	String key; 
+	String title; 
 	int year;
 	String month;
 	String ee;
-	
+
 	public Article () {
-		
+
 	}
-	
+
 	public Article (List<String> author, String key, String title, int year, String month, String ee) {
 		this.author = author;
 		this.key = key;
@@ -27,7 +28,8 @@ public class Article {
 		this.month = month;
 		this.ee = ee;
 	}
-	
+
+	// Getter and setters
 	public String getKey() {
 		return key;
 	}
@@ -45,43 +47,43 @@ public class Article {
 	public void setAuthor(List<String> author) {
 		this.author = author;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
-	
+
 	@XmlElement
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public int getYear() {
 		return year;
 	}
-	
+
 	@XmlElement
 	public void setYear(int year) {
 		this.year = year;
 	}
-	
+
 	public String getMonth() {
 		return month;
 	}
-	
+
 	@XmlElement
 	public void setMonth(String month) {
 		this.month = month;
 	}
-	
+
 	public String getEe() {
 		return ee;
 	}
-	
+
 	@XmlElement
 	public void setEe(String ee) {
 		this.ee = ee;
 	}
-	
-	
+
+
 
 }

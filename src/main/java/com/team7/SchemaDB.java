@@ -5,21 +5,14 @@ import java.sql.SQLException;
 
 public interface SchemaDB {
 
-	
-	/* 
-	 * Creates database and tables
-	 */
+
+	// Creates database and tables
 	public void dbSetUp() throws ClassNotFoundException, SQLException;
-	
-	/*
-	 * Create connection to RDBMS 
-	 */
+
+	// Create connection to RDBMS 
 	public Connection getConnection();
 
-	/*
-	 * Insert the objects created to Database
-	 *
-	 */
+	//Insert the objects created to Database
 	public boolean insertData(Object object_name) throws SQLException;
-	
+
 }
