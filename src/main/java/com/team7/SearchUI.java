@@ -13,14 +13,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class SearchUI extends JFrame {
 
-	private JPanel contentPane;
+	public JPanel contentPane;
 	private JTextField ValueField_1;
 	private JTextField ValueField_2;
 	private JTextField ValueField_3;
@@ -41,8 +40,7 @@ public class SearchUI extends JFrame {
 
 	List<SearchParameter> finalList = new ArrayList<SearchParameter>();
 	LoginUI log = new LoginUI();
-	ImplementSearchDisplay sd = new ImplementSearchDisplay();
-	
+
 
 	/**
 	 * Create the frame.
@@ -50,22 +48,22 @@ public class SearchUI extends JFrame {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public SearchUI(final String userName) {
 
-	    setVisible(true);
-	    setTitle("Search UI");
-		
-		
+		setVisible(true);
+		setTitle("Search UI");
+
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblSearch = new JLabel("Search");
 		lblSearch.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblSearch.setBounds(401, 39, 153, 32);
 		contentPane.add(lblSearch);
 
-		
+
 		final JPanel panel_2 = new JPanel();
 		panel_2.setVisible(false);
 
@@ -87,7 +85,7 @@ public class SearchUI extends JFrame {
 		Criteria.put("Keyword in Title", "Keyword");
 		Criteria.put("Paper Published Year", "Year");
 		Criteria.put("Journal Name", "JournalName");
-	    List<String> keys = new ArrayList<String>(Criteria.keySet());
+		List<String> keys = new ArrayList<String>(Criteria.keySet());
 		String[] JoinList = {"AND","OR"};
 
 
@@ -113,22 +111,18 @@ public class SearchUI extends JFrame {
 
 		final JComboBox JoinComboBox_1= new JComboBox(JoinList);
 		JoinComboBox_1.setSelectedItem(JoinList[0]);	
-		sp1.joinFilter = (String) JoinComboBox_1.getItemAt(0);
 		JoinComboBox_1.setVisible(false);
 
 		final JComboBox JoinComboBox_2= new JComboBox(JoinList);
 		JoinComboBox_2.setSelectedItem(JoinList[0]);	
-		sp2.joinFilter = (String) JoinComboBox_2.getItemAt(0);
 		JoinComboBox_2.setVisible(false);
 
 		final JComboBox JoinComboBox_3= new JComboBox(JoinList);
 		JoinComboBox_3.setSelectedItem(JoinList[0]);	
-		sp3.joinFilter = (String) JoinComboBox_3.getItemAt(0);
 		JoinComboBox_3.setVisible(false);
 
 		final JComboBox JoinComboBox_4= new JComboBox(JoinList);
 		JoinComboBox_4.setSelectedItem(JoinList[0]);	
-		sp4.joinFilter = (String) JoinComboBox_4.getItemAt(0);
 		JoinComboBox_4.setVisible(false);
 
 
@@ -149,7 +143,7 @@ public class SearchUI extends JFrame {
 		panel_1.add(CriteriaComboBox_1);
 
 		CriteriaComboBox_1.setSelectedItem(keys.toArray()[0]);
-		sp1.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
+		//sp1.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
 		ComparatorComboBox_1.addItem("=");
 		ComparatorComboBox_1.addItem("!=");
 
@@ -179,7 +173,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_1.addItem("!=");
 
 				}
-				sp1.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
+				//sp1.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
 			}
 		});
 
@@ -187,14 +181,14 @@ public class SearchUI extends JFrame {
 		ComparatorLabel_1.setBounds(212, 13, 79, 16);
 		panel_1.add(ComparatorLabel_1);
 
-		sp1.searchComparator = (String) ComparatorComboBox_1.getItemAt(0);
+		//sp1.searchComparator = (String) ComparatorComboBox_1.getItemAt(0);
 		ComparatorComboBox_1.setBounds(291, 10, 107, 22);
 		panel_1.add(ComparatorComboBox_1);
-		ComparatorComboBox_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sp1.searchComparator = (String) ComparatorComboBox_1.getSelectedItem();
-			}
-		});
+//		ComparatorComboBox_1.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				sp1.searchComparator = (String) ComparatorComboBox_1.getSelectedItem();
+//			}
+//		});
 
 
 		JLabel ValueLabel_1 = new JLabel("Value");
@@ -236,13 +230,11 @@ public class SearchUI extends JFrame {
 		//combo box for join comparator
 		JoinComboBox_1.setBounds(777, 10, 86, 22);
 		panel_1.add(JoinComboBox_1);
-		JoinComboBox_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sp1.joinFilter =(String) JoinComboBox_1.getSelectedItem(); 
-			}
-		});
-
-
+//		JoinComboBox_1.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				sp1.joinFilter =(String) JoinComboBox_1.getSelectedItem(); 
+//			}
+//		});
 
 		/****************************************************** Panel -2 ********************************************/		
 		panel_2.setLayout(null);
@@ -258,7 +250,7 @@ public class SearchUI extends JFrame {
 		panel_2.add(CriteriaComboBox_2);
 
 		CriteriaComboBox_2.setSelectedItem(keys.toArray()[0]);
-		sp2.searchFilter = Criteria.get(CriteriaComboBox_2.getSelectedItem());
+		//sp2.searchFilter = Criteria.get(CriteriaComboBox_2.getSelectedItem());
 		ComparatorComboBox_2.addItem("=");
 		ComparatorComboBox_2.addItem("!=");
 
@@ -288,7 +280,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_2.addItem("!=");
 
 				}
-				sp2.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
+				//sp2.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
 
 			}
 		});
@@ -297,14 +289,14 @@ public class SearchUI extends JFrame {
 		ComparatorLabel_2.setBounds(212, 13, 79, 16);
 		panel_2.add(ComparatorLabel_2);
 
-		sp2.searchComparator = (String) ComparatorComboBox_2.getSelectedItem();
+//		sp2.searchComparator = (String) ComparatorComboBox_2.getSelectedItem();
 		ComparatorComboBox_2.setBounds(291, 10, 107, 22);
 		panel_2.add(ComparatorComboBox_2);
-		ComparatorComboBox_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sp2.searchComparator = (String) ComparatorComboBox_2.getSelectedItem();
-			}
-		});
+//		ComparatorComboBox_2.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				sp2.searchComparator = (String) ComparatorComboBox_2.getSelectedItem();
+//			}
+//		});
 
 
 		JLabel ValueLabel_2 = new JLabel("Value");
@@ -344,11 +336,11 @@ public class SearchUI extends JFrame {
 		//combo box for join comparator
 		JoinComboBox_2.setBounds(777, 10, 86, 22);
 		panel_2.add(JoinComboBox_2);
-		JoinComboBox_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sp2.joinFilter =(String) JoinComboBox_2.getSelectedItem(); 
-			}
-		});
+//		JoinComboBox_2.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				sp2.joinFilter =(String) JoinComboBox_2.getSelectedItem(); 
+//			}
+//		});
 
 		/************************************ Panel -3 ******************************************************/
 
@@ -365,7 +357,7 @@ public class SearchUI extends JFrame {
 		panel_3.add(CriteriaComboBox_3);
 
 		CriteriaComboBox_3.setSelectedItem(keys.toArray()[0]);
-		sp3.searchFilter = Criteria.get(CriteriaComboBox_3.getSelectedItem());
+		//sp3.searchFilter = Criteria.get(CriteriaComboBox_3.getSelectedItem());
 		ComparatorComboBox_3.addItem("="); //As initial criteria is AuthorName
 		ComparatorComboBox_3.addItem("!=");//it's corresponding comparator should be = and !=
 
@@ -396,7 +388,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_3.addItem("!=");
 
 				}
-				sp3.searchFilter = Criteria.get(CriteriaComboBox_3.getSelectedItem());
+				//sp3.searchFilter = Criteria.get(CriteriaComboBox_3.getSelectedItem());
 			}
 		});
 
@@ -404,14 +396,14 @@ public class SearchUI extends JFrame {
 		ComparatorLabel_3.setBounds(212, 13, 79, 16);
 		panel_3.add(ComparatorLabel_3);
 
-		sp3.searchComparator = (String) ComparatorComboBox_3.getItemAt(0);
+//		sp3.searchComparator = (String) ComparatorComboBox_3.getItemAt(0);
 		ComparatorComboBox_3.setBounds(291, 10, 107, 22);
 		panel_3.add(ComparatorComboBox_3);
-		ComparatorComboBox_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sp3.searchComparator = (String) ComparatorComboBox_3.getSelectedItem();
-			}
-		});
+//		ComparatorComboBox_3.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				sp3.searchComparator = (String) ComparatorComboBox_3.getSelectedItem();
+//			}
+//		});
 
 
 		JLabel ValueLabel_3 = new JLabel("Value");
@@ -449,11 +441,11 @@ public class SearchUI extends JFrame {
 		//combo box for join comparator
 		JoinComboBox_3.setBounds(777, 10, 86, 22);
 		panel_3.add(JoinComboBox_3);
-		JoinComboBox_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sp3.joinFilter =(String) JoinComboBox_3.getSelectedItem(); 
-			}
-		});
+//		JoinComboBox_3.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				sp3.joinFilter =(String) JoinComboBox_3.getSelectedItem(); 
+//			}
+//		});
 
 		/****************************************** Panel-4 ******************************************************************/
 
@@ -470,7 +462,7 @@ public class SearchUI extends JFrame {
 		panel_4.add(CriteriaComboBox_4);
 
 		CriteriaComboBox_4.setSelectedItem(keys.toArray()[0]);
-		sp4.searchFilter = Criteria.get(CriteriaComboBox_4.getSelectedItem());
+		//sp4.searchFilter = Criteria.get(CriteriaComboBox_4.getSelectedItem());
 		ComparatorComboBox_4.addItem("=");
 		ComparatorComboBox_4.addItem("!=");
 
@@ -502,7 +494,7 @@ public class SearchUI extends JFrame {
 
 				}
 
-				sp4.searchFilter =Criteria.get(CriteriaComboBox_4.getSelectedItem());
+				//sp4.searchFilter =Criteria.get(CriteriaComboBox_4.getSelectedItem());
 
 			}
 		});
@@ -512,14 +504,14 @@ public class SearchUI extends JFrame {
 		ComparatorLabel_4.setBounds(212, 13, 79, 16);
 		panel_4.add(ComparatorLabel_4);
 
-		sp4.searchComparator = (String) ComparatorComboBox_4.getItemAt(0);
+		//sp4.searchComparator = (String) ComparatorComboBox_4.getItemAt(0);
 		ComparatorComboBox_4.setBounds(291, 10, 107, 22);
 		panel_4.add(ComparatorComboBox_4);
-		ComparatorComboBox_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sp4.searchComparator = (String) ComparatorComboBox_4.getSelectedItem();
-			}
-		});
+//		ComparatorComboBox_4.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				sp4.searchComparator = (String) ComparatorComboBox_4.getSelectedItem();
+//			}
+//		});
 
 
 		JLabel ValueLabel_4 = new JLabel("Value");
@@ -558,11 +550,11 @@ public class SearchUI extends JFrame {
 		//combo box for join comparator
 		JoinComboBox_4.setBounds(777, 10, 86, 22);
 		panel_4.add(JoinComboBox_4);
-		JoinComboBox_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sp4.joinFilter =(String) JoinComboBox_4.getSelectedItem(); 
-			}
-		});
+//		JoinComboBox_4.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				sp4.joinFilter =(String) JoinComboBox_4.getSelectedItem(); 
+//			}
+//		});
 
 
 		/*********************************** Panel - 5 **********************************************/	
@@ -580,7 +572,7 @@ public class SearchUI extends JFrame {
 		panel_5.add(CriteriaComboBox_5);
 
 		CriteriaComboBox_5.setSelectedItem(keys.toArray()[0]);
-		sp5.searchFilter = Criteria.get(CriteriaComboBox_5.getSelectedItem());
+		//sp5.searchFilter = Criteria.get(CriteriaComboBox_5.getSelectedItem());
 		ComparatorComboBox_5.addItem("=");
 		ComparatorComboBox_5.addItem("!=");
 
@@ -611,7 +603,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_5.addItem("!=");
 
 				}	
-				sp5.searchFilter = Criteria.get(CriteriaComboBox_5.getSelectedItem());
+				//sp5.searchFilter = Criteria.get(CriteriaComboBox_5.getSelectedItem());
 			}
 		});
 
@@ -620,14 +612,14 @@ public class SearchUI extends JFrame {
 		ComparatorLabel_5.setBounds(212, 13, 79, 16);
 		panel_5.add(ComparatorLabel_5);
 
-		sp5.searchComparator = (String) ComparatorComboBox_5.getItemAt(0);
+//		sp5.searchComparator = (String) ComparatorComboBox_5.getItemAt(0);
 		ComparatorComboBox_5.setBounds(291, 10, 107, 22);
 		panel_5.add(ComparatorComboBox_5);
-		ComparatorComboBox_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sp5.searchComparator = (String) ComparatorComboBox_5.getSelectedItem();
-			}
-		});
+//		ComparatorComboBox_5.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				sp5.searchComparator = (String) ComparatorComboBox_5.getSelectedItem();
+//			}
+//		});
 
 
 		JLabel ValueLabel_5 = new JLabel("Value");
@@ -638,23 +630,57 @@ public class SearchUI extends JFrame {
 		ValueField_5.setColumns(10);
 		ValueField_5.setBounds(456, 10, 116, 22);
 		panel_5.add(ValueField_5);
-				
-				
+
+        /*****************************************Submit button****************************************************/
+		
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnNewButton.setBounds(394, 395, 97, 25);
 		contentPane.add(btnNewButton);
-					
-		
+
+
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				sp1.searchValue = ValueField_1.getText();
-				sp2.searchValue = ValueField_2.getText();
-				sp3.searchValue = ValueField_3.getText();
-				sp4.searchValue = ValueField_4.getText();
-				sp5.searchValue = ValueField_5.getText();
+				if(q1 == true){
+					
+					sp1.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
+					sp1.searchComparator = (String) ComparatorComboBox_1.getSelectedItem();
+					sp1.searchValue = ValueField_1.getText();
+					sp1.joinFilter =(String) JoinComboBox_1.getSelectedItem(); 
+
+				}
+				if(q2 == true){
+					
+					sp2.searchFilter = Criteria.get(CriteriaComboBox_2.getSelectedItem());
+					sp2.searchComparator = (String) ComparatorComboBox_2.getSelectedItem();
+					sp2.searchValue = ValueField_2.getText();
+					sp2.joinFilter =(String) JoinComboBox_2.getSelectedItem(); 
+
+				}
+				if(q3 == true){
+					
+					sp3.searchFilter = Criteria.get(CriteriaComboBox_3.getSelectedItem());
+					sp3.searchComparator = (String) ComparatorComboBox_3.getSelectedItem();
+					sp3.searchValue = ValueField_3.getText();
+					sp3.joinFilter =(String) JoinComboBox_3.getSelectedItem(); 
+
+				}
 				
+				if(q4 == true){
+					sp4.searchFilter = Criteria.get(CriteriaComboBox_4.getSelectedItem());
+					sp4.searchComparator = (String) ComparatorComboBox_4.getSelectedItem();
+					sp4.searchValue = ValueField_4.getText();
+					sp4.joinFilter =(String) JoinComboBox_4.getSelectedItem(); 
+
+				}
+
+				if(q5 == true){
+					sp5.searchFilter = Criteria.get(CriteriaComboBox_5.getSelectedItem());
+					sp5.searchComparator = (String) ComparatorComboBox_5.getSelectedItem();
+					sp5.searchValue = ValueField_5.getText();
+				}
+
 				boolean error = false;
 
 				if(q1 == true)
@@ -716,7 +742,7 @@ public class SearchUI extends JFrame {
 					// send these to displayUI to render the information there.
 					ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 					List<String> finalAuthors = null;
-					 try {
+					try {
 						finalAuthors = searchDisplay.search(finalList);
 					} catch (SQLException e2) {
 						// TODO Auto-generated catch block
@@ -724,18 +750,18 @@ public class SearchUI extends JFrame {
 					}					
 					DisplayUI display;
 					try {
-						
+
 						dispose();
 						display = new DisplayUI(finalAuthors, userName);
 						display.setVisible(true);
 						display.setSize(950, 600);
 						display.setLocationRelativeTo(null);
-						
+
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
+
 
 				}				   
 			}
@@ -747,16 +773,16 @@ public class SearchUI extends JFrame {
 		contentPane.add(btnLogout);
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				 dispose();
-				 LoginUI log = new LoginUI();
-				 log.setVisible(true);
-				 log.setSize(950,600);
-				 log.setLocationRelativeTo(null);
+
+				dispose();
+				LoginUI log = new LoginUI();
+				log.setVisible(true);
+				log.setSize(950,600);
+				log.setLocationRelativeTo(null);
 
 			}
 		});
 	}
-	
+
 
 }
