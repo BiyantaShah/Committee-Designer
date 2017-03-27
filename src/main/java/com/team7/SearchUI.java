@@ -11,7 +11,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
@@ -76,7 +78,16 @@ public class SearchUI extends JFrame {
 		final JPanel panel_5 = new JPanel();
 		panel_5.setVisible(false);
 
-		String[] CriteriaList = {"Author Name" ,"Committee Year","Committee Conf Name", "Conference Name", "Count Of Papers", "Keyword in Title", "Paper Published Year"};
+		final HashMap<String,String> Criteria = new HashMap<String,String>();
+		Criteria.put("Author Name","Name");
+		Criteria.put("Committee Year","Committee.Year");
+		Criteria.put("Committee Conf Name", "Committee.ConfName");
+		Criteria.put("Conference Name", "ConfName");
+		Criteria.put("Count Of Papers", "CountNoOfPapers");
+		Criteria.put("Keyword in Title", "Keyword");
+		Criteria.put("Paper Published Year", "Year");
+		Criteria.put("Journal Name", "JournalName");
+	    List<String> keys = new ArrayList<String>(Criteria.keySet());
 		String[] JoinList = {"AND","OR"};
 
 
@@ -133,13 +144,12 @@ public class SearchUI extends JFrame {
 		CriteriaLabel_1.setBounds(12, 13, 56, 16);
 		panel_1.add(CriteriaLabel_1);
 
-
-		final JComboBox CriteriaComboBox_1 = new JComboBox(CriteriaList);
+		final JComboBox CriteriaComboBox_1 = new JComboBox(keys.toArray());
 		CriteriaComboBox_1.setBounds(67, 10, 129, 22);
 		panel_1.add(CriteriaComboBox_1);
 
-		CriteriaComboBox_1.setSelectedItem(CriteriaList[0]);
-		sp1.searchFilter = (String) CriteriaComboBox_1.getSelectedItem();
+		CriteriaComboBox_1.setSelectedItem(keys.toArray()[0]);
+		sp1.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
 		ComparatorComboBox_1.addItem("=");
 		ComparatorComboBox_1.addItem("!=");
 
@@ -154,7 +164,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_1.addItem("NOT LIKE");
 
 
-				} else if(CriteriaComboBox_1.getSelectedItem() == "Author Name" || CriteriaComboBox_1.getSelectedItem() == "Conference Name" || CriteriaComboBox_1.getSelectedItem() == "Committee Conf Name" ){
+				} else if(CriteriaComboBox_1.getSelectedItem() == "Author Name" || CriteriaComboBox_1.getSelectedItem() == "Conference Name" || CriteriaComboBox_1.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_1.getSelectedItem() == "Journal Name"){
 
 					ComparatorComboBox_1.addItem("=");	
 					ComparatorComboBox_1.addItem("!=");
@@ -169,7 +179,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_1.addItem("!=");
 
 				}
-				sp1.searchFilter = (String) CriteriaComboBox_1.getSelectedItem();
+				sp1.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
 			}
 		});
 
@@ -243,12 +253,12 @@ public class SearchUI extends JFrame {
 		CriteriaLabel_2.setBounds(12, 13, 56, 16);
 		panel_2.add(CriteriaLabel_2);
 
-		final JComboBox CriteriaComboBox_2 = new JComboBox(CriteriaList);
+		final JComboBox CriteriaComboBox_2 = new JComboBox(keys.toArray());
 		CriteriaComboBox_2.setBounds(67, 10, 129, 22);
 		panel_2.add(CriteriaComboBox_2);
 
-		CriteriaComboBox_2.setSelectedItem(CriteriaList[0]);
-		sp2.searchFilter = (String) CriteriaComboBox_2.getSelectedItem();
+		CriteriaComboBox_2.setSelectedItem(keys.toArray()[0]);
+		sp2.searchFilter = Criteria.get(CriteriaComboBox_2.getSelectedItem());
 		ComparatorComboBox_2.addItem("=");
 		ComparatorComboBox_2.addItem("!=");
 
@@ -263,7 +273,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_2.addItem("NOT LIKE");
 
 
-				} else if(CriteriaComboBox_2.getSelectedItem() == "Author Name" || CriteriaComboBox_2.getSelectedItem() == "Conference Name" || CriteriaComboBox_2.getSelectedItem() == "Committee Conf Name" ){
+				} else if(CriteriaComboBox_2.getSelectedItem() == "Author Name" || CriteriaComboBox_2.getSelectedItem() == "Conference Name" || CriteriaComboBox_2.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_2.getSelectedItem() == "Journal Name"){
 
 					ComparatorComboBox_2.addItem("=");	
 					ComparatorComboBox_2.addItem("!=");
@@ -278,7 +288,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_2.addItem("!=");
 
 				}
-				sp2.searchFilter = (String) CriteriaComboBox_2.getSelectedItem();
+				sp2.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
 
 			}
 		});
@@ -350,11 +360,12 @@ public class SearchUI extends JFrame {
 		CriteriaLabel_3.setBounds(12, 13, 56, 16);
 		panel_3.add(CriteriaLabel_3);
 
-		final JComboBox CriteriaComboBox_3 = new JComboBox(CriteriaList);
+		final JComboBox CriteriaComboBox_3 = new JComboBox(keys.toArray());
 		CriteriaComboBox_3.setBounds(67, 10, 129, 22);
 		panel_3.add(CriteriaComboBox_3);
 
-		CriteriaComboBox_3.setSelectedItem(CriteriaList[0]);
+		CriteriaComboBox_3.setSelectedItem(keys.toArray()[0]);
+		sp3.searchFilter = Criteria.get(CriteriaComboBox_3.getSelectedItem());
 		ComparatorComboBox_3.addItem("="); //As initial criteria is AuthorName
 		ComparatorComboBox_3.addItem("!=");//it's corresponding comparator should be = and !=
 
@@ -370,7 +381,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_3.addItem("NOT LIKE");
 
 
-				} else if(CriteriaComboBox_3.getSelectedItem() == "Author Name" || CriteriaComboBox_3.getSelectedItem() == "Conference Name" || CriteriaComboBox_3.getSelectedItem() == "Committee Conf Name" ){
+				} else if(CriteriaComboBox_3.getSelectedItem() == "Author Name" || CriteriaComboBox_3.getSelectedItem() == "Conference Name" || CriteriaComboBox_3.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_3.getSelectedItem() == "Journal Name"){
 
 					ComparatorComboBox_3.addItem("=");	
 					ComparatorComboBox_3.addItem("!=");
@@ -385,7 +396,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_3.addItem("!=");
 
 				}
-				sp3.searchFilter = (String) CriteriaComboBox_1.getSelectedItem();
+				sp3.searchFilter = Criteria.get(CriteriaComboBox_3.getSelectedItem());
 			}
 		});
 
@@ -454,12 +465,12 @@ public class SearchUI extends JFrame {
 		CriteriaLabel_4.setBounds(12, 13, 56, 16);
 		panel_4.add(CriteriaLabel_4);
 
-		final JComboBox CriteriaComboBox_4 = new JComboBox(CriteriaList);
+		final JComboBox CriteriaComboBox_4 = new JComboBox(keys.toArray());
 		CriteriaComboBox_4.setBounds(67, 10, 129, 22);
 		panel_4.add(CriteriaComboBox_4);
 
-		CriteriaComboBox_4.setSelectedItem(CriteriaList[0]);
-		sp4.searchFilter = (String) CriteriaComboBox_4.getSelectedItem();
+		CriteriaComboBox_4.setSelectedItem(keys.toArray()[0]);
+		sp4.searchFilter = Criteria.get(CriteriaComboBox_4.getSelectedItem());
 		ComparatorComboBox_4.addItem("=");
 		ComparatorComboBox_4.addItem("!=");
 
@@ -475,7 +486,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_4.addItem("NOT LIKE");
 
 
-				} else if(CriteriaComboBox_4.getSelectedItem() == "Author Name" || CriteriaComboBox_4.getSelectedItem() == "Conference Name" || CriteriaComboBox_4.getSelectedItem() == "Committee Conf Name" ){
+				} else if(CriteriaComboBox_4.getSelectedItem() == "Author Name" || CriteriaComboBox_4.getSelectedItem() == "Conference Name" || CriteriaComboBox_4.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_4.getSelectedItem() == "Journal Name"){
 
 					ComparatorComboBox_4.addItem("=");	
 					ComparatorComboBox_4.addItem("!=");
@@ -491,7 +502,7 @@ public class SearchUI extends JFrame {
 
 				}
 
-				sp4.searchFilter = (String) CriteriaComboBox_4.getSelectedItem();
+				sp4.searchFilter =Criteria.get(CriteriaComboBox_4.getSelectedItem());
 
 			}
 		});
@@ -564,12 +575,12 @@ public class SearchUI extends JFrame {
 		CriteriaLabel_5.setBounds(12, 13, 56, 16);
 		panel_5.add(CriteriaLabel_5);
 
-		final JComboBox CriteriaComboBox_5 = new JComboBox(CriteriaList);
+		final JComboBox CriteriaComboBox_5 = new JComboBox(keys.toArray());
 		CriteriaComboBox_5.setBounds(67, 10, 129, 22);
 		panel_5.add(CriteriaComboBox_5);
 
-		CriteriaComboBox_5.setSelectedItem(CriteriaList[0]);
-		sp5.searchFilter = (String) CriteriaComboBox_5.getSelectedItem();
+		CriteriaComboBox_5.setSelectedItem(keys.toArray()[0]);
+		sp5.searchFilter = Criteria.get(CriteriaComboBox_5.getSelectedItem());
 		ComparatorComboBox_5.addItem("=");
 		ComparatorComboBox_5.addItem("!=");
 
@@ -585,7 +596,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_5.addItem("NOT LIKE");
 
 
-				} else if(CriteriaComboBox_5.getSelectedItem() == "Author Name" || CriteriaComboBox_5.getSelectedItem() == "Conference Name" || CriteriaComboBox_5.getSelectedItem() == "Committee Conf Name" ){
+				} else if(CriteriaComboBox_5.getSelectedItem() == "Author Name" || CriteriaComboBox_5.getSelectedItem() == "Conference Name" || CriteriaComboBox_5.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_5.getSelectedItem() == "Journal Name"){
 
 					ComparatorComboBox_5.addItem("=");	
 					ComparatorComboBox_5.addItem("!=");
@@ -600,7 +611,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_5.addItem("!=");
 
 				}	
-				sp5.searchFilter = (String) CriteriaComboBox_5.getSelectedItem();
+				sp5.searchFilter = Criteria.get(CriteriaComboBox_5.getSelectedItem());
 			}
 		});
 
@@ -713,9 +724,13 @@ public class SearchUI extends JFrame {
 					}					
 					DisplayUI display;
 					try {
+						
 						dispose();
 						display = new DisplayUI(finalAuthors, userName);
+						display.setVisible(true);
+						display.setSize(950, 600);
 						display.setLocationRelativeTo(null);
+						
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

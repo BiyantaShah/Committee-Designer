@@ -54,8 +54,8 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	public boolean validateQuery(List<SearchParameter> searchParam) {        	
 		boolean result = false;
 		for(SearchParameter s : searchParam){
-			if(s.getSearchFilter() == "Author Name"){	
-				s.setSearchFilter("Name");
+			
+			if(s.getSearchFilter() == "Name"){	
 				if(checkValidityOfSearchParameters(s.getSearchValue())){					
 					return false;
 				}
@@ -63,8 +63,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 					result = true;
 			}
 			
-			if(s.getSearchFilter() == "Conference Name"){
-				s.setSearchFilter("ConfName");
+			if(s.getSearchFilter() == "ConfName"){
 				if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
@@ -72,15 +71,13 @@ public class ImplementQueryBuilder implements QueryBuilder{
 					result = true;
 			}
 			
-			if(s.getSearchFilter() == "Paper Published Year"){
-				s.setSearchFilter("Year");
+			if(s.getSearchFilter() == "Year"){
 	            if(s.getSearchFilter() == "Year" && Integer.parseInt(s.getSearchValue()) > 0){
 	            	result = true;
 				}
 			}
               
-            if(s.getSearchFilter() == "Keyword in Title"){
-            	s.setSearchFilter("Keyword");
+            if(s.getSearchFilter() == "Keyword"){
             	if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;				  
             	}
@@ -88,22 +85,19 @@ public class ImplementQueryBuilder implements QueryBuilder{
 					result = true; 	
              } 
             
-            if(s.getSearchFilter() == "Count Of Papers"){            	
-            	s.setSearchFilter("CountNoOfPapers");
+            if(s.getSearchFilter() == "CountNoOfPapers"){            	
 	            if(s.getSearchFilter() == "CountNoOfPapers" && Integer.parseInt(s.getSearchValue()) > 0){
 					return true;
 				}
             }    
             
-	        if(s.getSearchFilter() == "Committee Year")  {  
-	        	s.setSearchFilter("Committee.Year");
+	        if(s.getSearchFilter() == "Committee.Year")  {  
 	            if(s.getSearchFilter() == "Committee.Year" && Integer.parseInt(s.getSearchValue()) > 0){					
 	            	return true;
 	            }
 			}
             
-            if(s.getSearchFilter() == "Committee Conf Name"){
-	        	s.setSearchFilter("Committee.ConfName");
+            if(s.getSearchFilter() == "Committee.ConfName"){
             	if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
@@ -111,8 +105,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 					result = true;
 			}
             
-            if(s.getSearchFilter() == "Journal Name"){
-				s.setSearchFilter("JournalName");
+            if(s.getSearchFilter() == "JournalName"){
 				if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
