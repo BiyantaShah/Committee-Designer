@@ -16,7 +16,6 @@ public class ImplementSearchDisplay implements SearchDisplay {
 
 	// Keeps track of all filter criteria and their values
 	public List<String> search(List<SearchParameter> searchParameter) throws SQLException {
-
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
 		List<String> query = queryBuilderObject.createQuery(searchParameter);
 

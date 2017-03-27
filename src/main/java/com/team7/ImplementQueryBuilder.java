@@ -35,7 +35,6 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	// from the UI
 	public List<String> createQuery(List<SearchParameter> searchParam) {			
 		if(validateQuery(searchParam)){
-
 			formQueryParams(searchParam);
 
 			getPaperAuthorQuery();
@@ -164,37 +163,75 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 	// Getting the final result of the query.
 	public List<String> getResultForDisplay(List<String> searchQuery) throws SQLException{
-		ResultSet paperAuthorResultSet = sendQuery(searchQuery.get(0));
+		
 		List<String> finalResult = new ArrayList<String>();
+		List<String> intermediate = new ArrayList<String>();
 		List<String> paperAuthorResult = new ArrayList<String>();
+		List<String> committeeResult = new ArrayList<String>();
+		List<String> articleResult = new ArrayList<String>();
 
-		while (paperAuthorResultSet.next()) {
-			paperAuthorResult.add(paperAuthorResultSet.getString("Author"));
+		// If there is query data about paper and author
+		if (searchQuery.get(0) != null) {
+			ResultSet paperAuthorResultSet = sendQuery(searchQuery.get(0));
+			while (paperAuthorResultSet.next()) {
+				paperAuthorResult.add(paperAuthorResultSet.getString("Author"));
+			}			
 		}
-
+		
+		// If there is query data about committee
 		if(searchQuery.get(1) != null){
 			ResultSet committeeResultSet = sendQuery(searchQuery.get(1));
-			List<String> committeeResult = new ArrayList<String>();
-
+			
 			while (committeeResultSet.next()) {
 				committeeResult.add(committeeResultSet.getString("Author"));
-			}
-
-			paperAuthorResult.retainAll(committeeResult);         		
+			}  
 		}
 
+		// If there is query data about articles
 		if(searchQuery.get(2) != null){
 			ResultSet articleResultSet = sendQuery(searchQuery.get(2));
-			List<String> articleResult = new ArrayList<String>();
+			
 
 			while (articleResultSet.next()) {
 				articleResult.add(articleResultSet.getString("Author"));
 			}
-
+		} 
+		
+		
+		// The result sets which are not empty are intersected together
+		if (paperAuthorResult.size() != 0 && 
+				committeeResult.size() != 0 && 
+				articleResult.size() != 0 ) {
+			paperAuthorResult.retainAll(committeeResult);
 			paperAuthorResult.retainAll(articleResult);
-		}        		 
-
-		finalResult.addAll(new HashSet<String>(paperAuthorResult));
+			intermediate = paperAuthorResult;
+		}
+		else if (paperAuthorResult.size() != 0 && 
+				committeeResult.size() != 0) {
+			paperAuthorResult.retainAll(committeeResult);
+			intermediate = paperAuthorResult;
+		}
+		else if (paperAuthorResult.size() != 0 && 
+				articleResult.size() != 0) {
+			paperAuthorResult.retainAll(articleResult);
+			intermediate = paperAuthorResult;
+		}
+		else if (committeeResult.size() != 0 && 
+				articleResult.size() != 0 ) {
+			committeeResult.retainAll(articleResult);
+			intermediate = committeeResult;
+		}
+		else if (paperAuthorResult.size() != 0) {
+			intermediate = paperAuthorResult;
+		}
+		else if (committeeResult.size() != 0) {
+			intermediate = committeeResult;
+		}
+		else if (articleResult.size() != 0) {
+			intermediate = articleResult;
+		}
+		
+		finalResult.addAll(new HashSet<String>(intermediate));
 		return finalResult;     		
 	}
 
@@ -269,9 +306,13 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	}
 
 	private void getPaperAuthorQuery(){ 
-		String joinCondition = formJoinCondition();
-		queryPaperAuthor = "SELECT a.name AS Author FROM " + joinCondition + " WHERE ";  
-		queryPaperAuthor += whereClauseForPaperAuthor;
+		
+		if (whereClauseForPaperAuthor.length() > 0) {
+
+			String joinCondition = formJoinCondition();
+			queryPaperAuthor = "SELECT a.name AS Author FROM " + joinCondition + " WHERE ";  
+			queryPaperAuthor += whereClauseForPaperAuthor;
+		}
 	}
 
 

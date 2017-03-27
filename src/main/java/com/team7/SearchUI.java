@@ -296,7 +296,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_2.addItem("!=");
 
 				}
-				sp2.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
+				sp2.searchFilter = Criteria.get(CriteriaComboBox_2.getSelectedItem());
 
 			}
 		});

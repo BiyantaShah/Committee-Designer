@@ -20,7 +20,7 @@ public class ImplementSearchTest extends TestCase {
 		
 		ImplementSearchDisplay searchdisplay = new ImplementSearchDisplay();
 		List<SearchParameter> searchParameterList = new ArrayList<SearchParameter>();
-		SearchParameter s = new SearchParameter("Author Name", "=","Shahar Maoz",null);
+		SearchParameter s = new SearchParameter("Name", "=","Shahar Maoz",null);
 		searchParameterList.add(0,s);
 		List<String> result = searchdisplay.search(searchParameterList); 
 		assertEquals("Shahar Maoz", result.get(0));
