@@ -30,10 +30,6 @@ public class ButtonEditor extends DefaultCellEditor {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	// extracts information about the row where the button is clicked

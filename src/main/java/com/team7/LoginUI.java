@@ -25,9 +25,6 @@ import javax.swing.JPasswordField;
 // LoginUI window
 public class LoginUI extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField userNameField;
@@ -39,7 +36,6 @@ public class LoginUI extends JFrame {
 
     static LoginUI frame; 
 	
-
 
 	/**
 	 * Launch the application.
