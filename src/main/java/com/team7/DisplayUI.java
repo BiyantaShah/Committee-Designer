@@ -54,7 +54,7 @@ public class DisplayUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(6, 6, 921, 73);
+		panel.setBounds(6, 6, 909, 73);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -63,8 +63,35 @@ public class DisplayUI extends JFrame {
 		lblSearchResults.setBounds(380, 22, 189, 25);
 		panel.add(lblSearchResults);
 		
+		JButton btnLogout = new JButton("LogOut");
+		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnLogout.setBounds(746, 0, 117, 34);
+		panel.add(btnLogout);
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 dispose();
+				 LoginUI log = new LoginUI();
+				 log.setVisible(true);
+				 log.setSize(950,600);
+				 log.setLocationRelativeTo(null);
+			}
+		});
+		
+		JButton btnSearch = new JButton("Search UI");
+		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnSearch.setBounds(625, 0, 117, 34);
+		panel.add(btnSearch);
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				SearchUI search = new SearchUI(userName);
+				search.setSize(950, 600);
+				search.setLocationRelativeTo(null);				
+			}
+		});
+		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(6, 91, 921, 383);
+		panel_1.setBounds(6, 91, 909, 373);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -91,11 +118,14 @@ public class DisplayUI extends JFrame {
 		panel_1.add(scroll);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(6, 491, 921, 60);
+		panel_2.setBounds(6, 477, 921, 55);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 		
 		JButton btnSavedAuthors = new JButton("Saved Authors");
+		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnSavedAuthors.setBounds(385, 0, 149, 34);
+		panel_2.add(btnSavedAuthors);
 		btnSavedAuthors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// List of authors who have been saved by the user
@@ -123,9 +153,6 @@ public class DisplayUI extends JFrame {
 				
 			}
 		});
-		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSavedAuthors.setBounds(398, 6, 149, 29);
-		panel_2.add(btnSavedAuthors);
 	}
 
 

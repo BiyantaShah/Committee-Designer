@@ -58,7 +58,7 @@ public class SavedAuthorsUI extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblSavedAuthors = new JLabel("SAVED AUTHORS");
+		JLabel lblSavedAuthors = new JLabel("Save Authors");
 		lblSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblSavedAuthors.setBounds(345, 17, 206, 16);
 		panel.add(lblSavedAuthors);
@@ -66,6 +66,33 @@ public class SavedAuthorsUI extends JFrame {
 		JLabel lblNewLabel = new JLabel("To select authors for the committee, click \"select\" beside the row");
 		lblNewLabel.setBounds(242, 68, 433, 16);
 		panel.add(lblNewLabel);
+		
+		JButton btnSearch = new JButton("Search UI");
+		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnSearch.setBounds(620, 0, 117, 34);
+		panel.add(btnSearch);
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				SearchUI search = new SearchUI(userName);
+				search.setSize(950, 600);
+				search.setLocationRelativeTo(null);				
+			}
+		});
+		
+		JButton btnNewButton = new JButton("LogOut");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 dispose();
+				 LoginUI log = new LoginUI();
+				 log.setVisible(true);
+				 log.setSize(950,600);
+				 log.setLocationRelativeTo(null);
+			}
+		});
+		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnNewButton.setBounds(749, 0, 117, 34);
+		panel.add(btnNewButton);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(6, 119, 921, 357);

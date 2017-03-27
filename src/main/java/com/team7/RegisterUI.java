@@ -130,6 +130,7 @@ public class RegisterUI extends JFrame {
 		btnRegister.setBounds(394, 451, 114, 34);
 		contentPane.add(btnRegister);
 		
+				
 		btnRegister.addActionListener(new ActionListener()
 		{
 
@@ -174,5 +175,22 @@ public class RegisterUI extends JFrame {
 						log.messageShow("Username already exists");
 					}
 				}}});
+		
+		
+		JButton btnLogin = new JButton("Login");
+		btnLogin.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnLogin.setBounds(735, 28, 117, 34);
+		contentPane.add(btnLogin);
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 dispose();
+				 LoginUI log = new LoginUI();
+				 log.setVisible(true);
+				 log.setSize(950,600);
+				 log.setLocationRelativeTo(null);
+			}
+		});
+
+
 	}
 }

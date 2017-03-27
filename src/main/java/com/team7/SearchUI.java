@@ -633,7 +633,7 @@ public class SearchUI extends JFrame {
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnNewButton.setBounds(394, 395, 97, 25);
 		contentPane.add(btnNewButton);
-			
+					
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -726,5 +726,22 @@ public class SearchUI extends JFrame {
 			}
 		});
 
+		JButton btnLogout = new JButton("LogOut");
+		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnLogout.setBounds(790, 13, 117, 34);
+		contentPane.add(btnLogout);
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				 dispose();
+				 LoginUI log = new LoginUI();
+				 log.setVisible(true);
+				 log.setSize(950,600);
+				 log.setLocationRelativeTo(null);
+
+			}
+		});
 	}
+	
+
 }
