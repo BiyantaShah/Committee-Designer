@@ -208,4 +208,37 @@ public class ImplementQueryBuilderTest extends TestCase {
   		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
 		assertEquals(result.get(0),"Amer Diwan");   // add a real author name here
 	}
+	
+	@Test
+	public void testNoDuplicateAuthorName() throws SQLException{ 	
+  		List<String> query8= new ArrayList<String>();
+  		query8.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE p.title LIKE '%test%' ");
+  		query8.add(1,null);	
+  		 
+  		SearchParameter s= new SearchParameter("Keyword in Title", "LIKE" ,"test", null);
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s);	
+		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+		assertEquals(query8, queryFormed);
+		
+		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
+		//assertEquals(result.get(0),"Amer Diwan");   // add a real author name here
+	}
+	
+	@Test
+	public void testLikeClauseAuthorName() throws SQLException{ 	
+  		List<String> query9= new ArrayList<String>();
+  		query9.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE a.Name LIKE '%ABC%' ");
+  		query9.add(1,null);	
+  		 
+  		SearchParameter s= new SearchParameter("Author Name", "LIKE" ,"ABC", null);
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s);	
+		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+		assertEquals(query9, queryFormed);
+		
+		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
+		//assertEquals(result.get(0),"ABC");   // add a real author name here
+	}
+
 }
