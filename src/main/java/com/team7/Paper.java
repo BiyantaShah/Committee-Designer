@@ -5,6 +5,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
+// Contains information about the paper (authors, title , pages etc.)
 @SuppressWarnings("restriction")
 public class Paper {
 
@@ -18,6 +19,7 @@ public class Paper {
 		return author;
 	}
 
+	// Getters and setters
 	@XmlElement
 	public void setAuthor(List<String> author) {
 		this.author = author;

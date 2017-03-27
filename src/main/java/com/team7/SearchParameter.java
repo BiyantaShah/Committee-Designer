@@ -1,5 +1,7 @@
 package com.team7;
 
+// This class contains the search criteria, values, comparator and join conditions
+// The object of this class is sent to the query engine to create the query.
 public class SearchParameter {
 	
 	String searchFilter = null;
@@ -15,11 +17,12 @@ public class SearchParameter {
 		this.searchFilter =searchFilter;
 		this.searchComparator = searchComparator;
 		this.searchValue = searchValue;	
-//		if(joinFilter != null){
+		if(joinFilter != null){
 				this.joinFilter = joinFilter;
-//			}
+			}
 		}
 	
+	// getters and setters
 	public String getSearchFilter(){
 		return this.searchFilter;
 	}

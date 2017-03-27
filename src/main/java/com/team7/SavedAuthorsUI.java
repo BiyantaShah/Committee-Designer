@@ -58,7 +58,7 @@ public class SavedAuthorsUI extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblSavedAuthors = new JLabel("Save Authors");
+		JLabel lblSavedAuthors = new JLabel("Saved Authors");
 		lblSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblSavedAuthors.setBounds(345, 17, 206, 16);
 		panel.add(lblSavedAuthors);
@@ -114,9 +114,8 @@ public class SavedAuthorsUI extends JFrame {
 		table.getColumn("Select").setCellEditor(
 				new ButtonEditor(new JCheckBox()));
 		
-		table.setPreferredScrollableViewportSize(new Dimension(550, 350));
+		table.setPreferredScrollableViewportSize(new Dimension(650, 350));
 		JScrollPane scroll = new JScrollPane(table);
-//		getContentPane().add(scroll, FlowLayout.CENTER);
 		setVisible(true);
 		
 		panel_1.add(scroll);
@@ -130,11 +129,18 @@ public class SavedAuthorsUI extends JFrame {
 		btnSendEmail.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSendEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sendMail = ButtonEditor.sendEmail;
+				sendMail = ButtonEditor.savedAuthors;
+				String res = null;
 				
 				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 				try {
-					searchDisplay.sendEmail(sendMail, userName);
+					res = searchDisplay.sendEmail(sendMail, userName);	
+					System.out.println(res);
+					if (res.equals("failure")) {
+						LoginUI login = new LoginUI();
+						login.messageShow("Invalid email ID of the user");
+					}
+					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
