@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
@@ -20,7 +21,7 @@ import java.awt.Font;
 @SuppressWarnings("serial")
 public class SearchUI extends JFrame {
 
-	public JPanel contentPane;
+	private JPanel contentPane;
 	private JTextField ValueField_1;
 	private JTextField ValueField_2;
 	private JTextField ValueField_3;
@@ -41,6 +42,7 @@ public class SearchUI extends JFrame {
 
 	List<SearchParameter> finalList = new ArrayList<SearchParameter>();
 	LoginUI log = new LoginUI();
+	ImplementSearchDisplay sd = new ImplementSearchDisplay();
 
 
 	/**
@@ -651,18 +653,12 @@ public class SearchUI extends JFrame {
 		ValueField_5.setBounds(456, 10, 116, 22);
 		panel_5.add(ValueField_5);
 
-<<<<<<< HEAD
         /*****************************************Submit button****************************************************/
 		
-=======
-
->>>>>>> master
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnNewButton.setBounds(394, 395, 97, 25);
 		contentPane.add(btnNewButton);
-
-<<<<<<< HEAD
 
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -705,16 +701,6 @@ public class SearchUI extends JFrame {
 					sp5.searchComparator = (String) ComparatorComboBox_5.getSelectedItem();
 					sp5.searchValue = ValueField_5.getText();
 				}
-=======
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				sp1.searchValue = ValueField_1.getText();
-				sp2.searchValue = ValueField_2.getText();
-				sp3.searchValue = ValueField_3.getText();
-				sp4.searchValue = ValueField_4.getText();
-				sp5.searchValue = ValueField_5.getText();
->>>>>>> master
 
 				boolean error = false;
 
@@ -777,10 +763,7 @@ public class SearchUI extends JFrame {
 					// send these to displayUI to render the information there.
 					ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 					List<String> finalAuthors = null;
-<<<<<<< HEAD
-=======
 					Boolean flag = true;
->>>>>>> master
 					try {
 						finalAuthors = searchDisplay.search(finalList);
 						if (finalAuthors.size() == 0) {
@@ -794,31 +777,17 @@ public class SearchUI extends JFrame {
 					}					
 					DisplayUI display;
 					try {
-<<<<<<< HEAD
 
-						dispose();
-						display = new DisplayUI(finalAuthors, userName);
-						display.setVisible(true);
-						display.setSize(950, 600);
-						display.setLocationRelativeTo(null);
-
-=======
 						if (flag == true) {
 							dispose();
 							display = new DisplayUI(finalAuthors, userName);
 							display.setSize(950, 600);
 							display.setLocationRelativeTo(null);
 						}
->>>>>>> master
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-<<<<<<< HEAD
-
-
-=======
->>>>>>> master
 				}				   
 			}
 		});
