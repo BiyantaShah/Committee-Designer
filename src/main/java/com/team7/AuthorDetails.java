@@ -4,39 +4,40 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
+// This class gives the information about details of the author (name and their home page)
 @SuppressWarnings("restriction")
 public class AuthorDetails {
 
-   List<String> author;
-   String url;
-  
- 	public AuthorDetails() {
-	// TODO Auto-generated constructor stub
- 	}
- 	
- 	public AuthorDetails(List<String> name,String url) {
- 		
-	// TODO Auto-generated constructor stub
- 		this.author = name;
- 		this.url = url;
- 	
- 	}
+	List<String> author;
+	String url;
+
+	public AuthorDetails() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public AuthorDetails(List<String> name,String url) {
+
+		// TODO Auto-generated constructor stub
+		this.author = name;
+		this.url = url;
+
+	}
 
 	public 	List<String> getAuthor() {
-        return 	author;
-    }
+		return 	author;
+	}
 
 	@XmlElement
-    public void setAuthor(List<String> name) {
-        this.author = name;
-    }
-	
-    public String getUrl() {
-        return url;
-    }
+	public void setAuthor(List<String> name) {
+		this.author = name;
+	}
+
+	public String getUrl() {
+		return url;
+	}
 
 	@XmlElement
-    public void setUrl(String url) {
-        this.url = url;
-    }
+	public void setUrl(String url) {
+		this.url = url;
+	}
 }

@@ -3,15 +3,11 @@ package com.team7;
 import java.sql.SQLException;
 
 public interface Register {
-	
-	/*
-	 * Create a new user, if not present
-	 */
+
+	//Create a new user, if not present
 	public String createUser(String userName, String password, String role, String confName) throws SQLException;
 
-	/*
-	 * Check if user already exists
-	 */
+	// Check if user already exists
 	public boolean verifyIfUserExists(String userName) throws SQLException;
 
 }

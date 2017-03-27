@@ -6,19 +6,13 @@ import java.util.List;
 
 public interface QueryBuilder {
 
-	/*
-	 * createQuery method receives a key-value pair for search parameters
-	 * Returns a string query
-	 */
+	// createQuery method receives a List for search parameters
+	// Returns a List of queries which will be joined for the final result
 	public List<String> createQuery(List<SearchParameter> searchParam);
-	
-	/*
-	 * validate the query and look for evil inputs for enhanced security
-	 */	
+
+	//validate the query and look for evil inputs for enhanced security 	
 	public boolean validateQuery(List<SearchParameter> searchParam);
-	
-	/*
-	 * send the query to Database
-	 */
-	public ResultSet sendQuery(String searchQuery) throws SQLException;  //This object will be of type ResultSet
+
+	// send the query to Database
+	public ResultSet sendQuery(String searchQuery) throws SQLException;
 }

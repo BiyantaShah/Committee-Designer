@@ -7,18 +7,13 @@ import java.util.Set;
 
 public interface SearchDisplay {
 	
-	/*
-	* sends these parameters to the query builder
-	*/
+	// sends these parameters to the query builder
 	public List<String> search(List<SearchParameter> searchFilter) throws SQLException;
 	
-	/*
-	* gets a list of email id's to send email to
-	*/
+	// gets a list of authors and sends email ID's to all users , 
+	// with the list of the final committee
 	public String sendEmail(Set<String> authors, String userName) throws SQLException;
 
-	/*
-	* details of the Author
-	*/
+	// details of the Author
 	public ResultSet candidateDetails(Set<String> authors) throws SQLException;
 }

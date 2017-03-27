@@ -16,5 +16,5 @@ public class Garbage {
 	public void setTest(String test) {
 		this.test = test;
 	}
-	
+
 }
