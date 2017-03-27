@@ -38,6 +38,8 @@ public class LoginUI extends JFrame {
 	String secretKey = "SECRETKEY";
 
     static LoginUI frame; 
+	
+
 
 	/**
 	 * Launch the application.
@@ -54,23 +56,25 @@ public class LoginUI extends JFrame {
     	File comData = new File("input/committees/");
     	// Parsing the xml to create objects
     	ImplementParseDatabase parse = new ImplementParseDatabase();
-    	ImplementSchemaDB db;
+    	ImplementSchemaDB db=new ImplementSchemaDB();;
+    	ImplementCommittees com = new ImplementCommittees();
+
 		try {
-			db = new ImplementSchemaDB();
+			
 //	    	db.dbSetUp();   //set up initial database
 //	    	parse.parseXml(file);	//parse xml data
+//	    	com.ParseFiles(comData); //parse committee data
+
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
-    	ImplementCommittees com = new ImplementCommittees();
-//    	com.ParseFiles(comData); //parse committee data
 
     	EventQueue.invokeLater(new Runnable() {
     		public void run() {
     			try {
-    				frame = new LoginUI();
+    				frame= new LoginUI();
     				frame.setVisible(true);
     				frame.setLocationRelativeTo(null);
     				frame.setTitle("MSD PROJECT");
@@ -87,7 +91,9 @@ public class LoginUI extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginUI() {
+		
 		setSize(950, 600);
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -147,7 +153,7 @@ public class LoginUI extends JFrame {
 							if (login.login(userName, plainText)) {
 								
 								// let it go to the search page if login is successful
-								frame.dispose();
+								dispose();
 								SearchUI search = new SearchUI(userName);
 								search.setSize(950, 600);
 								search.setLocationRelativeTo(null);
@@ -178,7 +184,7 @@ public class LoginUI extends JFrame {
 				RegisterUI register;
 				try {
 					// go to the register page
-					frame.dispose();
+					dispose();
 					register = new RegisterUI();
 					register.setSize(950, 600);
 					register.setLocationRelativeTo(null);
