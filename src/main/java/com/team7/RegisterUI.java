@@ -120,7 +120,7 @@ public class RegisterUI extends JFrame {
 		conf_combo.setBounds(521, 353, 191, 34);
 		contentPane.add(conf_combo);
 
-		JLabel lblRegistrationPage = new JLabel("REGISTRATION PAGE");
+		JLabel lblRegistrationPage = new JLabel("Registration Page");
 		lblRegistrationPage.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblRegistrationPage.setBounds(340, 56, 234, 28);
 		contentPane.add(lblRegistrationPage);
@@ -168,6 +168,10 @@ public class RegisterUI extends JFrame {
 					// if user already exists
 					else if (res.equals("exists")) {
 						log.messageShow("Username already exists");
+					}
+					
+					else if (res.equals("invalid email")) {
+						log.messageShow("Enter a valid email ID");
 					}
 				}}});
 		

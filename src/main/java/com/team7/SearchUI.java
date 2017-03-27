@@ -724,17 +724,25 @@ public class SearchUI extends JFrame {
 					// send these to displayUI to render the information there.
 					ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 					List<String> finalAuthors = null;
+					Boolean flag = true;
 					try {
 						finalAuthors = searchDisplay.search(finalList);
+						if (finalAuthors.size() == 0) {
+							LoginUI log = new LoginUI();
+							log.messageShow("Please widen your search criteria");
+							flag = false;
+						}
 					} catch (SQLException e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}					
 					DisplayUI display;
 					try {
-						dispose();
-						display = new DisplayUI(finalAuthors, userName);
-						display.setLocationRelativeTo(null);
+						if (flag == true) {
+							dispose();
+							display = new DisplayUI(finalAuthors, userName);
+							display.setLocationRelativeTo(null);
+						}
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

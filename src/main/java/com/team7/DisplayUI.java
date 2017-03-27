@@ -71,14 +71,14 @@ public class DisplayUI extends JFrame {
 		panel.add(btnLogout);
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 dispose();
-				 LoginUI log = new LoginUI();
-				 log.setVisible(true);
-				 log.setSize(950,600);
-				 log.setLocationRelativeTo(null);
+				dispose();
+				LoginUI log = new LoginUI();
+				log.setVisible(true);
+				log.setSize(950,600);
+				log.setLocationRelativeTo(null);
 			}
 		});
-		
+
 		JButton btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSearch.setBounds(625, 0, 117, 34);
@@ -91,7 +91,7 @@ public class DisplayUI extends JFrame {
 				search.setLocationRelativeTo(null);				
 			}
 		});
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(6, 91, 909, 373);
 		contentPane.add(panel_1);
@@ -128,31 +128,43 @@ public class DisplayUI extends JFrame {
 		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSavedAuthors.setBounds(385, 0, 149, 34);
 		panel_2.add(btnSavedAuthors);
-		
+
 		btnSavedAuthors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// List of authors who have been saved by the user
 				saveAuthors = ButtonEditor.savedAuthors;
 
+				boolean flag = true;
+
+				if (saveAuthors.size() == 0) {
+					LoginUI log = new LoginUI();
+					log.messageShow("Please select some authors");
+					flag = false;
+				}
 				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 				ResultSet result = null;
-				try {
-					// candidate details will give all the details of the authors present in 
-					// the saved list
-					result = searchDisplay.candidateDetails(saveAuthors);
-				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
+				if (flag == true) {		
+					try {
+						// candidate details will give all the details of the authors present in 
+						// the saved list
+						result = searchDisplay.candidateDetails(saveAuthors);
+
+					} catch (SQLException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+
+					try {
+						dispose();
+						SavedAuthorsUI saved = new SavedAuthorsUI(result, userName);
+						saved.setLocationRelativeTo(null);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
 				}
 
-				try {
-					dispose();
-					SavedAuthorsUI saved = new SavedAuthorsUI(result, userName);
-					saved.setLocationRelativeTo(null);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 
 			}
 		});

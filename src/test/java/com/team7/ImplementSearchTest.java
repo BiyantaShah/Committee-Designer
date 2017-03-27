@@ -65,7 +65,7 @@ public class ImplementSearchTest extends TestCase {
 		authors.add("Roger King");
 		authors.add("Petra Ludewig");
 		
-		String username="abc@abc.com";
+		String username="com";
 		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 		String res = searchDisplay.sendEmail(authors, username);
 				

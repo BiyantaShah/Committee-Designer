@@ -2,6 +2,7 @@ package com.team7;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -143,7 +144,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(1,s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
   		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);			
-  		assertEquals(result.get(0),"Eric Van Wyk");
+  		assertEquals(result.get(0),"Yusuke Nishiguchi");
 	}
 	
 	@Test
@@ -216,24 +217,19 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(1,s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
   		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
-		assertEquals(result.get(0),"Amer Diwan");   // add a real author name here
+		assertEquals(result.get(0),"Simon Marlow");   
 	}
 	
 	@Test
-	public void testNoDuplicateAuthorName() throws SQLException{ 	
-  		List<String> query8= new ArrayList<String>();
-  		query8.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE p.title LIKE '%test%' ");
-  		query8.add(1,null);	
-  		query8.add(2,null);	
+	public void testNoDuplicateAuthorName() throws SQLException{
   		 
   		SearchParameter s= new SearchParameter("Keyword in Title", "LIKE" ,"test", null);
   		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s);	
 		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
-		assertEquals(query8, queryFormed);
 		
 		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
-		//assertEquals(result.get(0),"Amer Diwan");   // add a real author name here
+		assertEquals(Collections.frequency(result, "William Pugh"),1);  
 	}
 	
 	@Test
@@ -250,20 +246,20 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(query9, queryFormed);
 		
 		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
-		assertEquals(result.get(0),"Anurag Gupta");   
+		assertEquals(result.get(0),"Anurag Mendhekar");   
 	}
 	
 	@Test
 	public void testQueryWithJournal() throws SQLException{ 	
 	  		 
-  		SearchParameter s1= new SearchParameter("Author Name", "=" ,"Anurag Gupta","AND");
+  		SearchParameter s1= new SearchParameter("Author Name", "=" ,"Brian Demsky","AND");
   		SearchParameter s2= new SearchParameter("Journal Name", "=" ,"tse", null);
   		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s1);
   		searchCriteria.add(0,s2);
-		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);	
-		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
-		assertEquals(result.get(0),"Anurag Gupta");   // add a real author name here
+		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);
+		assertEquals(result.get(0),"Brian Demsky");   
 	}
 
 }

@@ -115,10 +115,8 @@ public class ImplementSearchDisplay implements SearchDisplay {
 			}
 			catch(MessagingException mex) {
 				mex.printStackTrace();
-
 			}
 		}
 		return "failure";
-
 	}
 }
