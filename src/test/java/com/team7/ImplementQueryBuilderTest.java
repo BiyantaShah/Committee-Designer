@@ -14,7 +14,8 @@ public class ImplementQueryBuilderTest extends TestCase {
 	public void testValidAuthorName(){ 	
   		List<String> query1 = new ArrayList<String>();
   		query1.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE a.Name='Michael Ley' ");
-  		query1.add(1,null);	
+  		query1.add(1, null);
+  		query1.add(2, null);
   		 
   		SearchParameter s= new SearchParameter("Author Name", "=" ,"Michael Ley", null);
   		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -29,6 +30,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<String> result = new ArrayList<String>();
 		result.add(0,null);
 		result.add(1,null);	
+		result.add(2,null);	
   		
 		SearchParameter s= new SearchParameter("Author Name", "=" ,"#Michael Ley", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -42,6 +44,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<String> result = new ArrayList<String>();
 		result.add(0,null);
 		result.add(1,null);	
+		result.add(2,null);	
   		
 		SearchParameter s= new SearchParameter("Author Name", "=" ,"123 Michael Ley", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -56,6 +59,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<String> query2 = new ArrayList<String>();
   		query2.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE p.Year>2 ");
   		query2.add(1,null);	
+  		query2.add(2,null);	
 
 		SearchParameter s= new SearchParameter("Paper Published Year", ">" ,"2", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -69,6 +73,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<String> result = new ArrayList<String>();
 		result.add(0,null);
 		result.add(1,null);	
+		result.add(2,null);	
 
 		SearchParameter s= new SearchParameter("Paper Published Year", ">" ,"-1", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();	
@@ -84,6 +89,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<String> query3 = new ArrayList<String>();
   		query3.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE p.title LIKE '%Chemistry%' ");
   		query3.add(1,null);	
+  		query3.add(2,null);	
 
 		SearchParameter s= new SearchParameter("Keyword in Title", "LIKE" ,"Chemistry", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -98,6 +104,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<String> query4 = new ArrayList<String>();
   		query4.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE a.Name='ABC' AND p.title LIKE '%Biology%' ");
   		query4.add(1,null);	
+  		query4.add(2,null);	
   		
   		SearchParameter s1= new SearchParameter("Author Name", "=" ,"ABC","AND");
 		SearchParameter s2= new SearchParameter("Keyword in Title", "LIKE" ,"Biology", null);
@@ -114,6 +121,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<String> query5 = new ArrayList<String>();
   		query5.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE p.title LIKE '%Chemistry%' OR p.title LIKE '%Biology%' ");
   		query5.add(1, null);	
+  		query5.add(2,null);	
 
 		SearchParameter s1= new SearchParameter("Keyword in Title", "LIKE" ,"Chemistry","OR");
 		SearchParameter s2= new SearchParameter("Keyword in Title", "LIKE" ,"Biology", null);
@@ -166,7 +174,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<String> query6 = new ArrayList<String>();
   		query6.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE p.ConfName='OOPSLA' AND p.Year=2010 GROUP BY a.name HAVING COUNT(*) >1");
   		query6.add(1,null);	
-  		
+  		query6.add(2,null);	
 
 		SearchParameter s1= new SearchParameter("Conference Name", "=" ,"OOPSLA","AND");
 		SearchParameter s2= new SearchParameter("Paper Published Year", "=" ,"2010", "AND");
@@ -183,9 +191,9 @@ public class ImplementQueryBuilderTest extends TestCase {
 	public void testSecondUseCase() throws SQLException{    //add another test fetching result from DB
 		List<String> query7 = new ArrayList<String>();
   		query7.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE p.title LIKE '%pointer%' OR p.title LIKE '%analysis%' GROUP BY a.name HAVING COUNT(*) >=1");
-  		query7.add(1,null);	
+  		query7.add(1,null);
+  		query7.add(2,null);
   		
-
 		SearchParameter s1= new SearchParameter("Keyword in Title", "LIKE" ,"pointer","OR");
 		SearchParameter s2= new SearchParameter("Keyword in Title", "LIKE" ,"analysis", "AND");
 		SearchParameter s3= new SearchParameter("Count Of Papers", ">=" ,"1", null);
@@ -214,6 +222,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		List<String> query8= new ArrayList<String>();
   		query8.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE p.title LIKE '%test%' ");
   		query8.add(1,null);	
+  		query8.add(2,null);	
   		 
   		SearchParameter s= new SearchParameter("Keyword in Title", "LIKE" ,"test", null);
   		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -228,17 +237,31 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testLikeClauseAuthorName() throws SQLException{ 	
   		List<String> query9= new ArrayList<String>();
-  		query9.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE a.Name LIKE '%ABC%' ");
+  		query9.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE a.Name LIKE '%Anurag%' ");
   		query9.add(1,null);	
+  		query9.add(2,null);
   		 
-  		SearchParameter s= new SearchParameter("Author Name", "LIKE" ,"ABC", null);
+  		SearchParameter s= new SearchParameter("Author Name", "LIKE" ,"Anurag", null);
   		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s);	
 		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		assertEquals(query9, queryFormed);
 		
 		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
-		//assertEquals(result.get(0),"ABC");   // add a real author name here
+		assertEquals(result.get(0),"Anurag Gupta");   
+	}
+	
+	@Test
+	public void testQueryWithJournal() throws SQLException{ 	
+	  		 
+  		SearchParameter s1= new SearchParameter("Author Name", "=" ,"Anurag Gupta","AND");
+  		SearchParameter s2= new SearchParameter("Journal Name", "=" ,"tse", null);
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s1);
+  		searchCriteria.add(0,s2);
+		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);	
+		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
+		assertEquals(result.get(0),"Anurag Gupta");   // add a real author name here
 	}
 
 }
