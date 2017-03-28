@@ -251,14 +251,15 @@ public class ImplementQueryBuilderTest extends TestCase {
 	
 	@Test
 	public void testQueryWithJournal() throws SQLException{ 	
-  		SearchParameter s1= new SearchParameter("Author Name", "=" ,"Brian Demsky","AND");
-  		SearchParameter s2= new SearchParameter("Journal Name", "=" ,"tse", null);
+  		SearchParameter s1= new SearchParameter("Name", "=" ,"Brian Demsky","AND");
+  		SearchParameter s2= new SearchParameter("JournalName", "=" ,"tse", null);
   		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s1);
-  		searchCriteria.add(0,s2);
+  		searchCriteria.add(1,s2);
 		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);
 		assertEquals(result.get(0),"Brian Demsky"); 
 	}
+	
 
 }

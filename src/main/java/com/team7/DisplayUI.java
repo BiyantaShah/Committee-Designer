@@ -31,9 +31,6 @@ import java.awt.event.ActionEvent;
 // Search display results page is created here.
 public class DisplayUI extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	// List of Authors whose candidate details are to be viewed

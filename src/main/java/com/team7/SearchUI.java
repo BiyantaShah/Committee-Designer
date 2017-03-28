@@ -350,6 +350,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_2.addItem("<=");
 					ComparatorComboBox_2.addItem("!=");
 
+
 				}else if(CriteriaComboBox_2.getSelectedItem() == "Conference Name" || CriteriaComboBox_2.getSelectedItem() == "Committee Conf Name"){
 
 					ValueField_2.setVisible(false);
@@ -371,7 +372,6 @@ public class SearchUI extends JFrame {
 					
 					ComparatorComboBox_2.addItem("=");	
 					ComparatorComboBox_2.addItem("!=");
-
 
 				}
 			}
