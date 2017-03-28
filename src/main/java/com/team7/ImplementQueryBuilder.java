@@ -33,18 +33,35 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 	// creates queries for all the incoming search parameters and their values 
 	// from the UI
-	public List<String> createQuery(List<SearchParameter> searchParam) {			
-		if(validateQuery(searchParam)){
-			formQueryParams(searchParam);
-
-			getPaperAuthorQuery();
-
-			getCommitteQuery();	
-
-			getArticleQuery();
-		}
-
+	public List<String> createQuery(List<SearchParameter> searchParam) {
 		List<String> queries = new ArrayList<String>();
+		if(validateQuery(searchParam)){
+			
+			// if there is only one condition of grouping by the number of papers
+			if (searchParam.size() == 1 && 
+					searchParam.get(0).getSearchFilter() == "CountNoOfPapers") {
+				
+				formGroupClause(searchParam.get(0));
+
+				queryPaperAuthor = "SELECT a.name AS Author FROM " + formJoinCondition() +
+						groupByClause;
+				
+				queries.add(0, queryPaperAuthor);
+				queries.add(1, queryCommitte);
+				queries.add(2, queryArticle);
+				
+				return queries;
+			}
+			else  {
+				formQueryParams(searchParam);
+
+				getPaperAuthorQuery();
+
+				getCommitteQuery();	
+
+				getArticleQuery();
+			}
+		}	
 		queries.add(0, queryPaperAuthor);
 		queries.add(1, queryCommitte);
 		queries.add(2, queryArticle);
@@ -55,7 +72,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	public boolean validateQuery(List<SearchParameter> searchParam) {        	
 		boolean result = false;
 		for(SearchParameter s : searchParam){
-			
+
 			if(s.getSearchFilter() == "Name"){	
 				if(checkValidityOfSearchParameters(s.getSearchValue())){					
 					return false;
@@ -63,7 +80,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 				else
 					result = true;
 			}
-			
+
 			if(s.getSearchFilter() == "ConfName"){
 				if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
@@ -73,40 +90,40 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			}
 
 			if(s.getSearchFilter() == "Year"){
-	            if(s.getSearchFilter() == "Year" && Integer.parseInt(s.getSearchValue()) > 0){
-	            	result = true;
+				if(s.getSearchFilter() == "Year" && Integer.parseInt(s.getSearchValue()) > 0){
+					result = true;
 				}
 			}
-              
-            if(s.getSearchFilter() == "Keyword"){
-            	if(checkValidityOfSearchParameters(s.getSearchValue())){
+
+			if(s.getSearchFilter() == "Keyword"){
+				if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;				  
 				}
 				else
 					result = true; 	
-             } 
-            
-            if(s.getSearchFilter() == "CountNoOfPapers"){            	
-	            if(s.getSearchFilter() == "CountNoOfPapers" && Integer.parseInt(s.getSearchValue()) > 0){
+			} 
+
+			if(s.getSearchFilter() == "CountNoOfPapers"){            	
+				if(s.getSearchFilter() == "CountNoOfPapers" && Integer.parseInt(s.getSearchValue()) > 0){
 					return true;
 				}
-            }    
-            
-	        if(s.getSearchFilter() == "Committee.Year")  {  
-	            if(s.getSearchFilter() == "Committee.Year" && Integer.parseInt(s.getSearchValue()) > 0){					
-	            	return true;
-	            }
+			}    
+
+			if(s.getSearchFilter() == "Committee.Year")  {  
+				if(s.getSearchFilter() == "Committee.Year" && Integer.parseInt(s.getSearchValue()) > 0){					
+					return true;
+				}
 			}
-            
-            if(s.getSearchFilter() == "Committee.ConfName"){
-            	if(checkValidityOfSearchParameters(s.getSearchValue())){
+
+			if(s.getSearchFilter() == "Committee.ConfName"){
+				if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
 				else
 					result = true;
 			}
-            
-            if(s.getSearchFilter() == "JournalName"){
+
+			if(s.getSearchFilter() == "JournalName"){
 				if(checkValidityOfSearchParameters(s.getSearchValue())){
 					return false;
 				}
@@ -162,7 +179,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 	// Getting the final result of the query.
 	public List<String> getResultForDisplay(List<String> searchQuery) throws SQLException{
-		
+
 		List<String> finalResult = new ArrayList<String>();
 		List<String> intermediate = new ArrayList<String>();
 		List<String> paperAuthorResult = new ArrayList<String>();
@@ -176,11 +193,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
 				paperAuthorResult.add(paperAuthorResultSet.getString("Author"));
 			}			
 		}
-		
+
 		// If there is query data about committee
 		if(searchQuery.get(1) != null){
 			ResultSet committeeResultSet = sendQuery(searchQuery.get(1));
-			
+
 			while (committeeResultSet.next()) {
 				committeeResult.add(committeeResultSet.getString("Author"));
 			}  
@@ -189,14 +206,14 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		// If there is query data about articles
 		if(searchQuery.get(2) != null){
 			ResultSet articleResultSet = sendQuery(searchQuery.get(2));
-			
+
 
 			while (articleResultSet.next()) {
 				articleResult.add(articleResultSet.getString("Author"));
 			}
 		} 
-		
-		
+
+
 		// The result sets which are not empty are intersected together
 		if (paperAuthorResult.size() != 0 && 
 				committeeResult.size() != 0 && 
@@ -229,7 +246,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		else if (articleResult.size() != 0) {
 			intermediate = articleResult;
 		}
-		
+
 		finalResult.addAll(new HashSet<String>(intermediate));
 		return finalResult;     		
 	}
@@ -273,7 +290,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		else if(s.getSearchFilter() == "CountNoOfPapers"){
 			formGroupClause(s);
 		}
-	
+
 	}
 
 	private String formJoinCondition(){
@@ -305,7 +322,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	}
 
 	private void getPaperAuthorQuery(){ 
-		
+
 		if (whereClauseForPaperAuthor.length() > 0) {
 
 			String joinCondition = formJoinCondition();
