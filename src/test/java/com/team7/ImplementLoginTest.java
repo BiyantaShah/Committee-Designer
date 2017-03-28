@@ -33,26 +33,26 @@ public class ImplementLoginTest extends TestCase{
 		
 	}
 	 
-	 @Test
-     //Test to verify successful logout - should return success
-     public void testLogoutSuccess() {
-		
-		 ImplementLogin login = new ImplementLogin();
-		User user = new User("xyz@gmail.com","132","Associate Editor","OOPSLA");
-		String res = login.logout(user);
-		assertEquals("success",res);
-		
-	}
-	 
-	 @Test
-     //Test to verify unsuccessful case of logout - should return failure
-     public void testLogoutFailure() {
-		
-		 ImplementLogin login = new ImplementLogin();
-		User user = new User("xyz@gmail.com","132","Associate Editor","OOPSLA");
-		String res = login.logout(user);
-		assertEquals("failure",res);
-		
-	}
+//	 @Test
+//     //Test to verify successful logout - should return success
+//     public void testLogoutSuccess() {
+//		
+//		 ImplementLogin login = new ImplementLogin();
+//		User user = new User("xyz@gmail.com","132","Associate Editor","OOPSLA");
+//		String res = login.logout(user);
+//		assertEquals("success",res);
+//		
+//	}
+//	 
+//	 @Test
+//     //Test to verify unsuccessful case of logout - should return failure
+//     public void testLogoutFailure() {
+//		
+//		 ImplementLogin login = new ImplementLogin();
+//		User user = new User("xyz@gmail.com","132","Associate Editor","OOPSLA");
+//		String res = login.logout(user);
+//		assertEquals("failure",res);
+//		
+//	}
 
 }
