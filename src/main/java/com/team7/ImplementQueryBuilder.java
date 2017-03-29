@@ -94,6 +94,12 @@ public class ImplementQueryBuilder implements QueryBuilder{
 					result = true;
 				}
 			}
+			
+			if(s.getSearchFilter() == "Keyword"){	
+				// no validation needed for Keyword
+				// all characters are accepted
+				result = true;
+			}
 
 			if(s.getSearchFilter() == "CountNoOfPapers"){            	
 				if(s.getSearchFilter() == "CountNoOfPapers" && Integer.parseInt(s.getSearchValue()) > 0){

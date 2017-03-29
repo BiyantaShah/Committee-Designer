@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
@@ -50,7 +49,7 @@ public class SearchUI extends JFrame {
 	 * Create the frame.
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public SearchUI(final String userName) {
+	public SearchUI() {
 
 		setVisible(true);
 		setTitle("Search UI");
@@ -881,7 +880,7 @@ public class SearchUI extends JFrame {
 					}
 				}
 
-				if(finalList.size() != 0 && error == false){
+				if(finalList.size() != 0 && error == false) {
 
 					// Display function will return a result set containing the search query results
 					// send these to displayUI to render the information there.
@@ -904,7 +903,7 @@ public class SearchUI extends JFrame {
 
 						if (flag == true) {
 							dispose();
-							display = new DisplayUI(finalAuthors, userName);
+							display = new DisplayUI(finalAuthors);
 							display.setSize(950, 600);
 							display.setLocationRelativeTo(null);
 						}
@@ -922,7 +921,9 @@ public class SearchUI extends JFrame {
 		contentPane.add(btnLogout);
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				// make the currentUser null and redirect to login page
+				ImplementLogin login = new ImplementLogin();
+				login.logout();
 				dispose();
 				LoginUI log = new LoginUI();
 				log.setVisible(true);
