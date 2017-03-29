@@ -40,7 +40,7 @@ public class DisplayUI extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public DisplayUI(List<String> authors, final String userName) throws SQLException {
+	public DisplayUI(List<String> authors) throws SQLException {
 
 		setVisible(true);
 		setTitle("SEARCH RESULTS");
@@ -68,6 +68,10 @@ public class DisplayUI extends JFrame {
 		panel.add(btnLogout);
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// make the currentUser null and redirect to login page
+				ImplementLogin login = new ImplementLogin();
+				login.logout();
+				
 				dispose();
 				LoginUI log = new LoginUI();
 				log.setVisible(true);
@@ -83,7 +87,7 @@ public class DisplayUI extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				SearchUI search = new SearchUI(userName);
+				SearchUI search = new SearchUI();
 				search.setSize(950, 600);
 				search.setLocationRelativeTo(null);				
 			}
@@ -153,7 +157,7 @@ public class DisplayUI extends JFrame {
 
 					try {
 						dispose();
-						SavedAuthorsUI saved = new SavedAuthorsUI(result, userName);
+						SavedAuthorsUI saved = new SavedAuthorsUI(result);
 						saved.setLocationRelativeTo(null);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block

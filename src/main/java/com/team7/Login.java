@@ -9,5 +9,5 @@ public interface Login {
 	
 	
 	// Close the session and logout the user.
-	public String logout(User userObject);
+	public String logout();
 }

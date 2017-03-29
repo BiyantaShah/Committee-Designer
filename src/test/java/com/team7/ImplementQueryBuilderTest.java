@@ -229,7 +229,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		
 		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
-		assertEquals(Collections.frequency(result, "William Pugh"),1);  
+		assertEquals(1, Collections.frequency(result, "William Pugh"));  
 	}
 	
 	@Test

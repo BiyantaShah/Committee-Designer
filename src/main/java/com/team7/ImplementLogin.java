@@ -44,6 +44,7 @@ public class ImplementLogin implements Login {
 
 				if (decryptPassword.equals(password)) {
 					// if inserted password is correct then allow the user to login
+					LoginUI.currentUser = username;
 					return true;
 				}
 				else { 
@@ -55,9 +56,11 @@ public class ImplementLogin implements Login {
 		return false; // if user does not exist;
 	}
 
-	public String logout(User userObject) {
+	public String logout() {
 		// TODO Auto-generated method stub
-		return null;
+		LoginUI.currentUser = null;
+		
+		return (LoginUI.currentUser == null)? "success": "failure";
 	}
 
 }

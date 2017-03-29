@@ -29,7 +29,8 @@ public class LoginUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField userNameField;
 	private JPasswordField passwordField;
-
+	
+	static String currentUser = null; // to maintain the 'session' for the user.
 	String userName;
 	String password;
 	String secretKey = "SECRETKEY";
@@ -148,9 +149,11 @@ public class LoginUI extends JFrame {
 							ImplementLogin login = new ImplementLogin();
 							if (login.login(userName, plainText)) {
 								
+								// assign currentUser as username
+								currentUser = userName;
 								// let it go to the search page if login is successful
 								dispose();
-								SearchUI search = new SearchUI(userName);
+								SearchUI search = new SearchUI();
 								search.setSize(950, 600);
 								search.setLocationRelativeTo(null);
 								

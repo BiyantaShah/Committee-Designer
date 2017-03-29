@@ -160,7 +160,7 @@ public class RegisterUI extends JFrame {
 					if(res.equals("true")){
 						//connect to search page
 						dispose();
-						SearchUI search = new SearchUI(userName);
+						SearchUI search = new SearchUI();
 						search.setSize(950, 600);
 						search.setLocationRelativeTo(null);
 					}
