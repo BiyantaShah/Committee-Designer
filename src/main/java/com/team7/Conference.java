@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlElement;
 @SuppressWarnings("restriction")
 public class Conference {
 
-	String booktitle; // name of the conference
-	String title; // extra info about the conference
-	String key;
+	private String booktitle; // name of the conference
+	private String title; // extra info about the conference
+	private String key;
 
 	public String getBooktitle() {
 		return booktitle;

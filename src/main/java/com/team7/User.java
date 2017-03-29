@@ -3,10 +3,10 @@ package com.team7;
 // This class contains information about the users of the application 
 public class User {
 
-     String userName;
-     String password;
-     String role;
-     String confName;
+	private String userName;
+	private String password;
+	private String role;
+	private String confName;
      
     public User(){
     	

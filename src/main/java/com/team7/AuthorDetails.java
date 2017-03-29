@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 @SuppressWarnings("restriction")
 public class AuthorDetails {
 
-	List<String> author;
-	String url;
+	private List<String> author;
+	private String url;
 
 	public AuthorDetails() {
 		// TODO Auto-generated constructor stub

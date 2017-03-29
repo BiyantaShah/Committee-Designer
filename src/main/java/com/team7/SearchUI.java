@@ -760,68 +760,69 @@ public class SearchUI extends JFrame {
 
 				if(q1 == true){
 
-					sp1.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
-					sp1.searchComparator = (String) ComparatorComboBox_1.getSelectedItem();
+					sp1.setSearchFilter(Criteria.get(CriteriaComboBox_1.getSelectedItem()));
+					sp1.setSearchComparator((String) ComparatorComboBox_1.getSelectedItem()); 
 					if(CriteriaComboBox_1.getSelectedItem() == "Conference Name" || CriteriaComboBox_1.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_1.getSelectedItem() == "Journal Name"){
 						
-						sp1.searchValue =(String) SelectionComboBox_1.getSelectedItem();
+						sp1.setSearchValue((String) SelectionComboBox_1.getSelectedItem());
 					}else{
 						
-						sp1.searchValue = ValueField_1.getText();
+						sp1.setSearchValue(ValueField_1.getText());
 					}
-					sp1.joinFilter =(String) JoinComboBox_1.getSelectedItem(); 
+					sp1.setJoinFilter((String) JoinComboBox_1.getSelectedItem()); 
 
 				}
 				if(q2 == true){
 
-					sp2.searchFilter = Criteria.get(CriteriaComboBox_2.getSelectedItem());
-					sp2.searchComparator = (String) ComparatorComboBox_2.getSelectedItem();
+					sp2.setSearchFilter(Criteria.get(CriteriaComboBox_2.getSelectedItem()));
+					sp2.setSearchComparator((String) ComparatorComboBox_2.getSelectedItem());
 					if(CriteriaComboBox_2.getSelectedItem() == "Conference Name" || CriteriaComboBox_2.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_2.getSelectedItem() == "Journal Name"){
 						
-						sp2.searchValue =(String) SelectionComboBox_2.getSelectedItem();
+						sp2.setSearchValue((String) SelectionComboBox_2.getSelectedItem());
 					}else{
 						
-						sp2.searchValue = ValueField_2.getText();
+						sp2.setSearchValue(ValueField_2.getText());
 					}
-					sp2.joinFilter =(String) JoinComboBox_2.getSelectedItem(); 
+					sp2.setJoinFilter((String) JoinComboBox_2.getSelectedItem()); 
 
 				}
 				if(q3 == true){
 
-					sp3.searchFilter = Criteria.get(CriteriaComboBox_3.getSelectedItem());
-					sp3.searchComparator = (String) ComparatorComboBox_3.getSelectedItem();
+					sp3.setSearchFilter(Criteria.get(CriteriaComboBox_3.getSelectedItem()));
+					sp3.setSearchComparator((String) ComparatorComboBox_3.getSelectedItem());
 					if(CriteriaComboBox_3.getSelectedItem() == "Conference Name" || CriteriaComboBox_3.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_3.getSelectedItem() == "Journal Name"){
 						
-						sp3.searchValue =(String) SelectionComboBox_3.getSelectedItem();
+						sp3.setSearchValue((String) SelectionComboBox_3.getSelectedItem());
 					}else{
 						
-						sp3.searchValue = ValueField_3.getText();
+						sp3.setSearchValue(ValueField_3.getText());
 					}
-					sp3.joinFilter =(String) JoinComboBox_3.getSelectedItem(); 
+					sp3.setJoinFilter((String) JoinComboBox_3.getSelectedItem()); 
 
 				}
 
 				if(q4 == true){
-					sp4.searchFilter = Criteria.get(CriteriaComboBox_4.getSelectedItem());
-					sp4.searchComparator = (String) ComparatorComboBox_4.getSelectedItem();					
+					sp4.setSearchFilter(Criteria.get(CriteriaComboBox_4.getSelectedItem()));
+					sp4.setSearchComparator((String) ComparatorComboBox_4.getSelectedItem());					
 					if(CriteriaComboBox_4.getSelectedItem() == "Conference Name" || CriteriaComboBox_4.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_4.getSelectedItem() == "Journal Name"){
 						
-						sp4.searchValue =(String) SelectionComboBox_4.getSelectedItem();
+						sp4.setSearchValue((String) SelectionComboBox_4.getSelectedItem());
 					}else{
 						
-						sp4.searchValue = ValueField_4.getText();
+						sp4.setSearchValue(ValueField_4.getText());
 					}
-					sp4.joinFilter =(String) JoinComboBox_4.getSelectedItem(); 
+					sp4.setJoinFilter((String) JoinComboBox_4.getSelectedItem()); 
 
 				}
 
 				if(q5 == true){
-					sp5.searchFilter = Criteria.get(CriteriaComboBox_5.getSelectedItem());
-					sp5.searchComparator = (String) ComparatorComboBox_5.getSelectedItem();
+					sp5.setSearchFilter(Criteria.get(CriteriaComboBox_5.getSelectedItem()));
+					sp5.setSearchComparator ((String) ComparatorComboBox_5.getSelectedItem());
 					if(CriteriaComboBox_5.getSelectedItem() == "Conference Name" || CriteriaComboBox_5.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_5.getSelectedItem() == "Journal Name"){
-						sp5.searchValue =(String) SelectionComboBox_5.getSelectedItem();
+						
+						sp5.setSearchValue ((String) SelectionComboBox_5.getSelectedItem());
 					}else{
-						sp5.searchValue = ValueField_5.getText();
+						sp5.setSearchValue ( ValueField_5.getText());
 					}
 				}
 
@@ -830,27 +831,27 @@ public class SearchUI extends JFrame {
 				if(q1 == true)
 				{
 					finalList.clear();
-					if(!sp1.searchValue.equals("")){
+					if(!sp1.getSearchValue().equals("")){
 						error = false;
 						finalList.add(sp1);
 						if(q2 == true)
 						{
-							if(!sp2.searchValue.equals("")){
+							if(!sp2.getSearchValue().equals("")){
 								error = false;
 								finalList.add(sp2);
 								if(q3 == true)
 								{
-									if(!sp3.searchValue.equals("")){
+									if(!sp3.getSearchValue().equals("")){
 										error = false;
 										finalList.add(sp3);
 										if(q4 == true)
 										{
-											if(!sp4.searchValue.equals("")){
+											if(!sp4.getSearchValue().equals("")){
 												error = false;
 												finalList.add(sp4);
 												if(q5 == true)
 												{
-													if(!sp5.searchValue.equals("")){
+													if(!sp5.getSearchValue().equals("")){
 														error = false;
 														finalList.add(sp5);
 													}else{

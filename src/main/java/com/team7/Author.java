@@ -3,8 +3,8 @@ package com.team7;
 // This class gives information about the Author (name and the papers written)
 public class Author {
 
-	String name;
-	String paperKey;
+	private String name;
+	private String paperKey;
 
 	public Author(String author, String key) {
 		// TODO Auto-generated constructor stub
