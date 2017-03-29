@@ -9,12 +9,12 @@ import javax.xml.bind.annotation.XmlElement;
 // This class gives information about the article (authors, title, date of publishing)
 public class Article {
 
-	List<String> author; 
-	String key; 
-	String title; 
-	int year;
-	String month;
-	String ee;
+	private List<String> author; 
+	private String key; 
+	private String title; 
+	private int year;
+	private String month;
+	private String ee;
 
 	public Article () {
 

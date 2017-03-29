@@ -31,11 +31,11 @@ public class ImplementSchemaDB implements SchemaDB {
 			//Open a connection
 			conn = DriverManager.getConnection(DB_URL, userName, password);
 			String sql = null; 
-			//stmt = conn.createStatement();
-			//			      
-			//sql = "DROP DATABASE IF EXISTS DBLP";
-			//stmt.executeUpdate(sql);
-			//System.out.println("Dblp database deleted successfully...");
+//			stmt = conn.createStatement();
+//						      
+//			sql = "DROP DATABASE IF EXISTS DBLP";
+//			stmt.executeUpdate(sql);
+//			System.out.println("Dblp database deleted successfully...");
 
 			//Execute a query
 			stmt = conn.createStatement();			      
@@ -185,10 +185,10 @@ public class ImplementSchemaDB implements SchemaDB {
 			if(object_name instanceof User) {
 				
 				PreparedStatement statement_inproceedings = conn.prepareStatement("insert into User(userName,password,role,confName) values(?,?,?,?)");
-				statement_inproceedings.setString(1,(((User) object_name).userName));
-				statement_inproceedings.setString(2,((User) object_name).password);
-				statement_inproceedings.setString(3,  ((User) object_name).role);
-				statement_inproceedings.setString(4, ((User) object_name).confName);
+				statement_inproceedings.setString(1,(((User) object_name).getUserName()));
+				statement_inproceedings.setString(2,((User) object_name).getPassword());
+				statement_inproceedings.setString(3,  ((User) object_name).getRole());
+				statement_inproceedings.setString(4, ((User) object_name).getConfName());
 				statement_inproceedings.executeUpdate();
 
 			}

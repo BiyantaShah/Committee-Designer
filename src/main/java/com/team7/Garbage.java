@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 @SuppressWarnings("restriction")
 public class Garbage {
 
-	String test;
+	private String test;
 
 	@XmlElement
 	public String getTest() {

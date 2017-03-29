@@ -12,11 +12,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class dblp {
 
-	List<Paper> inproceedings;
-	List<Conference> proceedings;
-	List<AuthorDetails> www;
-	List<Article> article;
-	List<Garbage> garbage; // only for testing purposes
+	private List<Paper> inproceedings;
+	private List<Conference> proceedings;
+	private List<AuthorDetails> www;
+	private List<Article> article;
+	private List<Garbage> garbage; // only for testing purposes
 
 
 	// getters and setters
