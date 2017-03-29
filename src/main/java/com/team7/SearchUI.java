@@ -62,18 +62,18 @@ public class SearchUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblSearch = new JLabel("Search");
 		lblSearch.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblSearch.setBounds(401, 39, 153, 32);
 		contentPane.add(lblSearch);
 
-		
-/*****************Variables Declaration*********************************/
-		
+
+		/*****************Variables Declaration*********************************/
+
 		/***************** Creating panels******************/
 		final JPanel panel_1 = new JPanel();
-		
+
 		final JPanel panel_2 = new JPanel();
 		panel_2.setVisible(false);
 
@@ -85,9 +85,9 @@ public class SearchUI extends JFrame {
 
 		final JPanel panel_5 = new JPanel();
 		panel_5.setVisible(false);
-		
-		
-        /****************************Search Criteria*********************************************/
+
+
+		/****************************Search Criteria*********************************************/
 		final HashMap<String,String> Criteria = new HashMap<String,String>();
 		Criteria.put("Author Name","Name");
 		Criteria.put("Committee Year","Committee.Year");
@@ -98,27 +98,27 @@ public class SearchUI extends JFrame {
 		Criteria.put("Paper Published Year", "Year");
 		Criteria.put("Journal Name", "JournalName");
 		List<String> keys = new ArrayList<String>(Criteria.keySet());
-		
+
 		/*************************Connection between two queries***********************************/
 		String[] JoinList = {"AND","OR"};
 
 		/*******************Conference Names*****************************/
 
 		final String[] conf = {"OOPSLA","ECOOP","PLDI","ICFP"};
-		
+
 		/*******************Journal Names*****************************/	
-		
+
 		final String[] jour = {"TSE","TOPLAS"};
 
 
-        /*************************ComboBox for Relational Operators************************************/
+		/*************************ComboBox for Relational Operators************************************/
 		final JComboBox ComparatorComboBox_1 = new JComboBox();
 		final JComboBox ComparatorComboBox_2 = new JComboBox();
 		final JComboBox ComparatorComboBox_3 = new JComboBox();
 		final JComboBox ComparatorComboBox_4 = new JComboBox();
 		final JComboBox ComparatorComboBox_5 = new JComboBox();
 
-       
+
 		/******************************Join Condition label***********************************************************/
 		final JLabel JoinLabel_1 = new JLabel("Join Condition");
 		JoinLabel_1.setVisible(false);
@@ -132,7 +132,7 @@ public class SearchUI extends JFrame {
 		final JLabel JoinLabel_4 = new JLabel("Join Condition");
 		JoinLabel_4.setVisible(false);
 
-        /*********************************ComboBox for Join Conditions between queries*****************************************/
+		/*********************************ComboBox for Join Conditions between queries*****************************************/
 		final JComboBox JoinComboBox_1= new JComboBox(JoinList);
 		JoinComboBox_1.setSelectedItem(JoinList[0]);	
 		JoinComboBox_1.setVisible(false);
@@ -149,7 +149,7 @@ public class SearchUI extends JFrame {
 		JoinComboBox_4.setSelectedItem(JoinList[0]);	
 		JoinComboBox_4.setVisible(false);
 
-        /***************************************ComboBox for journal and conference names****************************************************************************/
+		/***************************************ComboBox for journal and conference names****************************************************************************/
 		final JComboBox SelectionComboBox_1 = new JComboBox();
 		SelectionComboBox_1.setVisible(false);
 
@@ -165,7 +165,7 @@ public class SearchUI extends JFrame {
 		final JComboBox SelectionComboBox_5 = new JComboBox();
 		SelectionComboBox_5.setVisible(false);
 
-       /******************************************Text field for values**************************************************************/
+		/******************************************Text field for values**************************************************************/
 		ValueField_1 = new JTextField();
 		ValueField_1.setVisible(true);
 
@@ -212,7 +212,7 @@ public class SearchUI extends JFrame {
 				ValueField_1.setVisible(true);
 				SelectionComboBox_1.setVisible(false);
 
-				
+
 				if(CriteriaComboBox_1.getSelectedItem() == "Keyword in Title"){
 
 					ComparatorComboBox_1.addItem("LIKE");
@@ -241,7 +241,7 @@ public class SearchUI extends JFrame {
 					SelectionComboBox_1.setModel(new DefaultComboBoxModel(conf));
 					SelectionComboBox_1.setSelectedItem(0);
 					SelectionComboBox_1.setVisible(true);
-					
+
 					ComparatorComboBox_1.addItem("=");	
 					ComparatorComboBox_1.addItem("!=");
 
@@ -252,7 +252,7 @@ public class SearchUI extends JFrame {
 					SelectionComboBox_1.setModel(new DefaultComboBoxModel(jour));
 					SelectionComboBox_1.setSelectedItem(0);
 					SelectionComboBox_1.setVisible(true);
-					
+
 					ComparatorComboBox_1.addItem("=");	
 					ComparatorComboBox_1.addItem("!=");
 
@@ -285,11 +285,11 @@ public class SearchUI extends JFrame {
 		NewRowButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-					JoinLabel_1.setVisible(true);
-					JoinComboBox_1.setVisible(true);
-					panel_2.setVisible(true);
-					q2 = true;
-				
+				JoinLabel_1.setVisible(true);
+				JoinComboBox_1.setVisible(true);
+				panel_2.setVisible(true);
+				q2 = true;
+
 			}
 
 		});
@@ -329,7 +329,7 @@ public class SearchUI extends JFrame {
 				ValueField_2.setVisible(true);
 				SelectionComboBox_2.setVisible(false);
 
-				
+
 				if(CriteriaComboBox_2.getSelectedItem() == "Keyword in Title"){
 
 					ComparatorComboBox_2.addItem("LIKE");
@@ -360,7 +360,7 @@ public class SearchUI extends JFrame {
 					SelectionComboBox_2.setSelectedItem(0);
 					SelectionComboBox_2.setVisible(true);
 
-					
+
 					ComparatorComboBox_2.addItem("=");	
 					ComparatorComboBox_2.addItem("!=");
 
@@ -371,7 +371,7 @@ public class SearchUI extends JFrame {
 					SelectionComboBox_2.setModel(new DefaultComboBoxModel(jour));
 					SelectionComboBox_2.setSelectedItem(0);
 					SelectionComboBox_2.setVisible(true);
-					
+
 					ComparatorComboBox_2.addItem("=");	
 					ComparatorComboBox_2.addItem("!=");
 
@@ -394,7 +394,7 @@ public class SearchUI extends JFrame {
 		ValueField_2.setColumns(10);
 		ValueField_2.setBounds(492, 10, 116, 22);
 		panel_2.add(ValueField_2);
-		
+
 		SelectionComboBox_2.setBounds(492, 10, 116, 22);
 		panel_2.add(SelectionComboBox_2);
 
@@ -406,10 +406,10 @@ public class SearchUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				JoinLabel_2.setVisible(true);
-					JoinComboBox_2.setVisible(true);
-					panel_3.setVisible(true);
-					q3 = true;
-				
+				JoinComboBox_2.setVisible(true);
+				panel_3.setVisible(true);
+				q3 = true;
+
 			}
 		});
 
@@ -450,7 +450,7 @@ public class SearchUI extends JFrame {
 				ValueField_3.setVisible(true);
 				SelectionComboBox_3.setVisible(false);
 
-				
+
 				if(CriteriaComboBox_3.getSelectedItem() == "Keyword in Title"){
 
 					ComparatorComboBox_3.addItem("LIKE");
@@ -479,7 +479,7 @@ public class SearchUI extends JFrame {
 					SelectionComboBox_3.setModel(new DefaultComboBoxModel(conf));
 					SelectionComboBox_3.setSelectedItem(0);
 					SelectionComboBox_3.setVisible(true);
-					
+
 					ComparatorComboBox_3.addItem("=");	
 					ComparatorComboBox_3.addItem("!=");
 
@@ -490,7 +490,7 @@ public class SearchUI extends JFrame {
 					SelectionComboBox_3.setModel(new DefaultComboBoxModel(jour));
 					SelectionComboBox_3.setSelectedItem(0);
 					SelectionComboBox_3.setVisible(true);
-					
+
 					ComparatorComboBox_3.addItem("=");	
 					ComparatorComboBox_3.addItem("!=");
 
@@ -514,7 +514,7 @@ public class SearchUI extends JFrame {
 		ValueField_3.setColumns(10);
 		ValueField_3.setBounds(492, 10, 116, 22);
 		panel_3.add(ValueField_3);
-		
+
 		SelectionComboBox_3.setBounds(492, 10, 116, 22);
 		panel_3.add(SelectionComboBox_3);
 
@@ -524,10 +524,10 @@ public class SearchUI extends JFrame {
 		panel_3.add(NewRowButton_3);
 		NewRowButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					JoinLabel_3.setVisible(true);
-					JoinComboBox_3.setVisible(true);
-					panel_4.setVisible(true);
-					q4 = true;				
+				JoinLabel_3.setVisible(true);
+				JoinComboBox_3.setVisible(true);
+				panel_4.setVisible(true);
+				q4 = true;				
 			}
 		});
 
@@ -566,7 +566,7 @@ public class SearchUI extends JFrame {
 				ComparatorComboBox_4.removeAllItems();
 				ValueField_4.setVisible(true);
 				SelectionComboBox_4.setVisible(false);
-				
+
 				if(CriteriaComboBox_4.getSelectedItem() == "Keyword in Title"){
 
 					ComparatorComboBox_4.addItem("LIKE");
@@ -595,7 +595,7 @@ public class SearchUI extends JFrame {
 					SelectionComboBox_4.setModel(new DefaultComboBoxModel(conf));
 					SelectionComboBox_4.setSelectedItem(0);
 					SelectionComboBox_4.setVisible(true);
-					
+
 					ComparatorComboBox_4.addItem("=");	
 					ComparatorComboBox_4.addItem("!=");
 
@@ -606,7 +606,7 @@ public class SearchUI extends JFrame {
 					SelectionComboBox_4.setModel(new DefaultComboBoxModel(jour));
 					SelectionComboBox_4.setSelectedItem(0);
 					SelectionComboBox_4.setVisible(true);
-					
+
 					ComparatorComboBox_4.addItem("=");	
 					ComparatorComboBox_4.addItem("!=");
 
@@ -630,7 +630,7 @@ public class SearchUI extends JFrame {
 		ValueField_4.setColumns(10);
 		ValueField_4.setBounds(492, 10, 116, 22);
 		panel_4.add(ValueField_4);
-		
+
 		SelectionComboBox_4.setBounds(492, 10, 116, 22);
 		panel_4.add(SelectionComboBox_4);
 
@@ -639,10 +639,10 @@ public class SearchUI extends JFrame {
 		panel_4.add(NewRowButton_4);
 		NewRowButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					JoinLabel_4.setVisible(true);
-					JoinComboBox_4.setVisible(true);
-					panel_5.setVisible(true);
-					q5 = true;
+				JoinLabel_4.setVisible(true);
+				JoinComboBox_4.setVisible(true);
+				panel_5.setVisible(true);
+				q5 = true;
 			}
 		});
 
@@ -710,7 +710,7 @@ public class SearchUI extends JFrame {
 					SelectionComboBox_5.setModel(new DefaultComboBoxModel(conf));
 					SelectionComboBox_5.setSelectedItem(0);
 					SelectionComboBox_5.setVisible(true);
-					
+
 					ComparatorComboBox_5.addItem("=");	
 					ComparatorComboBox_5.addItem("!=");
 
@@ -721,7 +721,7 @@ public class SearchUI extends JFrame {
 					SelectionComboBox_5.setModel(new DefaultComboBoxModel(jour));
 					SelectionComboBox_5.setSelectedItem(0);
 					SelectionComboBox_5.setVisible(true);
-					
+
 					ComparatorComboBox_5.addItem("=");	
 					ComparatorComboBox_5.addItem("!=");
 
@@ -746,7 +746,7 @@ public class SearchUI extends JFrame {
 		ValueField_5.setColumns(10);
 		ValueField_5.setBounds(492, 10, 116, 22);
 		panel_5.add(ValueField_5);
-		
+
 		SelectionComboBox_5.setBounds(492, 10, 116, 22);
 		panel_5.add(SelectionComboBox_5);
 
@@ -762,148 +762,147 @@ public class SearchUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				boolean error = false;
-                finalList.clear();
-				
+				finalList.clear();
+
 				if(q1 == true){
 
-					sp1.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
-					sp1.searchComparator = (String) ComparatorComboBox_1.getSelectedItem();
+					sp1.setSearchFilter(Criteria.get(CriteriaComboBox_1.getSelectedItem()));
+					sp1.setSearchComparator((String) ComparatorComboBox_1.getSelectedItem()); 
 					if(CriteriaComboBox_1.getSelectedItem() == "Conference Name" || CriteriaComboBox_1.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_1.getSelectedItem() == "Journal Name"){
-						
-						sp1.searchValue =(String) SelectionComboBox_1.getSelectedItem();
+
+						sp1.setSearchValue((String) SelectionComboBox_1.getSelectedItem());
 					}else{
-						
-						sp1.searchValue = ValueField_1.getText().trim();
+
+						sp1.setSearchValue(ValueField_1.getText().trim());
 					}					
-					sp1.joinFilter =(String) JoinComboBox_1.getSelectedItem(); 
-					
-					if(sp1.searchValue.equals("")){
+					sp1.setJoinFilter((String) JoinComboBox_1.getSelectedItem()); 
+
+					if(sp1.getSearchValue().equals("")){
 						error = true;
 						log.messageShow("Please enter a value for search in first row"); 
 					}
 
 					if(CriteriaComboBox_1.getSelectedItem() == "Paper Published Year" || CriteriaComboBox_1.getSelectedItem() == "Committee Year"){
-						if(!(StringUtils.isNumeric(sp1.searchValue) && sp1.searchValue.length() == 4)){
+						if(!(StringUtils.isNumeric(sp1.getSearchValue()) && sp1.getSearchValue().length() == 4)){
 							error = true;
 							log.messageShow("Please enter a valid year in first row"); 
 						}
 					}
-					
+
 					if(CriteriaComboBox_1.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp1.searchValue)){
+						if(!StringUtils.isNumeric(sp1.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in first row"); 
 						}
 					}
-					
+
 					if(!error){
 						finalList.add(sp1);
 					}
 				}
-				
+
 				if(q2 == true){
 
-					sp2.searchFilter = Criteria.get(CriteriaComboBox_2.getSelectedItem());
-					sp2.searchComparator = (String) ComparatorComboBox_2.getSelectedItem();
+					sp2.setSearchFilter(Criteria.get(CriteriaComboBox_2.getSelectedItem()));
+					sp2.setSearchComparator((String) ComparatorComboBox_2.getSelectedItem());
 					if(CriteriaComboBox_2.getSelectedItem() == "Conference Name" || CriteriaComboBox_2.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_2.getSelectedItem() == "Journal Name"){
-						
-						sp2.searchValue =(String) SelectionComboBox_2.getSelectedItem();
+
+						sp2.setSearchValue((String) SelectionComboBox_2.getSelectedItem());
 					}else{
-						
-						sp2.searchValue = ValueField_2.getText().trim();
+
+						sp2.setSearchValue(ValueField_2.getText().trim());
 					}
-					sp2.joinFilter =(String) JoinComboBox_2.getSelectedItem(); 
-					
-					if(sp2.searchValue.equals("")){
+					sp2.setJoinFilter((String) JoinComboBox_2.getSelectedItem()); 
+
+					if(sp2.getSearchValue().equals("")){
 						error = true;
 						log.messageShow("Please enter a value for search in second row"); 
 					}
 
 					if(CriteriaComboBox_2.getSelectedItem() == "Paper Published Year" || CriteriaComboBox_2.getSelectedItem() == "Committee Year"){
-						if(!(StringUtils.isNumeric(sp2.searchValue) && sp2.searchValue.length() == 4)){
+						if(!(StringUtils.isNumeric(sp2.getSearchValue()) && sp2.getSearchValue().length() == 4)){
 							error = true;
 							log.messageShow("Please enter a valid year in second row"); 
 						}
 					}
-					
+
 					if(CriteriaComboBox_2.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp2.searchValue)){
+						if(!StringUtils.isNumeric(sp2.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in second row"); 
 						}
 					}
-					
+
 					if(!error){
 						finalList.add(sp2);
 					}
 
 				}
-				
+
 				if(q3 == true){
 
-					sp3.searchFilter = Criteria.get(CriteriaComboBox_3.getSelectedItem());
-					sp3.searchComparator = (String) ComparatorComboBox_3.getSelectedItem();
+					sp3.setSearchFilter(Criteria.get(CriteriaComboBox_3.getSelectedItem()));
+					sp3.setSearchComparator((String) ComparatorComboBox_3.getSelectedItem());
 					if(CriteriaComboBox_3.getSelectedItem() == "Conference Name" || CriteriaComboBox_3.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_3.getSelectedItem() == "Journal Name"){
-						
-						sp3.searchValue =(String) SelectionComboBox_3.getSelectedItem();
+
+						sp3.setSearchValue((String) SelectionComboBox_3.getSelectedItem());
 					}else{
-						
-						sp3.searchValue = ValueField_3.getText().trim();
+
+						sp3.setSearchValue(ValueField_3.getText().trim());
 					}
-					sp3.joinFilter =(String) JoinComboBox_3.getSelectedItem(); 
-					
-					if(sp3.searchValue.equals("")){
+					sp3.setJoinFilter((String) JoinComboBox_3.getSelectedItem()); 
+
+					if(sp3.getSearchValue().equals("")){
 						error = true;
 						log.messageShow("Please enter a value for search in third row"); 
 					}
-					
+
 					if(CriteriaComboBox_3.getSelectedItem() == "Paper Published Year" || CriteriaComboBox_3.getSelectedItem() == "Committee Year"){
-						if(!(StringUtils.isNumeric(sp3.searchValue) && sp3.searchValue.length() == 4)){
+						if(!(StringUtils.isNumeric(sp3.getSearchValue()) && sp3.getSearchValue().length() == 4)){
 							error = true;
 							log.messageShow("Please enter a valid year in third row"); 
 						}
 					}
-					
+
 					if(CriteriaComboBox_3.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp3.searchValue)){
+						if(!StringUtils.isNumeric(sp3.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in third row"); 
 						}
 					}
-					
+
 					if(!error){
 						finalList.add(sp3);
 					}
 
-
 				}
 
 				if(q4 == true){
-					sp4.searchFilter = Criteria.get(CriteriaComboBox_4.getSelectedItem());
-					sp4.searchComparator = (String) ComparatorComboBox_4.getSelectedItem();					
+					sp4.setSearchFilter(Criteria.get(CriteriaComboBox_4.getSelectedItem()));
+					sp4.setSearchComparator((String) ComparatorComboBox_4.getSelectedItem());					
 					if(CriteriaComboBox_4.getSelectedItem() == "Conference Name" || CriteriaComboBox_4.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_4.getSelectedItem() == "Journal Name"){
-						
-						sp4.searchValue =(String) SelectionComboBox_4.getSelectedItem();
+
+						sp4.setSearchValue((String) SelectionComboBox_4.getSelectedItem());
 					}else{
-						
-						sp4.searchValue = ValueField_4.getText().trim();
+
+						sp4.setSearchValue(ValueField_4.getText().trim());
 					}
-					sp4.joinFilter =(String) JoinComboBox_4.getSelectedItem(); 
-					
-					if(sp4.searchValue.equals("")){
+					sp4.setJoinFilter((String) JoinComboBox_4.getSelectedItem()); 
+
+					if(sp4.getSearchValue().equals("")){
 						error = true;
 						log.messageShow("Please enter a value for search in fourth row"); 
 					}
-					
+
 					if(CriteriaComboBox_4.getSelectedItem() == "Paper Published Year" || CriteriaComboBox_4.getSelectedItem() == "Committee Year"){
-						if(!(StringUtils.isNumeric(sp4.searchValue) && sp4.searchValue.length() == 4)){
+						if(!(StringUtils.isNumeric(sp4.getSearchValue()) && sp4.getSearchValue().length() == 4)){
 							error = true;
 							log.messageShow("Please enter a valid year in fourth row"); 
 						}
 					}
-					
+
 					if(CriteriaComboBox_4.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp4.searchValue)){
+						if(!StringUtils.isNumeric(sp4.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in fourth row"); 
 						}
@@ -912,42 +911,43 @@ public class SearchUI extends JFrame {
 						finalList.add(sp4);
 					}
 
-
 				}
 
 				if(q5 == true){
-					sp5.searchFilter = Criteria.get(CriteriaComboBox_5.getSelectedItem());
-					sp5.searchComparator = (String) ComparatorComboBox_5.getSelectedItem();
+					sp5.setSearchFilter(Criteria.get(CriteriaComboBox_5.getSelectedItem()));
+					sp5.setSearchComparator ((String) ComparatorComboBox_5.getSelectedItem());
 					if(CriteriaComboBox_5.getSelectedItem() == "Conference Name" || CriteriaComboBox_5.getSelectedItem() == "Committee Conf Name" || CriteriaComboBox_5.getSelectedItem() == "Journal Name"){
-						sp5.searchValue =(String) SelectionComboBox_5.getSelectedItem();
+
+						sp5.setSearchValue ((String) SelectionComboBox_5.getSelectedItem());
 					}else{
-						sp5.searchValue = ValueField_5.getText().trim();
+
+						sp5.setSearchValue(ValueField_5.getText().trim());
 					}
-					
-					if(sp5.searchValue.equals("")){
+
+					if(sp5.getSearchValue().equals("")) {
 						error = true;
 						log.messageShow("Please enter a value for search in fifth row"); 
 					}
 
 					if(CriteriaComboBox_5.getSelectedItem() == "Paper Published Year" || CriteriaComboBox_5.getSelectedItem() == "Committee Year"){
-						if(!(StringUtils.isNumeric(sp5.searchValue) && sp5.searchValue.length() == 4)){
+						if(!(StringUtils.isNumeric(sp5.getSearchValue()) && sp5.getSearchValue().length() == 4)){
 							error = true;
 							log.messageShow("Please enter a valid year in fifth row"); 
 						}
 					}
-					
+
 					if(CriteriaComboBox_5.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp5.searchValue)){
+						if(!StringUtils.isNumeric(sp5.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in fifth row"); 
 						}
 					}	
-					
+
 					if(!error){
 						finalList.add(sp5);
 					}
 				}
-				
+
 				if(finalList.size() != 0 && error == false) {
 
 					// Display function will return a result set containing the search query results

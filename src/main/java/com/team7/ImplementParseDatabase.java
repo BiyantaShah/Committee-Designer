@@ -53,12 +53,12 @@ public class ImplementParseDatabase implements ParseDatabase {
 			for(AuthorDetails auth : data.getWww()){
 
 				// If the author name and url is empty then do not insert
-				if(auth.author != null && auth.url != null){
+				if(auth.getAuthor() != null && auth.getUrl() != null){
 
-					for(String name : auth.author)
+					for(String name : auth.getAuthor())
 					{
 						statement_authorD.setString(1,name);
-						statement_authorD.setString(2,auth.url);
+						statement_authorD.setString(2,auth.getUrl());
 						statement_authorD.addBatch();
 					}					
 					if (++i % batchSize == 0){			
@@ -89,13 +89,13 @@ public class ImplementParseDatabase implements ParseDatabase {
 				}
 
 				// papers having empty titles are not needed
-				if (paper.title.equals("")) {
+				if (paper.getTitle().equals("")) {
 					continue;
 				}
 
 				// extracting conference name from the paper key
 				String[] output  = new String[3];
-				output = paper.key.split("/");
+				output = paper.getKey().split("/");
 				String confName = null;
 
 				if (output[0].equals("conf")){    	
@@ -110,18 +110,18 @@ public class ImplementParseDatabase implements ParseDatabase {
 							|| (confName.equalsIgnoreCase("ecoop")) 
 							|| (confName.equalsIgnoreCase("icfp"))) {
 
-						statement_inproceedings.setString(1,paper.title);
-						statement_inproceedings.setInt(2,paper.year);
-						statement_inproceedings.setString(3,paper.pages);
+						statement_inproceedings.setString(1,paper.getTitle());
+						statement_inproceedings.setInt(2,paper.getYear());
+						statement_inproceedings.setString(3,paper.getPages());
 						statement_inproceedings.setString(4,confName);
-						statement_inproceedings.setString(5, paper.key);
+						statement_inproceedings.setString(5, paper.getKey());
 						statement_inproceedings.addBatch();
 
-						for (String author: paper.author) {
-							Author auth = new Author(author, paper.key);
+						for (String author: paper.getAuthor()) {
+							Author auth = new Author(author, paper.getKey());
 
-							statement_author.setString(1, auth.name);
-							statement_author.setString(2, auth.paperKey);
+							statement_author.setString(1, auth.getName());
+							statement_author.setString(2, auth.getPaperKey());
 							statement_author.addBatch();
 						}
 
@@ -144,15 +144,15 @@ public class ImplementParseDatabase implements ParseDatabase {
 			PreparedStatement statement_conference = conn.prepareStatement("insert into conference(confKey,name,confDetail) values (?,?,?)");
 
 			for (Conference conf: data.getProceedings()) {
-				if (conf.booktitle != null) {
-					if ((conf.booktitle.equalsIgnoreCase("oopsla")) 
-							|| (conf.booktitle.equalsIgnoreCase("pldi"))
-							|| (conf.booktitle.equalsIgnoreCase("ecoop"))
-							|| (conf.booktitle.equalsIgnoreCase("icfp"))) {
+				if (conf.getBooktitle() != null) {
+					if ((conf.getBooktitle().equalsIgnoreCase("oopsla")) 
+							|| (conf.getBooktitle().equalsIgnoreCase("pldi"))
+							|| (conf.getBooktitle().equalsIgnoreCase("ecoop"))
+							|| (conf.getBooktitle().equalsIgnoreCase("icfp"))) {
 
-						statement_conference.setString(1, conf.key);
-						statement_conference.setString(2, conf.booktitle);
-						statement_conference.setString(3, conf.title);
+						statement_conference.setString(1, conf.getKey());
+						statement_conference.setString(2, conf.getBooktitle());
+						statement_conference.setString(3, conf.getTitle());
 						statement_conference.addBatch(); 
 
 						if (++k % batchSize == 0){
@@ -170,7 +170,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 
 			for (Article article: data.getArticle()) {
 
-				if (article.author ==  null)
+				if (article.getAuthor() ==  null)
 					continue;
 
 				// UTF8  misinterpreted characters have been found in the title, 
@@ -179,17 +179,17 @@ public class ImplementParseDatabase implements ParseDatabase {
 					continue;
 				}
 
-				if (article.title.equals("")) {
+				if (article.getTitle().equals("")) {
 					continue;
 				}
 
-				if (article.key == null) {
+				if (article.getKey() == null) {
 					continue;
 				}
 
 				// extracting journal name from the article key
 				String[] output  = new String[3];
-				output = article.key.split("/");
+				output = article.getKey().split("/");
 				String journalName = null;
 
 				if (output[0].equals("journals")){    	
@@ -202,13 +202,13 @@ public class ImplementParseDatabase implements ParseDatabase {
 					if (journalName.equalsIgnoreCase("tse") || 
 							journalName.equalsIgnoreCase("toplas")) {
 						
-						for (String author: article.author) {
+						for (String author: article.getAuthor()) {
 							statement_article.setString(1, author);
-							statement_article.setString(2, article.title);
+							statement_article.setString(2, article.getTitle());
 							statement_article.setString(3, journalName);
-							statement_article.setInt(4, article.year);
-							statement_article.setString(5, article.month);
-							statement_article.setString(6, article.ee);
+							statement_article.setInt(4, article.getYear());
+							statement_article.setString(5, article.getMonth());
+							statement_article.setString(6, article.getEe());
 
 							statement_article.addBatch();
 
@@ -224,7 +224,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 		// only for testing purposes
 		if (data.getGarbage() != null) {
 			for (Garbage gar : data.getGarbage()) {
-				if (gar.test.equals("This is a test"))
+				if (gar.getTest().equals("This is a test"))
 					return "success";
 				else 
 					return "failure";

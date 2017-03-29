@@ -9,11 +9,11 @@ import javax.xml.bind.annotation.XmlElement;
 @SuppressWarnings("restriction")
 public class Paper {
 
-	List<String> author;
-	String title;
-	String pages;
-	int year;
-	String key;
+	private List<String> author;
+	private String title;
+	private String pages;
+	private int year;
+	private String key;
 	
 	public List<String> getAuthor() {
 		return author;

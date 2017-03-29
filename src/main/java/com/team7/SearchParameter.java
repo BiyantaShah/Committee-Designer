@@ -4,10 +4,10 @@ package com.team7;
 // The object of this class is sent to the query engine to create the query.
 public class SearchParameter {
 	
-	String searchFilter = null;
-	String searchComparator = null;
-	String searchValue = null;
-	String joinFilter = null;
+	private String searchFilter = null;
+	private String searchComparator = null;
+	private String searchValue = null;
+	private String joinFilter = null;
 	
 	SearchParameter(){
 		
