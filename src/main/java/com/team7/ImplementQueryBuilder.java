@@ -95,14 +95,6 @@ public class ImplementQueryBuilder implements QueryBuilder{
 				}
 			}
 
-			if(s.getSearchFilter() == "Keyword"){
-				if(checkValidityOfSearchParameters(s.getSearchValue())){
-					return false;				  
-				}
-				else
-					result = true; 	
-			} 
-
 			if(s.getSearchFilter() == "CountNoOfPapers"){            	
 				if(s.getSearchFilter() == "CountNoOfPapers" && Integer.parseInt(s.getSearchValue()) > 0){
 					return true;
