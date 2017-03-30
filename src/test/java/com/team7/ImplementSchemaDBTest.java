@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import com.jcabi.jdbc.JdbcSession;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -51,14 +53,18 @@ public class ImplementSchemaDBTest extends TestCase {
 	public void testCInsertData() throws SQLException {
 
 		ImplementSchemaDB db = new ImplementSchemaDB();
+		Connection conn = new ImplementSchemaDB().getConnection();
+		Statement stmt = conn.createStatement();
+		// delete the user before inserting it every time
+		stmt.executeUpdate("delete from User where username='test@test.com'");
+		
 		User test = new User("test@test.com","test","editor","OOPSLA");	
 		db.insertData(test);
-
-		Connection conn = new ImplementSchemaDB().getConnection();
+		
 		assertNotNull(conn);
 		try {
 			JdbcSession sessionObject = new JdbcSession(conn)
-					.sql("select id from user where userName like 'test@test.com'")
+					.sql("select id from User where userName like 'test@test.com'")
 					.execute();
 			assertNotNull(sessionObject);
 		} catch (SQLException e) {

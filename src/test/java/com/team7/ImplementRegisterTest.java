@@ -20,7 +20,7 @@ public class ImplementRegisterTest {
 		Connection conn = db.getConnection();
 		Statement stmt = conn.createStatement();
 
-		stmt.executeUpdate("delete from user where username='xyz@gmail.com'");
+		stmt.executeUpdate("delete from User where username='xyz@gmail.com'");
 
 		String res = user.createUser("xyz@gmail.com","132","Associate Editor","OOPSLA");
 

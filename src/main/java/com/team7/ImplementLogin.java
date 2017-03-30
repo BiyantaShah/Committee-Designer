@@ -21,7 +21,7 @@ public class ImplementLogin implements Login {
 			Connection conn = db.getConnection();
 			Statement stmt = conn.createStatement();
 
-			String sql = "select password from user where username = '" +username +"'";
+			String sql = "select password from User where username = '" +username +"'";
 
 			ResultSet rs = stmt.executeQuery(sql);
 
