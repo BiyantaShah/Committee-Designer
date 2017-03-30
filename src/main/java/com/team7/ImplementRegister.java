@@ -94,7 +94,7 @@ public class ImplementRegister implements Register {
 			Connection conn = db.getConnection();
 			Statement stmt = conn.createStatement();
 
-			String sql = "Select count(*) from user where username = " + "'" +userName+ "'"; 
+			String sql = "Select count(*) from User where username = " + "'" +userName+ "'"; 
 
 			ResultSet rs = stmt.executeQuery(sql);
 

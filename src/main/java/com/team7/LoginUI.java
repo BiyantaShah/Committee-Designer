@@ -48,24 +48,27 @@ public class LoginUI extends JFrame {
     public static void main(String[] args) throws ClassNotFoundException, SQLException, JAXBException, IOException {
 
     	System.out.println("Start");
-
-    	File file = new File("input/dblp.xml");
-    	File comData = new File("input/committees/");
-    	// Parsing the xml to create objects
-    	ImplementParseDatabase parse = new ImplementParseDatabase();
-    	ImplementSchemaDB db=new ImplementSchemaDB();;
-    	ImplementCommittees com = new ImplementCommittees();
-
-		try {
-			
+    	
+// Below was used to create database ,extract xml and insert data into tables
+    	
+//    	File file = new File("input/dblp.xml");
+//    	File comData = new File("input/committees/");
+    	
+//    	// Parsing the xml to create objects
+//    	ImplementParseDatabase parse = new ImplementParseDatabase();
+//    	ImplementSchemaDB db=new ImplementSchemaDB();;
+//    	ImplementCommittees com = new ImplementCommittees();
+//
+//		try {
+//			
 //	    	db.dbSetUp();   //set up initial database
 //	    	parse.parseXml(file);	//parse xml data
 //	    	com.ParseFiles(comData); //parse committee data
-
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//
+//		} catch (Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		
 
     	EventQueue.invokeLater(new Runnable() {
