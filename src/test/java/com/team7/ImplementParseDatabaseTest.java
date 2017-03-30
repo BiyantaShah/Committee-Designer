@@ -23,6 +23,7 @@ public class ImplementParseDatabaseTest extends TestCase{
 	    ImplementParseDatabase parse = new ImplementParseDatabase();
 		String result = parse.parseXml(file);
 		assertEquals("success", result);
+		file.delete();
 	}
 	
 	@Test
@@ -36,6 +37,7 @@ public class ImplementParseDatabaseTest extends TestCase{
 		ImplementParseDatabase parse = new ImplementParseDatabase();
 		String result = parse.parseXml(file);
 		assertEquals("failure", result);
+		file.delete();
 		
 	}
 }

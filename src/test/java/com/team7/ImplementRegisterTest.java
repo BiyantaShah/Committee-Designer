@@ -8,11 +8,11 @@ import java.sql.Statement;
 
 import org.junit.Test;
 
-public class ImplementRegisterTest {
+public class ImplementRegisterTest { 
 
 	@Test
 	//Test to verify a successful user registration - should return true
-	public void testCreateUserSuccess() throws SQLException {
+	public void testCreateUserSuccess() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
 		// After inserting delete it, so that the next time you run, it does not fail
@@ -26,12 +26,52 @@ public class ImplementRegisterTest {
 
 		assertEquals("true",res);		
 
-	}
+	} 
+	
+	@Test
+	//Test to verify a successful user registration - should return exists
+	public void testUserExistsSuccess() throws Exception {
 
+		ImplementRegister user = new ImplementRegister();
+		String  res = user.createUser("xyz@gmail.com","132","Associate Editor","OOPSLA");
+		assertEquals("exists",res);
+
+	}
+	
+	@Test
+	//Test to successful encryption of password
+	public void testPwdEncryptionSuccess() throws SQLException {
+
+		ImplementRegister user = new ImplementRegister();
+		String res;
+		try {		
+			res = user.encryptPassword("123","SECRETKEY");
+			int len = res.length();
+		    assertEquals(len,13);
+		} catch (Exception e) {
+		}
+	}
+	
+	@Test
+	//Test to unsuccessful encryption of password
+	public void testPwdEncryptionFailure() throws Exception {
+	    
+		ImplementRegister user = new ImplementRegister();
+		try {
+			
+			user.encryptPassword("123","");
+			
+		} catch (IllegalArgumentException e) {
+			
+		} 
+	}  
+
+
+	
 	@Test
 	//Test to verify a unsuccessful user registration - should return invalid email
 	// When email ID does not contain "@"
-	public void testCreateUserFailure() throws SQLException {
+	public void testCreateUserFailure() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
 
@@ -44,7 +84,7 @@ public class ImplementRegisterTest {
 	@Test
 	//Test to verify a unsuccessful user registration - should return invalid email
 	// When email ID does not contain .com or .edu as the domain
-	public void testCreateUserFailure1() throws SQLException {
+	public void testCreateUserFailure1() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
 
@@ -57,7 +97,7 @@ public class ImplementRegisterTest {
 	@Test
 	//Test to verify a unsuccessful user registration - should return invalid email
 	// When email ID contain 2 "@"
-	public void testCreateUserFailure2() throws SQLException {
+	public void testCreateUserFailure2() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
 
@@ -70,7 +110,7 @@ public class ImplementRegisterTest {
 	@Test
 	//Test to verify a unsuccessful user registration - should return invalid email
 	// When email ID does contain domain name
-	public void testCreateUserFailure3() throws SQLException {
+	public void testCreateUserFailure3() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
 
@@ -79,19 +119,20 @@ public class ImplementRegisterTest {
 		assertEquals("invalid email",res);		
 
 	}
-
-	// CreateUserFailure Test is already included in testVerifyUserExistsFailure. 
-	// Hence, there is no separate test case for the same 
-
+	
 	@Test
-	//Test to verify a successful user registration - should return success
-	public void testVerifyUserExistsSuccess() throws SQLException {
+	//Test to verify a unsuccessful user registration - should return invalid email
+	// When contains multiple userNames
+	public void testCreateUserFailure4() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
-		boolean  res = user.verifyIfUserExists("xyz@gmail.com");
-		assertEquals(true,res);
+
+		String res = user.createUser("test@gmail.com,test1@gmail.edu","132","Associate Editor","OOPSLA");
+
+		assertEquals("invalid email",res);		
 
 	}
+
 
 	@Test
 	//Test to verify a successful user registration - should return success
@@ -102,10 +143,4 @@ public class ImplementRegisterTest {
 		assertEquals(false,res);
 
 	}
-
-
-
-
-
-
 }

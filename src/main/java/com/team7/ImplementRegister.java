@@ -12,43 +12,48 @@ import org.apache.commons.codec.binary.Base64;
 
 public class ImplementRegister implements Register {
 
-	String secretKey = "SECRETKEY"; // to encrypt the password before inserting in the DB
-	String password = null;
-
 	private static Base64 base64 = new Base64(true);
 
-	public String createUser(String userName, String plainPass, String role, String confName) throws SQLException {
+	public String createUser(String userName, String plainPass, String role, String confName) throws SQLException{
 
 		if(verifyIfUserExists(userName))
 		{			
-			return "exists";
+			return "exists"; 
 
 		}
 		else{
 			if (validEmailId(userName)) {
 
-				// encrypt the password
-				try {
-					SecretKeySpec skeyspec=new SecretKeySpec(secretKey.getBytes(),"Blowfish");
-					Cipher cipher = Cipher.getInstance("Blowfish");
-					cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
-					password = base64.encodeToString(cipher.doFinal(plainPass.getBytes("UTF8")));
+				String encryptedPassword = encryptPassword(plainPass,"SECRETKEY");
 
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				if(!encryptedPassword.equals("failure")){
+					
+					// if the password is correctly encrypted, insert the user into the DB.
+					User user = new User(userName,encryptedPassword,role,confName);
+					ImplementSchemaDB db= new ImplementSchemaDB();
+					boolean res = db.insertData(user);
 
-				// if the password is correctly encrypted, insert the user into the DB.
-				User user = new User(userName,password,role,confName);
-				ImplementSchemaDB db= new ImplementSchemaDB();
-				boolean res = db.insertData(user);
-
-				if(res == true){
-					return "true";
+					if(res){
+						return "true";
+					}
 				}
 			}
 			return "invalid email";
+		}
+	}
+
+	public String encryptPassword(String plainPass,String secretKey) {
+
+		// encrypt the password
+		try {
+			SecretKeySpec skeyspec=new SecretKeySpec(secretKey.getBytes(),"Blowfish");
+			Cipher cipher = Cipher.getInstance("Blowfish");
+			cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
+			String password = base64.encodeToString(cipher.doFinal(plainPass.getBytes("UTF8")));
+			return password; 
+
+		} catch (Exception e1) {
+			return "failure";
 		}
 
 	}
@@ -59,7 +64,7 @@ public class ImplementRegister implements Register {
 
 		if (! userName.contains("@")) 
 			return false;
-		
+
 		if (userName.contains("@.")) 
 			return false;
 
@@ -88,21 +93,18 @@ public class ImplementRegister implements Register {
 	// checking if the user exists
 	public boolean verifyIfUserExists(String userName) throws SQLException {
 
-		if(userName != null)
-		{
-			ImplementSchemaDB db = new ImplementSchemaDB();
-			Connection conn = db.getConnection();
-			Statement stmt = conn.createStatement();
+		ImplementSchemaDB db = new ImplementSchemaDB();
+		Connection conn = db.getConnection();
+		Statement stmt = conn.createStatement();
 
-			String sql = "Select count(*) from User where username = " + "'" +userName+ "'"; 
+		String sql = "Select count(*) from User where username = " + "'" +userName+ "'"; 
 
-			ResultSet rs = stmt.executeQuery(sql);
+		ResultSet rs = stmt.executeQuery(sql);
 
-			if(rs.next()){
+		if(rs.next()){
 
-				if(rs.getInt(1) > 0){
-					return true; 
-				}
+			if(rs.getInt(1) > 0){
+				return true; 
 			}
 		}
 

@@ -16,28 +16,21 @@ public class ImplementSearchDisplay implements SearchDisplay {
 
 	// Keeps track of all filter criteria and their values
 	public List<String> search(List<SearchParameter> searchParameter) throws SQLException {
+		
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
 		List<String> query = queryBuilderObject.createQuery(searchParameter);
-
-		if(query!=null){
-			return queryBuilderObject.getResultForDisplay(query);
-		}
-		else
-			return null;
+        return queryBuilderObject.getResultForDisplay(query);
+	
 	}
 
 	// Returns the candidate details for each author selected by the user
 	public ResultSet candidateDetails(Set<String> authors) throws SQLException {
+		
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
 		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
-
-		if(query!=null){
-			ResultSet detailsResultSet = queryBuilderObject.sendQuery(query);
-
-			return detailsResultSet; 		    
-		}
-		else
-			return null;	
+		ResultSet detailsResultSet = queryBuilderObject.sendQuery(query);
+		return detailsResultSet; 
+		
 	}
 
 	// sends an email to the users with the list of finalized authors
@@ -111,9 +104,9 @@ public class ImplementSearchDisplay implements SearchDisplay {
 				Transport.send(message);
 
 				return "success";
-			}
+			} 
 			catch(MessagingException mex) {
-				mex.printStackTrace();
+				//mex.printStackTrace();
 			}
 		}
 		return "failure";

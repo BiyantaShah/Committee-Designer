@@ -20,7 +20,7 @@ import java.sql.PreparedStatement;
  *  hence they won't be created again.
  */
 
-public class ImplementSchemaDB implements SchemaDB {
+public class ImplementSchemaDB implements SchemaDB { 
 
 	// creating  DB and its initial skeleton 
 	public void dbSetUp() throws ClassNotFoundException, SQLException{
@@ -39,7 +39,7 @@ public class ImplementSchemaDB implements SchemaDB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		 
 		//Database Properties
 		
 		String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -67,7 +67,6 @@ public class ImplementSchemaDB implements SchemaDB {
 			stmt = conn.createStatement();			      
 			sql = "CREATE DATABASE IF NOT EXISTS DBLP";
 			stmt.executeUpdate(sql);
-			System.out.println("Dblp database created successfully...");
 
 			//selecting database created above
 			String connected_db = props.getProperty("jdbc.url.setupdb");
@@ -84,7 +83,6 @@ public class ImplementSchemaDB implements SchemaDB {
 					" PRIMARY  KEY(id))"; 
 
 			stmt.executeUpdate(sql);
-			System.out.println("Created user table in dblp database...");
 
 			//creating conference table
 			sql = "CREATE TABLE IF NOT EXISTS Conference " +
@@ -95,7 +93,6 @@ public class ImplementSchemaDB implements SchemaDB {
 					" PRIMARY     KEY(id))"; 
 
 			stmt.executeUpdate(sql);
-			System.out.println("Created Conference table in dblp database...");
 
 			//creating paper table
 			sql = "CREATE TABLE IF NOT EXISTS Paper " +
@@ -108,9 +105,8 @@ public class ImplementSchemaDB implements SchemaDB {
 					" PRIMARY      KEY(id))"; 
 
 			stmt.executeUpdate(sql);
-			System.out.println("Created Paper table in dblp database...");
 
-			// Adding index to the paper key, making it faster during a join
+// Adding index to the paper key, making it faster during a join
 //			sql = "ALTER TABLE Paper ADD INDEX keyP(paperKey)";
 //			stmt.executeUpdate(sql);
 //			System.out.println("Created index on Key in paper table...");
@@ -123,9 +119,8 @@ public class ImplementSchemaDB implements SchemaDB {
 					" PRIMARY   KEY(id))" ;
 
 			stmt.executeUpdate(sql);
-			System.out.println("Created author table in dblp database...");
 
-			// Adding index to the paper key in author making it faster during a join
+// Adding index to the paper key in author making it faster during a join
 //			sql = "ALTER TABLE Author ADD INDEX keyA(paperKey)";
 //			stmt.executeUpdate(sql);
 //			System.out.println("Created index on Key in author table...");
@@ -138,7 +133,6 @@ public class ImplementSchemaDB implements SchemaDB {
 					" PRIMARY   KEY(id))" ;
 
 			stmt.executeUpdate(sql);
-			System.out.println("Created author_details table in dblp database...");
 
 			//creating Committees table
 			sql = "CREATE TABLE IF NOT EXISTS Committee " +
@@ -150,7 +144,6 @@ public class ImplementSchemaDB implements SchemaDB {
 					" PRIMARY         KEY(id))" ;
 
 			stmt.executeUpdate(sql);
-			System.out.println("Created Committees table in dblp database...");
 
 			// creating Article table
 			sql = "CREATE TABLE IF NOT EXISTS Article " +
@@ -164,7 +157,6 @@ public class ImplementSchemaDB implements SchemaDB {
 					" PRIMARY     KEY(id))" ;
 
 			stmt.executeUpdate(sql);
-			System.out.println("Created Article table in dblp database...");
 
 
 		}catch(SQLException se){

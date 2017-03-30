@@ -28,7 +28,7 @@ public class RegisterUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField UsernameTField;
-	private JPasswordField passwordField;
+	private JPasswordField passwordField; 
 
 	String userName;
 	String password;
@@ -39,7 +39,7 @@ public class RegisterUI extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException 
+	 * @throws SQLException  
 	 */
 	@SuppressWarnings("unchecked")
 	public RegisterUI() throws SQLException {
@@ -147,12 +147,12 @@ public class RegisterUI extends JFrame {
 				} else if(plainPwd.equals("")) {
 					log.messageShow("Please enter password");
 				} else {
-
+ 
 					try {
 						//insert data into table
 						res = register.createUser(userName,plainPwd,role,confName);
-
-					} catch (SQLException e1) {
+						
+					} catch (Exception e1) { 
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} 
