@@ -28,7 +28,7 @@ public class RegisterUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField UsernameTField;
-	private JPasswordField passwordField;
+	private JPasswordField passwordField; 
 
 	String userName;
 	String password;
@@ -151,8 +151,11 @@ public class RegisterUI extends JFrame {
 					try {
 						//insert data into table
 						res = register.createUser(userName,plainPwd,role,confName);
-
+						
 					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (Exception e1) { 
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} 

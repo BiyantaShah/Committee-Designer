@@ -5,7 +5,7 @@ import java.sql.SQLException;
 public interface Register {
 
 	//Create a new user, if not present
-	public String createUser(String userName, String password, String role, String confName) throws SQLException;
+	public String createUser(String userName, String password, String role, String confName) throws SQLException,Exception;
 
 	// Check if user already exists
 	public boolean verifyIfUserExists(String userName) throws SQLException;
