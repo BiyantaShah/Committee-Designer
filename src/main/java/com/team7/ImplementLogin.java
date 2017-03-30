@@ -16,7 +16,6 @@ public class ImplementLogin implements Login {
 
 	public boolean login(String username, String password) throws SQLException {
 
-		if (username != null){
 			ImplementSchemaDB db = new ImplementSchemaDB();
 			Connection conn = db.getConnection();
 			Statement stmt = conn.createStatement();
@@ -51,15 +50,13 @@ public class ImplementLogin implements Login {
 					// if inserted password is incorrect the do not allow the user to login
 					return false;
 				}	
-			}
 		}
 		return false; // if user does not exist;
 	}
 
 	public String logout() {
 		// TODO Auto-generated method stub
-		LoginUI.currentUser = null;
-		
+		LoginUI.currentUser = null;		
 		return (LoginUI.currentUser == null)? "success": "failure";
 	}
 

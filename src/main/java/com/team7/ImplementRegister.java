@@ -14,7 +14,7 @@ public class ImplementRegister implements Register {
 
 	private static Base64 base64 = new Base64(true);
 
-	public String createUser(String userName, String plainPass, String role, String confName) throws Exception {
+	public String createUser(String userName, String plainPass, String role, String confName) throws SQLException{
 
 		if(verifyIfUserExists(userName))
 		{			
@@ -25,6 +25,8 @@ public class ImplementRegister implements Register {
 			if (validEmailId(userName)) {
 
 				String encryptedPassword = encryptPassword(plainPass,"SECRETKEY");
+
+				if(!encryptedPassword.equals("failure")){
 					
 					// if the password is correctly encrypted, insert the user into the DB.
 					User user = new User(userName,encryptedPassword,role,confName);
@@ -33,15 +35,15 @@ public class ImplementRegister implements Register {
 
 					if(res){
 						return "true";
-					}								
+					}
+				}
 			}
 			return "invalid email";
 		}
-
 	}
-	
-	public String encryptPassword(String plainPass,String secretKey) throws Exception{
-		
+
+	public String encryptPassword(String plainPass,String secretKey) {
+
 		// encrypt the password
 		try {
 			SecretKeySpec skeyspec=new SecretKeySpec(secretKey.getBytes(),"Blowfish");
@@ -51,7 +53,7 @@ public class ImplementRegister implements Register {
 			return password; 
 
 		} catch (Exception e1) {
-			throw e1;
+			return "failure";
 		}
 
 	}
@@ -62,7 +64,7 @@ public class ImplementRegister implements Register {
 
 		if (! userName.contains("@")) 
 			return false;
-		
+
 		if (userName.contains("@.")) 
 			return false;
 
@@ -91,20 +93,20 @@ public class ImplementRegister implements Register {
 	// checking if the user exists
 	public boolean verifyIfUserExists(String userName) throws SQLException {
 
-			ImplementSchemaDB db = new ImplementSchemaDB();
-			Connection conn = db.getConnection();
-			Statement stmt = conn.createStatement();
+		ImplementSchemaDB db = new ImplementSchemaDB();
+		Connection conn = db.getConnection();
+		Statement stmt = conn.createStatement();
 
-			String sql = "Select count(*) from User where username = " + "'" +userName+ "'"; 
+		String sql = "Select count(*) from User where username = " + "'" +userName+ "'"; 
 
-			ResultSet rs = stmt.executeQuery(sql);
+		ResultSet rs = stmt.executeQuery(sql);
 
-			if(rs.next()){
+		if(rs.next()){
 
-				if(rs.getInt(1) > 0){
-					return true; 
-				}
+			if(rs.getInt(1) > 0){
+				return true; 
 			}
+		}
 
 		return false;
 	}

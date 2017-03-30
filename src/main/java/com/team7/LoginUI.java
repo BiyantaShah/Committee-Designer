@@ -33,7 +33,6 @@ public class LoginUI extends JFrame {
 	static String currentUser = null; // to maintain the 'session' for the user.
 	String userName;
 	String password;
-	String secretKey = "SECRETKEY";
 
     static LoginUI frame; 
 	

@@ -26,7 +26,7 @@ public class ImplementRegisterTest {
 
 		assertEquals("true",res);		
 
-	}
+	} 
 	
 	@Test
 	//Test to verify a successful user registration - should return exists
@@ -63,8 +63,8 @@ public class ImplementRegisterTest {
 			
 		} catch (IllegalArgumentException e) {
 			
-		}
-	} 
+		} 
+	}  
 
 
 	
