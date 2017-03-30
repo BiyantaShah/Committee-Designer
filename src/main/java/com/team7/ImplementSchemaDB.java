@@ -10,13 +10,22 @@ import java.sql.Statement;
 import java.util.Properties;
 import java.sql.PreparedStatement;
 
+/*
+ * Commenting the index creation. 
+ *  We have created the database with indexes and uploaded it on RDS. However,
+ *  when testing this function (dbSetup()) , it throws an error because it creates
+ *  duplicate index keys. MySQL does not allow us to check whether an Index has been created or not.
+ *  Since that part of the code is no longer used, we've commented it. 
+ *  For the tables creation part we have a IF NOT EXISTS condition,
+ *  hence they won't be created again.
+ */
+
 public class ImplementSchemaDB implements SchemaDB {
 
 	// creating  DB and its initial skeleton 
 	public void dbSetUp() throws ClassNotFoundException, SQLException{
 
-		// JDBC driver name and database URL
-		
+		// JDBC driver name and database URL		
 		Properties props = new Properties();
 		FileInputStream in;
 		try {
@@ -102,9 +111,9 @@ public class ImplementSchemaDB implements SchemaDB {
 			System.out.println("Created Paper table in dblp database...");
 
 			// Adding index to the paper key, making it faster during a join
-			sql = "ALTER TABLE Paper ADD INDEX keyP(paperKey)";
-			stmt.executeUpdate(sql);
-			System.out.println("Created index on Key in paper table...");
+//			sql = "ALTER TABLE Paper ADD INDEX keyP(paperKey)";
+//			stmt.executeUpdate(sql);
+//			System.out.println("Created index on Key in paper table...");
 
 			// creating author table
 			sql = "CREATE TABLE IF NOT EXISTS Author " +
@@ -117,9 +126,9 @@ public class ImplementSchemaDB implements SchemaDB {
 			System.out.println("Created author table in dblp database...");
 
 			// Adding index to the paper key in author making it faster during a join
-			sql = "ALTER TABLE Author ADD INDEX keyA(paperKey)";
-			stmt.executeUpdate(sql);
-			System.out.println("Created index on Key in author table...");
+//			sql = "ALTER TABLE Author ADD INDEX keyA(paperKey)";
+//			stmt.executeUpdate(sql);
+//			System.out.println("Created index on Key in author table...");
 
 			//creating AuthorDetails table
 			sql = "CREATE TABLE IF NOT EXISTS Author_Details " +

@@ -49,14 +49,14 @@ public class ImplementSearchDisplay implements SearchDisplay {
 		Statement stmt = conn.createStatement();
 		String conference = null;
 
-		ResultSet rs1 = stmt.executeQuery("select confName from user where username='"+userName+"'");
+		ResultSet rs1 = stmt.executeQuery("select confName from User where username='"+userName+"'");
 		while (rs1.next()) {
 			conference = rs1.getString(1);
 		}
 
 		// In the user table, extract user names of all authors in the same conference 
 		// as the current user. 
-		ResultSet rs2 = stmt.executeQuery("select username from user where confName='" +conference+"'");
+		ResultSet rs2 = stmt.executeQuery("select username from User where confName='" +conference+"'");
 
 		// Then send an email to that list of users with the set of authors obtained from UI
 		while (rs2.next()) {

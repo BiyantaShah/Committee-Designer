@@ -68,6 +68,7 @@ public class DisplayUI extends JFrame {
 		panel.add(btnLogout);
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ButtonEditor.savedAuthors.clear();
 				// make the currentUser null and redirect to login page
 				ImplementLogin login = new ImplementLogin();
 				login.logout();
@@ -86,6 +87,7 @@ public class DisplayUI extends JFrame {
 		panel.add(btnSearch);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ButtonEditor.savedAuthors.clear();
 				dispose();
 				SearchUI search = new SearchUI();
 				search.setSize(950, 600);
@@ -139,7 +141,7 @@ public class DisplayUI extends JFrame {
 
 				if (saveAuthors.size() == 0) {
 					LoginUI log = new LoginUI();
-					log.messageShow("Please select some authors");
+					log.messageShow("Please select some authors to view details");
 					flag = false;
 				}
 				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
@@ -149,6 +151,9 @@ public class DisplayUI extends JFrame {
 						// candidate details will give all the details of the authors present in 
 						// the saved list
 						result = searchDisplay.candidateDetails(saveAuthors);
+						
+						// clearing the list once its displayed.
+						saveAuthors.clear();
 
 					} catch (SQLException e2) {
 						// TODO Auto-generated catch block
@@ -165,7 +170,6 @@ public class DisplayUI extends JFrame {
 					}
 
 				}
-
 
 			}
 		});
