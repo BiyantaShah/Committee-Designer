@@ -12,8 +12,6 @@ import org.apache.commons.codec.binary.Base64;
 
 public class ImplementRegister implements Register {
 
-	//String secretKey = "SECRETKEY"; // to encrypt the password before inserting in the DB
-
 	private static Base64 base64 = new Base64(true);
 
 	public String createUser(String userName, String plainPass, String role, String confName) throws Exception {
@@ -53,8 +51,6 @@ public class ImplementRegister implements Register {
 			return password; 
 
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			//e1.printStackTrace();
 			throw e1;
 		}
 

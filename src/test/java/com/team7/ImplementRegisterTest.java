@@ -6,9 +6,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class ImplementRegisterTest { 
 
@@ -64,8 +62,7 @@ public class ImplementRegisterTest {
 			user.encryptPassword("123","");
 			
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-	        //thrown.expect(java.lang.IllegalArgumentException.class);
+			
 		}
 	} 
 
