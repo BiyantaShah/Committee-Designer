@@ -1,5 +1,5 @@
 package com.team7;
-
+ 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,31 +16,20 @@ public class ImplementLogin implements Login {
 
 	public boolean login(String username, String password) throws SQLException {
 
-			ImplementSchemaDB db = new ImplementSchemaDB();
-			Connection conn = db.getConnection();
-			Statement stmt = conn.createStatement();
+		ImplementSchemaDB db = new ImplementSchemaDB();
+		Connection conn = db.getConnection();
+		Statement stmt = conn.createStatement();
 
-			String sql = "select password from User where username = '" +username +"'";
+		String sql = "select password from User where username = '" +username +"'";
 
-			ResultSet rs = stmt.executeQuery(sql);
+		ResultSet rs = stmt.executeQuery(sql);
+		if (rs.next()) {
 
-			while (rs.next()) {
+			String plainText = rs.getString(1);
+			String decryptPassword = decryptPassword(plainText,"SECRETKEY");
 
-				String plainText = rs.getString(1);
-				String decryptPassword = "";
-				try { 
-					// decrypting the password
-					byte[] encryptedData = Base64.decodeBase64(plainText);
-					SecretKeySpec skeyspec = new SecretKeySpec(secretKey.getBytes(),"Blowfish");
-					Cipher cipher = Cipher.getInstance("Blowfish");
-					cipher.init(Cipher.DECRYPT_MODE, skeyspec);
-					byte[] decrypted = cipher.doFinal(encryptedData);
-					decryptPassword = new String(decrypted);
-
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-
+			if(!decryptPassword.equals("failure")){
+				
 				if (decryptPassword.equals(password)) {
 					// if inserted password is correct then allow the user to login
 					LoginUI.currentUser = username;
@@ -48,16 +37,37 @@ public class ImplementLogin implements Login {
 				}
 				else { 
 					// if inserted password is incorrect the do not allow the user to login
-					return false;
-				}	
-		}
+					return false; 
+				}
+			}
+		} 
 		return false; // if user does not exist;
+	}
+
+	public String decryptPassword(String plainText,String secretKey){
+ 
+		try { 
+			// decrypting the password
+			byte[] encryptedData = Base64.decodeBase64(plainText);
+			SecretKeySpec skeyspec = new SecretKeySpec(secretKey.getBytes(),"Blowfish");
+			Cipher cipher = Cipher.getInstance("Blowfish");
+			cipher.init(Cipher.DECRYPT_MODE, skeyspec);
+			byte[] decrypted = cipher.doFinal(encryptedData);
+			String decryptPassword = new String(decrypted);
+			return decryptPassword;
+
+		} catch (Exception e2) {
+			
+			return "failure";
+			
+		}
+
 	}
 
 	public String logout() {
 		// TODO Auto-generated method stub
-		LoginUI.currentUser = null;		
-		return (LoginUI.currentUser == null)? "success": "failure";
+		LoginUI.currentUser = null;		 
+		return "success";
 	}
 
 }

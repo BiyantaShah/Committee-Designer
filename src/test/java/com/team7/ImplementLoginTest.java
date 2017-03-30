@@ -19,12 +19,12 @@ public class ImplementLoginTest extends TestCase{
 		Boolean val = true;
 		assertEquals(val,res);
 		
-	}
-    
+	} 
 	 
+	 	  
 	 @Test
-     //Test to verify a  unregistered user or if details are incorrect - should return false
-     public void testLoginFailure() throws SQLException {
+     //Test to verify a  if details are incorrect - should return false
+     public void testWrongPassword() throws SQLException {
 		
 		ImplementLogin login = new ImplementLogin();
 		Boolean res = login.login("xyz@gmail.com","123");
@@ -33,6 +33,39 @@ public class ImplementLoginTest extends TestCase{
 		
 	}
 	 
+	 @Test
+     //Test to verify a  unregistered user  - should return false
+     public void testUnregisteredUser() throws SQLException {
+		
+		ImplementLogin login = new ImplementLogin();
+		Boolean res = login.login("xyz@hello.com","123");
+		Boolean val = false;
+		assertEquals(val,res);
+		
+	}
+
+	 
+	 
+	 @Test
+	 //Test to verify a valid registered user - should return true and enter the search page
+     public void testPwdDecryptionSuccess() throws SQLException {
+		
+		ImplementLogin login = new ImplementLogin();
+		String res = login.decryptPassword("oU4jbVTElTw","SECRETKEY");
+		assertEquals(res,"123");
+		
+	} 
+	 
+	 @Test
+	 //Test to verify a valid registered user - should return true and enter the search page
+     public void testPwdDecryptionFailure() throws SQLException {
+		
+		ImplementLogin login = new ImplementLogin();
+		String res = login.decryptPassword("oU4jbVTElTw","");
+		assertEquals(res,"failure");
+		
+	} 
+ 	  
 	 @Test
      //Test to verify successful logout - should return success
      public void testLogoutSuccess() {
@@ -43,10 +76,10 @@ public class ImplementLoginTest extends TestCase{
 		res = (LoginUI.currentUser == null) ? "success" : "failure";
 		assertEquals("success",res);
 		
-	}
+	} 
 	 
 	 @Test
-     //Test to verify successful logout - should return success
+     //Test to verify failed logout - should return failure
      public void testLogoutFailure() throws SQLException {
 		
 		ImplementLogin login = new ImplementLogin();
