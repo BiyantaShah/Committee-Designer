@@ -25,8 +25,8 @@ public class ImplementSearchTest extends TestCase {
 		List<String> result = searchdisplay.search(searchParameterList); 
 		assertEquals("Shahar Maoz", result.get(0));
 
-	}
-	
+	} 
+		
 	// Valid candidate details extracted
 	@Test
 	public void testCandidateDetails() throws SQLException {   
