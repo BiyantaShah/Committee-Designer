@@ -73,6 +73,7 @@ public class SavedAuthorsUI extends JFrame {
 		panel.add(btnSearch);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ButtonEditor.savedAuthors.clear();
 				dispose();
 				SearchUI search = new SearchUI();
 				search.setSize(950, 600);
@@ -83,6 +84,7 @@ public class SavedAuthorsUI extends JFrame {
 		JButton btnNewButton = new JButton("LogOut");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ButtonEditor.savedAuthors.clear();
 				// make the currentUser null and redirect to login page
 				ImplementLogin login = new ImplementLogin();
 				login.logout();
@@ -133,16 +135,25 @@ public class SavedAuthorsUI extends JFrame {
 		btnSendEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sendMail = ButtonEditor.savedAuthors;
-				String res = null;
+				Boolean flag = true;
 
-				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
-				try {
-					res = searchDisplay.sendEmail(sendMail, LoginUI.currentUser);
-
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if (sendMail.size() == 0) {
+					LoginUI log = new LoginUI();
+					log.messageShow("Please select some authors for your committee");
+					flag = false;
 				}
+				
+				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
+				if (flag == true) {
+					try {
+						searchDisplay.sendEmail(sendMail, LoginUI.currentUser);
+
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+
 
 			}
 		});
