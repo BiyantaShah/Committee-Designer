@@ -48,7 +48,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 
 		if(data.getWww() != null){
 
-			PreparedStatement statement_authorD =  conn.prepareStatement("insert into author_details(name,url) values (?,?)");
+			PreparedStatement statement_authorD =  conn.prepareStatement("insert into Author_Details(name,url) values (?,?)");
 
 			for(AuthorDetails auth : data.getWww()){
 
@@ -74,7 +74,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 			PreparedStatement statement_inproceedings = conn.prepareStatement("insert into Paper(title,year,pages,confName,paperKey)"
 					+ "values(?,?,?,?,?)");
 
-			PreparedStatement statement_author = conn.prepareStatement("insert into author(name,paperKey) values (?,?)");
+			PreparedStatement statement_author = conn.prepareStatement("insert into Author(name,paperKey) values (?,?)");
 
 			for (Paper paper: data.getInproceedings()) {
 				
@@ -141,7 +141,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 
 		if (data.getProceedings() != null) {
 
-			PreparedStatement statement_conference = conn.prepareStatement("insert into conference(confKey,name,confDetail) values (?,?,?)");
+			PreparedStatement statement_conference = conn.prepareStatement("insert into Conference(confKey,name,confDetail) values (?,?,?)");
 
 			for (Conference conf: data.getProceedings()) {
 				if (conf.getBooktitle() != null) {
@@ -166,7 +166,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 
 		if (data.getArticle() != null) {
 
-			PreparedStatement statement_article = conn.prepareStatement("insert into article(author,title,journal,year,month,ee) values (?,?,?,?,?,?)");
+			PreparedStatement statement_article = conn.prepareStatement("insert into Article(author,title,journal,year,month,ee) values (?,?,?,?,?,?)");
 
 			for (Article article: data.getArticle()) {
 

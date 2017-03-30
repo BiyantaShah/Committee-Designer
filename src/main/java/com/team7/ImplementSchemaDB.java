@@ -1,10 +1,13 @@
 package com.team7;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.Properties;
 import java.sql.PreparedStatement;
 
 public class ImplementSchemaDB implements SchemaDB {
@@ -13,13 +16,27 @@ public class ImplementSchemaDB implements SchemaDB {
 	public void dbSetUp() throws ClassNotFoundException, SQLException{
 
 		// JDBC driver name and database URL
+		
+		Properties props = new Properties();
+		FileInputStream in;
+		try {
+			in = new FileInputStream("config/db.properties");
+			props.load(in);
+			in.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Database Properties
+		
 		String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-		String DB_URL = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
-
-
-		//Database credentials
-		String userName = "root";
-		String password = "root";
+		String DB_URL = props.getProperty("jdbc.url.setup");
+		String userName = props.getProperty("jdbc.username");
+		String password = props.getProperty("jdbc.password");
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -44,7 +61,7 @@ public class ImplementSchemaDB implements SchemaDB {
 			System.out.println("Dblp database created successfully...");
 
 			//selecting database created above
-			String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true";
+			String connected_db = props.getProperty("jdbc.url.setupdb");
 			conn = DriverManager.getConnection(connected_db, userName, password);
 			stmt = conn.createStatement();
 
@@ -157,17 +174,28 @@ public class ImplementSchemaDB implements SchemaDB {
 	public Connection getConnection() {
 
 		Connection conn = null;
-
-		//Database to be connected
-		String connected_db = "jdbc:mysql://localhost/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true&verifyServerCertificate=false&useSSL=true";
-
-		//Database credentials
-		String userName = "root";
-		String password = "root";
+		Properties props = new Properties();
+		FileInputStream in;
+		try {
+			in = new FileInputStream("config/db.properties");
+			props.load(in);
+			in.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Database Properties
+		String url = props.getProperty("jdbc.url");
+		String userName = props.getProperty("jdbc.username");
+		String password = props.getProperty("jdbc.password");
 
 		try {
 
-			conn = DriverManager.getConnection(connected_db, userName, password);
+			conn = DriverManager.getConnection(url, userName, password);
 
 		} catch (SQLException e) {
 
