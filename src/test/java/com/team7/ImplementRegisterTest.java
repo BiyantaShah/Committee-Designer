@@ -45,26 +45,20 @@ public class ImplementRegisterTest {
 
 		ImplementRegister user = new ImplementRegister();
 		String res;
-		try {		
 			res = user.encryptPassword("123","SECRETKEY");
 			int len = res.length();
 		    assertEquals(len,13);
-		} catch (Exception e) {
-		}
 	}
 	
-	@Test 
-	//Test to unsuccessful encryption of password
+	
+	@Test
 	public void testPwdEncryptionFailure() throws Exception {
 	    
-		ImplementRegister user = new ImplementRegister();
-		try {
-		   user.encryptPassword("123","");
-			
-		} catch (IllegalArgumentException e) {
-			
-		} 
+		ImplementRegister user = new ImplementRegister();		
+		assertEquals("failure",user.encryptPassword("123",""));	
+		
 	}  
+	  
 
 
 	

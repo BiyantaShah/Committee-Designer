@@ -64,7 +64,7 @@ public class ImplementLoginTest extends TestCase{
 		ImplementLogin login = new ImplementLogin();
 		String res = login.decryptPassword("oU4jbVTElTw","");
 		assertEquals(res,"failure");
-		
+		 
 	} 
  	  
 	 @Test
@@ -73,23 +73,8 @@ public class ImplementLoginTest extends TestCase{
 		
 		ImplementLogin login = new ImplementLogin();
 		String res = null;
-		login.logout();
-		res = (LoginUI.currentUser == null) ? "success" : "failure";
+		res = login.logout(); 
 		assertEquals("success",res);
 		
 	} 
-	 
-	 @Test
-     //Test to verify failed logout - should return failure
-     public void testLogoutFailure() throws SQLException, IOException {
-		
-		ImplementLogin login = new ImplementLogin();
-		String res = null;
-		login.login("xyz@gmail.com","132");
-		res = (LoginUI.currentUser == null) ? "success" : "failure";
-		assertEquals("failure",res);
-		
-	}
-	 
-
 }

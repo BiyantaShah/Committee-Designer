@@ -9,7 +9,7 @@ import java.sql.Statement;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Base64; 
 
 public class ImplementRegister implements Register {
 
@@ -20,11 +20,10 @@ public class ImplementRegister implements Register {
 		if(verifyIfUserExists(userName))
 		{			
 			return "exists"; 
-
 		}  
 		else{
-			if (validEmailId(userName)) {
-
+			if (validEmailId(userName)) 
+			{
 				String encryptedPassword = encryptPassword(plainPass,"SECRETKEY");
 
 				if(!encryptedPassword.equals("failure")){
@@ -32,14 +31,10 @@ public class ImplementRegister implements Register {
 					// if the password is correctly encrypted, insert the user into the DB.
 					User user = new User(userName,encryptedPassword,role,confName);
 					ImplementSchemaDB db= new ImplementSchemaDB();
-					boolean res = db.insertData(user);
-
-					if(res){ 
-						return "true";
+					return(String.valueOf(db.insertData(user)));
 					}
-				}
-			}
-			return "invalid email";
+				}			
+			return "invalid email";	
 		}
 	}
 

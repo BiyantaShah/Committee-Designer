@@ -28,7 +28,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(query1, queryFormed);
 	}
 
-	@Test
+	@Test 
 	public void testInvalidAuthorNameWithSpecialCharacters(){	
 		
 		List<String> expected = new ArrayList<String>();
@@ -344,7 +344,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 	
 	@Test
-	public void testQueryWithJustJournal() throws SQLException{ 	
+	public void testQueryWithJustJournal() throws SQLException, IOException{ 	
   	  	SearchParameter s1= new SearchParameter("JournalName", "=" ,"tse", null);
   		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s1);
@@ -354,7 +354,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 
 	@Test
-	public void testCommitteeName() throws SQLException{   
+	public void testCommitteeName() throws SQLException, IOException{   
 		SearchParameter s1= new SearchParameter("Committee.ConfName", "=" ,"OOPSLA", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s1);
@@ -378,7 +378,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 	
 	@Test
-	public void testAllThreeTablesUseCase() throws SQLException{   
+	public void testAllThreeTablesUseCase() throws SQLException, IOException{   
 		SearchParameter s1= new SearchParameter("Keyword", "LIKE" ,"pointer","AND");
 		SearchParameter s2= new SearchParameter("Committee.Year", "=" ,"2006", null);
 		SearchParameter s3= new SearchParameter("JournalName", "=" ,"tse", null);
@@ -392,7 +392,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 	
 	@Test
-	public void testCommitteeAndArticleUseCase() throws SQLException{   
+	public void testCommitteeAndArticleUseCase() throws SQLException, IOException{   
 		SearchParameter s1= new SearchParameter("Committee.Year", "=" ,"2006", null);
 		SearchParameter s2= new SearchParameter("JournalName", "=" ,"tse", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
