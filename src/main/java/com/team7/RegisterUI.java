@@ -26,9 +26,11 @@ import javax.swing.JPasswordField;
 @SuppressWarnings("serial")
 public class RegisterUI extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField UsernameTField;
-	private JPasswordField passwordField; 
+	public JPanel contentPane;
+	public JTextField UsernameTField;
+	public JPasswordField passwordField; 
+	JButton btnRegister; 
+	JButton btnLogin;
 
 	String userName;
 	String password;
@@ -42,7 +44,7 @@ public class RegisterUI extends JFrame {
 	 * @throws SQLException  
 	 */
 	@SuppressWarnings("unchecked")
-	public RegisterUI() throws SQLException {
+	public RegisterUI() {
 
 		setVisible(true);
 		setTitle("REGISTER");
@@ -125,7 +127,7 @@ public class RegisterUI extends JFrame {
 		lblRegistrationPage.setBounds(340, 56, 234, 28);
 		contentPane.add(lblRegistrationPage);
 
-		JButton btnRegister = new JButton("Register");
+		btnRegister = new JButton("Register");
 		btnRegister.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnRegister.setBounds(394, 451, 114, 34);
 		contentPane.add(btnRegister);
@@ -154,7 +156,6 @@ public class RegisterUI extends JFrame {
 						
 					} catch (Exception e1) { 
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} 
 
 					if(res.equals("true")){
@@ -176,7 +177,7 @@ public class RegisterUI extends JFrame {
 				}}});
 		
 		
-		JButton btnLogin = new JButton("Login");
+		btnLogin = new JButton("Login");
 		btnLogin.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnLogin.setBounds(735, 28, 117, 34);
 		contentPane.add(btnLogin);

@@ -7,7 +7,7 @@ import org.junit.runners.Suite;
 
 @Suite.SuiteClasses({ 
    ImplementRegisterTest.class,ImplementSearchTest.class,ImplementQueryBuilderTest.class,ImplementLoginTest.class,ImplementParseDatabaseTest.class,ImplementSchemaDBTest.class,
-   ImplementCommitteesTest.class
+   ImplementCommitteesTest.class, SearchParameterTest.class, ImplementLoginUITest.class, ImplementRegisterUITest.class
 })
 
 public class JUnitTestSuite {
