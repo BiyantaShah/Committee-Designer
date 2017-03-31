@@ -31,30 +31,30 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testInvalidAuthorNameWithSpecialCharacters(){	
 		
-		List<String> result = new ArrayList<String>();
-		result.add(0,null);
-		result.add(1,null);	
-		result.add(2,null);	
+		List<String> expected = new ArrayList<String>();
+		expected.add(0,null);
+		expected.add(1,null);	
+		expected.add(2,null);	
   		
 		SearchParameter s= new SearchParameter("Name", "=" ,"#Michael Ley", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s);	
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
-		assertEquals(result, queryFormed);
+		assertEquals(expected, queryFormed);
 	}
 
 	@Test
 	public void testInvalidAuthorNameWithNumbers(){		
-		List<String> result = new ArrayList<String>();
-		result.add(0,null);
-		result.add(1,null);	
-		result.add(2,null);	
+		List<String> expected = new ArrayList<String>();
+		expected.add(0,null);
+		expected.add(1,null);	
+		expected.add(2,null);	
   		
 		SearchParameter s= new SearchParameter("Name", "=" ,"123 Michael Ley", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s);	
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
-		assertEquals( result, queryFormed);
+		assertEquals( expected, queryFormed);
 	}
 
 	@Test
@@ -74,17 +74,17 @@ public class ImplementQueryBuilderTest extends TestCase {
 
 	@Test
 	public void testInvalidYearsActive(){	
-		List<String> result = new ArrayList<String>();
-		result.add(0,null);
-		result.add(1,null);	
-		result.add(2,null);	
+		List<String> expected = new ArrayList<String>();
+		expected.add(0,null);
+		expected.add(1,null);	
+		expected.add(2,null);	
 
 		SearchParameter s= new SearchParameter("Year", ">" ,"-1", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();	
 	
   		searchCriteria.add(0,s);	
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
-		assertEquals(result, queryFormed);
+		assertEquals(expected, queryFormed);
 	}
 
 	@Test
@@ -145,7 +145,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(1,s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
   		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);			
-  		assertEquals(result.get(0),"Yusuke Nishiguchi");
+  		assertEquals("Yusuke Nishiguchi", result.get(0));
 	}
 	
 	@Test
@@ -157,7 +157,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(1,s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
-		assertEquals(result.get(0),"Shahar Maoz");
+		assertEquals("Shahar Maoz", result.get(0));
 	}
 	
 	@Test
@@ -169,7 +169,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(1,s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
-		assertEquals(result.size(),0);
+		assertEquals(0, result.size());
 	}
 	
 	@Test
@@ -218,7 +218,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(1,s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
   		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
-		assertEquals(result.get(0),"Simon Marlow");  
+		assertEquals("Simon Marlow",result.get(0));  
 	}
 	
 	@Test
@@ -247,7 +247,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(query9, queryFormed);
 		
 		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
-		assertEquals(result.get(0),"Anurag Mendhekar");   
+		assertEquals("Anurag Mendhekar",result.get(0));   
 	}
 	
 	@Test
@@ -258,7 +258,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		
 		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);
-		assertEquals(result.get(0),"Steven Lucco"); 
+		assertEquals("Steven Lucco",result.get(0)); 
 	}
 	
 	@Test
@@ -270,9 +270,164 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(1,s2);
 		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);
-		assertEquals(result.get(0),"Brian Demsky"); 
+		assertEquals("Brian Demsky",result.get(0)); 
 	}
 
+	@Test
+	public void testInValidConfName(){ 	
+  		List<String> expected = new ArrayList<String>();
+  		expected.add(0, null);
+  		expected.add(1, null);
+  		expected.add(2, null);
+  		 
+  		SearchParameter s= new SearchParameter("ConfName", "=" ,"CONF123", null);
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s);	
+		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+		assertEquals(expected, queryFormed);
+	}
 	
+	@Test
+	public void testInValidYear(){ 	
+  		List<String> expected = new ArrayList<String>();
+  		expected.add(0, null);
+  		expected.add(1, null);
+  		expected.add(2, null);
+  		 
+  		SearchParameter s= new SearchParameter("Year", "=" ,"-8", null);
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s);	
+		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+		assertEquals(expected, queryFormed);
+	}
+	
+	@Test
+	public void testInValidCountNoOfPapers(){ 	
+  		List<String> expected = new ArrayList<String>();
+  		expected.add(0, null);
+  		expected.add(1, null);
+  		expected.add(2, null);
+  		 
+  		SearchParameter s= new SearchParameter("CountNoOfPapers", "=" ,"-2", null);
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s);	
+		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+		assertEquals(expected, queryFormed);
+	}
+	
+	@Test
+	public void testInValidCommitteeYear(){ 	
+  		List<String> expected = new ArrayList<String>();
+  		expected.add(0, null);
+  		expected.add(1, null);
+  		expected.add(2, null);
+  		 
+  		SearchParameter s= new SearchParameter("Committee.Year", "=" ,"-2", null);
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s);	
+		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+		assertEquals(expected, queryFormed);
+	}
+	
+	@Test
+	public void testInValidJournalName(){ 	
+  		List<String> expected = new ArrayList<String>();
+  		expected.add(0, null);
+  		expected.add(1, null);
+  		expected.add(2, null);
+  		 
+  		SearchParameter s= new SearchParameter("JournalName", "=" ,"JournalName123", null);
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s);	
+		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+		assertEquals(expected, queryFormed);
+	}
+	
+	@Test
+	public void testQueryWithJustJournal() throws SQLException{ 	
+  	  	SearchParameter s1= new SearchParameter("JournalName", "=" ,"tse", null);
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s1);
+		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);
+		assertEquals(5338 ,result.size()); 
+	}
+
+	@Test
+	public void testCommitteeName() throws SQLException{   
+		SearchParameter s1= new SearchParameter("Committee.ConfName", "=" ,"OOPSLA", null);
+		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s1);
+  		//searchCriteria.add(1,s2);
+  		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+  		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
+		assertEquals(377,result.size());  
+	}
+	
+	@Test
+	public void testInValidCommitteName() throws SQLException{    
+		List<String> expected = new ArrayList<String>();
+  		expected.add(0, null);
+  		expected.add(1, null);
+  		expected.add(2, null);
+		SearchParameter s1= new SearchParameter("Committee.ConfName", "=" ,"OOPSLA123", null);
+		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s1);
+  		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+		assertEquals(expected,queryFormed);  
+	}
+	
+	@Test
+	public void testAllThreeTablesUseCase() throws SQLException{   
+		SearchParameter s1= new SearchParameter("Keyword", "LIKE" ,"pointer","AND");
+		SearchParameter s2= new SearchParameter("Committee.Year", "=" ,"2006", null);
+		SearchParameter s3= new SearchParameter("JournalName", "=" ,"tse", null);
+		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s1);
+  		searchCriteria.add(1,s2);
+  		searchCriteria.add(1,s3);
+  		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+  		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
+		assertEquals("Amer Diwan",result.get(0));  
+	}
+	
+	@Test
+	public void testCommitteeAndArticleUseCase() throws SQLException{   
+		SearchParameter s1= new SearchParameter("Committee.Year", "=" ,"2006", null);
+		SearchParameter s2= new SearchParameter("JournalName", "=" ,"tse", null);
+		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s1);
+  		searchCriteria.add(1,s2);
+  		//searchCriteria.add(1,s3);
+  		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+  		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
+		assertEquals("Luca Cardelli",result.get(0));  
+	}
+	
+	@Test
+	public void testInvalidSearchParemeter() throws SQLException{   
+		List<String> expected = new ArrayList<String>();
+  		expected.add(0, null);
+  		expected.add(1, null);
+  		expected.add(2, null);
+		SearchParameter s1= new SearchParameter("XYZ", "=" ,"2006", null);
+		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s1);
+  		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+		assertEquals(expected,queryFormed);  
+	}
+	
+	@Test
+	public void testInvalidCommitteeSearchParemeter() throws SQLException{   
+		List<String> expected = new ArrayList<String>();
+  		expected.add(0, null);
+  		expected.add(1, null);
+  		expected.add(2, null);
+		SearchParameter s1= new SearchParameter("Committee.XYZ", "=" ,"2006", null);
+		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s1);
+  		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+		assertEquals(expected,queryFormed);  
+	}
 
 }

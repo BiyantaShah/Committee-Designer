@@ -20,15 +20,6 @@ public class Article {
 
 	}
 
-	public Article (List<String> author, String key, String title, int year, String month, String ee) {
-		this.author = author;
-		this.key = key;
-		this.title = title;
-		this.year = year;
-		this.month = month;
-		this.ee = ee;
-	}
-
 	// Getter and setters
 	public String getKey() {
 		return key;

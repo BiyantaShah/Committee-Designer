@@ -16,8 +16,6 @@ public class dblp {
 	private List<Conference> proceedings;
 	private List<AuthorDetails> www;
 	private List<Article> article;
-	private List<Garbage> garbage; // only for testing purposes
-
 
 	// getters and setters
 	public List<Paper> getInproceedings() {
@@ -56,14 +54,6 @@ public class dblp {
 		this.www = www;
 	}
 
-	public List<Garbage> getGarbage() {
-		return garbage;
-	}
-
-	@XmlElement
-	public void setGarbage(List<Garbage> garbage) {
-		this.garbage = garbage;
-	}
 
 }
 

@@ -32,26 +32,17 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	private static String CommitteeTableAlias = "c";
 	private static String ArticleTableAlias = "ar";
 
+	List<String> queries = new ArrayList<String>();
+	
 	// creates queries for all the incoming search parameters and their values 
 	// from the UI
 	public List<String> createQuery(List<SearchParameter> searchParam) {
-		List<String> queries = new ArrayList<String>();
 		if(validateQuery(searchParam)){
 			
 			// if there is only one condition of grouping by the number of papers
-			if (searchParam.size() == 1 && 
-					searchParam.get(0).getSearchFilter() == "CountNoOfPapers") {
+			if (searchParam.size() == 1 && searchParam.get(0).getSearchFilter() == "CountNoOfPapers") {
 				
-				formGroupClause(searchParam.get(0));
-
-				queryPaperAuthor = "SELECT a.name AS Author FROM " + formJoinCondition() +
-						groupByClause;
-				
-				queries.add(0, queryPaperAuthor);
-				queries.add(1, queryCommitte);
-				queries.add(2, queryArticle);
-				
-				return queries;
+				return getGroupByQuery(searchParam.get(0));
 			}
 			else  {
 				formQueryParams(searchParam);
@@ -90,11 +81,9 @@ public class ImplementQueryBuilder implements QueryBuilder{
 					result = true;
 			}
 
-			if(s.getSearchFilter() == "Year"){
-				if(s.getSearchFilter() == "Year" && Integer.parseInt(s.getSearchValue()) > 0){
+			if(s.getSearchFilter() == "Year" && Integer.parseInt(s.getSearchValue()) > 0){
 					result = true;
 				}
-			}
 			
 			if(s.getSearchFilter() == "Keyword"){	
 				// no validation needed for Keyword
@@ -103,16 +92,14 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			}
 
 			if(s.getSearchFilter() == "CountNoOfPapers"){            	
-				if(s.getSearchFilter() == "CountNoOfPapers" && Integer.parseInt(s.getSearchValue()) > 0){
+				if(Integer.parseInt(s.getSearchValue()) > 0){
 					return true;
 				}
 			}    
 
-			if(s.getSearchFilter() == "Committee.Year")  {  
-				if(s.getSearchFilter() == "Committee.Year" && Integer.parseInt(s.getSearchValue()) > 0){					
+			if(s.getSearchFilter() == "Committee.Year" && Integer.parseInt(s.getSearchValue()) > 0){					
 					return true;
 				}
-			}
 
 			if(s.getSearchFilter() == "Committee.ConfName"){
 				if(checkValidityOfSearchParameters(s.getSearchValue())){
@@ -349,6 +336,20 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		}     	
 		query = query.substring(0, query.length()-1) + ")"; 	
 		return query;   	
+	}
+	
+	private List<String> getGroupByQuery(SearchParameter groupByParameter){
+
+	formGroupClause(groupByParameter);
+	
+	queryPaperAuthor = "SELECT a.name AS Author FROM " + formJoinCondition() +
+			groupByClause;
+	
+	queries.add(0, queryPaperAuthor);
+	queries.add(1, queryCommitte);
+	queries.add(2, queryArticle);
+	
+	return queries;
 	}
 }
 

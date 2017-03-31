@@ -221,15 +221,6 @@ public class ImplementParseDatabase implements ParseDatabase {
 			statement_article.executeBatch();
 		}
 
-		// only for testing purposes
-		if (data.getGarbage() != null) {
-			for (Garbage gar : data.getGarbage()) {
-				if (gar.getTest().equals("This is a test"))
-					return "success";
-				else 
-					return "failure";
-			}	
-		}
 
 		return "success";
 	}

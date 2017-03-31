@@ -61,9 +61,4 @@ public class Paper {
 		 this.key = key;
        	}
 
-	@Override
-	public String toString() {
-		return "[ Author:" + author + " title: "+ 
-				title + " pages: " + pages + " year: " +year + "]";
-	}
 }
