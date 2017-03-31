@@ -30,6 +30,12 @@ public class SearchUI extends JFrame {
 	private JTextField ValueField_3;
 	private JTextField ValueField_4;
 	private JTextField ValueField_5;
+	JButton NewRowButton_1;
+	JButton NewRowButton_2;
+	JButton NewRowButton_3;
+	JButton NewRowButton_4;
+	JButton btnLogout;
+	JButton btnNewButton; // submit button
 
 	SearchParameter sp1 = new SearchParameter();
 	SearchParameter sp2 = new SearchParameter();
@@ -279,7 +285,7 @@ public class SearchUI extends JFrame {
 		panel_1.add(SelectionComboBox_1);
 
 
-		final JButton NewRowButton_1 = new JButton("New row");
+		NewRowButton_1 = new JButton("New row");
 		NewRowButton_1.setBounds(630, 9, 86, 25);
 		panel_1.add(NewRowButton_1);
 		NewRowButton_1.addActionListener(new ActionListener() {
@@ -399,7 +405,7 @@ public class SearchUI extends JFrame {
 		panel_2.add(SelectionComboBox_2);
 
 
-		JButton NewRowButton_2 = new JButton("New row");
+		NewRowButton_2 = new JButton("New row");
 		NewRowButton_2.setBounds(630, 9, 86, 25);
 		panel_2.add(NewRowButton_2);
 		NewRowButton_2.addActionListener(new ActionListener() {
@@ -519,7 +525,7 @@ public class SearchUI extends JFrame {
 		panel_3.add(SelectionComboBox_3);
 
 
-		JButton NewRowButton_3 = new JButton("New row");
+		NewRowButton_3 = new JButton("New row");
 		NewRowButton_3.setBounds(630, 9, 86, 25);
 		panel_3.add(NewRowButton_3);
 		NewRowButton_3.addActionListener(new ActionListener() {
@@ -634,7 +640,7 @@ public class SearchUI extends JFrame {
 		SelectionComboBox_4.setBounds(492, 10, 116, 22);
 		panel_4.add(SelectionComboBox_4);
 
-		JButton NewRowButton_4 = new JButton("New row");  
+		NewRowButton_4 = new JButton("New row");  
 		NewRowButton_4.setBounds(630, 9, 86, 25);
 		panel_4.add(NewRowButton_4);
 		NewRowButton_4.addActionListener(new ActionListener() {
@@ -753,7 +759,7 @@ public class SearchUI extends JFrame {
 
 		/*****************************************Submit button****************************************************/
 
-		JButton btnNewButton = new JButton("Submit");
+		btnNewButton = new JButton("Submit");
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnNewButton.setBounds(394, 395, 97, 25);
 		contentPane.add(btnNewButton);
@@ -967,23 +973,17 @@ public class SearchUI extends JFrame {
 						e2.printStackTrace();
 					}					
 					DisplayUI display;
-					try {
-
-						if (flag == true) {
-							dispose();
-							display = new DisplayUI(finalAuthors);
-							display.setSize(950, 600);
-							display.setLocationRelativeTo(null);
-						}
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					if (flag == true) {
+						dispose();
+						display = new DisplayUI(finalAuthors);
+						display.setSize(950, 600);
+						display.setLocationRelativeTo(null);
 					}
 				}				   
 			}
 		});
 
-		JButton btnLogout = new JButton("LogOut");
+		btnLogout = new JButton("LogOut");
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnLogout.setBounds(790, 13, 117, 34);
 		contentPane.add(btnLogout);

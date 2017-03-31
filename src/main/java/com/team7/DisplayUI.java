@@ -35,12 +35,15 @@ public class DisplayUI extends JFrame {
 	private JPanel contentPane;
 	// List of Authors whose candidate details are to be viewed
 	Set<String> saveAuthors = new HashSet<String>();
+	JButton btnSavedAuthors;
+	JButton btnLogout;
+	JButton btnSearch; 
 
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public DisplayUI(List<String> authors) throws SQLException {
+	public DisplayUI(List<String> authors) {
 
 		setVisible(true);
 		setTitle("SEARCH RESULTS");
@@ -62,7 +65,7 @@ public class DisplayUI extends JFrame {
 		lblSearchResults.setBounds(380, 22, 189, 25);
 		panel.add(lblSearchResults);
 
-		JButton btnLogout = new JButton("LogOut");
+		btnLogout = new JButton("LogOut");
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnLogout.setBounds(746, 0, 117, 34);
 		panel.add(btnLogout);
@@ -81,7 +84,7 @@ public class DisplayUI extends JFrame {
 			}
 		});
 
-		JButton btnSearch = new JButton("Search UI");
+		btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSearch.setBounds(625, 0, 117, 34);
 		panel.add(btnSearch);
@@ -101,32 +104,36 @@ public class DisplayUI extends JFrame {
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 
-		JTable table = new JTable(buildTableModel(authors));
+		JTable table;
+		try {
+			table = new JTable(buildTableModel(authors));
+			JTableHeader header = table.getTableHeader();
+			header.setDefaultRenderer(new HeaderRenderer(table));
 
-		JTableHeader header = table.getTableHeader();
-		header.setDefaultRenderer(new HeaderRenderer(table));
+			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+			centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+			table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
 
-		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+			// Rendering a button for each table row
+			table.getColumn("Save").setCellRenderer(new JTableButtonRenderer());
+			table.getColumn("Save").setCellEditor(
+					new ButtonEditor(new JCheckBox()));
 
-		// Rendering a button for each table row
-		table.getColumn("Save").setCellRenderer(new JTableButtonRenderer());
-		table.getColumn("Save").setCellEditor(
-				new ButtonEditor(new JCheckBox()));
-
-		table.setPreferredScrollableViewportSize(new Dimension(550, 350));
-		JScrollPane scroll = new JScrollPane(table);
-		setVisible(true);
-		panel_1.add(scroll);
+			table.setPreferredScrollableViewportSize(new Dimension(550, 350));
+			JScrollPane scroll = new JScrollPane(table);
+			setVisible(true);
+			panel_1.add(scroll);
+		} catch (SQLException e3) {
+			// TODO Auto-generated catch block
+		}
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(6, 477, 921, 55);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
-		JButton btnSavedAuthors = new JButton("Candidate Details");
+		btnSavedAuthors = new JButton("Candidate Details");
 
 		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSavedAuthors.setBounds(385, 0, 149, 34);
@@ -156,8 +163,7 @@ public class DisplayUI extends JFrame {
 						saveAuthors.clear();
 
 					} catch (SQLException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
+						
 					}
 
 					try {
@@ -165,8 +171,7 @@ public class DisplayUI extends JFrame {
 						SavedAuthorsUI saved = new SavedAuthorsUI(result);
 						saved.setLocationRelativeTo(null);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						
 					}
 
 				}
