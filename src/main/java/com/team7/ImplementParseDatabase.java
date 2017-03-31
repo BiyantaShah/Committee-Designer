@@ -18,11 +18,11 @@ import javax.xml.bind.Unmarshaller;
 @SuppressWarnings("restriction")
 public class ImplementParseDatabase implements ParseDatabase {
 
-	ImplementSchemaDB db = new ImplementSchemaDB();
+	ImplementSchemaDB db = new ImplementSchemaDB(); 
 
 	// Parsing the dblp.xml to extract required data, 
 	// converting into java objects and inserting into the database
-	public String parseXml(File file) throws JAXBException, SQLException {
+	public String parseXml(File file) throws JAXBException, SQLException, IOException {
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(dblp.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();

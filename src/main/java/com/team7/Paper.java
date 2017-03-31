@@ -13,7 +13,7 @@ public class Paper {
 	private String title;
 	private String pages;
 	private int year;
-	private String key;
+	private String key; 
 	
 	public List<String> getAuthor() {
 		return author;

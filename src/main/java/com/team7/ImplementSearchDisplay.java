@@ -1,5 +1,6 @@
 package com.team7;
-
+ 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,16 +16,16 @@ import javax.mail.internet.*;
 public class ImplementSearchDisplay implements SearchDisplay {
 
 	// Keeps track of all filter criteria and their values
-	public List<String> search(List<SearchParameter> searchParameter) throws SQLException {
+	public List<String> search(List<SearchParameter> searchParameter) throws SQLException, IOException {
 		
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
 		List<String> query = queryBuilderObject.createQuery(searchParameter);
         return queryBuilderObject.getResultForDisplay(query);
 	
-	}
-
+	} 
+ 
 	// Returns the candidate details for each author selected by the user
-	public ResultSet candidateDetails(Set<String> authors) throws SQLException {
+	public ResultSet candidateDetails(Set<String> authors) throws SQLException, IOException {
 		
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
 		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
@@ -34,7 +35,7 @@ public class ImplementSearchDisplay implements SearchDisplay {
 	}
 
 	// sends an email to the users with the list of finalized authors
-	public String sendEmail(Set<String> authors, String userName) throws SQLException {
+	public String sendEmail(Set<String> authors, String userName) throws SQLException, IOException {
 		// TODO Auto-generated method stub
 		// get the conference of the current user
 		ImplementSchemaDB db = new ImplementSchemaDB();

@@ -1,5 +1,6 @@
 package com.team7;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,13 +15,13 @@ public class ImplementRegister implements Register {
 
 	private static Base64 base64 = new Base64(true);
 
-	public String createUser(String userName, String plainPass, String role, String confName) throws SQLException{
+	public String createUser(String userName, String plainPass, String role, String confName) throws SQLException, IOException{
 
 		if(verifyIfUserExists(userName))
 		{			
 			return "exists"; 
 
-		}
+		}  
 		else{
 			if (validEmailId(userName)) {
 
@@ -33,7 +34,7 @@ public class ImplementRegister implements Register {
 					ImplementSchemaDB db= new ImplementSchemaDB();
 					boolean res = db.insertData(user);
 
-					if(res){
+					if(res){ 
 						return "true";
 					}
 				}
@@ -91,7 +92,7 @@ public class ImplementRegister implements Register {
 	}
 
 	// checking if the user exists
-	public boolean verifyIfUserExists(String userName) throws SQLException {
+	public boolean verifyIfUserExists(String userName) throws SQLException, IOException {
 
 		ImplementSchemaDB db = new ImplementSchemaDB();
 		Connection conn = db.getConnection();

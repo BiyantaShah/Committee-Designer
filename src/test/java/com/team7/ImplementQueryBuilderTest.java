@@ -1,5 +1,6 @@
 package com.team7;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +13,7 @@ import junit.framework.TestCase;
 public class ImplementQueryBuilderTest extends TestCase {
 
 	// Testing queries of different types
-	
+	 
   	@Test
 	public void testValidAuthorName(){ 	
   		List<String> query1 = new ArrayList<String>();
@@ -136,7 +137,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 	
 	@Test
-	public void testSendQuery() throws SQLException{	
+	public void testSendQuery() throws SQLException, IOException{	
 		SearchParameter s1= new SearchParameter("Name", "=" ,"Petra Ludewig","OR");
 		SearchParameter s2= new SearchParameter("Keyword", "LIKE" ,"Extension", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -148,7 +149,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 	
 	@Test
-	public void testMultipleAuthorSearch() throws SQLException{
+	public void testMultipleAuthorSearch() throws SQLException, IOException{
 		SearchParameter s1= new SearchParameter("Name", "=" ,"Shahar Maoz","OR");
 		SearchParameter s2= new SearchParameter("Name", "=" ,"Jan Oliver Ringert", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -160,7 +161,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 	
 	@Test
-	public void testMultipleAuthorInvalidSearch() throws SQLException{
+	public void testMultipleAuthorInvalidSearch() throws SQLException, IOException{
 		SearchParameter s1= new SearchParameter("Name", "=" ,"ABC","AND");
 		SearchParameter s2= new SearchParameter("Name", "=" ,"Michael Ley", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -209,7 +210,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 	
 	@Test
-	public void testThirdUseCase() throws SQLException{    //add another test fetching result from DB
+	public void testThirdUseCase() throws SQLException, IOException{    //add another test fetching result from DB
 		SearchParameter s1= new SearchParameter("Keyword", "LIKE" ,"pointer","AND");
 		SearchParameter s2= new SearchParameter("Committee.Year", "=" ,"2006", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -221,7 +222,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 	
 	@Test
-	public void testNoDuplicateAuthorName() throws SQLException{
+	public void testNoDuplicateAuthorName() throws SQLException, IOException{
   		 
   		SearchParameter s= new SearchParameter("Keyword", "LIKE" ,"test", null);
   		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -233,7 +234,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 	
 	@Test
-	public void testLikeClauseAuthorName() throws SQLException{ 	
+	public void testLikeClauseAuthorName() throws SQLException, IOException{ 	
   		List<String> query9= new ArrayList<String>();
   		query9.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE a.Name LIKE '%Anurag%' ");
   		query9.add(1,null);	
@@ -250,7 +251,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 	
 	@Test
-	public void testCountOfPapers() throws SQLException{ 
+	public void testCountOfPapers() throws SQLException, IOException{ 
   		SearchParameter s1= new SearchParameter("CountNoOfPapers", ">=" ,"2",null);
   		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(0,s1);
@@ -261,7 +262,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 	
 	@Test
-	public void testQueryWithJournal() throws SQLException{ 	
+	public void testQueryWithJournal() throws SQLException, IOException{ 	
   		SearchParameter s1= new SearchParameter("Name", "=" ,"Brian Demsky","AND");
   		SearchParameter s2= new SearchParameter("JournalName", "=" ,"tse", null);
   		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();

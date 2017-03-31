@@ -26,6 +26,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 // Search display results page is created here.
@@ -34,7 +35,7 @@ public class DisplayUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	// List of Authors whose candidate details are to be viewed
-	Set<String> saveAuthors = new HashSet<String>();
+	Set<String> saveAuthors = new HashSet<String>(); 
 
 	/**
 	 * Create the frame.
@@ -143,7 +144,7 @@ public class DisplayUI extends JFrame {
 					LoginUI log = new LoginUI();
 					log.messageShow("Please select some authors to view details");
 					flag = false;
-				}
+				} 
 				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 				ResultSet result = null;
 				if (flag == true) {		
@@ -158,6 +159,9 @@ public class DisplayUI extends JFrame {
 					} catch (SQLException e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 
 					try {

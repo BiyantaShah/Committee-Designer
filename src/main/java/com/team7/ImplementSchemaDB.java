@@ -22,24 +22,13 @@ import java.sql.PreparedStatement;
 
 public class ImplementSchemaDB implements SchemaDB { 
 
+	Properties props;
+
 	// creating  DB and its initial skeleton 
-	public void dbSetUp() throws ClassNotFoundException, SQLException{
+	public void dbSetUp() throws ClassNotFoundException, SQLException, IOException{
 
 		// JDBC driver name and database URL		
-		Properties props = new Properties();
-		FileInputStream in;
-		try {
-			in = new FileInputStream("config/db.properties");
-			props.load(in);
-			in.close();
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 
+		getDBProperties(); 
 		//Database Properties
 		
 		String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -57,11 +46,6 @@ public class ImplementSchemaDB implements SchemaDB {
 			//Open a connection
 			conn = DriverManager.getConnection(DB_URL, userName, password);
 			String sql = null; 
-//			stmt = conn.createStatement();
-//						      
-//			sql = "DROP DATABASE IF EXISTS DBLP";
-//			stmt.executeUpdate(sql);
-//			System.out.println("Dblp database deleted successfully...");
 
 			//Execute a query
 			stmt = conn.createStatement();			      
@@ -159,35 +143,19 @@ public class ImplementSchemaDB implements SchemaDB {
 			stmt.executeUpdate(sql);
 
 
-		}catch(SQLException se){
+		}catch(Exception se){
 			//Handle errors for JDBC
 			se.printStackTrace();
-
-		}catch(Exception e){
-			//Handle errors for Class.forName
-			e.printStackTrace();
 
 		}
 		conn.close();
 
 	}
 
-	public Connection getConnection() {
+	public Connection getConnection() throws IOException {
 
 		Connection conn = null;
-		Properties props = new Properties();
-		FileInputStream in;
-		try {
-			in = new FileInputStream("config/db.properties");
-			props.load(in);
-			in.close();
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		getDBProperties();
 		
 		//Database Properties
 		String url = props.getProperty("jdbc.url");
@@ -204,8 +172,23 @@ public class ImplementSchemaDB implements SchemaDB {
 		}
 		return conn;
 	}
+	
+	private void getDBProperties() throws IOException{
+		
+		props = new Properties();
+		FileInputStream in;
+		try {
+			in = new FileInputStream("config/db.properties");
+			props.load(in);
+			in.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}  
+		
+	}
 
-	public boolean insertData(Object object_name) throws SQLException {
+	public boolean insertData(Object object_name) throws SQLException, IOException {
 
 		Connection conn = getConnection();		
 
@@ -220,11 +203,12 @@ public class ImplementSchemaDB implements SchemaDB {
 				statement_inproceedings.setString(4, ((User) object_name).getConfName());
 				statement_inproceedings.executeUpdate();
 
+			}else{
+				return false;
 			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return false;
 		}
 		conn.close();

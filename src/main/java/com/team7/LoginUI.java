@@ -29,13 +29,13 @@ public class LoginUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField userNameField;
 	private JPasswordField passwordField;
-	
+
 	static String currentUser = null; // to maintain the 'session' for the user.
 	String userName;
 	String password;
 
-    static LoginUI frame; 
-	
+	static LoginUI frame; 
+
 
 	/**
 	 * Launch the application.
@@ -44,53 +44,53 @@ public class LoginUI extends JFrame {
 	 * @throws IOException 
 	 * @throws JAXBException 
 	 */
-    public static void main(String[] args) throws ClassNotFoundException, SQLException, JAXBException, IOException {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException, JAXBException, IOException {
 
-    	System.out.println("Start");
-    	
-// Below was used to create database ,extract xml and insert data into tables
-    	
-//    	File file = new File("input/dblp.xml");
-//    	File comData = new File("input/committees/");
-    	
-//    	// Parsing the xml to create objects
-//    	ImplementParseDatabase parse = new ImplementParseDatabase();
-//    	ImplementSchemaDB db=new ImplementSchemaDB();;
-//    	ImplementCommittees com = new ImplementCommittees();
-//
-//		try {
-//			
-//	    	db.dbSetUp();   //set up initial database
-//	    	parse.parseXml(file);	//parse xml data
-//	    	com.ParseFiles(comData); //parse committee data
-//
-//		} catch (Exception e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-		
+		System.out.println("Start");
 
-    	EventQueue.invokeLater(new Runnable() {
-    		public void run() {
-    			try {
-    				frame= new LoginUI();
-    				frame.setVisible(true);
-    				frame.setLocationRelativeTo(null);
-    				frame.setTitle("MSD PROJECT");
-    			} catch (Exception e) {
-    				e.printStackTrace();
-    			}
-    		}
-    	});
-    	
-    	System.out.println("End");
-    }
+		// Below was used to create database ,extract xml and insert data into tables
+
+		//    	File file = new File("input/dblp.xml");
+		//    	File comData = new File("input/committees/");
+
+		//    	// Parsing the xml to create objects
+		//    	ImplementParseDatabase parse = new ImplementParseDatabase();
+		//    	ImplementSchemaDB db=new ImplementSchemaDB();;
+		//    	ImplementCommittees com = new ImplementCommittees();
+		//
+		//		try {
+		//			
+		//	    	db.dbSetUp();   //set up initial database
+		//	    	parse.parseXml(file);	//parse xml data
+		//	    	com.ParseFiles(comData); //parse committee data
+		//
+		//		} catch (Exception e1) {
+		//			// TODO Auto-generated catch block
+		//			e1.printStackTrace();
+		//		}
+
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame= new LoginUI();
+					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					frame.setTitle("MSD PROJECT");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		System.out.println("End");
+	}
 
 	/**
 	 * Create the frame.
 	 */
 	public LoginUI() {
-		
+
 		setSize(950, 600);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -102,7 +102,7 @@ public class LoginUI extends JFrame {
 		JLabel lblWelcome = new JLabel("WELCOME !");
 		lblWelcome.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblWelcome.setBounds(401, 39, 153, 32);
-		contentPane.add(lblWelcome);
+		contentPane.add(lblWelcome); 
 
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setFont(new Font("Lucida Grande", Font.BOLD, 14));
@@ -150,7 +150,7 @@ public class LoginUI extends JFrame {
 						if (register.verifyIfUserExists(userName)) {
 							ImplementLogin login = new ImplementLogin();
 							if (login.login(userName, plainText)) {
-								
+
 								// assign currentUser as username
 								currentUser = userName;
 								// let it go to the search page if login is successful
@@ -158,7 +158,7 @@ public class LoginUI extends JFrame {
 								SearchUI search = new SearchUI();
 								search.setSize(950, 600);
 								search.setLocationRelativeTo(null);
-								
+
 							}
 							else {
 								messageShow("Invalid Credentials: Username and password don't match");
@@ -167,14 +167,17 @@ public class LoginUI extends JFrame {
 						else {
 							messageShow("User does not exist. Please register");
 						}
-					} catch (SQLException e2) {
+					} catch (IOException e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
-					}		
-
-				}
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} 
+				}		
 			}
-		});
+		}
+				);
 
 		JButton btnNewUserClick = new JButton("New User? Click to Register");
 		btnNewUserClick.setFont(new Font("Lucida Grande", Font.BOLD, 16));
@@ -193,7 +196,7 @@ public class LoginUI extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 	}

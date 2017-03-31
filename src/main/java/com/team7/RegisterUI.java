@@ -32,7 +32,7 @@ public class RegisterUI extends JFrame {
 
 	String userName;
 	String password;
-	String role;
+	String role; 
 	String confName;
 	static Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	LoginUI log = new LoginUI();

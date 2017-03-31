@@ -1,5 +1,6 @@
 package com.team7;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,5 +15,5 @@ public interface QueryBuilder {
 	public boolean validateQuery(List<SearchParameter> searchParam);
 
 	// send the query to Database
-	public ResultSet sendQuery(String searchQuery) throws SQLException;
+	public ResultSet sendQuery(String searchQuery) throws SQLException,IOException;
 }

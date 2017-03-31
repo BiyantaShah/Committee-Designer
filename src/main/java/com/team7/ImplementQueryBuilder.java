@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,8 +20,8 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	String whereClauseForArticle = "";
 
 	String groupByClause = "";
-	String queryPaperAuthor = null;
-	String queryCommitte = null;
+	String queryPaperAuthor = null; 
+	String queryCommitte = null; 
 	String queryArticle = null;
 
 	private static String AuthorTable = "Author";
@@ -176,7 +177,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	}
 
 	// Getting the final result of the query.
-	public List<String> getResultForDisplay(List<String> searchQuery) throws SQLException{
+	public List<String> getResultForDisplay(List<String> searchQuery) throws SQLException, IOException{
 
 		List<String> finalResult = new ArrayList<String>();
 		List<String> intermediate = new ArrayList<String>();
@@ -234,7 +235,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 				articleResult.size() != 0 ) {
 			committeeResult.retainAll(articleResult);
 			intermediate = committeeResult;
-		}
+		} 
 		else if (paperAuthorResult.size() != 0) {
 			intermediate = paperAuthorResult;
 		}
@@ -250,7 +251,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	}
 
 	// making a connection with the DB
-	public ResultSet sendQuery(String searchQuery) throws SQLException {
+	public ResultSet sendQuery(String searchQuery) throws SQLException, IOException {
 		ImplementSchemaDB implementSchemaObj = new ImplementSchemaDB();
 		Connection conn = implementSchemaObj.getConnection();
 		Statement stmt = conn.createStatement();
