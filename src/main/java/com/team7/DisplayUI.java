@@ -75,7 +75,7 @@ public class DisplayUI extends JFrame {
 				// make the currentUser null and redirect to login page
 				ImplementLogin login = new ImplementLogin();
 				login.logout();
-				
+
 				dispose();
 				LoginUI log = new LoginUI();
 				log.setVisible(true);
@@ -154,25 +154,21 @@ public class DisplayUI extends JFrame {
 				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 				ResultSet result = null;
 				if (flag == true) {		
+					// candidate details will give all the details of the authors present in 
+					// the saved list
 					try {
-						// candidate details will give all the details of the authors present in 
-						// the saved list
 						result = searchDisplay.candidateDetails(saveAuthors);
-						
+
 						// clearing the list once its displayed.
 						saveAuthors.clear();
-
-					} catch (SQLException e2) {
-						
-					}
-
-					try {
-						dispose();
-						SavedAuthorsUI saved = new SavedAuthorsUI(result);
-						saved.setLocationRelativeTo(null);
 					} catch (SQLException e1) {
-						
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
+
+					dispose();
+					SavedAuthorsUI saved = new SavedAuthorsUI(result);
+					saved.setLocationRelativeTo(null);
 
 				}
 
