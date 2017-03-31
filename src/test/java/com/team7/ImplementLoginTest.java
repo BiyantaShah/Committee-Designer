@@ -2,6 +2,7 @@ package com.team7;
 
 import junit.framework.TestCase;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import org.junit.Test;
@@ -12,19 +13,19 @@ public class ImplementLoginTest extends TestCase{
 	
 	 @Test
 	 //Test to verify a valid registered user - should return true and enter the search page
-     public void testLoginSuccess() throws SQLException {
+     public void testLoginSuccess() throws SQLException, IOException {
 		
 		ImplementLogin login = new ImplementLogin();
 		Boolean res = login.login("xyz@gmail.com","132");
 		Boolean val = true;
-		assertEquals(val,res);
+		assertEquals(val,res);  
 		
-	} 
+	}  
 	 
 	 	  
 	 @Test
      //Test to verify a  if details are incorrect - should return false
-     public void testWrongPassword() throws SQLException {
+     public void testWrongPassword() throws SQLException, IOException {
 		
 		ImplementLogin login = new ImplementLogin();
 		Boolean res = login.login("xyz@gmail.com","123");
@@ -35,7 +36,7 @@ public class ImplementLoginTest extends TestCase{
 	 
 	 @Test
      //Test to verify a  unregistered user  - should return false
-     public void testUnregisteredUser() throws SQLException {
+     public void testUnregisteredUser() throws SQLException, IOException {
 		
 		ImplementLogin login = new ImplementLogin();
 		Boolean res = login.login("xyz@hello.com","123");
@@ -63,7 +64,7 @@ public class ImplementLoginTest extends TestCase{
 		ImplementLogin login = new ImplementLogin();
 		String res = login.decryptPassword("oU4jbVTElTw","");
 		assertEquals(res,"failure");
-		
+		 
 	} 
  	  
 	 @Test
@@ -72,23 +73,8 @@ public class ImplementLoginTest extends TestCase{
 		
 		ImplementLogin login = new ImplementLogin();
 		String res = null;
-		login.logout();
-		res = (LoginUI.currentUser == null) ? "success" : "failure";
+		res = login.logout(); 
 		assertEquals("success",res);
 		
 	} 
-	 
-	 @Test
-     //Test to verify failed logout - should return failure
-     public void testLogoutFailure() throws SQLException {
-		
-		ImplementLogin login = new ImplementLogin();
-		String res = null;
-		login.login("xyz@gmail.com","132");
-		res = (LoginUI.currentUser == null) ? "success" : "failure";
-		assertEquals("failure",res);
-		
-	}
-	 
-
 }

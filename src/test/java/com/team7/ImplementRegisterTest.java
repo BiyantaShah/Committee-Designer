@@ -1,7 +1,8 @@
 package com.team7;
-
+ 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,7 +27,7 @@ public class ImplementRegisterTest {
 
 		assertEquals("true",res);		
 
-	} 
+	}  
 	
 	@Test
 	//Test to verify a successful user registration - should return exists
@@ -44,27 +45,20 @@ public class ImplementRegisterTest {
 
 		ImplementRegister user = new ImplementRegister();
 		String res;
-		try {		
 			res = user.encryptPassword("123","SECRETKEY");
 			int len = res.length();
 		    assertEquals(len,13);
-		} catch (Exception e) {
-		}
 	}
 	
+	
 	@Test
-	//Test to unsuccessful encryption of password
 	public void testPwdEncryptionFailure() throws Exception {
 	    
-		ImplementRegister user = new ImplementRegister();
-		try {
-			
-			user.encryptPassword("123","");
-			
-		} catch (IllegalArgumentException e) {
-			
-		} 
+		ImplementRegister user = new ImplementRegister();		
+		assertEquals("failure",user.encryptPassword("123",""));	
+		
 	}  
+	  
 
 
 	
@@ -136,7 +130,7 @@ public class ImplementRegisterTest {
 
 	@Test
 	//Test to verify a successful user registration - should return success
-	public void testVerifyUserExistsFailure() throws SQLException {
+	public void testVerifyUserExistsFailure() throws SQLException, IOException {
 
 		ImplementRegister user = new ImplementRegister();
 		boolean  res = user.verifyIfUserExists("test@gmail.com");

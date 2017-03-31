@@ -1,5 +1,6 @@
 package com.team7;
  
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,16 +15,16 @@ public class ImplementLogin implements Login {
 
 	String secretKey = "SECRETKEY"; // used for decryption of the password
 
-	public boolean login(String username, String password) throws SQLException {
+	public boolean login(String username, String password) throws SQLException, IOException {
 
 		ImplementSchemaDB db = new ImplementSchemaDB();
-		Connection conn = db.getConnection();
+		Connection conn = db.getConnection(); 
 		Statement stmt = conn.createStatement();
 
 		String sql = "select password from User where username = '" +username +"'";
 
 		ResultSet rs = stmt.executeQuery(sql);
-		if (rs.next()) {
+		if (rs.next()) { 
 
 			String plainText = rs.getString(1);
 			String decryptPassword = decryptPassword(plainText,"SECRETKEY");

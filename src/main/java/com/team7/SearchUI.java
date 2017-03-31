@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ import java.awt.Font;
 
 // Search Criteria page is created here
 @SuppressWarnings("serial")
-public class SearchUI extends JFrame {
+public class SearchUI extends JFrame { 
 
 	private JPanel contentPane;
 	private JTextField ValueField_1;
@@ -291,7 +292,7 @@ public class SearchUI extends JFrame {
 				q2 = true;
 
 			}
-
+ 
 		});
 
 		//label for join comparator
@@ -912,7 +913,7 @@ public class SearchUI extends JFrame {
 					}
 
 				}
-
+ 
 				if(q5 == true){
 					sp5.setSearchFilter(Criteria.get(CriteriaComboBox_5.getSelectedItem()));
 					sp5.setSearchComparator ((String) ComparatorComboBox_5.getSelectedItem());
@@ -965,6 +966,9 @@ public class SearchUI extends JFrame {
 					} catch (SQLException e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}					
 					DisplayUI display;
 					try {

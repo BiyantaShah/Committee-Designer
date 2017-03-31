@@ -10,7 +10,7 @@ public class Author {
 		// TODO Auto-generated constructor stub
 		this.name = author;
 		this.paperKey = key;
-	}
+	} 
 
 	// Getters and setters
 	public String getName() {

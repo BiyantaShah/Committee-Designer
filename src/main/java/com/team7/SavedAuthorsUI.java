@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -39,7 +40,7 @@ public class SavedAuthorsUI extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException 
+	 * @throws SQLException  
 	 */
 	public SavedAuthorsUI(ResultSet result) throws SQLException {
 
@@ -148,6 +149,9 @@ public class SavedAuthorsUI extends JFrame {
 					try {
 						searchDisplay.sendEmail(sendMail, LoginUI.currentUser);
 
+					}  catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
