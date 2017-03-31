@@ -63,7 +63,6 @@ public class ButtonEditor extends DefaultCellEditor {
 
 	public Object getCellEditorValue() {
 		if (isPushed) {}
-		isPushed = false;
 		return new String(label);
 	}
 

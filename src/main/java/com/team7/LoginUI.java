@@ -26,13 +26,16 @@ import javax.swing.JPasswordField;
 public class LoginUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField userNameField;
-	private JPasswordField passwordField;
+
+	public JPanel contentPane;
+	public JTextField userNameField;
+	public JPasswordField passwordField;
+	public JButton btnLogin;
+	public JButton btnNewUserClick; 
 
 	static String currentUser = null; // to maintain the 'session' for the user.
-	String userName;
-	String password;
+	public String userName;
+	public String password;
 
 	static LoginUI frame; 
 
@@ -45,8 +48,6 @@ public class LoginUI extends JFrame {
 	 * @throws JAXBException 
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, JAXBException, IOException {
-
-		System.out.println("Start");
 
 		// Below was used to create database ,extract xml and insert data into tables
 
@@ -83,7 +84,6 @@ public class LoginUI extends JFrame {
 			}
 		});
 
-		System.out.println("End");
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class LoginUI extends JFrame {
 		passwordField.setBounds(472, 201, 191, 34);
 		contentPane.add(passwordField);
 
-		JButton btnLogin = new JButton("Login");
+		btnLogin = new JButton("Login");
 		btnLogin.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnLogin.setBounds(408, 282, 117, 34);
 		contentPane.add(btnLogin);
@@ -147,55 +147,52 @@ public class LoginUI extends JFrame {
 					try {
 						ImplementRegister register = new ImplementRegister();
 						// check if user exists or not and then validate the password.
-						if (register.verifyIfUserExists(userName)) {
-							ImplementLogin login = new ImplementLogin();
-							if (login.login(userName, plainText)) {
+						try {
+							if (register.verifyIfUserExists(userName)) {
+								ImplementLogin login = new ImplementLogin();
+								if (login.login(userName, plainText)) {
 
-								// assign currentUser as username
-								currentUser = userName;
-								// let it go to the search page if login is successful
-								dispose();
-								SearchUI search = new SearchUI();
-								search.setSize(950, 600);
-								search.setLocationRelativeTo(null);
+									// assign currentUser as username
+									currentUser = userName;
+									// let it go to the search page if login is successful
+									dispose();
+									SearchUI search = new SearchUI();
+									search.setSize(950, 600);
+									search.setLocationRelativeTo(null);
 
+								}
+								else {
+									messageShow("Invalid Credentials: Username and password don't match");
+								}
 							}
 							else {
-								messageShow("Invalid Credentials: Username and password don't match");
+								messageShow("User does not exist. Please register");
 							}
-						}
-						else {
-							messageShow("User does not exist. Please register");
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
 						}
 					} catch (IOException e2) {
 						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} 
-				}		
+					}		
+
+				}
 			}
 		}
 				);
 
-		JButton btnNewUserClick = new JButton("New User? Click to Register");
+		btnNewUserClick = new JButton("New User? Click to Register");
 		btnNewUserClick.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnNewUserClick.setBounds(333, 339, 287, 34);
 		contentPane.add(btnNewUserClick);
 		btnNewUserClick.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegisterUI register;
-				try {
-					// go to the register page
-					dispose();
-					register = new RegisterUI();
-					register.setSize(950, 600);
-					register.setLocationRelativeTo(null);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+
+				// go to the register page
+				dispose();
+				register = new RegisterUI();
+				register.setSize(950, 600);
+				register.setLocationRelativeTo(null);
 
 			}
 		});
