@@ -17,15 +17,8 @@ public class Author {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getPaperKey() {
 		return paperKey;
 	}
 
-	public void setPaperKey(String paperKey) {
-		this.paperKey = paperKey;
-	}
 }

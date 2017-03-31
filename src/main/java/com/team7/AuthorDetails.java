@@ -15,14 +15,6 @@ public class AuthorDetails {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AuthorDetails(List<String> name,String url) {
-
-		// TODO Auto-generated constructor stub
-		this.author = name;
-		this.url = url;
-
-	}
-
 	public 	List<String> getAuthor() {
 		return 	author;
 	}
