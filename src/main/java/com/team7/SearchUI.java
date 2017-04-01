@@ -305,7 +305,7 @@ public class SearchUI extends JFrame {
 		panel_1.add(JoinLabel_1);
 
 		//combo box for join comparator
-		JoinComboBox_1.setBounds(818, 10, 79, 22);
+		JoinComboBox_1.setBounds(818, 10, 68, 22);
 		panel_1.add(JoinComboBox_1);
 
 		/****************************************************** Panel -2 ********************************************/		
@@ -425,7 +425,7 @@ public class SearchUI extends JFrame {
 
 
 		//combo box for join comparator
-		JoinComboBox_2.setBounds(818, 10, 79, 22);
+		JoinComboBox_2.setBounds(818, 10, 68, 22);
 		panel_2.add(JoinComboBox_2);
 
 		/************************************ Panel -3 ******************************************************/
@@ -542,7 +542,7 @@ public class SearchUI extends JFrame {
 		panel_3.add(JoinLabel_3);
 
 		//combo box for join comparator
-		JoinComboBox_3.setBounds(818, 10, 79, 22);
+		JoinComboBox_3.setBounds(818, 10, 68, 22);
 		panel_3.add(JoinComboBox_3);
 
 		/****************************************** Panel-4 ******************************************************************/
@@ -657,7 +657,7 @@ public class SearchUI extends JFrame {
 		panel_4.add(JoinLabel_4);
 
 		//combo box for join comparator
-		JoinComboBox_4.setBounds(818, 10, 79, 22);
+		JoinComboBox_4.setBounds(818, 10, 68, 22);
 		panel_4.add(JoinComboBox_4);
 
 		/*********************************** Panel - 5 **********************************************/	
@@ -770,7 +770,7 @@ public class SearchUI extends JFrame {
 				boolean error = false;
 				finalList.clear();
 
-				if(q1 == true){
+				if(q1 == true){ 
 
 					sp1.setSearchFilter(Criteria.get(CriteriaComboBox_1.getSelectedItem()));
 					sp1.setSearchComparator((String) ComparatorComboBox_1.getSelectedItem()); 
@@ -980,7 +980,7 @@ public class SearchUI extends JFrame {
 						dispose();
 						display = new DisplayUI(finalAuthors);
 						display.setVisible(true);
-						display.setSize(950, 600);
+						display.setSize(1000, 600);
 						display.setLocationRelativeTo(null);
 					}
 				}				   
@@ -999,7 +999,7 @@ public class SearchUI extends JFrame {
 				dispose();
 				LoginUI log = new LoginUI();
 				log.setVisible(true);
-				log.setSize(950,600);
+				log.setSize(1000,600);
 				log.setLocationRelativeTo(null);
 
 			}
