@@ -186,7 +186,7 @@ public class RegisterUI extends JFrame {
 				 dispose();
 				 LoginUI log = new LoginUI();
 				 log.setVisible(true);
-				 log.setSize(950,600);
+				 log.setSize(950,600); 
 				 log.setLocationRelativeTo(null);
 			}
 		});

@@ -5,14 +5,12 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'mvn clean package'
+                sh 'mvn clean'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'mvn --version'
-                sh 'mvn clean test'
             }
         }
         stage('Deploy') {
