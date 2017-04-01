@@ -94,7 +94,7 @@ public class LoginUI extends JFrame {
 	 */
 	public LoginUI() {
 
-		setSize(950, 600);
+		setSize(1000, 600);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
@@ -149,15 +149,6 @@ public class LoginUI extends JFrame {
 				else {
 					try {
 						ImplementRegister register = new ImplementRegister();
-				        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-				        System.out.println(timestamp);
-				        ImageIcon loading = new ImageIcon("input/ajax-loader.gif");
-				        JLabel load = new JLabel("loading... "); 			
-				        load.setIcon(loading);
-				        load.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-//				        load.setBounds(317, 208, 81, 19);
-				        load.setLocation(500,500);
-				        contentPane.add(load);
 						// check if user exists or not and then validate the password.
 						try {
 							if (register.verifyIfUserExists(userName)) {
@@ -170,7 +161,7 @@ public class LoginUI extends JFrame {
 									dispose();
 									SearchUI search = new SearchUI();
 									search.setVisible(true);
-									search.setSize(950, 600);
+									search.setSize(1000,600);
 									search.setLocationRelativeTo(null);
 
 								}
@@ -204,11 +195,11 @@ public class LoginUI extends JFrame {
 				dispose();
 				register = new RegisterUI();
 				register.setVisible(true);
-				register.setSize(950, 600);
+				register.setSize(1000,600);
 				register.setLocationRelativeTo(null);
 			}
 		});
-	}
+	} 
 
 	public void messageShow (String msg) {
 

@@ -162,7 +162,7 @@ public class RegisterUI extends JFrame {
 						dispose();
 						SearchUI search = new SearchUI();
 						search.setVisible(true);
-						search.setSize(950, 600);
+						search.setSize(1000, 600);
 						search.setLocationRelativeTo(null);
 					}
 
@@ -186,7 +186,7 @@ public class RegisterUI extends JFrame {
 				 dispose();
 				 LoginUI log = new LoginUI();
 				 log.setVisible(true);
-				 log.setSize(950,600); 
+				 log.setSize(1000,600); 
 				 log.setLocationRelativeTo(null);
 			}
 		});
