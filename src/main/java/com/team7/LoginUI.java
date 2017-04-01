@@ -221,7 +221,6 @@ public class LoginUI extends JFrame {
 		d.setSize(500, 100);
 		d.setLocationRelativeTo(frame);
 		d.setVisible(true);
-		d.dispose();
 	}
 
 }
