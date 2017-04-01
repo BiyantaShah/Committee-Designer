@@ -47,7 +47,6 @@ public class DisplayUI extends JFrame {
 	 */
 	public DisplayUI(List<String> authors) {
 
-		setVisible(true);
 		setTitle("SEARCH RESULTS");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,6 +94,7 @@ public class DisplayUI extends JFrame {
 				ButtonEditor.savedAuthors.clear();
 				dispose();
 				SearchUI search = new SearchUI();
+				search.setVisible(true);
 				search.setSize(950, 600);
 				search.setLocationRelativeTo(null);				
 			}
@@ -147,7 +147,7 @@ public class DisplayUI extends JFrame {
 				saveAuthors = ButtonEditor.savedAuthors;
 
 				boolean flag = true;
-
+  
 				if (saveAuthors.size() == 0) {
 					LoginUI log = new LoginUI();
 					log.messageShow("Please select some authors to view details");
@@ -171,6 +171,8 @@ public class DisplayUI extends JFrame {
 
 					dispose();
 					SavedAuthorsUI saved = new SavedAuthorsUI(result);
+					saved.setVisible(true);
+					saved.setSize(950, 600);
 					saved.setLocationRelativeTo(null);
 
 				}

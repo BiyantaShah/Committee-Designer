@@ -29,31 +29,24 @@ public class ImplementSchemaDB implements SchemaDB {
 
 		// JDBC driver name and database URL		
 		getDBProperties(); 
-		//Database Properties
+		//Database Properties 
 		
 		String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-		String DB_URL = props.getProperty("jdbc.url.setup");
-		String userName = props.getProperty("jdbc.username");
-		String password = props.getProperty("jdbc.password");
 
 		Connection conn = null;
 		Statement stmt = null;
+		String sql = null;
 
 		try{
 			//Register JDBC driver
 			Class.forName(JDBC_DRIVER);
 
-			//Open a connection
-			conn = DriverManager.getConnection(DB_URL, userName, password);
-			String sql = null; 
-
-			//Execute a query
-			stmt = conn.createStatement();			      
-			sql = "CREATE DATABASE IF NOT EXISTS DBLP";
-			stmt.executeUpdate(sql);
-
+          			
 			//selecting database created above
 			String connected_db = props.getProperty("jdbc.url.setupdb");
+			String userName = props.getProperty("jdbc.username");
+			String password = props.getProperty("jdbc.password");
+
 			conn = DriverManager.getConnection(connected_db, userName, password);
 			stmt = conn.createStatement();
 
@@ -145,7 +138,7 @@ public class ImplementSchemaDB implements SchemaDB {
 
 		}catch(Exception se){
 			//Handle errors for JDBC
-			se.printStackTrace();
+			se.printStackTrace(); 
 
 		}
 		conn.close();
@@ -154,7 +147,7 @@ public class ImplementSchemaDB implements SchemaDB {
 
 	public Connection getConnection() throws IOException {
 
-		Connection conn = null;
+		Connection conn = null; 
 		getDBProperties();
 		
 		//Database Properties

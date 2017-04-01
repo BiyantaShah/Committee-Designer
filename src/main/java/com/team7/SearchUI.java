@@ -32,7 +32,7 @@ public class SearchUI extends JFrame {
 	private JTextField ValueField_4;
 	private JTextField ValueField_5;
 	JButton NewRowButton_1;
-	JButton NewRowButton_2;
+	JButton NewRowButton_2; 
 	JButton NewRowButton_3;
 	JButton NewRowButton_4;
 	JButton btnLogout;
@@ -61,7 +61,6 @@ public class SearchUI extends JFrame {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public SearchUI() {
 
-		setVisible(true);
 		setTitle("Search UI");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -980,6 +979,7 @@ public class SearchUI extends JFrame {
 					if (flag == true) {
 						dispose();
 						display = new DisplayUI(finalAuthors);
+						display.setVisible(true);
 						display.setSize(950, 600);
 						display.setLocationRelativeTo(null);
 					}
