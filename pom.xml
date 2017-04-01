@@ -180,7 +180,13 @@
 			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire.version}</version>
+                <version>${surefire.version}</version>           
+                <configuration>
+                  <systemPropertyVariables>
+                    <java.awt.headless>true</java.awt.headless>
+                    <log4j.configuration>${runtime.log4j.config}   </log4j.configuration>                                              
+                  </systemPropertyVariables>        
+            </configuration>               
             </plugin>
             <plugin>
 				<groupId>org.jacoco</groupId>
