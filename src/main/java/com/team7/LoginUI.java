@@ -49,6 +49,7 @@ public class LoginUI extends JFrame {
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, JAXBException, IOException {
 
+		System.setProperty("java.awt.headless", "true");
 		// Below was used to create database ,extract xml and insert data into tables
 
 		//    	File file = new File("input/dblp.xml");
