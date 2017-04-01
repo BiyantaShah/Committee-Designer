@@ -37,12 +37,15 @@ public class SavedAuthorsUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	Set<String> sendMail = new HashSet<String>();
+	JButton btnNewButton;
+	JButton btnSearch;
+	JButton btnSendEmail;
 
 	/**
 	 * Create the frame.
 	 * @throws SQLException  
 	 */
-	public SavedAuthorsUI(ResultSet result) throws SQLException {
+	public SavedAuthorsUI(ResultSet result) {
 
 		setVisible(true);
 		setTitle("SAVED AUTHORS");
@@ -68,7 +71,7 @@ public class SavedAuthorsUI extends JFrame {
 		lblNewLabel.setBounds(242, 68, 433, 16);
 		panel.add(lblNewLabel);
 
-		JButton btnSearch = new JButton("Search UI");
+		btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSearch.setBounds(620, 0, 117, 34);
 		panel.add(btnSearch);
@@ -82,7 +85,7 @@ public class SavedAuthorsUI extends JFrame {
 			}
 		});
 
-		JButton btnNewButton = new JButton("LogOut");
+		btnNewButton = new JButton("LogOut");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ButtonEditor.savedAuthors.clear();
@@ -105,33 +108,37 @@ public class SavedAuthorsUI extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JTable table = new JTable(buildTableModel(result));
+		JTable table;
+		try {
+			table = new JTable(buildTableModel(result));
+			JTableHeader header = table.getTableHeader();
+			header.setDefaultRenderer(new HeaderRenderer(table));
 
-		JTableHeader header = table.getTableHeader();
-		header.setDefaultRenderer(new HeaderRenderer(table));
-
-		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+			centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+			table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
 
 
-		table.getColumn("Select").setCellRenderer(new JTableButtonRenderer());
-		table.getColumn("Select").setCellEditor(
-				new ButtonEditor(new JCheckBox()));
+			table.getColumn("Select").setCellRenderer(new JTableButtonRenderer());
+			table.getColumn("Select").setCellEditor(
+					new ButtonEditor(new JCheckBox()));
 
-		table.setPreferredScrollableViewportSize(new Dimension(650, 350));
-		JScrollPane scroll = new JScrollPane(table);
-		setVisible(true);
+			table.setPreferredScrollableViewportSize(new Dimension(650, 350));
+			JScrollPane scroll = new JScrollPane(table);
+			setVisible(true);
 
-		panel_1.add(scroll);
+			panel_1.add(scroll);
+		} catch (SQLException e2) {
+			
+		}
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(6, 488, 921, 63);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
-		JButton btnSendEmail = new JButton("Send Email");
+		btnSendEmail = new JButton("Send Email");
 		btnSendEmail.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSendEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -153,8 +160,7 @@ public class SavedAuthorsUI extends JFrame {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						
 					}
 				}
 
