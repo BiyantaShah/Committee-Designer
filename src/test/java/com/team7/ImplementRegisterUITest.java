@@ -16,6 +16,7 @@ public class ImplementRegisterUITest  {
 	public void testRegUserEmpty() {
 		reg.passwordField.setText("abc");
 		reg.btnRegister.doClick();
+		reg.dispose();
 	}
 	
 	@Test
@@ -23,6 +24,7 @@ public class ImplementRegisterUITest  {
 	public void testRegPassEmpty() {
 		reg.UsernameTField.setText("sravani.beeram@gmail.com");
 		reg.btnRegister.doClick();
+		reg.dispose();
 	}
 	
 	@Test
@@ -31,6 +33,7 @@ public class ImplementRegisterUITest  {
 		reg.UsernameTField.setText("shahbiyanta@gmail.com");
 		reg.passwordField.setText("abc");
 		reg.btnRegister.doClick();
+		reg.dispose();
 	}
 	
 	@Test
@@ -39,6 +42,7 @@ public class ImplementRegisterUITest  {
 		reg.UsernameTField.setText("shahbiyanta@@gmail.com");
 		reg.passwordField.setText("abc");
 		reg.btnRegister.doClick();
+		reg.dispose();
 	}
 	
 	@Test
@@ -53,13 +57,14 @@ public class ImplementRegisterUITest  {
 		Statement stmt = conn.createStatement();
 		
 		stmt.executeUpdate("delete from User where username='sravani.beeram@gmail.com'");		
-		
+		reg.dispose();
 	}
 	
 	@Test
 	// Testing the register button
 	public void testLoginButton() throws SQLException {
 		reg.btnLogin.doClick();
+		reg.dispose();
 	}
 
 }

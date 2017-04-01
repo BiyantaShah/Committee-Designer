@@ -1,7 +1,7 @@
 package com.team7;
 
 import java.awt.Color;
-
+import java.awt.Dialog;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,14 +12,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.JDialog;
 import javax.swing.JButton;
@@ -207,19 +204,20 @@ public class LoginUI extends JFrame {
 		d.setSize(500, 100);
 		d.setLocationRelativeTo(frame);
 
+
 		d.addWindowListener(null);
 		d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
-		ScheduledExecutorService sch = Executors.newSingleThreadScheduledExecutor();     
-		sch.schedule(new Runnable() {
-			public void run() {
+		Timer timer = new Timer(3000, new ActionListener() { // 3 sec
+			public void actionPerformed(ActionEvent e) {
 				d.setVisible(false);
 				d.dispose();
 			}
-		}, 5, TimeUnit.SECONDS);
+		});
+
+		timer.start();
+
 		d.setVisible(true);
-
-
 	}
 
 }

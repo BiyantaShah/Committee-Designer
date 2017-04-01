@@ -29,6 +29,7 @@ public class ImplementSavedUITest {
 		saved = new SavedAuthorsUI(rs);
 		
 		saved.btnNewButton.doClick();
+		saved.dispose();
 				
 	}
 	
@@ -40,7 +41,8 @@ public class ImplementSavedUITest {
 		ResultSet rs = queryBuilderObject.sendQuery(query);
 		
 		saved = new SavedAuthorsUI(rs);		
-		saved.btnSearch.doClick();				
+		saved.btnSearch.doClick();
+		saved.dispose();
 	}
 	
 	@Test
@@ -58,7 +60,7 @@ public class ImplementSavedUITest {
 		button.getTableCellEditorComponent(table, "select", true, 1, 0);
 		
 		saved.btnSendEmail.doClick();
-				
+		saved.dispose();		
 	}
 	
 	@Test
@@ -71,7 +73,7 @@ public class ImplementSavedUITest {
 		saved = new SavedAuthorsUI(rs);
 		
 		saved.btnSendEmail.doClick();
-				
+		saved.dispose();		
 	}
 	
 	

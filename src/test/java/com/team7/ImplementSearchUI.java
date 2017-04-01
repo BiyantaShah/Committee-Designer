@@ -13,18 +13,21 @@ public class ImplementSearchUI {
 		search.NewRowButton_2.doClick();
 		search.NewRowButton_3.doClick();
 		search.NewRowButton_4.doClick();
+		search.dispose();
 	}
 	
 	@Test
 	// Testing the logout button
 	public void testLogoutButton() {
 		search.btnLogout.doClick();
+		search.dispose();
 	}
 	
 	@Test
 	// Testing the submit button
 	public void testSubmitButton() {
 		search.btnNewButton.doClick();
+		search.dispose();
 	}
 
 }
