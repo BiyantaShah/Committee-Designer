@@ -43,7 +43,7 @@ public class ImplementSchemaDB implements SchemaDB {
 
           			
 			//selecting database created above
-			String connected_db = props.getProperty("jdbc.url");
+			String connected_db = props.getProperty("jdbc.url.setupdb");
 			String userName = props.getProperty("jdbc.username");
 			String password = props.getProperty("jdbc.password");
 
@@ -147,7 +147,7 @@ public class ImplementSchemaDB implements SchemaDB {
 
 	public Connection getConnection() throws IOException {
 
-		Connection conn = null;
+		Connection conn = null; 
 		getDBProperties();
 		
 		//Database Properties
