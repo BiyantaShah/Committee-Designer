@@ -44,7 +44,6 @@ public class RegisterUI extends JFrame {
 	@SuppressWarnings("unchecked")
 	public RegisterUI() throws SQLException {
 
-		setVisible(true);
 		setTitle("REGISTER");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -161,6 +160,7 @@ public class RegisterUI extends JFrame {
 						//connect to search page
 						dispose();
 						SearchUI search = new SearchUI();
+						search.setVisible(true);
 						search.setSize(950, 600);
 						search.setLocationRelativeTo(null);
 					}

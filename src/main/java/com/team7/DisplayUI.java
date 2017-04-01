@@ -43,7 +43,6 @@ public class DisplayUI extends JFrame {
 	 */
 	public DisplayUI(List<String> authors) throws SQLException {
 
-		setVisible(true);
 		setTitle("SEARCH RESULTS");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,6 +90,7 @@ public class DisplayUI extends JFrame {
 				ButtonEditor.savedAuthors.clear();
 				dispose();
 				SearchUI search = new SearchUI();
+				search.setVisible(true);
 				search.setSize(950, 600);
 				search.setLocationRelativeTo(null);				
 			}
@@ -167,6 +167,8 @@ public class DisplayUI extends JFrame {
 					try {
 						dispose();
 						SavedAuthorsUI saved = new SavedAuthorsUI(result);
+						saved.setVisible(true);
+						saved.setSize(950, 600);
 						saved.setLocationRelativeTo(null);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block

@@ -52,7 +52,7 @@ public class SavedAuthorsUI extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(null); 
 
 		JPanel panel = new JPanel();
 		panel.setBounds(6, 6, 921, 101);
@@ -77,6 +77,7 @@ public class SavedAuthorsUI extends JFrame {
 				ButtonEditor.savedAuthors.clear();
 				dispose();
 				SearchUI search = new SearchUI();
+				search.setVisible(true);
 				search.setSize(950, 600);
 				search.setLocationRelativeTo(null);				
 			}
@@ -147,8 +148,11 @@ public class SavedAuthorsUI extends JFrame {
 				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 				if (flag == true) {
 					try {
-						searchDisplay.sendEmail(sendMail, LoginUI.currentUser);
-
+						String res = searchDisplay.sendEmail(sendMail, LoginUI.currentUser);
+                        if(res == "success"){
+        					LoginUI log = new LoginUI();
+        					log.messageShow("Email sent successfully");
+                        }
 					}  catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -157,8 +161,6 @@ public class SavedAuthorsUI extends JFrame {
 						e1.printStackTrace();
 					}
 				}
-
-
 			}
 		});
 		btnSendEmail.setBounds(383, 13, 155, 29);

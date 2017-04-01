@@ -26,7 +26,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(dblp.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-
+ 
 		// to allow access to dblp.dtd
 		System.setProperty("javax.xml.accessExternalDTD", "all");
 

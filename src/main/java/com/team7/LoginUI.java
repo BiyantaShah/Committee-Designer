@@ -15,10 +15,12 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.JDialog;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
@@ -50,24 +52,24 @@ public class LoginUI extends JFrame {
 
 		// Below was used to create database ,extract xml and insert data into tables
 
-		//    	File file = new File("input/dblp.xml");
-		//    	File comData = new File("input/committees/");
-
-		//    	// Parsing the xml to create objects
-		//    	ImplementParseDatabase parse = new ImplementParseDatabase();
-		//    	ImplementSchemaDB db=new ImplementSchemaDB();;
-		//    	ImplementCommittees com = new ImplementCommittees();
-		//
-		//		try {
-		//			
-		//	    	db.dbSetUp();   //set up initial database
-		//	    	parse.parseXml(file);	//parse xml data
-		//	    	com.ParseFiles(comData); //parse committee data
-		//
-		//		} catch (Exception e1) {
-		//			// TODO Auto-generated catch block
-		//			e1.printStackTrace();
-		//		}
+//		    	File file = new File("input/dblp.xml");
+//		    	File comData = new File("input/committees/");
+//
+//		    	// Parsing the xml to create objects
+//		    	ImplementParseDatabase parse = new ImplementParseDatabase();
+//		    	ImplementSchemaDB db=new ImplementSchemaDB();;
+//		    	ImplementCommittees com = new ImplementCommittees();
+//		
+//				try {
+//					
+//			    	db.dbSetUp();   //set up initial database
+//			    	parse.parseXml(file);	//parse xml data
+//			    	com.ParseFiles(comData); //parse committee data
+//		
+//				} catch (Exception e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
 
 
 		EventQueue.invokeLater(new Runnable() {
@@ -127,7 +129,7 @@ public class LoginUI extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(472, 201, 191, 34);
 		contentPane.add(passwordField);
-
+		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnLogin.setBounds(408, 282, 117, 34);
@@ -146,6 +148,15 @@ public class LoginUI extends JFrame {
 				else {
 					try {
 						ImplementRegister register = new ImplementRegister();
+				        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+				        System.out.println(timestamp);
+				        ImageIcon loading = new ImageIcon("input/ajax-loader.gif");
+				        JLabel load = new JLabel("loading... "); 			
+				        load.setIcon(loading);
+				        load.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+//				        load.setBounds(317, 208, 81, 19);
+				        load.setLocation(500,500);
+				        contentPane.add(load);
 						// check if user exists or not and then validate the password.
 						if (register.verifyIfUserExists(userName)) {
 							ImplementLogin login = new ImplementLogin();
@@ -156,7 +167,10 @@ public class LoginUI extends JFrame {
 								// let it go to the search page if login is successful
 								dispose();
 								SearchUI search = new SearchUI();
-								search.setSize(950, 600);
+						        Timestamp timestamp2 = new Timestamp(System.currentTimeMillis());
+						        System.out.println(timestamp2);
+								search.setVisible(true);
+								search.setSize(950,600);
 								search.setLocationRelativeTo(null);
 
 							}
@@ -190,6 +204,7 @@ public class LoginUI extends JFrame {
 					// go to the register page
 					dispose();
 					register = new RegisterUI();
+					register.setVisible(true);
 					register.setSize(950, 600);
 					register.setLocationRelativeTo(null);
 				} catch (SQLException e1) {
@@ -202,12 +217,11 @@ public class LoginUI extends JFrame {
 	}
 
 	public void messageShow (String msg) {
-
 		JDialog d = new JDialog(frame, msg, true);
 		d.setSize(500, 100);
 		d.setLocationRelativeTo(frame);
 		d.setVisible(true);
-
+		d.dispose();
 	}
 
 }
