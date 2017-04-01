@@ -28,7 +28,7 @@ public class ImplementSchemaDB implements SchemaDB {
 	public void dbSetUp() throws ClassNotFoundException, SQLException, IOException{
 
 		// JDBC driver name and database URL		
-		getDBProperties(); 
+//		getDBProperties(); 
 		//Database Properties 
 		
 		String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -43,9 +43,9 @@ public class ImplementSchemaDB implements SchemaDB {
 
           			
 			//selecting database created above
-			String connected_db = props.getProperty("jdbc.url.setupdb");
-			String userName = props.getProperty("jdbc.username");
-			String password = props.getProperty("jdbc.password");
+			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
+			String userName = "root";
+			String password = "9HTa~TZ?dyQWM4}";
 
 			conn = DriverManager.getConnection(connected_db, userName, password);
 			stmt = conn.createStatement();
@@ -148,12 +148,12 @@ public class ImplementSchemaDB implements SchemaDB {
 	public Connection getConnection() throws IOException {
 
 		Connection conn = null; 
-		getDBProperties();
+//		getDBProperties();
 		
 		//Database Properties
-		String url = props.getProperty("jdbc.url");
-		String userName = props.getProperty("jdbc.username");
-		String password = props.getProperty("jdbc.password");
+		String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";
+		String userName = "root";
+		String password = "9HTa~TZ?dyQWM4}";
 
 		try {
 
@@ -166,20 +166,20 @@ public class ImplementSchemaDB implements SchemaDB {
 		return conn;
 	}
 	
-	private void getDBProperties() throws IOException{
-		
-		props = new Properties();
-		FileInputStream in;
-		try {
-			in = new FileInputStream("config/db.properties");
-			props.load(in);
-			in.close();
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}  
-		
-	}
+//	private void getDBProperties() throws IOException{
+//		
+//		props = new Properties();
+//		FileInputStream in;
+//		try {
+//			in = new FileInputStream("config/db.properties");
+//			props.load(in);
+//			in.close();
+//		} catch (FileNotFoundException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}  
+//		
+//	}
 
 	public boolean insertData(Object object_name) throws SQLException, IOException {
 
