@@ -15,6 +15,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -200,10 +203,22 @@ public class LoginUI extends JFrame {
 
 	public void messageShow (String msg) {
 
-		JDialog d = new JDialog(frame, msg, true);
+		final JDialog d = new JDialog(frame, msg, true);
 		d.setSize(500, 100);
 		d.setLocationRelativeTo(frame);
+
+		d.addWindowListener(null);
+		d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+		ScheduledExecutorService sch = Executors.newSingleThreadScheduledExecutor();     
+		sch.schedule(new Runnable() {
+			public void run() {
+				d.setVisible(false);
+				d.dispose();
+			}
+		}, 5, TimeUnit.SECONDS);
 		d.setVisible(true);
+
 
 	}
 
