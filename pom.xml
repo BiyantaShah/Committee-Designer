@@ -99,7 +99,8 @@
 	<name>team7</name>
 	<description>Author Publication Directory</description>
 	<build>
-		<sourceDirectory>src</sourceDirectory>
+		<sourceDirectory>Phase-4/src</sourceDirectory>
+		<pluginManagement>
     	<plugins>
     		<plugin>
     			<artifactId>maven-compiler-plugin</artifactId>
@@ -199,5 +200,6 @@
 				</executions>
 			</plugin>
 		</plugins>
+		</pluginManagement>
 	</build>
 </project>
