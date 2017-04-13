@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -52,24 +53,36 @@ public class LoginUI extends JFrame {
 		System.setProperty("java.awt.headless", "true");
 		// Below was used to create database ,extract xml and insert data into tables
 
-//		    	File file = new File("input/dblp.xml");
-//		    	File comData = new File("input/committees/");
+//		File file = new File("input/dblp.xml");
+//		File comData = new File("input/committees/");
+//		File uniData = new File("input/generate-author-info.csv");
+//		File countryData = new File("input/country-info.csv");	
+//		File affData = new File("input/faculty-affiliations.csv");
+//		File hPageData = new File("input/homepages.csv");
 //
-//		    	// Parsing the xml to create objects
-//		    	ImplementParseDatabase parse = new ImplementParseDatabase();
-//		    	ImplementSchemaDB db=new ImplementSchemaDB();;
-//		    	ImplementCommittees com = new ImplementCommittees();
-//		
-//				try {
-//					
-//			    	db.dbSetUp();   //set up initial database
-//			    	parse.parseXml(file);	//parse xml data
-//			    	com.ParseFiles(comData); //parse committee data
-//		
-//				} catch (Exception e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
+//		// Parsing the xml and csv to create objects
+//		ImplementParseDatabase parse = new ImplementParseDatabase();
+//		ImplementSchemaDB db=new ImplementSchemaDB();
+//		ImplementCommittees com = new ImplementCommittees();
+//		ImplementUniversityAuthorData uni = new ImplementUniversityAuthorData();
+//		ImplementUniCountryData country = new ImplementUniCountryData();
+//		ImplementAuthorAffData aff = new ImplementAuthorAffData();
+//		ImplementHomePageData hPage = new ImplementHomePageData();
+//
+//		try {
+//			
+//			db.dbSetUp();   //set up initial database
+//			parse.parseXml(file);	//parse xml data
+//			com.ParseFiles(comData); //parse committee data
+//			uni.ParseFiles(uniData); // parsing university data
+//			country.ParseFiles(countryData); // parsing universities and their country
+//			aff.ParseFiles(affData); // parsing the affiliated universities data
+//			hPage.ParseFiles(hPageData); // parsing homepage data
+//
+//		} catch (Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 
 
 		EventQueue.invokeLater(new Runnable() {

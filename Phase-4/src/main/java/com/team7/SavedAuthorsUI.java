@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableModel;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -117,13 +118,19 @@ public class SavedAuthorsUI extends JFrame {
 
 			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 			centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-			table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
-
-
+			
+			// Setting the values center aligned
+			for (int i=0; i< table.getColumnModel().getColumnCount(); i++) {
+				table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+			}
+			
+			// Rendering a button for each table row
 			table.getColumn("Select").setCellRenderer(new JTableButtonRenderer());
 			table.getColumn("Select").setCellEditor(
 					new ButtonEditor(new JCheckBox()));
+			
+			// Not allowing the columns to be dragged
+			table.getTableHeader().setReorderingAllowed(false);
 
 			table.setPreferredScrollableViewportSize(new Dimension(650, 350));
 			JScrollPane scroll = new JScrollPane(table);
@@ -175,17 +182,29 @@ public class SavedAuthorsUI extends JFrame {
 
 	}
 
-	public DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
+	public TableModel buildTableModel(ResultSet rs) throws SQLException {
 		// TODO Auto-generated method stub
 
 		ResultSetMetaData metaData = rs.getMetaData();
 
 		Vector<String> columnNames = new Vector<String>();
 
-		int columnCount = metaData.getColumnCount();
+		final int columnCount = metaData.getColumnCount();
 
+		// To understand what each column name means in the UI
 		for (int column = 1; column <= columnCount; column++) {
-			columnNames.add(metaData.getColumnName(column));
+			
+			if (metaData.getColumnName(column).equals("name"))			
+				columnNames.add("Author Name");
+			else if (metaData.getColumnName(column).equals("title"))
+				columnNames.addElement("Paper Title");
+			else if (metaData.getColumnName(column).equals("confName"))
+				columnNames.addElement("Published in");
+			else if (metaData.getColumnName(column).equals("year"))
+				columnNames.addElement("Publication Year");
+			else
+				columnNames.addElement(metaData.getColumnName(column));
+			
 		}
 		columnNames.add("Select");
 
@@ -198,7 +217,22 @@ public class SavedAuthorsUI extends JFrame {
 			vector.add("select");
 			data.add(vector);
 		}
+		
+		TableModel model = new DefaultTableModel(data, columnNames) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
-		return new DefaultTableModel(data, columnNames);
+			public boolean isCellEditable(int row, int column)
+		    {
+			  //This causes all cells except of the last column
+			  // to be not editable
+		      return column == 4; 
+		    }
+		};
+
+		return model;
+
 	}
 }

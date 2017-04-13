@@ -78,6 +78,7 @@ public class ImplementParseDatabaseTest extends TestCase{
 		
 		stmt.executeUpdate("delete from Paper where title='testing11'");
 		stmt.executeUpdate("delete from Paper where year='11116'");
+		stmt.executeUpdate("delete from Author where name='testing11'");
 		
 		file.delete();
 	}
@@ -89,19 +90,19 @@ public class ImplementParseDatabaseTest extends TestCase{
 		// to test the successful parsing of XML file
 	    File file = new File("test.xml");
 	    FileWriter writer = new FileWriter(file);
-	    writer.write("<?xml version='1.0' encoding='ISO-8859-1'?><dblp><proceedings key='conf/oopsla/1111'>"
+	    writer.write("<?xml version='1.0' encoding='ISO-8859-1'?><dblp><proceedings key='conf/oopsla/111g'>"
 	    		+ "<title>testing11</title>"
 	    		+ "<booktitle>oopsla</booktitle>"
 	    		+ "</proceedings>"
-	    		+ "<proceedings key='conf/ecoop/1111'>"
+	    		+ "<proceedings key='conf/ecoop/111g'>"
 	    		+ "<title>testing11</title>"
 	    		+ "<booktitle>ecoop</booktitle>"
 	    		+ "</proceedings>"
-	    		+ "<proceedings key='conf/pldi/1111'>"
+	    		+ "<proceedings key='conf/pldi/111g'>"
 	    		+ "<title>testing11</title>"
 	    		+ "<booktitle>pldi</booktitle>"
 	    		+ "</proceedings>"
-	    		+ "<proceedings key='conf/icfp/1111'>"
+	    		+ "<proceedings key='conf/icfp/111g'>"
 	    		+ "<title>testing11</title>"
 	    		+ "<booktitle>icfp</booktitle>"
 	    		+ "</proceedings></dblp>"); 
@@ -115,7 +116,7 @@ public class ImplementParseDatabaseTest extends TestCase{
 		Connection conn = db.getConnection();
 		Statement stmt = conn.createStatement();
 		
-		stmt.executeUpdate("delete from Paper where title='testing11'");
+		stmt.executeUpdate("delete from Conference where confDetail='testing11'");
 		
 		file.delete();
 	}
@@ -170,8 +171,8 @@ public class ImplementParseDatabaseTest extends TestCase{
 		Connection conn = db.getConnection();
 		Statement stmt = conn.createStatement();
 		
-		stmt.executeUpdate("delete from Paper where title='testing11'");
-		stmt.executeUpdate("delete from Paper where year='11116'");
+		stmt.executeUpdate("delete from Article where title='testing11'");
+		stmt.executeUpdate("delete from Article where year='11116'");
 		
 		file.delete();
 	}
