@@ -25,7 +25,7 @@ public class ImplementUniCountryData implements UniversityAuthorData {
 		ImplementSchemaDB db = new ImplementSchemaDB();
 		Connection conn = db.getConnection();
 
-		// updating the author table with university name.
+		// updating the author table with university region of the particular university.
 		PreparedStatement stmt = conn.prepareStatement("update Author set uniRegion=? where university=?");
 
 		try {

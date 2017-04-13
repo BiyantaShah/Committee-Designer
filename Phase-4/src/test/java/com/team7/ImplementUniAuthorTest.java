@@ -14,6 +14,7 @@ import org.junit.Test;
 public class ImplementUniAuthorTest {
 	
 	@Test
+	// to test the successful parsing of CSV file
 	public void testParseSuccess() throws IOException, SQLException {
 		
 		File file = new File("test.csv");
@@ -37,6 +38,7 @@ public class ImplementUniAuthorTest {
 	}
 	
 	@Test
+	// to test the parsing of an empty CSV file
 	public void parseEmpty() throws IOException, SQLException {
 		File file = new File("test.csv");
 		FileWriter writer = new FileWriter(file);

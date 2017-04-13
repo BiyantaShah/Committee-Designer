@@ -24,7 +24,7 @@ public class ImplementAuthorAffData implements UniversityAuthorData {
         ImplementSchemaDB db = new ImplementSchemaDB();
 		Connection conn = db.getConnection();
 		
-		// updating the author table with university name.
+		// updating the author table with affiliated university name.
         PreparedStatement stmt = conn.prepareStatement("update Author set affiliatedUni=? where name=?");
         
         try {
