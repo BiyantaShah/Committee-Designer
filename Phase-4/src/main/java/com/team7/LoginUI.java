@@ -1,13 +1,11 @@
 package com.team7;
 
 import java.awt.Color;
-import java.awt.Dialog;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.xml.bind.JAXBException;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -48,7 +46,7 @@ public class LoginUI extends JFrame {
 	 * @throws IOException 
 	 * @throws JAXBException 
 	 */
-	public static void main(String[] args) throws ClassNotFoundException, SQLException, JAXBException, IOException {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
 
 		System.setProperty("java.awt.headless", "true");
 		// Below was used to create database ,extract xml and insert data into tables
@@ -164,7 +162,7 @@ public class LoginUI extends JFrame {
 						try {
 							//including an escape character if string contains '
 							if(userName.contains("'")){
-								userName = userName.replaceAll("'","''");
+								userName = userName.replaceAll("'","\\\\'");
 							}
 							if (register.verifyIfUserExists(userName)) {
 								ImplementLogin login = new ImplementLogin();

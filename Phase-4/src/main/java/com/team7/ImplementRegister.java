@@ -19,7 +19,7 @@ public class ImplementRegister implements Register {
 
 		//including an escape character if string contains '
 		if(userName.contains("'")){
-			userName = userName.replaceAll("'","''");
+			userName = userName.replaceAll("'","\\\\'");
 		}
 
 		if(verifyIfUserExists(userName))

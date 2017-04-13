@@ -782,7 +782,12 @@ public class SearchUI extends JFrame {
 						sp1.setSearchValue(ValueField_1.getText().trim());
 						//including an escape character if string contains '
 						if(sp1.getSearchValue().contains("'")){
-							String s = sp1.getSearchValue().replaceAll("'", "''");
+							String s = sp1.getSearchValue().replaceAll("'", "\\\\'");
+							sp1.setSearchValue(s);
+						}
+						
+						if(sp1.getSearchValue().contains("%")){
+							String s = sp1.getSearchValue().replaceAll("%", "\\\\%");
 							sp1.setSearchValue(s);
 						}
 					}					
@@ -824,9 +829,15 @@ public class SearchUI extends JFrame {
 						sp2.setSearchValue(ValueField_2.getText().trim());
 						//including an escape character if string contains '
 						if(sp2.getSearchValue().contains("'")){
-							String s = sp2.getSearchValue().replaceAll("'", "''");
+							String s = sp2.getSearchValue().replaceAll("'", "\\\\'");
 							sp2.setSearchValue(s);
 						}
+						
+						if(sp2.getSearchValue().contains("%")){
+							String s = sp2.getSearchValue().replaceAll("%", "\\\\%");
+							sp2.setSearchValue(s);
+						}
+
 					}
 					sp2.setJoinFilter((String) JoinComboBox_2.getSelectedItem()); 
 
@@ -867,7 +878,12 @@ public class SearchUI extends JFrame {
 						sp3.setSearchValue(ValueField_3.getText().trim());
 						//including an escape character if string contains '
 						if(sp3.getSearchValue().contains("'")){
-							String s = sp3.getSearchValue().replaceAll("'", "''");
+							String s = sp3.getSearchValue().replaceAll("'", "\\\\'");
+							sp3.setSearchValue(s);
+						}
+						
+						if(sp3.getSearchValue().contains("%")){
+							String s = sp3.getSearchValue().replaceAll("%", "\\\\%");
 							sp3.setSearchValue(s);
 						}
 
@@ -910,7 +926,12 @@ public class SearchUI extends JFrame {
 						sp4.setSearchValue(ValueField_4.getText().trim());
 						//including an escape character if string contains '
 						if(sp4.getSearchValue().contains("'")){
-							String s = sp4.getSearchValue().replaceAll("'", "''");
+							String s = sp4.getSearchValue().replaceAll("'", "\\\\'");
+							sp4.setSearchValue(s);
+						}
+						
+						if(sp4.getSearchValue().contains("%")){
+							String s = sp4.getSearchValue().replaceAll("%", "\\\\%");
 							sp4.setSearchValue(s);
 						}
 
@@ -952,9 +973,15 @@ public class SearchUI extends JFrame {
 						sp5.setSearchValue(ValueField_5.getText().trim());
 						//including an escape character if string contains '
 						if(sp5.getSearchValue().contains("'")){
-							String s = sp5.getSearchValue().replaceAll("'", "''");
+							String s = sp5.getSearchValue().replaceAll("'", "\\\\'");
 							sp5.setSearchValue(s);
 						}
+						
+						if(sp5.getSearchValue().contains("%")){
+							String s = sp5.getSearchValue().replaceAll("%", "\\\\%");
+							sp5.setSearchValue(s);
+						}
+
 					}
 
 					if(sp5.getSearchValue().equals("")) {

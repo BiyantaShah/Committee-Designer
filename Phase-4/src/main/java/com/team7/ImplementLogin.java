@@ -21,7 +21,6 @@ public class ImplementLogin implements Login {
 		ImplementSchemaDB db = new ImplementSchemaDB();
 		Connection conn = db.getConnection(); 
 
-        System.out.print(username);
 		String sql = "select password from User where username = " + '"'+username +'"';
 	
 		PreparedStatement stmt = conn.prepareStatement(sql);
