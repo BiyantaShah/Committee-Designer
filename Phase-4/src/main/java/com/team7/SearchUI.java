@@ -54,7 +54,7 @@ public class SearchUI extends JFrame {
 	List<SearchParameter> finalList = new ArrayList<SearchParameter>();
 	LoginUI log = new LoginUI();
 	ImplementSearchDisplay sd = new ImplementSearchDisplay();
-
+    int count = 0;
 
 	/**
 	 * Create the frame.
@@ -807,12 +807,13 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_1.getSelectedItem() == "Count Of Papers"){
+						count += 1;
 						if(!NumberUtils.isNumber(sp1.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in first row"); 
 						}
 						try {
-						   int res = Integer.parseInt(sp1.getSearchValue());
+						   Integer.parseInt(sp1.getSearchValue());
 						} catch (NumberFormatException e1) {
 							error = true;
 							log.messageShow("Please enter valid number");
@@ -861,6 +862,7 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_2.getSelectedItem() == "Count Of Papers"){
+						count += 1;
 						if(!NumberUtils.isNumber(sp2.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in second row"); 
@@ -918,6 +920,7 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_3.getSelectedItem() == "Count Of Papers"){
+						count += 1;
 						if(!NumberUtils.isNumber(sp3.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in third row"); 
@@ -974,6 +977,7 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_4.getSelectedItem() == "Count Of Papers"){
+						count += 1;
 						if(!NumberUtils.isNumber(sp4.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in fourth row"); 
@@ -1027,6 +1031,7 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_5.getSelectedItem() == "Count Of Papers"){
+						count += 1;
 						if(!NumberUtils.isNumber(sp5.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in fifth row"); 
@@ -1044,6 +1049,12 @@ public class SearchUI extends JFrame {
 					if(!error){
 						finalList.add(sp5);
 					}
+				}
+				
+				if(count > 1){
+					count = 0;
+					finalList.clear();
+					log.messageShow("Please limit Count Of Papers search criteria to once");
 				}
 
 				if(finalList.size() != 0 && error == false) {
