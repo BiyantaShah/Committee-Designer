@@ -65,7 +65,6 @@ public class RegisterUI extends JFrame {
 		UIManager.getLookAndFeelDefaults()
 		.put("ToolTip.font", new Font("Lucida Grande", Font.BOLD, 14));
 
-
 		UsernameTField.setToolTipText("Please enter valid Email-id");
 
 		UsernameTField.setBounds(521, 146, 191, 34);
@@ -142,12 +141,24 @@ public class RegisterUI extends JFrame {
 				userName = UsernameTField.getText();
 				String plainPwd = new String(passwordField.getPassword());
 
-				// empty username or password is not allowed
+				// empty/blank user name or password is not allowed
 				if(userName.equals("")) {
-					log.messageShow("Please enter  user name");
-				} else if(plainPwd.equals("")) {
+					log.messageShow("Please enter user name");
+				} 
+				else if (userName.contains(" ")) {
+					log.messageShow("Username cannot contain blank spaces");
+				}
+				else if (userName.length() > 50) {
+					// user name having length > 50 is also not allowed
+					log.messageShow("Email ID should not have more than 50 characters");
+				}
+				else if(plainPwd.equals("")) {
 					log.messageShow("Please enter password");
-				} else {
+				} 
+				else if (plainPwd.contains(" ")) {
+					log.messageShow("Password cannot contain blank spaces");
+				}
+				else {
  
 					try {
 						//insert data into table

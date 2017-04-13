@@ -202,8 +202,6 @@ public class SavedAuthorsUI extends JFrame {
 				columnNames.addElement("Published in");
 			else if (metaData.getColumnName(column).equals("year"))
 				columnNames.addElement("Publication Year");
-			else
-				columnNames.addElement(metaData.getColumnName(column));
 			
 		}
 		columnNames.add("Select");
