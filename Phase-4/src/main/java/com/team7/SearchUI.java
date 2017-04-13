@@ -5,7 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils; 
+import org.apache.commons.lang.math.NumberUtils;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -806,12 +807,12 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_1.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp1.getSearchValue())){
+						if(!NumberUtils.isNumber(sp1.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in first row"); 
 						}
 						try {
-						   Integer.parseInt(sp1.getSearchValue());
+						   int res = Integer.parseInt(sp1.getSearchValue());
 						} catch (NumberFormatException e1) {
 							error = true;
 							log.messageShow("Please enter valid number");
@@ -860,7 +861,7 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_2.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp2.getSearchValue())){
+						if(!NumberUtils.isNumber(sp2.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in second row"); 
 						}
@@ -917,7 +918,7 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_3.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp3.getSearchValue())){
+						if(!NumberUtils.isNumber(sp3.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in third row"); 
 						}
@@ -973,7 +974,7 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_4.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp4.getSearchValue())){
+						if(!NumberUtils.isNumber(sp4.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in fourth row"); 
 						}
@@ -1026,7 +1027,7 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_5.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp5.getSearchValue())){
+						if(!NumberUtils.isNumber(sp5.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in fifth row"); 
 						}
