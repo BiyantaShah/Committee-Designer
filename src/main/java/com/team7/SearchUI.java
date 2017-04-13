@@ -780,6 +780,12 @@ public class SearchUI extends JFrame {
 					}else{
 
 						sp1.setSearchValue(ValueField_1.getText().trim());
+						System.out.println(sp1.getSearchValue());
+						if(sp1.getSearchValue().contains("'")){
+							String s = sp1.getSearchValue().replaceAll("'", "''");
+							sp1.setSearchValue(s);
+							System.out.println("inside"+sp1.getSearchValue());
+						}
 					}					
 					sp1.setJoinFilter((String) JoinComboBox_1.getSelectedItem()); 
 
@@ -817,6 +823,11 @@ public class SearchUI extends JFrame {
 					}else{
 
 						sp2.setSearchValue(ValueField_2.getText().trim());
+						if(sp2.getSearchValue().contains("'")){
+							sp2.setSearchValue(sp2.getSearchValue().replaceAll("'", "''"));
+							System.out.println(sp2.getSearchValue());
+						}
+
 					}
 					sp2.setJoinFilter((String) JoinComboBox_2.getSelectedItem()); 
 
@@ -855,6 +866,11 @@ public class SearchUI extends JFrame {
 					}else{
 
 						sp3.setSearchValue(ValueField_3.getText().trim());
+						if(sp3.getSearchValue().contains("'")){
+							sp3.setSearchValue(sp3.getSearchValue().replaceAll("'", "''"));
+							System.out.println(sp3.getSearchValue());
+						}
+
 					}
 					sp3.setJoinFilter((String) JoinComboBox_3.getSelectedItem()); 
 
@@ -892,6 +908,11 @@ public class SearchUI extends JFrame {
 					}else{
 
 						sp4.setSearchValue(ValueField_4.getText().trim());
+						if(sp4.getSearchValue().contains("'")){
+							sp4.setSearchValue(sp4.getSearchValue().replaceAll("'", "''"));
+							System.out.println(sp4.getSearchValue());
+						}
+
 					}
 					sp4.setJoinFilter((String) JoinComboBox_4.getSelectedItem()); 
 
@@ -928,6 +949,11 @@ public class SearchUI extends JFrame {
 					}else{
 
 						sp5.setSearchValue(ValueField_5.getText().trim());
+						if(sp5.getSearchValue().contains("'")){
+							sp5.setSearchValue(sp5.getSearchValue().replaceAll("'", "''"));
+							System.out.println(sp5.getSearchValue());
+						}
+
 					}
 
 					if(sp5.getSearchValue().equals("")) {

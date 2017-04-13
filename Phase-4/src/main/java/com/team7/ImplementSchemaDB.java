@@ -38,11 +38,14 @@ public class ImplementSchemaDB implements SchemaDB {
 
 
 			//selecting database created above
-			String db_url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
 //			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
+//			String userName = "root";
+//			String password = "9HTa~TZ?dyQWM4}";
+			
+			String db_url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
 			String userName = "root";
 			String password = "root";
-//			String password = "9HTa~TZ?dyQWM4}";
+
 
 			conn = DriverManager.getConnection(db_url, userName, password);
 			stmt = conn.createStatement();
@@ -56,7 +59,7 @@ public class ImplementSchemaDB implements SchemaDB {
 			sql = "CREATE DATABASE IF NOT EXISTS DBLP";
 			stmt.executeUpdate(sql);
 			
-			String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true";
+			String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
 			conn = DriverManager.getConnection(connected_db, userName, password);
 			stmt = conn.createStatement();
 
@@ -164,11 +167,14 @@ public class ImplementSchemaDB implements SchemaDB {
 		Connection conn = null; 
 
 		//Database Properties
-		String url = "jdbc:mysql://localhost/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true&verifyServerCertificate=false&useSSL=true";
 //		String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";
+//		String userName = "root";
+//		String password = "9HTa~TZ?dyQWM4}";
+		
+		String url = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
 		String userName = "root";
 		String password = "root";
-//		String password = "9HTa~TZ?dyQWM4}";
+
 
 		try {
 

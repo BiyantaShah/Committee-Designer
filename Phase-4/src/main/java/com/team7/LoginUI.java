@@ -1,13 +1,11 @@
 package com.team7;
 
 import java.awt.Color;
-import java.awt.Dialog;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.xml.bind.JAXBException;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,13 +13,11 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.JDialog;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
@@ -50,7 +46,7 @@ public class LoginUI extends JFrame {
 	 * @throws IOException 
 	 * @throws JAXBException 
 	 */
-	public static void main(String[] args) throws ClassNotFoundException, SQLException, JAXBException, IOException {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
 
 		System.setProperty("java.awt.headless", "true");
 		// Below was used to create database ,extract xml and insert data into tables
@@ -164,6 +160,10 @@ public class LoginUI extends JFrame {
 						ImplementRegister register = new ImplementRegister();
 						// check if user exists or not and then validate the password.
 						try {
+							//including an escape character if string contains '
+							if(userName.contains("'")){
+								userName = userName.replaceAll("'","\\\\'");
+							}
 							if (register.verifyIfUserExists(userName)) {
 								ImplementLogin login = new ImplementLogin();
 								if (login.login(userName, plainText)) {

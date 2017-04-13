@@ -429,5 +429,22 @@ public class ImplementQueryBuilderTest extends TestCase {
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		assertEquals(expected,queryFormed);  
 	}
+	
+	
+	@Test
+	public void testFirstUseCase1() throws SQLException{    //add another test fetching result from DB
+		
+		List<String> query6 = new ArrayList<String>();
+  		query6.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey GROUP BY a.name HAVING COUNT(*) >1");
+  		query6.add(1,null);	
+  		query6.add(2,null);	
+
+		SearchParameter s1= new SearchParameter("CountNoOfPapers", ">" ,"1", null);
+		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(0,s1);
+  		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
+		assertEquals(query6, queryFormed);
+	}
+
 
 }
