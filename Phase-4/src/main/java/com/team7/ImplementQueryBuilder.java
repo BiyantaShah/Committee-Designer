@@ -66,11 +66,9 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		for(SearchParameter s : searchParam){
 
 			if(s.getSearchFilter() == "Name"){	
-				if(checkValidityOfSearchParameters(s.getSearchValue())){					
-					return false;
-				}
-				else
-					result = true;
+				// no validation needed for Keyword
+				// all characters are accepted
+				result = true;
 			}
 
 			if(s.getSearchFilter() == "ConfName"){
@@ -92,9 +90,9 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			}
 
 			if(s.getSearchFilter() == "CountNoOfPapers"){            	
-				if(Integer.parseInt(s.getSearchValue()) > 0){
-					return true;
-				}
+				// no validation needed for Keyword
+				// all characters are accepted
+				result = true;
 			}    
 
 			if(s.getSearchFilter() == "Committee.Year" && Integer.parseInt(s.getSearchValue()) > 0){					
@@ -306,17 +304,22 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			queryCommitte += whereClauseForCommittee;
 		}
 	}
-
+	
 	private void getPaperAuthorQuery(){ 
 
 		if (whereClauseForPaperAuthor.length() > 0) {
 
 			String joinCondition = formJoinCondition();
-			queryPaperAuthor = "SELECT a.name AS Author FROM " + joinCondition + " WHERE ";  
-			queryPaperAuthor += whereClauseForPaperAuthor;
+			queryPaperAuthor = "SELECT a.name AS Author FROM " + joinCondition;
+			
+			if(whereClauseForPaperAuthor.startsWith(" GROUP")){
+			queryPaperAuthor+= whereClauseForPaperAuthor;
+			}
+			else{	
+			queryPaperAuthor += " WHERE " + whereClauseForPaperAuthor;
+			}
 		}
 	}
-
 
 	private void getArticleQuery(){
 
