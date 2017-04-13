@@ -37,7 +37,7 @@ public class ImplementRegisterUITest  {
 	}
 	
 	@Test
-	// Testing the user already exists 
+	// Testing the invalid email 
 	public void testRegUserEmailInvalid() {
 		reg.UsernameTField.setText("shahbiyanta@@gmail.com");
 		reg.passwordField.setText("abc");
@@ -58,6 +58,30 @@ public class ImplementRegisterUITest  {
 		
 		stmt.executeUpdate("delete from User where username='sravani.beeram@gmail.com'");		
 		reg.dispose();
+	}
+	
+	@Test
+	// Testing the register button with blank in the username
+	public void testblankUsername() throws SQLException, IOException {
+		reg.UsernameTField.setText(" ");
+		reg.passwordField.setText("abc");
+		reg.btnRegister.doClick();
+	}
+	
+	@Test
+	// Testing the register button with blank in the password
+	public void testblankPassword() throws SQLException, IOException {
+		reg.UsernameTField.setText("sravani.beeram@gmail.com");
+		reg.passwordField.setText(" ");
+		reg.btnRegister.doClick();
+	}
+	
+	@Test
+	// Testing the register button with user name length > 50
+	public void testUsernameLength() throws SQLException, IOException {
+		reg.UsernameTField.setText("1234567494928gdhst39hdfsdgfhsgjhdfdgashdgf@gmail.com");
+		reg.passwordField.setText("abc");
+		reg.btnRegister.doClick();
 	}
 	
 	@Test

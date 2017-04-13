@@ -5,11 +5,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.codec.binary.Base64; 
+import org.apache.commons.codec.binary.Base64;
 
 public class ImplementRegister implements Register {
 
@@ -58,38 +60,29 @@ public class ImplementRegister implements Register {
 		}
 
 	}
+	
 
-	// checking for a valid email ID
+	// checking for a valid email ID 
+	// (does not check whether the email ID is valid or not, 
+	// that discretion is upon the user)
 	private boolean validEmailId(String userName) {
 		// TODO Auto-generated method stub
 
-		if (! userName.contains("@")) 
-			return false;
-
-		if (userName.contains("@.")) 
-			return false;
-
-		if (! ((userName.substring (userName.length() - 4, userName.length()).equals(".com"))
-				|| (userName.substring (userName.length() - 4, userName.length()).equals(".edu"))) ) 
-			return false;
-
-		if (containsMoreThanone(userName))
-			return false;
-
-		else 
-			return true;
+		Pattern pattern;
+		Matcher matcher;
+		
+		final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+		        + "[A-Za-z]+(\\.[A-Za-z]+)*(\\.[A-Za-z]{2,})$";
+		
+		pattern = Pattern.compile(EMAIL_REGEX);
+		
+		matcher = pattern.matcher(userName);
+		return matcher.matches();
+		
 	}
+	
+	
 
-	private boolean containsMoreThanone(String userName) {
-		// TODO Auto-generated method stub
-		int counter = 0;
-		for( int i=0; i<userName.length(); i++ ) {
-			if (userName.charAt(i) == '@')
-				counter++;
-		}
-
-		return ((counter > 1) ? true : false);
-	}
 
 	// checking if the user exists
 	public boolean verifyIfUserExists(String userName) throws SQLException, IOException {

@@ -59,8 +59,6 @@ public class ImplementRegisterTest {
 		
 	}  
 	  
-
-
 	
 	@Test
 	//Test to verify a unsuccessful user registration - should return invalid email
@@ -69,7 +67,7 @@ public class ImplementRegisterTest {
 
 		ImplementRegister user = new ImplementRegister();
 
-		String res = user.createUser("xyzgmail.com","132","Associate Editor","OOPSLA");
+		String res = user.createUser("bshah.com","132","Associate Editor","OOPSLA");
 
 		assertEquals("invalid email",res);		
 
@@ -82,7 +80,7 @@ public class ImplementRegisterTest {
 
 		ImplementRegister user = new ImplementRegister();
 
-		String res = user.createUser("xyz@gmail.gcom","132","Associate Editor","OOPSLA");
+		String res = user.createUser("bshah@gmail@.gcom","132","Associate Editor","OOPSLA");
 
 		assertEquals("invalid email",res);		
 
@@ -95,7 +93,7 @@ public class ImplementRegisterTest {
 
 		ImplementRegister user = new ImplementRegister();
 
-		String res = user.createUser("xyz@gmail@com","132","Associate Editor","OOPSLA");
+		String res = user.createUser("bshah@gmail@com","132","Associate Editor","OOPSLA");
 
 		assertEquals("invalid email",res);		
 
@@ -121,7 +119,7 @@ public class ImplementRegisterTest {
 
 		ImplementRegister user = new ImplementRegister();
 
-		String res = user.createUser("test@gmail.com,test1@gmail.edu","132","Associate Editor","OOPSLA");
+		String res = user.createUser("bsha@gmail.com,bs1@gmail.edu","132","Associate Editor","OOPSLA");
 
 		assertEquals("invalid email",res);		
 
@@ -133,7 +131,7 @@ public class ImplementRegisterTest {
 	public void testVerifyUserExistsFailure() throws SQLException, IOException {
 
 		ImplementRegister user = new ImplementRegister();
-		boolean  res = user.verifyIfUserExists("test@gmail.com");
+		boolean  res = user.verifyIfUserExists("bs@gmail.com");
 		assertEquals(false,res);
 
 	}
