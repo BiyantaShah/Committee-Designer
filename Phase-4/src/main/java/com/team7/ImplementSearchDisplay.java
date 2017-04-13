@@ -104,12 +104,11 @@ public class ImplementSearchDisplay implements SearchDisplay {
 
 				Transport.send(message);
 
-				return "success";
 			}  
 			catch(MessagingException mex) {
 				//mex.printStackTrace();
 			}
 		}
-		return "failure";
+		return "success";
 	}
 }

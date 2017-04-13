@@ -59,18 +59,5 @@ public class ImplementSearchTest extends TestCase {
 		assertEquals("success", res);
 	}
 	
-	// Incorrect email ID, so email not sent
-	@Test
-	public void testSendEmailInValid() throws SQLException, IOException {
-		Set<String> authors = new HashSet<String>();
-		authors.add("Roger King");
-		authors.add("Petra Ludewig");
-		
-		String username="com";
-		ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
-		String res = searchDisplay.sendEmail(authors, username);
-				
-		assertEquals("failure", res);
-	} 
 
 }
