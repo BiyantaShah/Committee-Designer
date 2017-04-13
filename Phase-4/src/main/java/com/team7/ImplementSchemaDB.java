@@ -1,7 +1,5 @@
 package com.team7;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -27,10 +25,7 @@ public class ImplementSchemaDB implements SchemaDB {
 	// creating  DB and its initial skeleton 
 	public void dbSetUp() throws ClassNotFoundException, SQLException, IOException{
 
-		// JDBC driver name and database URL		
-//		getDBProperties(); 
-		//Database Properties 
-		
+		// JDBC driver name and database URL
 		String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 
 		Connection conn = null;
@@ -41,12 +36,27 @@ public class ImplementSchemaDB implements SchemaDB {
 			//Register JDBC driver
 			Class.forName(JDBC_DRIVER);
 
-          			
-			//selecting database created above
-			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
-			String userName = "root";
-			String password = "9HTa~TZ?dyQWM4}";
 
+			//selecting database created above
+			String db_url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
+//			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
+			String userName = "root";
+			String password = "root";
+//			String password = "9HTa~TZ?dyQWM4}";
+
+			conn = DriverManager.getConnection(db_url, userName, password);
+			stmt = conn.createStatement();
+			
+//			sql = "DROP DATABASE IF EXISTS DBLP";
+//			stmt.executeUpdate(sql);
+//			System.out.println("Dblp database deleted successfully...");
+			
+			//Create Database
+			stmt = conn.createStatement();			      
+			sql = "CREATE DATABASE IF NOT EXISTS DBLP";
+			stmt.executeUpdate(sql);
+			
+			String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true";
 			conn = DriverManager.getConnection(connected_db, userName, password);
 			stmt = conn.createStatement();
 
@@ -83,24 +93,28 @@ public class ImplementSchemaDB implements SchemaDB {
 
 			stmt.executeUpdate(sql);
 
-// Adding index to the paper key, making it faster during a join
-//			sql = "ALTER TABLE Paper ADD INDEX keyP(paperKey)";
-//			stmt.executeUpdate(sql);
-//			System.out.println("Created index on Key in paper table...");
+			// Adding index to the paper key, making it faster during a join
+//			 sql = "ALTER TABLE Paper ADD INDEX keyP(paperKey)";
+//			 stmt.executeUpdate(sql);
+//			 System.out.println("Created index on Key in paper table...");
 
 			// creating author table
 			sql = "CREATE TABLE IF NOT EXISTS Author " +
 					"(id        INTEGER      AUTO_INCREMENT NOT NULL, " +
 					" name      VARCHAR(255), " + 
-					" paperKey  VARCHAR(255), " + 
+					" paperKey  VARCHAR(255), " +
+					" university  VARCHAR(255), " +
+					" uniRegion   VARCHAR(255), " +
+					" affiliatedUni VARCHAR(255), "+
+					" url 		TEXT, "+
 					" PRIMARY   KEY(id))" ;
 
 			stmt.executeUpdate(sql);
 
-// Adding index to the paper key in author making it faster during a join
-//			sql = "ALTER TABLE Author ADD INDEX keyA(paperKey)";
-//			stmt.executeUpdate(sql);
-//			System.out.println("Created index on Key in author table...");
+			// Adding index to the paper key in author making it faster during a join
+//			 sql = "ALTER TABLE Author ADD INDEX keyA(paperKey)";
+//			 stmt.executeUpdate(sql);
+//			 System.out.println("Created index on Key in author table...");
 
 			//creating AuthorDetails table
 			sql = "CREATE TABLE IF NOT EXISTS Author_Details " +
@@ -148,12 +162,13 @@ public class ImplementSchemaDB implements SchemaDB {
 	public Connection getConnection() throws IOException {
 
 		Connection conn = null; 
-//		getDBProperties();
-		
+
 		//Database Properties
-		String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";
+		String url = "jdbc:mysql://localhost/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true&verifyServerCertificate=false&useSSL=true";
+//		String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";
 		String userName = "root";
-		String password = "9HTa~TZ?dyQWM4}";
+		String password = "root";
+//		String password = "9HTa~TZ?dyQWM4}";
 
 		try {
 
@@ -165,21 +180,21 @@ public class ImplementSchemaDB implements SchemaDB {
 		}
 		return conn;
 	}
-	
-//	private void getDBProperties() throws IOException{
-//		
-//		props = new Properties();
-//		FileInputStream in;
-//		try {
-//			in = new FileInputStream("config/db.properties");
-//			props.load(in);
-//			in.close();
-//		} catch (FileNotFoundException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}  
-//		
-//	}
+
+	//	private void getDBProperties() throws IOException{
+	//		
+	//		props = new Properties();
+	//		FileInputStream in;
+	//		try {
+	//			in = new FileInputStream("config/db.properties");
+	//			props.load(in);
+	//			in.close();
+	//		} catch (FileNotFoundException e1) {
+	//			// TODO Auto-generated catch block
+	//			e1.printStackTrace();
+	//		}  
+	//		
+	//	}
 
 	public boolean insertData(Object object_name) throws SQLException, IOException {
 
@@ -188,12 +203,12 @@ public class ImplementSchemaDB implements SchemaDB {
 		try {
 			// inserting the user into the DB
 			if(object_name instanceof User) {
-				
+
 				PreparedStatement statement_inproceedings = conn.prepareStatement("insert into User(userName,password,role,confName) values(?,?,?,?)");
 				statement_inproceedings.setString(1,(((User) object_name).getUserName()));
 				statement_inproceedings.setString(2,((User) object_name).getPassword());
-				statement_inproceedings.setString(3,  ((User) object_name).getRole());
-				statement_inproceedings.setString(4, ((User) object_name).getConfName());
+				statement_inproceedings.setString(3,((User) object_name).getRole());
+				statement_inproceedings.setString(4,((User) object_name).getConfName());
 				statement_inproceedings.executeUpdate();
 
 			}else{

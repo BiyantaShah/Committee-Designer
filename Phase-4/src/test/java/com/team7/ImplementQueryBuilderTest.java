@@ -350,7 +350,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(0,s1);
 		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);
-		assertEquals(5338 ,result.size()); 
+		assertEquals(5337 ,result.size()); 
 	}
 
 	@Test
