@@ -125,6 +125,7 @@ public class DisplayUI extends JFrame {
 			table.getColumn("Save").setCellEditor(
 					new ButtonEditor(new JCheckBox()));
 			
+			// Not allowing the columns to be dragged
 			table.getTableHeader().setReorderingAllowed(false);
 			
 			table.setPreferredScrollableViewportSize(new Dimension(550, 350));

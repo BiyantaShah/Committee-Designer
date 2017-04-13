@@ -123,11 +123,13 @@ public class SavedAuthorsUI extends JFrame {
 			for (int i=0; i< table.getColumnModel().getColumnCount(); i++) {
 				table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 			}
-						
+			
+			// Rendering a button for each table row
 			table.getColumn("Select").setCellRenderer(new JTableButtonRenderer());
 			table.getColumn("Select").setCellEditor(
 					new ButtonEditor(new JCheckBox()));
 			
+			// Not allowing the columns to be dragged
 			table.getTableHeader().setReorderingAllowed(false);
 
 			table.setPreferredScrollableViewportSize(new Dimension(650, 350));
