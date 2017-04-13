@@ -72,7 +72,7 @@ public class LoginUI extends JFrame {
 		ImplementHomePageData hPage = new ImplementHomePageData();
 
 		try {
-
+			
 			db.dbSetUp();   //set up initial database
 			parse.parseXml(file);	//parse xml data
 			com.ParseFiles(comData); //parse committee data

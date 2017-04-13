@@ -49,23 +49,17 @@ public class ImplementHomePageData implements UniversityAuthorData {
 				}
 
 			}
+			stmt.executeBatch();
+			br.close();
+        	if (i != 0)
+        		return "success";
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		} 
 		
-		return null;
+		return "No data";
 	}
 
 }

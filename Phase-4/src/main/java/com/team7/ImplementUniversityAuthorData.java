@@ -32,7 +32,7 @@ public class ImplementUniversityAuthorData implements UniversityAuthorData{
         	
         	br = new BufferedReader(new FileReader(csvFile));
         	while ((line = br.readLine()) != null) {
-
+        		
         		// use comma as separator
         		String[] university = line.split(cvsSplitBy);
         		
@@ -48,24 +48,17 @@ public class ImplementUniversityAuthorData implements UniversityAuthorData{
 				}
         		
         	}
+        	stmt.executeBatch();
+        	br.close();
+        	if (i != 0)
+        		return "success";
         	
-        } catch (FileNotFoundException e) {
-        	e.printStackTrace();
         } catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-        System.out.println("uni data");
-        
-		return null;
+		} 
+             
+		return "No data";
 	}
 
 }
