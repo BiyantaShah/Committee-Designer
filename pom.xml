@@ -99,7 +99,8 @@
 	<name>team7</name>
 	<description>Author Publication Directory</description>
 	<build>
-		<sourceDirectory>Phase-4/src</sourceDirectory>
+		<sourceDirectory>Phase-4/src/main/java</sourceDirectory>
+		<testSourceDirectory>Phase-4/src/test/java</testSourceDirectory>
 		<pluginManagement>
     	<plugins>
     		<plugin>
