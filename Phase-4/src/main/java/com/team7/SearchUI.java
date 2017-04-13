@@ -5,7 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils; 
+import org.apache.commons.lang.math.NumberUtils;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -53,7 +54,7 @@ public class SearchUI extends JFrame {
 	List<SearchParameter> finalList = new ArrayList<SearchParameter>();
 	LoginUI log = new LoginUI();
 	ImplementSearchDisplay sd = new ImplementSearchDisplay();
-
+    int count = 0;
 
 	/**
 	 * Create the frame.
@@ -806,7 +807,8 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_1.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp1.getSearchValue())){
+						count += 1;
+						if(!NumberUtils.isNumber(sp1.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in first row"); 
 						}
@@ -860,7 +862,8 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_2.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp2.getSearchValue())){
+						count += 1;
+						if(!NumberUtils.isNumber(sp2.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in second row"); 
 						}
@@ -917,7 +920,8 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_3.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp3.getSearchValue())){
+						count += 1;
+						if(!NumberUtils.isNumber(sp3.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in third row"); 
 						}
@@ -973,7 +977,8 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_4.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp4.getSearchValue())){
+						count += 1;
+						if(!NumberUtils.isNumber(sp4.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in fourth row"); 
 						}
@@ -1026,7 +1031,8 @@ public class SearchUI extends JFrame {
 					}
 
 					if(CriteriaComboBox_5.getSelectedItem() == "Count Of Papers"){
-						if(!StringUtils.isNumeric(sp5.getSearchValue())){
+						count += 1;
+						if(!NumberUtils.isNumber(sp5.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in fifth row"); 
 						}
@@ -1043,6 +1049,12 @@ public class SearchUI extends JFrame {
 					if(!error){
 						finalList.add(sp5);
 					}
+				}
+				
+				if(count > 1){
+					count = 0;
+					finalList.clear();
+					log.messageShow("Please limit Count Of Papers search criteria to once");
 				}
 
 				if(finalList.size() != 0 && error == false) {
