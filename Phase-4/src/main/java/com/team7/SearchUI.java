@@ -810,6 +810,12 @@ public class SearchUI extends JFrame {
 							error = true;
 							log.messageShow("Please enter a valid paper count in first row"); 
 						}
+						try {
+						   Integer.parseInt(sp1.getSearchValue());
+						} catch (NumberFormatException e1) {
+							error = true;
+							log.messageShow("Please enter valid number");
+						}
 					}
 
 					if(!error){
@@ -858,6 +864,14 @@ public class SearchUI extends JFrame {
 							error = true;
 							log.messageShow("Please enter a valid paper count in second row"); 
 						}
+						
+						try {
+							   Integer.parseInt(sp2.getSearchValue());
+							} catch (NumberFormatException e1) {
+								error = true;
+								log.messageShow("Please enter valid number in second row");
+							}
+
 					}
 
 					if(!error){
@@ -907,6 +921,14 @@ public class SearchUI extends JFrame {
 							error = true;
 							log.messageShow("Please enter a valid paper count in third row"); 
 						}
+						
+						try {
+							   Integer.parseInt(sp3.getSearchValue());
+							} catch (NumberFormatException e1) {
+								error = true;
+								log.messageShow("Please enter valid number in third row");
+							}
+
 					}
 
 					if(!error){
@@ -955,6 +977,13 @@ public class SearchUI extends JFrame {
 							error = true;
 							log.messageShow("Please enter a valid paper count in fourth row"); 
 						}
+						try {
+							   Integer.parseInt(sp4.getSearchValue());
+							} catch (NumberFormatException e1) {
+								error = true;
+								log.messageShow("Please enter valid number in fourth row");
+							}
+
 					}
 					if(!error){
 						finalList.add(sp4);
@@ -1001,6 +1030,14 @@ public class SearchUI extends JFrame {
 							error = true;
 							log.messageShow("Please enter a valid paper count in fifth row"); 
 						}
+						
+						try {
+							   Integer.parseInt(sp5.getSearchValue());
+							} catch (NumberFormatException e1) {
+								error = true;
+								log.messageShow("Please enter valid number in fifth row");
+							}
+
 					}	
 
 					if(!error){
