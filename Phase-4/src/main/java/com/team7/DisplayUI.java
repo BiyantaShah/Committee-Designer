@@ -114,14 +114,20 @@ public class DisplayUI extends JFrame {
 
 			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 			centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-			table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+			
+			// Setting the values in the cells center aligned
+			for (int i=0; i< table.getColumnModel().getColumnCount(); i++) {
+				table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+			}
 
 			// Rendering a button for each table row
 			table.getColumn("Save").setCellRenderer(new JTableButtonRenderer());
 			table.getColumn("Save").setCellEditor(
 					new ButtonEditor(new JCheckBox()));
-
+			
+			// Not allowing the columns to be dragged
+			table.getTableHeader().setReorderingAllowed(false);
+			
 			table.setPreferredScrollableViewportSize(new Dimension(550, 350));
 			JScrollPane scroll = new JScrollPane(table);
 			setVisible(true);
@@ -205,7 +211,20 @@ public class DisplayUI extends JFrame {
 			vector.addElement("save");
 			data.addElement(vector);
 		}
+		
+		TableModel model = new DefaultTableModel(data, columnNames) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
-		return new DefaultTableModel(data, columnNames);		
+			public boolean isCellEditable(int row, int column)
+		    {
+			  //This causes all cells in column 0 to be not editable
+		      return column == 1; 
+		    }
+		};
+
+		return model;		
 	}
 }

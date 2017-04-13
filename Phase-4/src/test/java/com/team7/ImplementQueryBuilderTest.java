@@ -401,7 +401,8 @@ public class ImplementQueryBuilderTest extends TestCase {
   		//searchCriteria.add(1,s3);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
   		List<String> result = new ImplementQueryBuilder().getResultForDisplay(queryFormed);	
-		assertEquals("Luca Cardelli",result.get(0));  
+  		
+		assertEquals(26,result.size());  
 	}
 	
 	@Test

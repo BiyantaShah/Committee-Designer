@@ -181,21 +181,6 @@ public class ImplementSchemaDB implements SchemaDB {
 		return conn;
 	}
 
-	//	private void getDBProperties() throws IOException{
-	//		
-	//		props = new Properties();
-	//		FileInputStream in;
-	//		try {
-	//			in = new FileInputStream("config/db.properties");
-	//			props.load(in);
-	//			in.close();
-	//		} catch (FileNotFoundException e1) {
-	//			// TODO Auto-generated catch block
-	//			e1.printStackTrace();
-	//		}  
-	//		
-	//	}
-
 	public boolean insertData(Object object_name) throws SQLException, IOException {
 
 		Connection conn = getConnection();		
