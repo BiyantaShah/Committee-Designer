@@ -14,13 +14,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.JDialog;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
@@ -151,6 +149,10 @@ public class LoginUI extends JFrame {
 						ImplementRegister register = new ImplementRegister();
 						// check if user exists or not and then validate the password.
 						try {
+							//including an escape character if string contains '
+							if(userName.contains("'")){
+								userName = userName.replaceAll("'","''");
+							}
 							if (register.verifyIfUserExists(userName)) {
 								ImplementLogin login = new ImplementLogin();
 								if (login.login(userName, plainText)) {

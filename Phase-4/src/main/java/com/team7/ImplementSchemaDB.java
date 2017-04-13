@@ -46,6 +46,11 @@ public class ImplementSchemaDB implements SchemaDB {
 			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
 			String userName = "root";
 			String password = "9HTa~TZ?dyQWM4}";
+			
+//			String connected_db = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
+//			String userName = "root";
+//			String password = "root";
+
 
 			conn = DriverManager.getConnection(connected_db, userName, password);
 			stmt = conn.createStatement();
@@ -154,6 +159,11 @@ public class ImplementSchemaDB implements SchemaDB {
 		String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";
 		String userName = "root";
 		String password = "9HTa~TZ?dyQWM4}";
+		
+//		String url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
+//		String userName = "root";
+//		String password = "root";
+
 
 		try {
 

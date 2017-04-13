@@ -254,6 +254,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 		if(s.getSearchFilter() == "Keyword"){
 			whereClauseForPaperAuthor += PaperTableAlias+ ".title " + s.getSearchComparator()+ " '%"+ s.getSearchValue()+ "%' " + s.getjoinFilter() + " ";   					
+		    System.out.println(whereClauseForPaperAuthor);
 		}
 
 		else if(s.getSearchFilter() == "Year"){

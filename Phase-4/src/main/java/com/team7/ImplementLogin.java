@@ -2,6 +2,7 @@ package com.team7;
  
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,9 +20,11 @@ public class ImplementLogin implements Login {
 
 		ImplementSchemaDB db = new ImplementSchemaDB();
 		Connection conn = db.getConnection(); 
-		Statement stmt = conn.createStatement();
 
-		String sql = "select password from User where username = '" +username +"'";
+        System.out.print(username);
+		String sql = "select password from User where username = " + '"'+username +'"';
+	
+		PreparedStatement stmt = conn.prepareStatement(sql);
 
 		ResultSet rs = stmt.executeQuery(sql);
 		if (rs.next()) { 
