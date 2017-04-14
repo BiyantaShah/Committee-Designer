@@ -19,25 +19,25 @@ public class ImplementCommitteesTest extends TestCase {
 	@Test
 	public void testParseSuccess() throws IOException, SQLException {
 		
-		File test = new File("input/committees");
+		File test = new File("input/committes");
 	    test.mkdirs();
 	    
-	    File file1 = new File("input/committees/ecoop1111-pc");	    
+	    File file1 = new File("input/committes/ecoop1111-pc");	    
 	    FileWriter writer = new FileWriter(file1);
 	    writer.write("P:test");  
 	    writer.close();
 	    
-	    File file2 = new File("input/committees/oopsla1111-pc");	    
+	    File file2 = new File("input/committes/oopsla1111-pc");	    
 	    FileWriter writer2 = new FileWriter(file2);
 	    writer2.write("test"); 	    
 		writer2.close();
 		
-	    File file3 = new File("input/committees/pldi1111-pc");	    
+	    File file3 = new File("input/committes/pldi1111-pc");	    
 	    FileWriter writer3 = new FileWriter(file3); 
 	    writer3.write("test"); 	    
 		writer3.close();
 
-	    File file4 = new File("input/committees/icfp1111-pc");	    
+	    File file4 = new File("input/committes/icfp1111-pc");	    
 	    FileWriter writer4 = new FileWriter(file4); 
 	    writer4.write("test"); 	    
 		writer4.close();
@@ -61,7 +61,7 @@ public class ImplementCommitteesTest extends TestCase {
 	@Test
 	public void testEmptyDirectory() throws IOException, SQLException {
 		
-		File test = new File("input/committees/");
+		File test = new File("input/committes/");
 		test.mkdirs();
 		
 		ImplementCommittees com = new ImplementCommittees();

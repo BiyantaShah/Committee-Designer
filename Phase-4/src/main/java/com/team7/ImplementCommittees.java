@@ -32,9 +32,9 @@ public class ImplementCommittees implements Committees {
 		final int batchSize = 1000;
 		int i=0;
 		if(textFile.list().length > 0 ){
-			
+
 			for(File fName : textFile.listFiles()){
-				
+
 				BufferedReader bf = new BufferedReader(new FileReader(fName));		
 				String fileName = fName.getName();	
 
@@ -53,33 +53,38 @@ public class ImplementCommittees implements Committees {
 
 					while ((rec = bf.readLine()) != null)	    	
 					{
-						if(rec.contains(":")) {
-							role = rec.substring(0,rec.indexOf(':'));
-							authorName = rec.substring(rec.indexOf(':')+1,rec.length());	
-						}
-						else {
-							role = null;
-							authorName = rec;
-						}
- 
-						// extracting the the conference name and the year of the committee
-						// from the file name
-						confName = output.get(0);
-						year = Integer.parseInt(output.get(1));
-						// information about only the 4 conferences required.
-						if (  (confName.equalsIgnoreCase("oopsla")) 
-						   || (confName.equalsIgnoreCase("pldi"))
-						   || (confName.equalsIgnoreCase("ecoop")) 
-						   || (confName.equalsIgnoreCase("icfp")) )
-						{
-							stmt.setString(1,confName);
-							stmt.setInt(2,year);
-							stmt.setString(3,authorName);
-							stmt.setString(4,role);
-							stmt.addBatch(); 
+						// the text file has a blank line at the end, this inserts blank authors 
+						// inside the database which is incorrect, so removing the blank records.
+						if (!rec.equals("")) {
 
-							if (++i % batchSize == 0){ 
-								stmt.executeBatch();  
+							if(rec.contains(":")) {
+								role = rec.substring(0,rec.indexOf(':'));
+								authorName = rec.substring(rec.indexOf(':')+1,rec.length());	
+							}
+							else {
+								role = null;
+								authorName = rec;
+							}
+
+							// extracting the the conference name and the year of the committee
+							// from the file name
+							confName = output.get(0);
+							year = Integer.parseInt(output.get(1));
+							// information about only the 4 conferences required.
+							if (  (confName.equalsIgnoreCase("oopsla")) 
+									|| (confName.equalsIgnoreCase("pldi"))
+									|| (confName.equalsIgnoreCase("ecoop")) 
+									|| (confName.equalsIgnoreCase("icfp")) )
+							{
+								stmt.setString(1,confName);
+								stmt.setInt(2,year);
+								stmt.setString(3,authorName);
+								stmt.setString(4,role);
+								stmt.addBatch(); 
+
+								if (++i % batchSize == 0){ 
+									stmt.executeBatch();  
+								}
 							}
 						}
 					}
