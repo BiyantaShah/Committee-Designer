@@ -47,6 +47,11 @@ public class RegisterUI extends JFrame {
 	public RegisterUI() {
 
 		setTitle("REGISTER");
+		setResizable(false);
+
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		pack();
+		setSize(screenSize.width,screenSize.height);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
@@ -56,7 +61,7 @@ public class RegisterUI extends JFrame {
 
 		JLabel lblUsername = new JLabel("Username: ");
 		lblUsername.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		lblUsername.setBounds(257, 148, 97, 28);
+		lblUsername.setBounds(487, 168, 97, 28);
 		contentPane.add(lblUsername);
 
 		UsernameTField = new JTextField(10);
@@ -67,22 +72,22 @@ public class RegisterUI extends JFrame {
 
 		UsernameTField.setToolTipText("Please enter valid Email-id");
 
-		UsernameTField.setBounds(521, 146, 191, 34);
+		UsernameTField.setBounds(651, 166, 191, 34);
 		contentPane.add(UsernameTField);
 
 		JLabel lblPassword = new JLabel("Password: ");
 		lblPassword.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		lblPassword.setBounds(257, 218, 81, 19);
+		lblPassword.setBounds(487, 238, 81, 19);
 		contentPane.add(lblPassword);
 
 		passwordField = new JPasswordField();
-		passwordField.setBounds(521, 211, 191, 34);
+		passwordField.setBounds(651, 231, 191, 34);
 		contentPane.add(passwordField);
 
 
 		JLabel lblRole = new JLabel("Role: ");
 		lblRole.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		lblRole.setBounds(257, 293, 56, 16);
+		lblRole.setBounds(487, 303, 56, 16);
 		contentPane.add(lblRole);
 		String[] roleList = {"Conference Chair","General Chair","Member for External Review Committee","Program Chair"};
 
@@ -97,13 +102,13 @@ public class RegisterUI extends JFrame {
 
 			}
 		});
-		role_combo.setBounds(521, 286, 191, 34);
+		role_combo.setBounds(651, 291, 191, 34);
 		contentPane.add(role_combo);
 
 
 		JLabel lblConference = new JLabel("Conference: ");
 		lblConference.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		lblConference.setBounds(257, 359, 97, 28);
+		lblConference.setBounds(487, 359, 97, 28);
 		contentPane.add(lblConference);
 		String[] confList = {"ECOOP","ICFP","OOPSLA","PLDI"};
 
@@ -117,17 +122,17 @@ public class RegisterUI extends JFrame {
 
 			}
 		});
-		conf_combo.setBounds(521, 353, 191, 34);
+		conf_combo.setBounds(651, 353, 191, 34);
 		contentPane.add(conf_combo);
 
 		JLabel lblRegistrationPage = new JLabel("Registration Page");
 		lblRegistrationPage.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblRegistrationPage.setBounds(340, 56, 234, 28);
+		lblRegistrationPage.setBounds(540, 76, 234, 28);
 		contentPane.add(lblRegistrationPage);
 
 		btnRegister = new JButton("Register");
 		btnRegister.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnRegister.setBounds(394, 451, 114, 34);
+		btnRegister.setBounds(580, 450, 114, 34);
 		contentPane.add(btnRegister);
 
 		btnRegister.addActionListener(new ActionListener()
@@ -174,7 +179,9 @@ public class RegisterUI extends JFrame {
 						dispose();
 						SearchUI search = new SearchUI();
 						search.setVisible(true);
-						search.setSize(1000, 600);
+						Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+						pack();
+						setSize(screenSize.width,screenSize.height);
 						search.setLocationRelativeTo(null);
 					}
 
@@ -191,14 +198,16 @@ public class RegisterUI extends JFrame {
 		
 		btnLogin = new JButton("Login");
 		btnLogin.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnLogin.setBounds(735, 28, 117, 34);
+		btnLogin.setBounds(1035, 18, 117, 34);
 		contentPane.add(btnLogin);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 dispose();
 				 LoginUI log = new LoginUI();
 				 log.setVisible(true);
-				 log.setSize(1000,600); 
+				 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				 pack();
+				 setSize(screenSize.width,screenSize.height);
 				 log.setLocationRelativeTo(null);
 			}
 		});

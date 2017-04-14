@@ -13,6 +13,7 @@ import javax.swing.table.TableModel;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -50,31 +51,36 @@ public class SavedAuthorsUI extends JFrame {
 
 		setVisible(true);
 		setTitle("SAVED AUTHORS");
+		setResizable(false);
+
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		pack();
+		setSize(screenSize.width,screenSize.height);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(10, -22, 933, 579);
+//		setBounds(10, -22, 933, 579);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null); 
 
 		JPanel panel = new JPanel();
-		panel.setBounds(6, 6, 921, 101);
+		panel.setBounds(6, 6, 1909, 173);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
 		JLabel lblSavedAuthors = new JLabel("Saved Authors");
 		lblSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblSavedAuthors.setBounds(345, 17, 206, 16);
+		lblSavedAuthors.setBounds(540, 76, 234, 28);
 		panel.add(lblSavedAuthors);
 
 		JLabel lblNewLabel = new JLabel("To select authors for the committee, click \"select\" beside the row");
-		lblNewLabel.setBounds(242, 68, 433, 16);
+		lblNewLabel.setBounds(420, 136, 433, 16);
 		panel.add(lblNewLabel);
 
 		btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSearch.setBounds(620, 0, 117, 34);
+		btnSearch.setBounds(945, 10, 117, 34);
 		panel.add(btnSearch);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -82,7 +88,11 @@ public class SavedAuthorsUI extends JFrame {
 				dispose();
 				SearchUI search = new SearchUI();
 				search.setVisible(true);
-				search.setSize(1000, 600);
+
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				pack();
+				setSize(screenSize.width,screenSize.height);
+				
 				search.setLocationRelativeTo(null);				
 			}
 		});
@@ -97,12 +107,16 @@ public class SavedAuthorsUI extends JFrame {
 				dispose();
 				LoginUI log = new LoginUI();
 				log.setVisible(true);
-				log.setSize(1000,600);
+
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				pack();
+				setSize(screenSize.width,screenSize.height);
+				
 				log.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnNewButton.setBounds(749, 0, 117, 34);
+		btnNewButton.setBounds(1100, 10, 117, 34);
 		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Favorite List");
@@ -125,7 +139,7 @@ public class SavedAuthorsUI extends JFrame {
 		panel.add(btnNewButton_1);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(6, 119, 921, 357);
+		panel_1.setBounds(56, 191, 1209, 403);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -151,7 +165,7 @@ public class SavedAuthorsUI extends JFrame {
 			// Not allowing the columns to be dragged
 			table.getTableHeader().setReorderingAllowed(false);
 
-			table.setPreferredScrollableViewportSize(new Dimension(650, 350));
+			table.setPreferredScrollableViewportSize(new Dimension(750, 350));
 			JScrollPane scroll = new JScrollPane(table);
 			setVisible(true);
 
@@ -160,7 +174,7 @@ public class SavedAuthorsUI extends JFrame {
 		}
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(6, 488, 921, 63);
+		panel_2.setBounds(176, 607, 921, 55);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
@@ -194,7 +208,7 @@ public class SavedAuthorsUI extends JFrame {
 				}
 			}
 		});
-		btnSendEmail.setBounds(383, 13, 155, 29);
+		btnSendEmail.setBounds(380, 10, 149, 34);
 		panel_2.add(btnSendEmail);
 
 
