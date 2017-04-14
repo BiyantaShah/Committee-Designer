@@ -49,9 +49,7 @@ public class RegisterUI extends JFrame {
 		setTitle("REGISTER");
 		setResizable(false);
 
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		pack();
-		setSize(screenSize.width,screenSize.height);
+		setSize(1400,900);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
@@ -179,9 +177,7 @@ public class RegisterUI extends JFrame {
 						dispose();
 						SearchUI search = new SearchUI();
 						search.setVisible(true);
-						Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-						pack();
-						setSize(screenSize.width,screenSize.height);
+						setSize(1400,900);
 						search.setLocationRelativeTo(null);
 					}
 
@@ -198,16 +194,14 @@ public class RegisterUI extends JFrame {
 		
 		btnLogin = new JButton("Login");
 		btnLogin.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnLogin.setBounds(1035, 18, 117, 34);
+		btnLogin.setBounds(1228, 13, 117, 34);
 		contentPane.add(btnLogin);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 dispose();
 				 LoginUI log = new LoginUI();
 				 log.setVisible(true);
-				 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				 pack();
-				 setSize(screenSize.width,screenSize.height);
+				 setSize(1400,900);
 				 log.setLocationRelativeTo(null);
 			}
 		});

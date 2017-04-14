@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,29 +36,31 @@ public class FavoriteList extends JFrame {
 	private JButton btnRemove;
 
 	public FavoriteList() throws IOException {
+		
 		setVisible(true);
 		setTitle("Favorite List");
-
+		setSize(1400,900);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(10, -22, 933, 579);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null); 
 
 		JPanel panel = new JPanel();
-		panel.setBounds(6, 6, 921, 101);
+		panel.setBounds(0, 6, 1382, 101);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JLabel lblSavedAuthors = new JLabel("Favorite List");
+		JLabel lblSavedAuthors = new JLabel("My Favorite List");
 		lblSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblSavedAuthors.setBounds(345, 17, 206, 16);
+		lblSavedAuthors.setBounds(604, 38, 197, 34);
 		panel.add(lblSavedAuthors);
 
 		btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSearch.setBounds(620, 0, 117, 34);
+		btnSearch.setBounds(1124, 13, 117, 34);
 		panel.add(btnSearch);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -67,7 +68,7 @@ public class FavoriteList extends JFrame {
 				dispose();
 				SearchUI search = new SearchUI();
 				search.setVisible(true);
-				search.setSize(1000, 600);
+				search.setSize(1400,900);
 				search.setLocationRelativeTo(null);				
 			}
 		});
@@ -82,16 +83,16 @@ public class FavoriteList extends JFrame {
 				dispose();
 				LoginUI log = new LoginUI();
 				log.setVisible(true);
-				log.setSize(1000,600);
+				log.setSize(1400,900);
 				log.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnNewButton.setBounds(749, 0, 117, 34);
+		btnNewButton.setBounds(1253, 13, 117, 34);
 		panel.add(btnNewButton);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(6, 119, 921, 357);
+		panel_1.setBounds(0, 119, 1382, 330);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -118,7 +119,7 @@ public class FavoriteList extends JFrame {
 			// Not allowing the columns to be dragged
 			table.getTableHeader().setReorderingAllowed(false);
 
-			table.setPreferredScrollableViewportSize(new Dimension(650, 350));
+			table.setPreferredScrollableViewportSize(new Dimension(400, 300));
 
 			JScrollPane scroll = new JScrollPane(table);
 			setVisible(true);
@@ -147,7 +148,7 @@ public class FavoriteList extends JFrame {
 
 				}
 			});
-			btnRemove.setBounds(388, 489, 97, 25);
+			btnRemove.setBounds(643, 486, 97, 30);
 			contentPane.add(btnRemove);
 		} catch (SQLException e2) {
 		}

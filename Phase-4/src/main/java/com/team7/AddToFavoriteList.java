@@ -32,7 +32,6 @@ public class AddToFavoriteList extends DefaultCellEditor {
 		super(checkBox);
 		button = new JButton();
 		button.setOpaque(true);
-		// TODO Auto-generated constructor stub
 	}
 	private static final long serialVersionUID = 1L;
 
@@ -61,10 +60,9 @@ public class AddToFavoriteList extends DefaultCellEditor {
 		isPushed = true;
 		return button;
 	}
-	
+
 	public void AddtoList() throws IOException, SQLException {
-		// TODO Auto-generated method stub
-		System.out.println("addlist");
+		
 		ImplementSchemaDB db =  new ImplementSchemaDB();
 		Connection conn = db.getConnection();
 		String conference= null;
@@ -75,16 +73,16 @@ public class AddToFavoriteList extends DefaultCellEditor {
 		}
 
 		PreparedStatement stmt = conn.prepareStatement("insert into Favorite_list(userName,confName,selectedAuthor) values(?,?,?)");
-				
+
 		stmt.setString(1,(LoginUI.currentUser));
 		stmt.setString(2,conference);
 		stmt.setString(3,data);
-		
+
 		stmt.executeUpdate();
 
 	}
 
-	
+
 	public Object getCellEditorValue() {
 		if (isPushed) {}
 		return new String(label);

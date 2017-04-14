@@ -13,7 +13,6 @@ import javax.swing.table.TableModel;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -51,9 +50,7 @@ public class DisplayUI extends JFrame {
 		setTitle("SEARCH RESULTS");
 		setResizable(false);
 
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		pack();
-		setSize(screenSize.width,screenSize.height);
+		setSize(1400,900);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -63,18 +60,18 @@ public class DisplayUI extends JFrame {
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(6, 6, 1909, 103);
+		panel.setBounds(0, 6, 1394, 103);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
 		JLabel lblSearchResults = new JLabel("SEARCH RESULTS");
 		lblSearchResults.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblSearchResults.setBounds(540, 76, 234, 28);
+		lblSearchResults.setBounds(559, 62, 234, 28);
 		panel.add(lblSearchResults);
 
 		btnLogout = new JButton("LogOut");
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnLogout.setBounds(1100, 10, 117, 34);
+		btnLogout.setBounds(1264, 10, 117, 34);
 		panel.add(btnLogout);
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -86,19 +83,39 @@ public class DisplayUI extends JFrame {
 				dispose();
 				LoginUI log = new LoginUI();
 				log.setVisible(true);
-
-				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				pack();
-				setSize(screenSize.width,screenSize.height);
+				setSize(1400,900);
 				
 				log.setLocationRelativeTo(null);
 			}
 		});
+		
+		JButton btnNewButton = new JButton("My Favorite List");
+		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnNewButton.setBounds(955, 10, 168, 34);
+		panel.add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					FavoriteList fl = new FavoriteList();
+					dispose();
+					fl.setVisible(true);
+					fl.setSize(1400,900);
+					fl.setLocationRelativeTo(null);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
+
 
 		btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSearch.setBounds(945, 10, 117, 34);
+		btnSearch.setBounds(1135, 10, 117, 34);
 		panel.add(btnSearch);
+		
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ButtonEditor.savedAuthors.clear();
@@ -106,16 +123,14 @@ public class DisplayUI extends JFrame {
 				SearchUI search = new SearchUI();
 				search.setVisible(true);
 
-				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				pack();
-				setSize(screenSize.width,screenSize.height);
+				setSize(1400,900);
 				
 				search.setLocationRelativeTo(null);				
 			}
 		});
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(176, 150, 909, 403);
+		panel_1.setBounds(0, 150, 1394, 442);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -142,7 +157,7 @@ public class DisplayUI extends JFrame {
 			// Not allowing the columns to be dragged
 			table.getTableHeader().setReorderingAllowed(false);
 			
-			table.setPreferredScrollableViewportSize(new Dimension(550, 350));
+			table.setPreferredScrollableViewportSize(new Dimension(550, 430));
 			JScrollPane scroll = new JScrollPane(table);
 			setVisible(true);
 			panel_1.add(scroll);
@@ -151,14 +166,14 @@ public class DisplayUI extends JFrame {
 		}
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(176, 557, 921, 55);
+		panel_2.setBounds(227, 605, 921, 55);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
 		btnSavedAuthors = new JButton("Candidate Details");
 
 		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSavedAuthors.setBounds(520, 10, 149, 34);
+		btnSavedAuthors.setBounds(413, 13, 149, 34);
 		panel_2.add(btnSavedAuthors);
 
 		btnSavedAuthors.addActionListener(new ActionListener() {
@@ -192,9 +207,7 @@ public class DisplayUI extends JFrame {
 					dispose();
 					SavedAuthorsUI saved = new SavedAuthorsUI(result);
 					saved.setVisible(true);
-					Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-					pack();
-					setSize(screenSize.width,screenSize.height);
+					setSize(1400,900);
 					saved.setLocationRelativeTo(null);
 
 				}

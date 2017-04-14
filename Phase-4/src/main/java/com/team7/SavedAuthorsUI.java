@@ -13,7 +13,6 @@ import javax.swing.table.TableModel;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -53,9 +52,7 @@ public class SavedAuthorsUI extends JFrame {
 		setTitle("SAVED AUTHORS");
 		setResizable(false);
 
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		pack();
-		setSize(screenSize.width,screenSize.height);
+		setSize(1400,900);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		setBounds(10, -22, 933, 579);
@@ -71,16 +68,16 @@ public class SavedAuthorsUI extends JFrame {
 
 		JLabel lblSavedAuthors = new JLabel("Saved Authors");
 		lblSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblSavedAuthors.setBounds(540, 76, 234, 28);
+		lblSavedAuthors.setBounds(593, 78, 176, 28);
 		panel.add(lblSavedAuthors);
 
 		JLabel lblNewLabel = new JLabel("To select authors for the committee, click \"select\" beside the row");
-		lblNewLabel.setBounds(420, 136, 433, 16);
+		lblNewLabel.setBounds(510, 133, 433, 16);
 		panel.add(lblNewLabel);
 
 		btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSearch.setBounds(945, 10, 117, 34);
+		btnSearch.setBounds(1138, 10, 117, 34);
 		panel.add(btnSearch);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -89,9 +86,7 @@ public class SavedAuthorsUI extends JFrame {
 				SearchUI search = new SearchUI();
 				search.setVisible(true);
 
-				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				pack();
-				setSize(screenSize.width,screenSize.height);
+				setSize(1400,900);
 				
 				search.setLocationRelativeTo(null);				
 			}
@@ -108,25 +103,27 @@ public class SavedAuthorsUI extends JFrame {
 				LoginUI log = new LoginUI();
 				log.setVisible(true);
 
-				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				pack();
-				setSize(screenSize.width,screenSize.height);
+				setSize(1400,900);
 				
 				log.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnNewButton.setBounds(1100, 10, 117, 34);
+		btnNewButton.setBounds(1267, 10, 117, 34);
 		panel.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Favorite List");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnFav = new JButton("My Favorite List");
+		btnFav.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnFav.setBounds(950, 10, 176, 34);
+		panel.add(btnFav);
+		btnFav.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
 					FavoriteList fl = new FavoriteList();
+					dispose();
 					fl.setVisible(true);
-					fl.setSize(1000,600);
+					fl.setSize(1400,900);
 					fl.setLocationRelativeTo(null);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -135,11 +132,9 @@ public class SavedAuthorsUI extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setBounds(0, 0, 97, 25);
-		panel.add(btnNewButton_1);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(56, 191, 1209, 403);
+		panel_1.setBounds(6, 191, 1388, 412);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -165,7 +160,7 @@ public class SavedAuthorsUI extends JFrame {
 			// Not allowing the columns to be dragged
 			table.getTableHeader().setReorderingAllowed(false);
 
-			table.setPreferredScrollableViewportSize(new Dimension(750, 350));
+			table.setPreferredScrollableViewportSize(new Dimension(850, 400));
 			JScrollPane scroll = new JScrollPane(table);
 			setVisible(true);
 
@@ -174,42 +169,42 @@ public class SavedAuthorsUI extends JFrame {
 		}
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(176, 607, 921, 55);
+		panel_2.setBounds(6, 607, 1388, 55);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
-		btnSendEmail = new JButton("Send Email");
-		btnSendEmail.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSendEmail.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sendMail = ButtonEditor.savedAuthors;
-				Boolean flag = true;
-
-				if (sendMail.size() == 0) {
-					LoginUI log = new LoginUI();
-					log.messageShow("Please select some authors for your committee");
-					flag = false;
-				}
-				
-				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
-				if (flag == true) {
-					try {
-						String res = searchDisplay.sendEmail(sendMail, LoginUI.currentUser);
-                        if(res == "success"){
-        					LoginUI log = new LoginUI();
-        					log.messageShow("Email sent successfully");
-                        }
-					}  catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (SQLException e1) {
-						
-					}
-				}
-			}
-		});
-		btnSendEmail.setBounds(380, 10, 149, 34);
-		panel_2.add(btnSendEmail);
+//		btnSendEmail = new JButton("Send Email");
+//		btnSendEmail.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+//		btnSendEmail.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				sendMail = ButtonEditor.savedAuthors;
+//				Boolean flag = true;
+//
+//				if (sendMail.size() == 0) {
+//					LoginUI log = new LoginUI();
+//					log.messageShow("Please select some authors for your committee");
+//					flag = false;
+//				}
+//				
+//				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
+//				if (flag == true) {
+//					try {
+//						String res = searchDisplay.sendEmail(sendMail, LoginUI.currentUser);
+//                        if(res == "success"){
+//        					LoginUI log = new LoginUI();
+//        					log.messageShow("Email sent successfully");
+//                        }
+//					}  catch (IOException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					} catch (SQLException e1) {
+//						
+//					}
+//				}
+//			}
+//		});
+//		btnSendEmail.setBounds(557, 13, 149, 34);
+//		panel_2.add(btnSendEmail);
 
 
 	}
