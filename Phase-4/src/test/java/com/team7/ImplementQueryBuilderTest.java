@@ -29,10 +29,11 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 
 	@Test 
-	public void testInvalidAuthorNameWithSpecialCharacters(){	
+	public void testAuthorNameWithSpecialCharacters(){	
 		
 		List<String> expected = new ArrayList<String>();
-		expected.add(0,null);
+		expected.add(0,"SELECT a.name AS Author FROM Author a "
+				+ "INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE a.Name='#Michael Ley' ");
 		expected.add(1,null);	
 		expected.add(2,null);	
   		
@@ -42,19 +43,23 @@ public class ImplementQueryBuilderTest extends TestCase {
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		assertEquals(expected, queryFormed);
 	}
-
-	@Test
-	public void testInvalidAuthorNameWithNumbers(){		
+	
+	@Test 
+	public void testAuthorNameWithCountOfPaper(){	
+		
 		List<String> expected = new ArrayList<String>();
-		expected.add(0,null);
+		expected.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper "
+				+ "p ON a.paperKey = p.paperKey WHERE a.Name='Michael Ley'  GROUP BY a.name HAVING COUNT(*) >1");
 		expected.add(1,null);	
 		expected.add(2,null);	
   		
-		SearchParameter s= new SearchParameter("Name", "=" ,"123 Michael Ley", null);
+		SearchParameter s1= new SearchParameter("Name", "=" ,"Michael Ley", null);
+		SearchParameter s2= new SearchParameter("CountNoOfPapers", ">" ,"1", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
-  		searchCriteria.add(0,s);	
+  		searchCriteria.add(0,s1);
+  		searchCriteria.add(1,s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
-		assertEquals( expected, queryFormed);
+		assertEquals(expected, queryFormed);
 	}
 
 	@Test
@@ -304,7 +309,8 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testInValidCountNoOfPapers(){ 	
   		List<String> expected = new ArrayList<String>();
-  		expected.add(0, null);
+  		expected.add(0, "SELECT a.name AS Author FROM Author a"
+  				+ " INNER JOIN Paper p ON a.paperKey = p.paperKey GROUP BY a.name HAVING COUNT(*) =-2");
   		expected.add(1, null);
   		expected.add(2, null);
   		 
