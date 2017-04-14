@@ -13,6 +13,7 @@ import javax.swing.table.TableModel;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -48,27 +49,32 @@ public class DisplayUI extends JFrame {
 	public DisplayUI(List<String> authors) {
 
 		setTitle("SEARCH RESULTS");
+		setResizable(false);
+
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		pack();
+		setSize(screenSize.width,screenSize.height);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(10, -22, 933, 579);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(6, 6, 909, 73);
+		panel.setBounds(6, 6, 1909, 103);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
 		JLabel lblSearchResults = new JLabel("SEARCH RESULTS");
 		lblSearchResults.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblSearchResults.setBounds(380, 22, 189, 25);
+		lblSearchResults.setBounds(540, 76, 234, 28);
 		panel.add(lblSearchResults);
 
 		btnLogout = new JButton("LogOut");
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnLogout.setBounds(746, 0, 117, 34);
+		btnLogout.setBounds(1100, 10, 117, 34);
 		panel.add(btnLogout);
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -80,14 +86,18 @@ public class DisplayUI extends JFrame {
 				dispose();
 				LoginUI log = new LoginUI();
 				log.setVisible(true);
-				log.setSize(1000,600);
+
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				pack();
+				setSize(screenSize.width,screenSize.height);
+				
 				log.setLocationRelativeTo(null);
 			}
 		});
 
 		btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSearch.setBounds(625, 0, 117, 34);
+		btnSearch.setBounds(945, 10, 117, 34);
 		panel.add(btnSearch);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -95,13 +105,17 @@ public class DisplayUI extends JFrame {
 				dispose();
 				SearchUI search = new SearchUI();
 				search.setVisible(true);
-				search.setSize(1000, 600);
+
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				pack();
+				setSize(screenSize.width,screenSize.height);
+				
 				search.setLocationRelativeTo(null);				
 			}
 		});
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(6, 91, 909, 373);
+		panel_1.setBounds(176, 150, 909, 403);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -137,14 +151,14 @@ public class DisplayUI extends JFrame {
 		}
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(6, 477, 921, 55);
+		panel_2.setBounds(176, 557, 921, 55);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
 		btnSavedAuthors = new JButton("Candidate Details");
 
 		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSavedAuthors.setBounds(385, 0, 149, 34);
+		btnSavedAuthors.setBounds(520, 10, 149, 34);
 		panel_2.add(btnSavedAuthors);
 
 		btnSavedAuthors.addActionListener(new ActionListener() {
@@ -178,7 +192,9 @@ public class DisplayUI extends JFrame {
 					dispose();
 					SavedAuthorsUI saved = new SavedAuthorsUI(result);
 					saved.setVisible(true);
-					saved.setSize(1000, 600);
+					Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+					pack();
+					setSize(screenSize.width,screenSize.height);
 					saved.setLocationRelativeTo(null);
 
 				}
