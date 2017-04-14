@@ -105,9 +105,9 @@ public class LoginUI extends JFrame {
 	 */
 	public LoginUI() {
 
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		pack();
-		setSize(screenSize.width,screenSize.height);
+		setSize(1400,900);
 		setResizable(false);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -179,9 +179,7 @@ public class LoginUI extends JFrame {
 									dispose();
 									SearchUI search = new SearchUI();
 									search.setVisible(true);
-									Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-									pack();
-									setSize(screenSize.width,screenSize.height);
+									setSize(1400,900);
 									search.setLocationRelativeTo(null);
 
 								}
@@ -215,9 +213,7 @@ public class LoginUI extends JFrame {
 				dispose();
 				register = new RegisterUI();
 				register.setVisible(true);
-				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				pack();
-				setSize(screenSize.width,screenSize.height);
+				setSize(1400,900);
 				register.setLocationRelativeTo(null);
 			}
 		});

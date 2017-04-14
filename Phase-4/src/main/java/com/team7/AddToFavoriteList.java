@@ -1,6 +1,11 @@
 package com.team7;
 
 import java.awt.Component;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,14 +14,13 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
 
-
-// This class renders buttons into the table
-public class ButtonEditor extends DefaultCellEditor {
+public class AddToFavoriteList extends DefaultCellEditor {
 
 	protected JButton button;
 
 	private String label;
 
+	LoginUI log = new LoginUI();
 	// A set which stores names of authors who have been saved or selected
 	static Set<String> savedAuthors = new HashSet<String>();
 
@@ -24,13 +28,11 @@ public class ButtonEditor extends DefaultCellEditor {
 
 	private boolean isPushed;
 
-	public ButtonEditor(JCheckBox checkBox) {
+	public AddToFavoriteList(JCheckBox checkBox) {
 		super(checkBox);
 		button = new JButton();
 		button.setOpaque(true);
-		// TODO Auto-generated constructor stub
 	}
-
 	private static final long serialVersionUID = 1L;
 
 	// extracts information about the row where the button is clicked
@@ -47,24 +49,44 @@ public class ButtonEditor extends DefaultCellEditor {
 
 		Object rowData = table.getValueAt(row, 0);
 		data = rowData.toString();
-		makeList();
-
+		try {
+			AddtoList();
+		} catch (IOException | SQLException e) {
+			// TODO Auto-generated catch block
+			log.messageShow("Already included in the list");
+			return null;
+		}
 		button.setText(label);
 		isPushed = true;
 		return button;
 	}
 
-	// adds the names of the authors in the set, corresponding to the button selected
-	public Set<String> makeList() {
-		// TODO Auto-generated method stub
-		savedAuthors.add(data);
-		return savedAuthors;
+	public void AddtoList() throws IOException, SQLException {
+		
+		ImplementSchemaDB db =  new ImplementSchemaDB();
+		Connection conn = db.getConnection();
+		String conference= null;
+		PreparedStatement p = conn.prepareStatement("select confName from User where username='"+LoginUI.currentUser+"'");
+		ResultSet rs = p.executeQuery();
+		while (rs.next()) {
+			conference = rs.getString(1);
+		}
+
+		PreparedStatement stmt = conn.prepareStatement("insert into Favorite_list(userName,confName,selectedAuthor) values(?,?,?)");
+
+		stmt.setString(1,(LoginUI.currentUser));
+		stmt.setString(2,conference);
+		stmt.setString(3,data);
+
+		stmt.executeUpdate();
 
 	}
-	
+
+
 	public Object getCellEditorValue() {
 		if (isPushed) {}
 		return new String(label);
 	}
+
 
 }
