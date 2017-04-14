@@ -1,55 +1,44 @@
 package com.team7;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Vector;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
-import java.awt.FlowLayout;
-import java.awt.Font;
+public class FavoriteList extends JFrame {
 
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Vector;
-import java.awt.event.ActionEvent;
-
-public class SavedAuthorsUI extends JFrame {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	Set<String> sendMail = new HashSet<String>();
 	JButton btnNewButton;
 	JButton btnSearch;
-	JButton btnSendEmail;
+	JTable table;
+	private JButton btnRemove;
 
-	/**
-	 * Create the frame.
-	 * @throws SQLException  
-	 */
-	public SavedAuthorsUI(ResultSet result) {
-
+	public FavoriteList() throws IOException {
 		setVisible(true);
-		setTitle("SAVED AUTHORS");
+		setTitle("Favorite List");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(10, -22, 933, 579);
@@ -63,14 +52,10 @@ public class SavedAuthorsUI extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JLabel lblSavedAuthors = new JLabel("Saved Authors");
+		JLabel lblSavedAuthors = new JLabel("Favorite List");
 		lblSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblSavedAuthors.setBounds(345, 17, 206, 16);
 		panel.add(lblSavedAuthors);
-
-		JLabel lblNewLabel = new JLabel("To select authors for the committee, click \"select\" beside the row");
-		lblNewLabel.setBounds(242, 68, 433, 16);
-		panel.add(lblNewLabel);
 
 		btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
@@ -104,104 +89,72 @@ public class SavedAuthorsUI extends JFrame {
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnNewButton.setBounds(749, 0, 117, 34);
 		panel.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Favorite List");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				try {
-					FavoriteList fl = new FavoriteList();
-					fl.setVisible(true);
-					fl.setSize(1000,600);
-					fl.setLocationRelativeTo(null);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-		});
-		btnNewButton_1.setBounds(0, 0, 97, 25);
-		panel.add(btnNewButton_1);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(6, 119, 921, 357);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JTable table;
 		try {
-			table = new JTable(buildTableModel(result));
+			ImplementSchemaDB db =  new ImplementSchemaDB();
+			Connection conn = db.getConnection();
+
+			PreparedStatement p = conn.prepareStatement("select selectedAuthor from Favorite_list where username='"+LoginUI.currentUser+"'");
+			ResultSet rs = p.executeQuery();
+
+			table = new JTable(buildTableModel(rs));
 			JTableHeader header = table.getTableHeader();
 			header.setDefaultRenderer(new HeaderRenderer(table));
 
 			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 			centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-			
+
 			// Setting the values center aligned
 			for (int i=0; i< table.getColumnModel().getColumnCount(); i++) {
 				table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 			}
-			
-			// Rendering a button for each table row
-			table.getColumn("Select").setCellRenderer(new JTableButtonRenderer());
-			table.getColumn("Select").setCellEditor(
-					new AddToFavoriteList(new JCheckBox()));
-			
+
+
 			// Not allowing the columns to be dragged
 			table.getTableHeader().setReorderingAllowed(false);
 
 			table.setPreferredScrollableViewportSize(new Dimension(650, 350));
+
 			JScrollPane scroll = new JScrollPane(table);
 			setVisible(true);
 
 			panel_1.add(scroll);
+			DefaultTableModel mod = (DefaultTableModel) table.getModel();
+
+			btnRemove = new JButton("Remove");
+			btnRemove.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+
+					int index = table.getSelectedRow();
+					String author = (String) mod.getValueAt(index, 0);
+					ImplementSchemaDB db =  new ImplementSchemaDB();
+					Connection conn;
+					try {
+						conn = db.getConnection();
+						PreparedStatement stmt = conn.prepareStatement("Delete from Favorite_list where selectedAuthor=?");								
+						stmt.setString(1,author);							
+						stmt.executeUpdate();		
+						mod.removeRow(index);; 
+					} catch (IOException | SQLException e) {
+						e.printStackTrace();
+					}
+
+
+				}
+			});
+			btnRemove.setBounds(388, 489, 97, 25);
+			contentPane.add(btnRemove);
 		} catch (SQLException e2) {
 		}
-
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(6, 488, 921, 63);
-		contentPane.add(panel_2);
-		panel_2.setLayout(null);
-
-		btnSendEmail = new JButton("Send Email");
-		btnSendEmail.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSendEmail.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sendMail = ButtonEditor.savedAuthors;
-				Boolean flag = true;
-
-				if (sendMail.size() == 0) {
-					LoginUI log = new LoginUI();
-					log.messageShow("Please select some authors for your committee");
-					flag = false;
-				}
-				
-				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
-				if (flag == true) {
-					try {
-						String res = searchDisplay.sendEmail(sendMail, LoginUI.currentUser);
-                        if(res == "success"){
-        					LoginUI log = new LoginUI();
-        					log.messageShow("Email sent successfully");
-                        }
-					}  catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (SQLException e1) {
-						
-					}
-				}
-			}
-		});
-		btnSendEmail.setBounds(383, 13, 155, 29);
-		panel_2.add(btnSendEmail);
-
-
 	}
 
+
 	public TableModel buildTableModel(ResultSet rs) throws SQLException {
-		// TODO Auto-generated method stub
 
 		ResultSetMetaData metaData = rs.getMetaData();
 
@@ -211,18 +164,10 @@ public class SavedAuthorsUI extends JFrame {
 
 		// To understand what each column name means in the UI
 		for (int column = 1; column <= columnCount; column++) {
-			
-			if (metaData.getColumnName(column).equals("name"))			
-				columnNames.add("Author Name");
-			else if (metaData.getColumnName(column).equals("title"))
-				columnNames.addElement("Paper Title");
-			else if (metaData.getColumnName(column).equals("confName"))
-				columnNames.addElement("Published in");
-			else if (metaData.getColumnName(column).equals("year"))
-				columnNames.addElement("Publication Year");
-			
+
+			if (metaData.getColumnName(column).equals("selectedAuthor"))			
+				columnNames.add("Author Name");			
 		}
-		columnNames.add("Select");
 
 		Vector<Vector<Object>> data = new Vector<Vector<Object>>();
 		while (rs.next()) {
@@ -230,25 +175,25 @@ public class SavedAuthorsUI extends JFrame {
 			for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
 				vector.add(rs.getObject(columnIndex));     
 			}
-			vector.add("select");
 			data.add(vector);
 		}
-		
+
+
 		TableModel model = new DefaultTableModel(data, columnNames) {
-			/**
-			 * 
-			 */
+
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int row, int column)
-		    {
-			  //This causes all cells except of the last column
-			  // to be not editable
-		      return column == 4; 
-		    }
+			{
+				//This causes all cells except of the last column
+				// to be not editable
+				return false; 
+			}
+
 		};
 
 		return model;
 
 	}
+
 }
