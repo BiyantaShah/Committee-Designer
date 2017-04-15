@@ -103,6 +103,17 @@ public class FavoriteListUI extends JFrame {
 		panel.add(btnCandidatesList);
 		btnCandidatesList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					CandidateListUI cl = new CandidateListUI();
+					  dispose();
+					  cl.setVisible(true);
+					  cl.setSize(1400,900);
+					  cl.setLocationRelativeTo(null);
+
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}				
 			}
 		});
 
@@ -115,7 +126,7 @@ public class FavoriteListUI extends JFrame {
 			ImplementSchemaDB db =  new ImplementSchemaDB();
 			Connection conn = db.getConnection();
 
-			PreparedStatement p = conn.prepareStatement("select selectedAuthor from Favorite_list where username='"+UIConstants.currentUser+"'");
+			PreparedStatement p = conn.prepareStatement("select selectedAuthor from Favorite_list where username='"+UIConstants.currentUser+"'" + "order by selectedAuthor");
 			ResultSet rs = p.executeQuery();
 
 			table = new JTable(buildTableModel(rs));
@@ -167,9 +178,6 @@ public class FavoriteListUI extends JFrame {
 							e.printStackTrace();
 						}
 					}
-
-
-
 				}
 			});
 			btnRemove.setBounds(643, 486, 97, 30);

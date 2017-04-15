@@ -5,7 +5,6 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-@SuppressWarnings("restriction")
 // This class gives information about the article (authors, title, date of publishing)
 public class Article {
 

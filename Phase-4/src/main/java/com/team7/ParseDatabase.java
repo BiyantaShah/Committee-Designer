@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 import javax.xml.bind.JAXBException;
 
-@SuppressWarnings("restriction")
 public interface ParseDatabase {
 	
 	//Parses XML to human readable format 

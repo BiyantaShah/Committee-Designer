@@ -139,6 +139,16 @@ public class SavedAuthorsUI extends JFrame {
 		panel.add(btnCandidatesList);
 		btnCandidatesList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					CandidateListUI cl = new CandidateListUI();
+					  dispose();
+					  cl.setVisible(true);
+					  cl.setSize(1400,900);
+					  cl.setLocationRelativeTo(null);
+
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		
@@ -200,7 +210,7 @@ public class SavedAuthorsUI extends JFrame {
 //				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 //				if (flag == true) {
 //					try {
-//						String res = searchDisplay.sendEmail(sendMail, LoginUI.currentUser);
+//						String res = searchDisplay.sendEmail(sendMail, UIConstants.currentUser);
 //                        if(res == "success"){
 //        					LoginUI log = new LoginUI();
 //        					log.messageShow("Email sent successfully");

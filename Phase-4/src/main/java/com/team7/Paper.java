@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 // Contains information about the paper (authors, title , pages etc.)
-@SuppressWarnings("restriction")
 public class Paper {
 
 	private List<String> author;

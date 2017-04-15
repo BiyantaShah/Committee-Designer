@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 // This class contains information about the conferences ( title, extra information about it)
-@SuppressWarnings("restriction")
 public class Conference {
 
 	private String booktitle; // name of the conference

@@ -108,12 +108,19 @@ public class ImplementSearchDisplay implements SearchDisplay {
 
 				// Format the incoming list into a string
 				StringBuilder sb = new StringBuilder();
-				sb.append("This is my preferred list of authors for committee of " + conference +":");
+				sb.append("Hi All,");
+				sb.append("\n");
+				sb.append("\n");
+
+				sb.append("This is list of authors for committee of " + conference +":");
 				sb.append("\n");
 				sb.append("\n");
 				for (String str: authors) {
 					sb.append(str + "\n");
 				}
+				
+				sb.append("\n");
+				sb.append("Thank you");
 
 				// Body of the email
 				message.setText(sb.toString());

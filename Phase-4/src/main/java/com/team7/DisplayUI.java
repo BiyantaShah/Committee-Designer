@@ -13,8 +13,6 @@ import javax.swing.table.TableModel;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -117,12 +115,24 @@ public class DisplayUI extends JFrame {
 			btnCandidatesList.setVisible(true);
 		}
 		btnCandidatesList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnCandidatesList.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnCandidatesList.setBounds(272, 10, 129, 34);
 		panel.add(btnCandidatesList);
+		btnCandidatesList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					CandidateListUI cl = new CandidateListUI();
+					  dispose();
+					  cl.setVisible(true);
+					  cl.setSize(1400,900);
+					  cl.setLocationRelativeTo(null);
+
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
 
 
 		btnSearch = new JButton("Search UI");
