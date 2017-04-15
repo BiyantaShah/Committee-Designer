@@ -71,7 +71,7 @@ public class DisplayUI extends JFrame {
 
 		btnLogout = new JButton("LogOut");
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnLogout.setBounds(1264, 10, 117, 34);
+		btnLogout.setBounds(1188, 10, 117, 34);
 		panel.add(btnLogout);
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -91,13 +91,13 @@ public class DisplayUI extends JFrame {
 		
 		JButton btnNewButton = new JButton("My Favorite List");
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnNewButton.setBounds(955, 10, 168, 34);
+		btnNewButton.setBounds(92, 10, 168, 34);
 		panel.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					FavoriteList fl = new FavoriteList();
+					FavoriteListUI fl = new FavoriteListUI();
 					dispose();
 					fl.setVisible(true);
 					fl.setSize(1400,900);
@@ -110,12 +110,25 @@ public class DisplayUI extends JFrame {
 			}
 		});
 
+		JButton btnCandidatesList = new JButton("Candidates List");
+		btnCandidatesList.setVisible(false);
+		if(UIConstants.currentuserRole.equals(UIConstants.HighestRole)){
+			btnCandidatesList.setVisible(true);
+		}
+		btnCandidatesList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnCandidatesList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCandidatesList.setBounds(272, 10, 129, 34);
+		panel.add(btnCandidatesList);
+
 
 		btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSearch.setBounds(1135, 10, 117, 34);
+		btnSearch.setBounds(1059, 10, 117, 34);
 		panel.add(btnSearch);
-		
+				
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ButtonEditor.savedAuthors.clear();

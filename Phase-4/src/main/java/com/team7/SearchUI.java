@@ -1095,16 +1095,16 @@ public class SearchUI extends JFrame {
 		
 		JButton btnFav = new JButton("My Favorite List");
 		btnFav.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnFav.setBounds(1044, 13, 183, 35);
+		btnFav.setBounds(102, 13, 183, 35);
 		contentPane.add(btnFav);
 
 		btnFav.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				FavoriteList fl;
+				FavoriteListUI fl;
 				try {
 					
-					fl = new FavoriteList();
+					fl = new FavoriteListUI();
 					dispose();
 					fl.setVisible(true);
 					fl.setSize(1400,900);
@@ -1116,12 +1116,25 @@ public class SearchUI extends JFrame {
 			}
 		});
 
+		JButton btnCandidatesList = new JButton("Candidates List");
+		btnCandidatesList.setVisible(false);
+		if(UIConstants.currentuserRole.equals(UIConstants.HighestRole)){
+			btnCandidatesList.setVisible(true);
+		}
+		btnCandidatesList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnCandidatesList.setBounds(301, 13, 169, 35);
+		contentPane.add(btnCandidatesList);
+		btnCandidatesList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+
 
 		btnLogout = new JButton("LogOut");
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnLogout.setBounds(1253, 13, 117, 34);
+		btnLogout.setBounds(1159, 13, 117, 34);
 		contentPane.add(btnLogout);
-		
+				
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// make the currentUser null and redirect to login page

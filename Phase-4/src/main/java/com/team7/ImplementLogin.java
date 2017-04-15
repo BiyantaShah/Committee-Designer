@@ -20,7 +20,7 @@ public class ImplementLogin implements Login {
 		ImplementSchemaDB db = new ImplementSchemaDB();
 		Connection conn = db.getConnection(); 
 
-		String sql = "select password from User where username = " + '"'+username +'"';
+		String sql = "select password,role from User where username = " + '"'+username +'"';
 	
 		PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -28,13 +28,15 @@ public class ImplementLogin implements Login {
 		if (rs.next()) { 
 
 			String plainText = rs.getString(1);
-			String decryptPassword = decryptPassword(plainText,"SECRETKEY");
+			String role = rs.getString(2);
+			String decryptPassword = decryptPassword(plainText,secretKey);
 
 			if(!decryptPassword.equals("failure")){
 				
 				if (decryptPassword.equals(password)) {
 					// if inserted password is correct then allow the user to login
-					LoginUI.currentUser = username;
+					UIConstants.currentUser = username;
+					UIConstants.currentuserRole = role;
 					return true;
 				}
 				else { 
@@ -45,6 +47,7 @@ public class ImplementLogin implements Login {
 		} 
 		return false; // if user does not exist;
 	}
+	
 
 	public String decryptPassword(String plainText,String secretKey){
  
@@ -68,7 +71,8 @@ public class ImplementLogin implements Login {
 
 	public String logout() {
 		// TODO Auto-generated method stub
-		LoginUI.currentUser = null;		 
+		UIConstants.currentUser = null;	
+		UIConstants.currentuserRole = null;
 		return "success";
 	}
 

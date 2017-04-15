@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
-public class FavoriteList extends JFrame {
+public class FavoriteListUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -34,15 +34,16 @@ public class FavoriteList extends JFrame {
 	JButton btnSearch;
 	JTable table;
 	private JButton btnRemove;
+	private JButton btnCandidatesList;
 
-	public FavoriteList() throws IOException {
-		
+	public FavoriteListUI() throws IOException {
+
 		setVisible(true);
 		setTitle("Favorite List");
 		setSize(1400,900);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -74,6 +75,9 @@ public class FavoriteList extends JFrame {
 		});
 
 		btnNewButton = new JButton("LogOut");
+		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnNewButton.setBounds(1253, 13, 117, 34);
+		panel.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ButtonEditor.savedAuthors.clear();
@@ -87,9 +91,19 @@ public class FavoriteList extends JFrame {
 				log.setLocationRelativeTo(null);
 			}
 		});
-		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnNewButton.setBounds(1253, 13, 117, 34);
-		panel.add(btnNewButton);
+
+		btnCandidatesList = new JButton("Candidates List");
+		btnCandidatesList.setVisible(false);
+		if(UIConstants.currentuserRole.equals("Program Chair")){
+			btnCandidatesList.setVisible(true);
+		}
+		btnCandidatesList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnCandidatesList.setBounds(59, 13, 179, 34);
+		panel.add(btnCandidatesList);
+		btnCandidatesList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 119, 1382, 330);
@@ -100,7 +114,7 @@ public class FavoriteList extends JFrame {
 			ImplementSchemaDB db =  new ImplementSchemaDB();
 			Connection conn = db.getConnection();
 
-			PreparedStatement p = conn.prepareStatement("select selectedAuthor from Favorite_list where username='"+LoginUI.currentUser+"'");
+			PreparedStatement p = conn.prepareStatement("select selectedAuthor from Favorite_list where username='"+UIConstants.currentUser+"'");
 			ResultSet rs = p.executeQuery();
 
 			table = new JTable(buildTableModel(rs));
