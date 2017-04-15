@@ -2,7 +2,9 @@ package com.team7;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,8 +33,19 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	private static String PaperTableAlias = "p";
 	private static String CommitteeTableAlias = "c";
 	private static String ArticleTableAlias = "ar";
+	
+	private static int count;
+	
+	private static HashMap<String, String> finalJoin;
+	String[] queryOrder = new String[5];
 
 	List<String> queries = new ArrayList<String>();
+	
+	
+	public ImplementQueryBuilder(){
+		finalJoin = new HashMap<String, String>();
+		count =0;
+	}
 	
 	// creates queries for all the incoming search parameters and their values 
 	// from the UI
@@ -69,7 +82,18 @@ public class ImplementQueryBuilder implements QueryBuilder{
 				// no validation needed for Keyword
 				// all characters are accepted
 				result = true;
+				
+				if(finalJoin.get("Author")!=null){
+					String join = s.getjoinFilter();
+					finalJoin.put("Author", join + ":"+count);
+					count++;
+				}
+				else{
+				String join= s.getjoinFilter();
+				finalJoin.put("Author", join + ":" + count);
+				count ++;
 			}
+		}
 
 			if(s.getSearchFilter() == "ConfName"){
 				if(checkValidityOfSearchParameters(s.getSearchValue())){
@@ -77,27 +101,81 @@ public class ImplementQueryBuilder implements QueryBuilder{
 				}
 				else
 					result = true;
+				
+				if(finalJoin.get("Author")!=null){
+					String join = s.getjoinFilter();
+					finalJoin.put("Author", join + ":"+ count);
+					count++;
+				}
+				else{
+				String join= s.getjoinFilter();
+				finalJoin.put("Author", join + ":" + count);
+				count ++;
 			}
+		}
 
 			if(s.getSearchFilter() == "Year" && Integer.parseInt(s.getSearchValue()) > 0){
 					result = true;
+					
+					if(finalJoin.get("Author")!=null){
+						String join = s.getjoinFilter();
+						finalJoin.put("Author", join +":"+ count);
+						count++;
+					}
+					else{
+					String join= s.getjoinFilter();
+					finalJoin.put("Author", join + ":" + count);
+					count ++;
 				}
+			}
 			
 			if(s.getSearchFilter() == "Keyword"){	
 				// no validation needed for Keyword
 				// all characters are accepted
 				result = true;
+				
+				if(finalJoin.get("Author")!=null){
+					String join = s.getjoinFilter();
+					finalJoin.put("Author", join +":"+ count);
+					count++;
+				}
+				else{
+				String join= s.getjoinFilter();
+				finalJoin.put("Author", join + ":" + count);
+				count ++;
 			}
+		}
 
 			if(s.getSearchFilter() == "CountNoOfPapers"){            	
 				// no validation needed for Keyword
 				// all characters are accepted
 				result = true;
+				
+				if(finalJoin.get("Author")!=null){
+					String join = s.getjoinFilter();
+					finalJoin.put("Author", join +":"+ count);
+					count++;
+				}
+				else{
+				String join= s.getjoinFilter();
+				finalJoin.put("Author", join + ":" + count);
+				count ++;
+			}
 			}    
 
 			if(s.getSearchFilter() == "Committee.Year" && Integer.parseInt(s.getSearchValue()) > 0){					
-					return true;
-				}
+					result = true;
+					if(finalJoin.get("Committee")!=null){
+						String join = s.getjoinFilter();
+						finalJoin.put("Committee", join + ":"+ count);
+						count++;
+					}
+					else{
+					String join= s.getjoinFilter();
+					finalJoin.put("Committee", join + ":" + count);
+					count ++;
+				}		
+			}
 
 			if(s.getSearchFilter() == "Committee.ConfName"){
 				if(checkValidityOfSearchParameters(s.getSearchValue())){
@@ -105,7 +183,17 @@ public class ImplementQueryBuilder implements QueryBuilder{
 				}
 				else
 					result = true;
+				if(finalJoin.get("Committee")!=null){
+					String join = s.getjoinFilter();
+					finalJoin.put("Committee", join + ":"+count);
+					count++;
+				}
+				else{
+				String join= s.getjoinFilter();
+				finalJoin.put("Committee", join + ":" + count);
+				count ++;
 			}
+		}
 
 			if(s.getSearchFilter() == "JournalName"){
 				if(checkValidityOfSearchParameters(s.getSearchValue())){
@@ -113,7 +201,18 @@ public class ImplementQueryBuilder implements QueryBuilder{
 				}
 				else
 					result = true;
+				if(finalJoin.get("Article")!=null){
+					String join = s.getjoinFilter();
+					finalJoin.put("Article", join + ":"+ count);
+					count++;
+				}
+				else{
+				String join= s.getjoinFilter();
+				finalJoin.put("Article", join + ":" + count);
+				count ++;
 			}
+				
+		 }
 		}
 		return result;
 	}
@@ -199,7 +298,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 
 		// The result sets which are not empty are intersected together
-		if (paperAuthorResult.size() != 0 && 
+		/*if (paperAuthorResult.size() != 0 && 
 				committeeResult.size() != 0 && 
 				articleResult.size() != 0 ) {
 			paperAuthorResult.retainAll(committeeResult);
@@ -232,7 +331,8 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		}
 
 		finalResult.addAll(new HashSet<String>(intermediate));
-		return finalResult;     		
+		return finalResult;   */  
+		return getSequenceOfResults(paperAuthorResult,committeeResult,articleResult);
 	}
 
 	// making a connection with the DB
@@ -284,7 +384,6 @@ public class ImplementQueryBuilder implements QueryBuilder{
 				AuthorTableAlias+ ".paperKey = " + PaperTableAlias + ".paperKey";		
 	}
 
-
 	private void formCommitteeWhereClause(SearchParameter s){  	
 
 		if(s.getSearchFilter() == "Committee.ConfName"){
@@ -332,13 +431,23 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	// Gets all details for authors
 	public String createQueryForAuthorDetails(Set<String> authors){
 
-		String query = "SELECT a.name AS Author, p.title As PaperTitle, p.confName AS Conference,"
+		String query = "SELECT a.name AS Author, p.title As PaperTitle, p.confName AS Conference,"   
 				+ "p.year as Year FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey where a.name IN (";   	
 		for(String author : authors){
 			query +="'" + author +"',";	
 		}     	
 		query = query.substring(0, query.length()-1) + ")"; 	
-		return query;   	
+		return query;  
+		
+		/*String query = "SELECT a.name AS Author, p.title AS PaperTitle, com.confName as Conference, ar.journal as Journal, a.url as URL "
+				+ "FROM Author a FULL OUTER JOIN Paper p ON a.paperkey = p.paperKey FULL OUTER JOIN Committee com ON p.confName = com.confName FULL OUTER JOIN "
+				+ "Article ar on ar.title = p.title WHERE a.name in (";
+		
+		for(String author : authors){
+			query +="'" + author +"',";	
+		}     	
+		query = query.substring(0, query.length()-1) + ")"; 	
+		return null;*/
 	}
 	
 	private List<String> getGroupByQuery(SearchParameter groupByParameter){
@@ -382,6 +491,82 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 				
 		return authQuery;
+	}
+	
+    private List<String> getSequenceOfResults(List<String> paperAuthor, List<String> committee, List<String> article){
+		
+		for(Entry value :finalJoin.entrySet()){
+			String key = (String) value.getKey();
+			int val = Integer.parseInt(value.getValue().toString().split(":")[1]);
+			
+			queryOrder[val] = key + ":" + value.getValue().toString().split(":")[0];	
+		}
+		
+		List<String> inter = new ArrayList<String>();
+		String joinParameter = "";
+		
+		for(String query : queryOrder){
+			if(query != null){			
+				if(query.split(":")[0].equals("Author")){
+					if(joinParameter.length() == 0){
+						inter = paperAuthor;
+						joinParameter = query.split(":")[1]; 
+					}
+					else{
+						if(joinParameter.equals("AND")){
+							inter.retainAll(paperAuthor);
+							joinParameter = query.split(":")[1]; 
+						}
+						else{
+							inter.addAll(paperAuthor);
+							joinParameter = query.split(":")[1]; 
+						}
+					}
+				}
+				
+				else if(query.split(":")[0].equals("Article")){
+					if(joinParameter.length() == 0){
+						inter = article;
+						joinParameter = query.split(":")[1]; 
+					}
+					else{
+						if(joinParameter.equals("AND")){
+							inter.retainAll(article);
+							joinParameter = query.split(":")[1]; 
+						}
+						else{
+							
+							inter.addAll(article);
+							joinParameter = query.split(":")[1]; 
+						}
+					}
+				}
+				
+				
+				else if(query.split(":")[0].equals("Committee")){
+					if(joinParameter.length() == 0){
+						inter = committee;
+						joinParameter = query.split(":")[1]; 
+					}
+					else{
+						if(joinParameter.equals("AND")){
+							inter.retainAll(committee);
+							joinParameter = query.split(":")[1]; 
+						}
+						else{
+							inter.addAll(committee);
+							joinParameter = query.split(":")[1]; 
+						}
+					}
+				}
+				
+			}
+		}
+		
+		Set<String> setWithUniqueValues = new HashSet<>(inter);
+		List<String> listWithUniqueValues = new ArrayList<>(setWithUniqueValues);
+		return listWithUniqueValues;
+		
 	}
 }
 
