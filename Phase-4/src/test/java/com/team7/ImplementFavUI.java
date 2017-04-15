@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class ImplementFavUI {
 	
-	FavoriteList favList = new FavoriteList();
+	FavoriteListUI favList = new FavoriteListUI();
 	AddToFavoriteList button = new AddToFavoriteList(new JCheckBox());
 	
 	@Test

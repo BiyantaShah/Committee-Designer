@@ -66,7 +66,7 @@ public class AddToFavoriteList extends DefaultCellEditor {
 		ImplementSchemaDB db =  new ImplementSchemaDB();
 		Connection conn = db.getConnection();
 		String conference= null;
-		PreparedStatement p = conn.prepareStatement("select confName from User where username='"+LoginUI.currentUser+"'");
+		PreparedStatement p = conn.prepareStatement("select confName from User where username='"+UIConstants.currentUser+"'");
 		ResultSet rs = p.executeQuery();
 		while (rs.next()) {
 			conference = rs.getString(1);
@@ -74,7 +74,7 @@ public class AddToFavoriteList extends DefaultCellEditor {
 		
 		PreparedStatement stmt = conn.prepareStatement("insert into Favorite_list(userName,confName,selectedAuthor) values(?,?,?)");
 
-		stmt.setString(1,(LoginUI.currentUser));
+		stmt.setString(1,(UIConstants.currentUser));
 		stmt.setString(2,conference);
 		stmt.setString(3,data);
 

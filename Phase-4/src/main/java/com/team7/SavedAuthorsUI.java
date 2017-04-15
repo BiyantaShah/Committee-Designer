@@ -78,7 +78,7 @@ public class SavedAuthorsUI extends JFrame {
 
 		btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSearch.setBounds(1138, 10, 117, 34);
+		btnSearch.setBounds(1078, 10, 117, 34);
 		panel.add(btnSearch);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -110,17 +110,18 @@ public class SavedAuthorsUI extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnNewButton.setBounds(1267, 10, 117, 34);
+		btnNewButton.setBounds(1207, 10, 117, 34);
 		panel.add(btnNewButton);
 		
 		JButton btnFav = new JButton("My Favorite List");
 		btnFav.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnFav.setBounds(950, 10, 176, 34);
+		btnFav.setBounds(81, 10, 176, 34);
 		panel.add(btnFav);
+		
 		btnFav.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				FavoriteList fl = new FavoriteList();
+				FavoriteListUI fl = new FavoriteListUI();
 				dispose();
 				fl.setVisible(true);
 				fl.setSize(1400,900);
@@ -128,6 +129,19 @@ public class SavedAuthorsUI extends JFrame {
 				
 			}
 		});
+		
+		JButton btnCandidatesList = new JButton("Candidates List");
+		btnCandidatesList.setVisible(false);
+		if(UIConstants.currentuserRole.equals(UIConstants.HighestRole)){
+			btnCandidatesList.setVisible(true);
+		}
+		btnCandidatesList.setBounds(267, 10, 142, 34);
+		panel.add(btnCandidatesList);
+		btnCandidatesList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(6, 191, 1388, 412);

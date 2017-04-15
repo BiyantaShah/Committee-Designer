@@ -2,7 +2,6 @@ package com.team7;
 
 import java.awt.Color;
 
-import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -36,7 +34,6 @@ public class RegisterUI extends JFrame {
 	String password;
 	String role; 
 	String confName;
-	static Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	LoginUI log = new LoginUI();
 
 	/**
@@ -173,6 +170,11 @@ public class RegisterUI extends JFrame {
 					} 
 
 					if(res.equals("true")){
+						
+						//set current user to session
+						UIConstants.currentUser = userName;
+						UIConstants.currentuserRole = role;
+						
 						//connect to search page
 						dispose();
 						SearchUI search = new SearchUI();

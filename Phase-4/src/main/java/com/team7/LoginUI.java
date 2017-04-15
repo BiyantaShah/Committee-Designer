@@ -1,7 +1,6 @@
 package com.team7;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -9,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -34,8 +32,7 @@ public class LoginUI extends JFrame {
 	public JButton btnLogin;
 	public JButton btnNewUserClick; 
 
-	static String currentUser = null; // to maintain the 'session' for the user.
-	public String userName;
+	public String userName;	
 	public String password;
 
 	static LoginUI frame; 
@@ -173,9 +170,7 @@ public class LoginUI extends JFrame {
 								ImplementLogin login = new ImplementLogin();
 								if (login.login(userName, plainText)) {
 
-									// assign currentUser as username
-									currentUser = userName;
-									// let it go to the search page if login is successful
+							      // let it go to the search page if login is successful
 									dispose();
 									SearchUI search = new SearchUI();
 									search.setVisible(true);
