@@ -13,6 +13,8 @@ import javax.swing.table.TableModel;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -24,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -40,6 +43,8 @@ public class DisplayUI extends JFrame {
 	JButton btnSavedAuthors;
 	JButton btnLogout;
 	JButton btnSearch; 
+	JButton btnSimilarAuthors;
+	JTable table;
 
 	/**
 	 * Create the frame.
@@ -96,16 +101,12 @@ public class DisplayUI extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				try {
-					FavoriteListUI fl = new FavoriteListUI();
+				FavoriteListUI fl;
+					fl = new FavoriteListUI();
 					dispose();
 					fl.setVisible(true);
 					fl.setSize(1400,900);
 					fl.setLocationRelativeTo(null);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 
 			}
 		});
@@ -148,7 +149,7 @@ public class DisplayUI extends JFrame {
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 
-		JTable table;
+		
 		try {
 			table = new JTable(buildTableModel(authors));
 			JTableHeader header = table.getTableHeader();
@@ -171,6 +172,7 @@ public class DisplayUI extends JFrame {
 			table.getTableHeader().setReorderingAllowed(false);
 			
 			table.setPreferredScrollableViewportSize(new Dimension(550, 430));
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			JScrollPane scroll = new JScrollPane(table);
 			setVisible(true);
 			panel_1.add(scroll);
@@ -179,15 +181,49 @@ public class DisplayUI extends JFrame {
 		}
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(227, 605, 921, 55);
+		panel_2.setBounds(247, 605, 921, 55);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
+		
+		btnSimilarAuthors = new JButton("Similar Authors");
+		btnSimilarAuthors.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				int index = table.getSelectedRow();
+				String author = (String) model.getValueAt(index, 0);
+
+				try {
+					ImplementSearchDisplay search = new ImplementSearchDisplay();
+					Set<String> similarAuth = search.similarAuthor(author);
+					
+					SimilarAuthors sa = new SimilarAuthors(similarAuth);
+					
+					sa.setVisible(true);
+
+					setSize(1400,900);
+					similarAuth.clear();
+					
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}
+				
+				
+				
+							
+				
+			}
+		});
+		btnSimilarAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnSimilarAuthors.setBounds(218, 6, 171, 29);
+		panel_2.add(btnSimilarAuthors);
 
 		btnSavedAuthors = new JButton("Candidate Details");
 
-		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSavedAuthors.setBounds(413, 13, 149, 34);
-		panel_2.add(btnSavedAuthors);
+//		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+//		btnSavedAuthors.setBounds(413, 13, 149, 34);
+//		panel_2.add(btnSavedAuthors);
 
 		btnSavedAuthors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -229,7 +265,7 @@ public class DisplayUI extends JFrame {
 		});
 
 		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSavedAuthors.setBounds(388, 6, 171, 29);
+		btnSavedAuthors.setBounds(518, 6, 171, 29);
 		panel_2.add(btnSavedAuthors);
 	}
 

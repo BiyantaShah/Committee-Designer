@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -30,14 +31,14 @@ public class FavoriteListUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	JButton btnNewButton;
+	JButton btnLogout;
 	JButton btnSearch;
 	JTable table;
-	private JButton btnRemove;
-	private JButton btnCandidatesList;
+	JButton btnRemove;
+	JButton btnCandidatesList;
 
-	public FavoriteListUI() throws IOException {
-
+	public FavoriteListUI() {
+		
 		setVisible(true);
 		setTitle("Favorite List");
 		setSize(1400,900);
@@ -74,11 +75,11 @@ public class FavoriteListUI extends JFrame {
 			}
 		});
 
-		btnNewButton = new JButton("LogOut");
-		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnNewButton.setBounds(1253, 13, 117, 34);
-		panel.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
+		btnLogout = new JButton("LogOut");
+		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnLogout.setBounds(1253, 13, 117, 34);
+		panel.add(btnLogout);
+		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ButtonEditor.savedAuthors.clear();
 				// make the currentUser null and redirect to login page
@@ -135,36 +136,46 @@ public class FavoriteListUI extends JFrame {
 
 			table.setPreferredScrollableViewportSize(new Dimension(400, 300));
 
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			
 			JScrollPane scroll = new JScrollPane(table);
 			setVisible(true);
 
 			panel_1.add(scroll);
-			DefaultTableModel mod = (DefaultTableModel) table.getModel();
+			DefaultTableModel model = (DefaultTableModel) table.getModel();
 
 			btnRemove = new JButton("Remove");
 			btnRemove.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 
 					int index = table.getSelectedRow();
-					String author = (String) mod.getValueAt(index, 0);
-					ImplementSchemaDB db =  new ImplementSchemaDB();
-					Connection conn;
-					try {
-						conn = db.getConnection();
-						PreparedStatement stmt = conn.prepareStatement("Delete from Favorite_list where selectedAuthor=?");								
-						stmt.setString(1,author);							
-						stmt.executeUpdate();		
-						mod.removeRow(index);; 
-					} catch (IOException | SQLException e) {
-						e.printStackTrace();
+					if (index == -1) {
+						LoginUI log = new LoginUI();
+						log.messageShow("Please select an author to remove");
 					}
+					else{
+						String author = (String) model.getValueAt(index, 0);
+						ImplementSchemaDB db =  new ImplementSchemaDB();
+						Connection conn;
+						try {
+							conn = db.getConnection();
+							PreparedStatement stmt = conn.prepareStatement("Delete from Favorite_list where selectedAuthor=?");								
+							stmt.setString(1,author);							
+							stmt.executeUpdate();		
+							model.removeRow(index);; 
+						} catch (IOException | SQLException e) {
+							e.printStackTrace();
+						}
+					}
+
 
 
 				}
 			});
 			btnRemove.setBounds(643, 486, 97, 30);
 			contentPane.add(btnRemove);
-		} catch (SQLException e2) {
+		} catch (SQLException | IOException e2) {
+			
 		}
 	}
 

@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
@@ -120,16 +121,11 @@ public class SavedAuthorsUI extends JFrame {
 		btnFav.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				try {
-					FavoriteListUI fl = new FavoriteListUI();
-					dispose();
-					fl.setVisible(true);
-					fl.setSize(1400,900);
-					fl.setLocationRelativeTo(null);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				FavoriteListUI fl = new FavoriteListUI();
+				dispose();
+				fl.setVisible(true);
+				fl.setSize(1400,900);
+				fl.setLocationRelativeTo(null);
 				
 			}
 		});
@@ -175,6 +171,7 @@ public class SavedAuthorsUI extends JFrame {
 			table.getTableHeader().setReorderingAllowed(false);
 
 			table.setPreferredScrollableViewportSize(new Dimension(850, 400));
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			JScrollPane scroll = new JScrollPane(table);
 			setVisible(true);
 
