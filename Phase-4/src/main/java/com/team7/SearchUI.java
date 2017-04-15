@@ -65,7 +65,7 @@ public class SearchUI extends JFrame {
 		setTitle("Search UI");
 		setResizable(false);
 
-		setSize(1400,900);
+		setSize(UIConstants.width, UIConstants.height);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
@@ -75,7 +75,7 @@ public class SearchUI extends JFrame {
 
 		JLabel lblSearch = new JLabel("SEARCH");
 		lblSearch.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblSearch.setBounds(601, 69, 84, 32);
+		lblSearch.setBounds(530, 69, 84, 32);
 		contentPane.add(lblSearch);
 
 
@@ -200,11 +200,11 @@ public class SearchUI extends JFrame {
 
 
 		JLabel CriteriaLabel_1 = new JLabel("Criteria");
-		CriteriaLabel_1.setBounds(103, 23, 56, 16);
+		CriteriaLabel_1.setBounds(53, 22, 56, 16);
 		panel_1.add(CriteriaLabel_1);
 
 		final JComboBox CriteriaComboBox_1 = new JComboBox(keys.toArray());
-		CriteriaComboBox_1.setBounds(163, 20, 166, 22);
+		CriteriaComboBox_1.setBounds(116, 20, 166, 22);
 		panel_1.add(CriteriaComboBox_1);
 
 		CriteriaComboBox_1.setSelectedItem(keys.toArray()[0]);
@@ -271,26 +271,26 @@ public class SearchUI extends JFrame {
 		});
 
 		JLabel ComparatorLabel_1 = new JLabel("Comparator");
-		ComparatorLabel_1.setBounds(346, 23, 79, 16);
+		ComparatorLabel_1.setBounds(306, 23, 79, 16);
 		panel_1.add(ComparatorLabel_1);
 
-		ComparatorComboBox_1.setBounds(439, 20, 107, 22);
+		ComparatorComboBox_1.setBounds(399, 20, 107, 22);
 		panel_1.add(ComparatorComboBox_1);
 
 		JLabel ValueLabel_1 = new JLabel("Value");
-		ValueLabel_1.setBounds(582, 23, 56, 16);
+		ValueLabel_1.setBounds(540, 22, 56, 16);
 		panel_1.add(ValueLabel_1);
 
-		ValueField_1.setBounds(625, 20, 116, 22);
+		ValueField_1.setBounds(596, 19, 116, 22);
 		panel_1.add(ValueField_1);
 		ValueField_1.setColumns(10);
 
-		SelectionComboBox_1.setBounds(625, 20, 116, 22);
+		SelectionComboBox_1.setBounds(596, 20, 116, 22);
 		panel_1.add(SelectionComboBox_1);
 
 
 		NewRowButton_1 = new JButton("New row");
-		NewRowButton_1.setBounds(777, 19, 86, 25);
+		NewRowButton_1.setBounds(740, 19, 86, 25);
 		panel_1.add(NewRowButton_1);
 		NewRowButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -305,11 +305,11 @@ public class SearchUI extends JFrame {
 		});
 
 		//label for join comparator
-		JoinLabel_1.setBounds(875, 19, 96, 25);
+		JoinLabel_1.setBounds(847, 18, 100, 25);
 		panel_1.add(JoinLabel_1);
 
 		//combo box for join comparator
-		JoinComboBox_1.setBounds(970, 18, 85, 26);
+		JoinComboBox_1.setBounds(940, 18, 85, 26);
 		panel_1.add(JoinComboBox_1);
 
 		/****************************************************** Panel -2 ********************************************/		
@@ -318,11 +318,11 @@ public class SearchUI extends JFrame {
 		contentPane.add(panel_2);
 
 		JLabel CriteriaLabel_2 = new JLabel("Criteria");
-		CriteriaLabel_2.setBounds(103, 23, 56, 16);
+		CriteriaLabel_2.setBounds(53, 22, 56, 16);
 		panel_2.add(CriteriaLabel_2);
 
 		final JComboBox CriteriaComboBox_2 = new JComboBox(keys.toArray());
-		CriteriaComboBox_2.setBounds(168, 20, 166, 22);
+		CriteriaComboBox_2.setBounds(116, 20, 166, 22);
 		panel_2.add(CriteriaComboBox_2);
 
 		CriteriaComboBox_2.setSelectedItem(keys.toArray()[0]);
@@ -390,27 +390,27 @@ public class SearchUI extends JFrame {
 		});
 
 		JLabel ComparatorLabel_2 = new JLabel("Comparator");
-		ComparatorLabel_2.setBounds(346, 23, 79, 16);
+		ComparatorLabel_2.setBounds(306, 23, 79, 16);
 		panel_2.add(ComparatorLabel_2);
 
-		ComparatorComboBox_2.setBounds(439, 20, 107, 22);
+		ComparatorComboBox_2.setBounds(399, 20, 107, 22);
 		panel_2.add(ComparatorComboBox_2);
 
 
 		JLabel ValueLabel_2 = new JLabel("Value");
-		ValueLabel_2.setBounds(582, 23, 56, 16);
+		ValueLabel_2.setBounds(540, 22, 56, 16);
 		panel_2.add(ValueLabel_2);
 
 		ValueField_2.setColumns(10);
-		ValueField_2.setBounds(625, 20, 116, 22);
+		ValueField_2.setBounds(595, 19, 116, 22);
 		panel_2.add(ValueField_2);
 
-		SelectionComboBox_2.setBounds(625, 20, 116, 22);
+		SelectionComboBox_2.setBounds(595, 20, 116, 22);
 		panel_2.add(SelectionComboBox_2);
 
 
 		NewRowButton_2 = new JButton("New row");
-		NewRowButton_2.setBounds(777, 19, 86, 25);
+		NewRowButton_2.setBounds(740, 19, 86, 25);
 		panel_2.add(NewRowButton_2);
 		NewRowButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -424,12 +424,12 @@ public class SearchUI extends JFrame {
 		});
 
 		//label for join comparator
-		JoinLabel_2.setBounds(875, 19, 95, 25);
+		JoinLabel_2.setBounds(847, 18, 107, 25);
 		panel_2.add(JoinLabel_2);
 
 
 		//combo box for join comparator
-		JoinComboBox_2.setBounds(970, 18, 85, 26);
+		JoinComboBox_2.setBounds(940, 18, 85, 26);
 		panel_2.add(JoinComboBox_2);
 
 		/************************************ Panel -3 ******************************************************/
@@ -439,11 +439,11 @@ public class SearchUI extends JFrame {
 		contentPane.add(panel_3);
 
 		JLabel CriteriaLabel_3 = new JLabel("Criteria");
-		CriteriaLabel_3.setBounds(103, 23, 56, 16);
+		CriteriaLabel_3.setBounds(53, 22, 56, 16);
 		panel_3.add(CriteriaLabel_3);
 
 		final JComboBox CriteriaComboBox_3 = new JComboBox(keys.toArray());
-		CriteriaComboBox_3.setBounds(163, 20, 166, 22);
+		CriteriaComboBox_3.setBounds(116, 20, 166, 22);
 		panel_3.add(CriteriaComboBox_3);
 
 		CriteriaComboBox_3.setSelectedItem(keys.toArray()[0]);
@@ -510,27 +510,27 @@ public class SearchUI extends JFrame {
 		});
 
 		JLabel ComparatorLabel_3 = new JLabel("Comparator");
-		ComparatorLabel_3.setBounds(346, 23, 79, 16);
+		ComparatorLabel_3.setBounds(306, 23, 79, 16);
 		panel_3.add(ComparatorLabel_3);
 
-		ComparatorComboBox_3.setBounds(439, 20, 107, 22);
+		ComparatorComboBox_3.setBounds(399, 20, 107, 22);
 		panel_3.add(ComparatorComboBox_3);
 
 
 		JLabel ValueLabel_3 = new JLabel("Value");
-		ValueLabel_3.setBounds(582, 23, 56, 16);
+		ValueLabel_3.setBounds(540, 23, 56, 16);
 		panel_3.add(ValueLabel_3);
 
 		ValueField_3.setColumns(10);
-		ValueField_3.setBounds(625, 20, 116, 22);
+		ValueField_3.setBounds(599, 19, 116, 22);
 		panel_3.add(ValueField_3);
 
-		SelectionComboBox_3.setBounds(625, 20, 116, 22);
+		SelectionComboBox_3.setBounds(599, 20, 116, 22);
 		panel_3.add(SelectionComboBox_3);
 
 
 		NewRowButton_3 = new JButton("New row");
-		NewRowButton_3.setBounds(777, 19, 86, 25);
+		NewRowButton_3.setBounds(740, 19, 86, 25);
 		panel_3.add(NewRowButton_3);
 		NewRowButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -542,11 +542,11 @@ public class SearchUI extends JFrame {
 		});
 
 		//label for join comparator
-		JoinLabel_3.setBounds(875, 19, 96, 25);
+		JoinLabel_3.setBounds(847, 19, 96, 25);
 		panel_3.add(JoinLabel_3);
 
 		//combo box for join comparator
-		JoinComboBox_3.setBounds(970, 18, 85, 26);
+		JoinComboBox_3.setBounds(940, 18, 85, 26);
 		panel_3.add(JoinComboBox_3);
 
 		/****************************************** Panel-4 ******************************************************************/
@@ -556,11 +556,11 @@ public class SearchUI extends JFrame {
 		contentPane.add(panel_4);
 
 		JLabel CriteriaLabel_4 = new JLabel("Criteria");
-		CriteriaLabel_4.setBounds(103, 23, 56, 16);
+		CriteriaLabel_4.setBounds(53, 23, 56, 16);
 		panel_4.add(CriteriaLabel_4);
 
 		final JComboBox CriteriaComboBox_4 = new JComboBox(keys.toArray());
-		CriteriaComboBox_4.setBounds(163, 20, 166, 22);
+		CriteriaComboBox_4.setBounds(116, 20, 166, 22);
 		panel_4.add(CriteriaComboBox_4);
 
 		CriteriaComboBox_4.setSelectedItem(keys.toArray()[0]);
@@ -627,25 +627,25 @@ public class SearchUI extends JFrame {
 
 
 		JLabel ComparatorLabel_4 = new JLabel("Comparator");
-		ComparatorLabel_4.setBounds(346, 23, 79, 16);
+		ComparatorLabel_4.setBounds(306, 23, 79, 16);
 		panel_4.add(ComparatorLabel_4);
 
-		ComparatorComboBox_4.setBounds(439, 20, 107, 22);
+		ComparatorComboBox_4.setBounds(399, 20, 107, 22);
 		panel_4.add(ComparatorComboBox_4);
 
 		JLabel ValueLabel_4 = new JLabel("Value");
-		ValueLabel_4.setBounds(582, 23, 56, 16);
+		ValueLabel_4.setBounds(540, 23, 56, 16);
 		panel_4.add(ValueLabel_4);
 
 		ValueField_4.setColumns(10);
-		ValueField_4.setBounds(625, 20, 116, 22);
+		ValueField_4.setBounds(599, 20, 116, 22);
 		panel_4.add(ValueField_4);
 
-		SelectionComboBox_4.setBounds(625, 20, 116, 22);
+		SelectionComboBox_4.setBounds(599, 20, 116, 22);
 		panel_4.add(SelectionComboBox_4);
 
 		NewRowButton_4 = new JButton("New row");  
-		NewRowButton_4.setBounds(777, 19, 86, 25);
+		NewRowButton_4.setBounds(740, 20, 86, 25);
 		panel_4.add(NewRowButton_4);
 		NewRowButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -657,11 +657,11 @@ public class SearchUI extends JFrame {
 		});
 
 		//label for join comparator
-		JoinLabel_4.setBounds(875, 19, 96, 25);
+		JoinLabel_4.setBounds(847, 19, 96, 25);
 		panel_4.add(JoinLabel_4);
 
 		//combo box for join comparator
-		JoinComboBox_4.setBounds(970, 18, 85, 26);
+		JoinComboBox_4.setBounds(940, 18, 85, 26);
 		panel_4.add(JoinComboBox_4);
 
 		/*********************************** Panel - 5 **********************************************/	
@@ -671,11 +671,11 @@ public class SearchUI extends JFrame {
 		panel_5.setLayout(null);
 
 		JLabel CriteriaLabel_5 = new JLabel("Criteria");
-		CriteriaLabel_5.setBounds(103, 23, 56, 16);
+		CriteriaLabel_5.setBounds(53, 23, 56, 16);
 		panel_5.add(CriteriaLabel_5);
 
 		final JComboBox CriteriaComboBox_5 = new JComboBox(keys.toArray());
-		CriteriaComboBox_5.setBounds(163, 20, 166, 22);
+		CriteriaComboBox_5.setBounds(116, 20, 166, 22);
 		panel_5.add(CriteriaComboBox_5);
 
 		CriteriaComboBox_5.setSelectedItem(keys.toArray()[0]);
@@ -742,22 +742,22 @@ public class SearchUI extends JFrame {
 
 
 		JLabel ComparatorLabel_5 = new JLabel("Comparator");
-		ComparatorLabel_5.setBounds(346, 23, 79, 16);
+		ComparatorLabel_5.setBounds(306, 23, 79, 16);
 		panel_5.add(ComparatorLabel_5);
 
-		ComparatorComboBox_5.setBounds(439, 20, 107, 22);
+		ComparatorComboBox_5.setBounds(399, 20, 107, 22);
 		panel_5.add(ComparatorComboBox_5);
 
 
 		JLabel ValueLabel_5 = new JLabel("Value");
-		ValueLabel_5.setBounds(582, 23, 56, 16);
+		ValueLabel_5.setBounds(540, 23, 56, 16);
 		panel_5.add(ValueLabel_5);
 
 		ValueField_5.setColumns(10);
-		ValueField_5.setBounds(625, 20, 116, 22);
+		ValueField_5.setBounds(599, 20, 116, 22);
 		panel_5.add(ValueField_5);
 
-		SelectionComboBox_5.setBounds(625, 20, 116, 22);
+		SelectionComboBox_5.setBounds(599, 20, 116, 22);
 		panel_5.add(SelectionComboBox_5);
 
 
@@ -765,7 +765,7 @@ public class SearchUI extends JFrame {
 
 		btnNewButton = new JButton("Submit");
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnNewButton.setBounds(576, 451, 97, 25);
+		btnNewButton.setBounds(530, 470, 97, 25);
 		contentPane.add(btnNewButton);
 
 		btnNewButton.addActionListener(new ActionListener() {
@@ -1086,7 +1086,7 @@ public class SearchUI extends JFrame {
 						dispose();
 						display = new DisplayUI(finalAuthors);
 						display.setVisible(true);
-						setSize(1400,900);
+						setSize(UIConstants.width, UIConstants.height);
 						display.setLocationRelativeTo(null);
 					}
 				}				   
@@ -1095,7 +1095,7 @@ public class SearchUI extends JFrame {
 		
 		JButton btnFav = new JButton("My Favorite List");
 		btnFav.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnFav.setBounds(102, 13, 183, 35);
+		btnFav.setBounds(23, 13, 183, 35);
 		contentPane.add(btnFav);
 
 		btnFav.addActionListener(new ActionListener() {
@@ -1104,7 +1104,7 @@ public class SearchUI extends JFrame {
 				FavoriteListUI fl = new FavoriteListUI();
 				dispose();
 				fl.setVisible(true);
-				fl.setSize(1400,900);
+				fl.setSize(UIConstants.width, UIConstants.height);
 				fl.setLocationRelativeTo(null);
 			}
 		});
@@ -1115,7 +1115,7 @@ public class SearchUI extends JFrame {
 			btnCandidatesList.setVisible(true);
 		}
 		btnCandidatesList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnCandidatesList.setBounds(301, 13, 169, 35);
+		btnCandidatesList.setBounds(226, 13, 169, 35);
 		contentPane.add(btnCandidatesList);
 		btnCandidatesList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -1124,7 +1124,7 @@ public class SearchUI extends JFrame {
 					CandidateListUI cl = new CandidateListUI();
 					  dispose();
 					  cl.setVisible(true);
-					  cl.setSize(1400,900);
+					  cl.setSize(UIConstants.width, UIConstants.height);
 					  cl.setLocationRelativeTo(null);
 
 				} catch (IOException e) {
@@ -1137,7 +1137,7 @@ public class SearchUI extends JFrame {
 
 		btnLogout = new JButton("LogOut");
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnLogout.setBounds(1159, 13, 117, 34);
+		btnLogout.setBounds(1064, 13, 117, 34);
 		contentPane.add(btnLogout);
 				
 		btnLogout.addActionListener(new ActionListener() {
@@ -1148,7 +1148,7 @@ public class SearchUI extends JFrame {
 				dispose();
 				LoginUI log = new LoginUI();
 				log.setVisible(true);
-				setSize(1400,900);
+				setSize(UIConstants.width, UIConstants.height);
 				log.setLocationRelativeTo(null);
 
 			}

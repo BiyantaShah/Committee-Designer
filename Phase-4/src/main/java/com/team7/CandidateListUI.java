@@ -47,9 +47,9 @@ public class CandidateListUI extends JFrame {
 
 	public CandidateListUI() throws IOException {
 
-		setTitle("CANDIDATE LIST FOR PC");
+		setTitle("CANDIDATE LIST OF THE PROGRAM CHAIR");
 		setResizable(false);
-		setSize(UIConstants.width,UIConstants.height);
+		setSize(UIConstants.width,UIConstants.height);	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		contentPane = new JPanel();
@@ -62,28 +62,31 @@ public class CandidateListUI extends JFrame {
 
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(6, 18, 1188, 85);
+		panel.setBounds(6, 18, 1188, 113);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
 
-		JLabel lblNewLabel = new JLabel("Committee List");
-		lblNewLabel.setBounds(511, 6, 134, 22);
-		panel.add(lblNewLabel);
+		JLabel lblCommittee = new JLabel("Committee List");
+		lblCommittee.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		lblCommittee.setBounds(521, 18, 134, 22);
+		panel.add(lblCommittee);
 
 
 		JLabel lblSelectedCandidates = new JLabel("Selected Candidates");
-		lblSelectedCandidates.setBounds(268, 63, 139, 16);
+		lblSelectedCandidates.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		lblSelectedCandidates.setBounds(182, 91, 176, 16);
 		panel.add(lblSelectedCandidates);
 
 
-		JLabel lblNewLabel_1 = new JLabel("Final Candidates");
-		lblNewLabel_1.setBounds(837, 63, 124, 16);
-		panel.add(lblNewLabel_1);
+		JLabel lblFinalCandidates = new JLabel("Final Candidates");
+		lblFinalCandidates.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		lblFinalCandidates.setBounds(797, 91, 141, 16);
+		panel.add(lblFinalCandidates);
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnLogout.setBounds(1047, 6, 117, 34);
+		btnLogout.setBounds(1065, 6, 117, 34);
 		panel.add(btnLogout);		
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -93,7 +96,7 @@ public class CandidateListUI extends JFrame {
 				dispose();
 				LoginUI log = new LoginUI();
 				log.setVisible(true);
-				setSize(1400,900);
+				setSize(UIConstants.width,UIConstants.height);
 				log.setLocationRelativeTo(null);
 			}
 		});
@@ -101,28 +104,28 @@ public class CandidateListUI extends JFrame {
 		
 		JButton btnSearchui = new JButton("SearchUI");
 		btnSearchui.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSearchui.setBounds(918, 6, 117, 34);
+		btnSearchui.setBounds(932, 6, 117, 34);
 		panel.add(btnSearchui);
 		btnSearchui.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				SearchUI search = new SearchUI();
 				search.setVisible(true);
-				setSize(1400,900);				
+				setSize(UIConstants.width,UIConstants.height);			
 				search.setLocationRelativeTo(null);				
 			}
 		});
 		
 		JButton btnMyFavoriteList = new JButton("My Favorite List");
 		btnMyFavoriteList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnMyFavoriteList.setBounds(25, 13, 176, 34);
+		btnMyFavoriteList.setBounds(17, 6, 176, 34);
 		panel.add(btnMyFavoriteList);
 		btnMyFavoriteList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FavoriteListUI fl = new FavoriteListUI();
 				dispose();
 				fl.setVisible(true);
-				fl.setSize(1400,900);
+				fl.setSize(UIConstants.width,UIConstants.height);
 				fl.setLocationRelativeTo(null);
 			}
 		});
@@ -132,7 +135,7 @@ public class CandidateListUI extends JFrame {
 		// first table
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(6, 120, 581, 493);
+		panel_1.setBounds(16, 143, 578, 465);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -170,6 +173,7 @@ public class CandidateListUI extends JFrame {
 			DefaultTableModel model = (DefaultTableModel) table1.getModel();
 
 			JButton button = new JButton("Select");
+			button.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 			button.setBounds(216, 5, 97, 30);
 			panel_3.add(button);
 			button.addActionListener(new ActionListener() {
@@ -210,7 +214,7 @@ public class CandidateListUI extends JFrame {
 		// second table
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(618, 120, 576, 493);
+		panel_2.setBounds(606, 143, 578, 465);
 		contentPane.add(panel_2);
 		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -242,12 +246,13 @@ public class CandidateListUI extends JFrame {
 			model2 = (DefaultTableModel) table2.getModel();
 
 
-			panel_3.setBounds(6, 637, 1188, 85);
+			panel_3.setBounds(6, 612, 1188, 85);
 			contentPane.add(panel_3);
 			panel_3.setLayout(null);
 
 
 			JButton btnSendEmail = new JButton("Send Email");
+			btnSendEmail.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 			btnSendEmail.setBounds(539, 50, 117, 29);
 			panel_3.add(btnSendEmail);
 			Set<String> sendMail = new HashSet<String>();
@@ -289,6 +294,7 @@ public class CandidateListUI extends JFrame {
 
 
 			JButton btnRemove = new JButton("Remove");
+			btnRemove.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 			btnRemove.setBounds(855, 6, 117, 29);
 			panel_3.add(btnRemove);
 			btnRemove.addActionListener(new ActionListener() {

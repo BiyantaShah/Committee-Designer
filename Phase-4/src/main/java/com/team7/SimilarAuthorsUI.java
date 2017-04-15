@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
-public class SimilarAuthors extends JFrame {
+public class SimilarAuthorsUI extends JFrame {
 
 	/**
 	 * 
@@ -32,7 +32,7 @@ public class SimilarAuthors extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SimilarAuthors(Set<String> similarAuthors) {
+	public SimilarAuthorsUI(Set<String> similarAuthors) {
 		
 		setSize(700,450);
 		setResizable(false);

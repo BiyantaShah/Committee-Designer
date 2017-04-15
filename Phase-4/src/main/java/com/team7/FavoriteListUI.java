@@ -41,7 +41,7 @@ public class FavoriteListUI extends JFrame {
 		
 		setVisible(true);
 		setTitle("Favorite List");
-		setSize(1400,900);
+		setSize(UIConstants.width,UIConstants.height);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -57,12 +57,12 @@ public class FavoriteListUI extends JFrame {
 
 		JLabel lblSavedAuthors = new JLabel("My Favorite List");
 		lblSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblSavedAuthors.setBounds(604, 38, 197, 34);
+		lblSavedAuthors.setBounds(499, 61, 197, 34);
 		panel.add(lblSavedAuthors);
 
 		btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSearch.setBounds(1124, 13, 117, 34);
+		btnSearch.setBounds(950, 13, 117, 34);
 		panel.add(btnSearch);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -70,14 +70,14 @@ public class FavoriteListUI extends JFrame {
 				dispose();
 				SearchUI search = new SearchUI();
 				search.setVisible(true);
-				search.setSize(1400,900);
+				search.setSize(UIConstants.width,UIConstants.height);
 				search.setLocationRelativeTo(null);				
 			}
 		});
 
 		btnLogout = new JButton("LogOut");
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnLogout.setBounds(1253, 13, 117, 34);
+		btnLogout.setBounds(1071, 13, 117, 34);
 		panel.add(btnLogout);
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -88,7 +88,7 @@ public class FavoriteListUI extends JFrame {
 				dispose();
 				LoginUI log = new LoginUI();
 				log.setVisible(true);
-				log.setSize(1400,900);
+				log.setSize(UIConstants.width,UIConstants.height);
 				log.setLocationRelativeTo(null);
 			}
 		});
@@ -99,7 +99,7 @@ public class FavoriteListUI extends JFrame {
 			btnCandidatesList.setVisible(true);
 		}
 		btnCandidatesList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnCandidatesList.setBounds(59, 13, 179, 34);
+		btnCandidatesList.setBounds(18, 13, 179, 34);
 		panel.add(btnCandidatesList);
 		btnCandidatesList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -107,7 +107,7 @@ public class FavoriteListUI extends JFrame {
 					CandidateListUI cl = new CandidateListUI();
 					  dispose();
 					  cl.setVisible(true);
-					  cl.setSize(1400,900);
+					  cl.setSize(UIConstants.width,UIConstants.height);
 					  cl.setLocationRelativeTo(null);
 
 				} catch (IOException e1) {
@@ -118,7 +118,7 @@ public class FavoriteListUI extends JFrame {
 		});
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 119, 1382, 330);
+		panel_1.setBounds(0, 129, 1182, 330);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -156,6 +156,7 @@ public class FavoriteListUI extends JFrame {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 
 			btnRemove = new JButton("Remove");
+			btnRemove.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 			btnRemove.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 
@@ -180,7 +181,7 @@ public class FavoriteListUI extends JFrame {
 					}
 				}
 			});
-			btnRemove.setBounds(643, 486, 97, 30);
+			btnRemove.setBounds(546, 487, 97, 30);
 			contentPane.add(btnRemove);
 		} catch (SQLException | IOException e2) {
 			

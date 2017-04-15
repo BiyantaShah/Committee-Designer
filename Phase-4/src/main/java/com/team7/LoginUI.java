@@ -104,7 +104,7 @@ public class LoginUI extends JFrame {
 
 		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		pack();
-		setSize(1400,900);
+		setSize(UIConstants.width, UIConstants.height);
 		setResizable(false);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,12 +115,12 @@ public class LoginUI extends JFrame {
 
 		JLabel lblWelcome = new JLabel("WELCOME !");
 		lblWelcome.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblWelcome.setBounds(601, 65, 153, 32);
+		lblWelcome.setBounds(551, 65, 153, 32);
 		contentPane.add(lblWelcome); 
 
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		lblUsername.setBounds(487, 151, 97, 28);
+		lblUsername.setBounds(437, 151, 97, 28);
 		contentPane.add(lblUsername);
 
 		userNameField = new JTextField();
@@ -130,21 +130,21 @@ public class LoginUI extends JFrame {
 		.put("ToolTip.font", new Font("Lucida Grande", Font.BOLD, 14));
 
 		userNameField.setToolTipText("Please enter registered Email-id");
-		userNameField.setBounds(642, 149, 191, 34);
+		userNameField.setBounds(592, 149, 191, 34);
 		contentPane.add(userNameField);
 
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		lblPassword.setBounds(487, 228, 81, 19);
+		lblPassword.setBounds(437, 228, 81, 19);
 		contentPane.add(lblPassword);
 
 		passwordField = new JPasswordField();
-		passwordField.setBounds(642, 221, 191, 34);
+		passwordField.setBounds(592, 221, 191, 34);
 		contentPane.add(passwordField);
 
 		btnLogin = new JButton("Login"); 
 		btnLogin.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnLogin.setBounds(608, 312, 117, 34);
+		btnLogin.setBounds(558, 312, 117, 34);
 		contentPane.add(btnLogin);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -174,7 +174,7 @@ public class LoginUI extends JFrame {
 									dispose();
 									SearchUI search = new SearchUI();
 									search.setVisible(true);
-									setSize(1400,900);
+									setSize(UIConstants.width, UIConstants.height);
 									search.setLocationRelativeTo(null);
 
 								}
@@ -199,7 +199,7 @@ public class LoginUI extends JFrame {
 
 		btnNewUserClick = new JButton("New User? Click to Register");
 		btnNewUserClick.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnNewUserClick.setBounds(533, 369, 287, 34);
+		btnNewUserClick.setBounds(483, 369, 287, 34);
 		contentPane.add(btnNewUserClick);
 		btnNewUserClick.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -208,7 +208,7 @@ public class LoginUI extends JFrame {
 				dispose();
 				register = new RegisterUI();
 				register.setVisible(true);
-				setSize(1400,900);
+				setSize(UIConstants.width, UIConstants.height);
 				register.setLocationRelativeTo(null);
 			}
 		});
