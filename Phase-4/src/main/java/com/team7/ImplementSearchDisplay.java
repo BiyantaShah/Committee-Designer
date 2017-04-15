@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -23,6 +25,20 @@ public class ImplementSearchDisplay implements SearchDisplay {
         return queryBuilderObject.getResultForDisplay(query);
 	
 	} 
+	
+	public Set<String> similarAuthor(String author) throws SQLException, IOException {
+		List<String> similarAuth = new ArrayList<String>();
+		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
+		String query = queryBuilderObject.createQueryForSimiliarAuthors(author);
+		ResultSet similarResultSet = queryBuilderObject.sendQuery(query);
+		
+		while (similarResultSet.next()) {
+			similarAuth.add(similarResultSet.getString(1));
+		}
+		
+		return new HashSet<String>(similarAuth);
+		
+	}
  
 	// Returns the candidate details for each author selected by the user
 	public ResultSet candidateDetails(Set<String> authors) throws SQLException, IOException {

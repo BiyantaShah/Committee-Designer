@@ -71,7 +71,7 @@ public class AddToFavoriteList extends DefaultCellEditor {
 		while (rs.next()) {
 			conference = rs.getString(1);
 		}
-
+		
 		PreparedStatement stmt = conn.prepareStatement("insert into Favorite_list(userName,confName,selectedAuthor) values(?,?,?)");
 
 		stmt.setString(1,(LoginUI.currentUser));

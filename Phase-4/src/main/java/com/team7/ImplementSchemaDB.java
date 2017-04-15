@@ -151,6 +151,17 @@ public class ImplementSchemaDB implements SchemaDB {
 					" PRIMARY     KEY(id))" ;
 
 			stmt.executeUpdate(sql);
+			
+			// creating Favorites table
+			sql = "CREATE TABLE IF NOT EXISTS Favorite_list " +
+					"(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
+					" userName	  VARCHAR(255), " +
+					" confName       VARCHAR(255), " + 
+					" selectedAuthor	  VARCHAR(255), " +   
+					" UNIQUE (userName, confName, selectedAuthor), "+
+					" PRIMARY     KEY(id))" ;
+
+			stmt.executeUpdate(sql);
 
 
 		}catch(Exception se){

@@ -45,36 +45,36 @@ public class ImplementSavedUITest {
 		saved.dispose();
 	}
 	
-	@Test
-	// Testing send email button with proper list
-	public void testEmailButtonWithList() throws SQLException, IOException {
-		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
-		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
-		ResultSet rs = queryBuilderObject.sendQuery(query);
-		
-		saved = new SavedAuthorsUI(rs);
-		
-		String[] colNames = {"Name", "Select"};
-		Object [][] row = {{"author1", "select"}, {"author2", "select"}};
-		JTable table = new JTable(new DefaultTableModel(row, colNames));
-		button.getTableCellEditorComponent(table, "select", true, 1, 0);
-		
-		saved.btnSendEmail.doClick();
-		saved.dispose();		
-	}
+//	@Test
+//	// Testing send email button with proper list
+//	public void testEmailButtonWithList() throws SQLException, IOException {
+//		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
+//		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
+//		ResultSet rs = queryBuilderObject.sendQuery(query);
+//		
+//		saved = new SavedAuthorsUI(rs);
+//		
+//		String[] colNames = {"Name", "Select"};
+//		Object [][] row = {{"author1", "select"}, {"author2", "select"}};
+//		JTable table = new JTable(new DefaultTableModel(row, colNames));
+//		button.getTableCellEditorComponent(table, "select", true, 1, 0);
+//		
+//		saved.btnSendEmail.doClick();
+//		saved.dispose();		
+//	}
 	
-	@Test
-	// Testing send email button with empty list
-	public void testEmailButtonWithEmptyList() throws SQLException, IOException {
-		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
-		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
-		ResultSet rs = queryBuilderObject.sendQuery(query);
-		
-		saved = new SavedAuthorsUI(rs);
-		
-		saved.btnSendEmail.doClick();
-		saved.dispose();		
-	}
+//	@Test
+//	// Testing send email button with empty list
+//	public void testEmailButtonWithEmptyList() throws SQLException, IOException {
+//		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
+//		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
+//		ResultSet rs = queryBuilderObject.sendQuery(query);
+//		
+//		saved = new SavedAuthorsUI(rs);
+//		
+//		saved.btnSendEmail.doClick();
+//		saved.dispose();		
+//	}
 	
 	
 	

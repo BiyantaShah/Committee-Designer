@@ -73,7 +73,7 @@ public class SearchUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblSearch = new JLabel("Search");
+		JLabel lblSearch = new JLabel("SEARCH");
 		lblSearch.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblSearch.setBounds(601, 69, 84, 32);
 		contentPane.add(lblSearch);
@@ -1102,17 +1102,11 @@ public class SearchUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				FavoriteList fl;
-				try {
-					
-					fl = new FavoriteList();
-					dispose();
-					fl.setVisible(true);
-					fl.setSize(1400,900);
-					fl.setLocationRelativeTo(null);
-
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				fl = new FavoriteList();
+				dispose();
+				fl.setVisible(true);
+				fl.setSize(1400,900);
+				fl.setLocationRelativeTo(null);
 			}
 		});
 
