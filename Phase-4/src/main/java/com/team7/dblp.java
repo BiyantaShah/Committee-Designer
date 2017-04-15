@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 // This class represents the root element of the xml file.
 // Contains objects of all the tags whose information is required.
 // Information of all these objects will be extracted by JAXB parser.
-@SuppressWarnings("restriction")
 @XmlRootElement
 public class dblp {
 

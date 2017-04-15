@@ -15,7 +15,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-@SuppressWarnings("restriction")
 public class ImplementParseDatabase implements ParseDatabase {
 
 	ImplementSchemaDB db = new ImplementSchemaDB(); 

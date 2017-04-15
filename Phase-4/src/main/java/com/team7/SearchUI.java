@@ -110,7 +110,7 @@ public class SearchUI extends JFrame {
 		List<String> keys = new ArrayList<String>(Criteria.keySet());
 
 		/*************************Connection between two queries***********************************/
-		String[] JoinList = {"AND","OR"};
+		String[] JoinList = {"AND","OR "};
 
 		/*******************Conference Names*****************************/
 
@@ -1119,6 +1119,18 @@ public class SearchUI extends JFrame {
 		contentPane.add(btnCandidatesList);
 		btnCandidatesList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				try {
+					CandidateListUI cl = new CandidateListUI();
+					  dispose();
+					  cl.setVisible(true);
+					  cl.setSize(1400,900);
+					  cl.setLocationRelativeTo(null);
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 

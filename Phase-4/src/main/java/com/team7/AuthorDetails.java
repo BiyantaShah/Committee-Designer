@@ -5,7 +5,6 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 // This class gives the information about details of the author (name and their home page)
-@SuppressWarnings("restriction")
 public class AuthorDetails {
 
 	private List<String> author;

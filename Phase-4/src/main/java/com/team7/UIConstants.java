@@ -10,6 +10,9 @@ public class UIConstants {
 	//To give authority for final selection of candidates
 	static String HighestRole = "Program Chair";
 	
+	static int width = 1200;
+	static int height = 750;
+	
 	
 
 }
