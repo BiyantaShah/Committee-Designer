@@ -354,5 +354,34 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	
 	return queries;
 	}
+
+	public String createQueryForSimiliarAuthors(String author) {
+		
+		String uniQuery = "select university from Author where name='"+author+"'";
+		ResultSet rs1;
+		String uni = new String();
+		String authQuery = new String();
+		try {
+			rs1 = sendQuery(uniQuery);
+			
+			while (rs1.next()) {
+				uni = rs1.getString(1);
+			}
+			
+			if (uni == null) {
+				authQuery = "select name from Author where university is NULL";
+			}
+			else {
+				authQuery = "select name from Author where university='"+uni+"'";
+			}
+			
+			
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+
+				
+		return authQuery;
+	}
 }
 

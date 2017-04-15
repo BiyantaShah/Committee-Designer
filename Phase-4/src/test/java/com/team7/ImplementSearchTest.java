@@ -43,6 +43,16 @@ public class ImplementSearchTest extends TestCase {
 
 		assertEquals("Amer Diwan", author);
 	} 
+	
+	
+	@Test
+	public void testSimAuth() throws SQLException, IOException {
+		
+		Set<String> simAuth = new ImplementSearchDisplay().similarAuthor("Aniruddha S. Gokhale");
+		
+		assertEquals(6, simAuth.size());
+		
+	}
 
 	
 	// Email sent successfully

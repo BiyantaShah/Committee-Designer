@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -436,5 +437,6 @@ public class ImplementQueryBuilderTest extends TestCase {
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
 		assertEquals(expected,queryFormed);  
 	}
+
 
 }

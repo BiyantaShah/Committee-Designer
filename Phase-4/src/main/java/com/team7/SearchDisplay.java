@@ -17,4 +17,7 @@ public interface SearchDisplay {
 
 	// details of the Author
 	public ResultSet candidateDetails(Set<String> authors) throws SQLException,IOException;
+	
+	// similar Authors
+	public Set<String> similarAuthor(String author) throws SQLException, IOException;
 }
