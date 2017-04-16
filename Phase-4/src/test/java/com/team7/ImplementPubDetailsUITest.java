@@ -13,7 +13,7 @@ import org.junit.Test;
 
 public class ImplementPubDetailsUITest {
 	
-	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Conference Chair", "ECOOP");
+	UIConstants u  = new UIConstants("shah.bi@husky.neu.edu", "Program Chair", "ECOOP");
 	Set<String> authors = new HashSet<String> (Arrays.asList("Shahar Maoz"));
 	AuthorPublicationDetailsUI saved;
 	ButtonEditor button = new ButtonEditor(new JCheckBox());
@@ -41,6 +41,30 @@ public class ImplementPubDetailsUITest {
 		
 		saved = new AuthorPublicationDetailsUI(rs);		
 		saved.btnSearch.doClick();
+		saved.dispose();
+	}
+	
+	@Test
+	// Testing the favorite list button
+	public void testFavList() throws SQLException, IOException {
+		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
+		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
+		ResultSet rs = queryBuilderObject.sendQuery(query);
+		
+		saved = new SavedAuthorsUI(rs);
+		saved.btnFav.doClick();
+		saved.dispose();
+	}
+	
+	@Test
+	// testing the candidate list button
+	public void testCandidateList() throws SQLException, IOException {
+		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
+		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
+		ResultSet rs = queryBuilderObject.sendQuery(query);
+		
+		saved = new SavedAuthorsUI(rs);
+		saved.btnCandidatesList.doClick();
 		saved.dispose();
 	}
 	

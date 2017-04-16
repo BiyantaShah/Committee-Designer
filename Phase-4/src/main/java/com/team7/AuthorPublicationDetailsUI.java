@@ -42,6 +42,8 @@ public class AuthorPublicationDetailsUI extends JFrame {
 	JButton btnNewButton;
 	JButton btnSearch;
 	JButton btnSendEmail;
+	JButton btnCandidatesList;
+	JButton btnFav;
 
 	/**
 	 * Create the frame.
@@ -113,7 +115,7 @@ public class AuthorPublicationDetailsUI extends JFrame {
 		btnNewButton.setBounds(1059, 10, 117, 34);
 		panel.add(btnNewButton);
 		
-		JButton btnFav = new JButton("My Favorite List");
+		btnFav = new JButton("My Favorite List");
 		btnFav.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnFav.setBounds(31, 10, 176, 34);
 		panel.add(btnFav);
@@ -138,7 +140,7 @@ public class AuthorPublicationDetailsUI extends JFrame {
 			}
 		});
 		
-		JButton btnCandidatesList = new JButton("Candidates List");
+		btnCandidatesList = new JButton("Candidates List");
 		btnCandidatesList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnCandidatesList.setVisible(false);
 		if(UIConstants.currentUserRole.equals(UIConstants.HighestRole)){
