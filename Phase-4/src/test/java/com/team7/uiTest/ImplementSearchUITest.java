@@ -1,4 +1,4 @@
-package com.team7;
+package com.team7.uiTest;
 
 import java.io.IOException;
 import java.sql.SQLException;

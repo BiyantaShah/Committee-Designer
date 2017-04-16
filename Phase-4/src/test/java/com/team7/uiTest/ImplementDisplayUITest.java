@@ -1,4 +1,4 @@
-package com.team7;
+package com.team7.uiTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;

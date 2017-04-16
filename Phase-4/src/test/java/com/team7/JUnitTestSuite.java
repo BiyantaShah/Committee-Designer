@@ -12,12 +12,14 @@ import com.team7.parseTest.ImplementUniCountryTest;
 import com.team7.queryTest.ImplementQueryBuilderTest;
 import com.team7.queryTest.ImplementSearchTest;
 import com.team7.queryTest.SearchParameterTest;
+import com.team7.uiTest.ImplementDisplayUITest;
 import com.team7.uiTest.ImplementFavUITest;
 import com.team7.uiTest.ImplementLoginTest;
 import com.team7.uiTest.ImplementLoginUITest;
 import com.team7.uiTest.ImplementPubDetailsUITest;
 import com.team7.uiTest.ImplementRegisterTest;
 import com.team7.uiTest.ImplementRegisterUITest;
+import com.team7.uiTest.ImplementSearchUITest;
 
 //JUnit Suite Test
 @RunWith(Suite.class)
