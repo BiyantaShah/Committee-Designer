@@ -163,7 +163,7 @@ public class SavedAuthorsUI extends JFrame {
 		
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(6, 191, 1188, 412);
+		panel_1.setBounds(6, 191, 1188, 431);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -199,7 +199,7 @@ public class SavedAuthorsUI extends JFrame {
 		}
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(6, 607, 1388, 55);
+		panel_2.setBounds(6, 648, 1388, 47);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
@@ -215,20 +215,8 @@ public class SavedAuthorsUI extends JFrame {
 
 		final int columnCount = metaData.getColumnCount();
 
-		// To understand what each column name means in the UI
 		for (int column = 1; column <= columnCount; column++) {
-//			columnNames.add(metaData.getColumnName(column));
-			
-			if (metaData.getColumnName(column).equals("name"))			
-				columnNames.add("Author Name");
-			else if ((metaData.getColumnName(column).equals("title")) && column == 2)
-				columnNames.addElement("Paper Title");
-			else if ((metaData.getColumnName(column).equals("title")) && column == 4)
-				columnNames.addElement("Article Title");
-			else if (metaData.getColumnName(column).equals("confName"))
-				columnNames.addElement("Committee Name");
-			else if (metaData.getColumnName(column).equals("url"))
-				columnNames.addElement("Url");
+			columnNames.add(metaData.getColumnName(column));
 			
 		}
 		columnNames.add("Select");
@@ -237,7 +225,13 @@ public class SavedAuthorsUI extends JFrame {
 		while (rs.next()) {
 			Vector<Object> vector = new Vector<Object>();
 			for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-				vector.add(rs.getObject(columnIndex));     
+				if (rs.getObject(columnIndex) == null) {
+					vector.add("----");
+				}
+				else {
+					vector.add(rs.getObject(columnIndex));    
+				}
+				 
 			}
 			vector.add("select");
 			data.add(vector);
@@ -253,7 +247,7 @@ public class SavedAuthorsUI extends JFrame {
 		    {
 			  //This causes all cells except of the last column
 			  // to be not editable
-		      return column == 5; 
+		      return column == 4; 
 		    }
 		};
 
