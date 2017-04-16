@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 import org.junit.Test;
 
-public class ImplementDisplayUI {
+public class ImplementDisplayUITest {
 	
 	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Conference Chair", "ECOOP");
 

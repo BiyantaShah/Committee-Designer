@@ -121,7 +121,7 @@ public class SavedAuthorsUI extends JFrame {
 		btnFav.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ImplementSearchDisplay search = new ImplementSearchDisplay();
-				Set<String> favList;
+				Set<String> favList; 
 				try {
 					favList = search.favAuthors("userName", UIConstants.currentUser);
 					FavoriteListUI fl = new FavoriteListUI(favList);
