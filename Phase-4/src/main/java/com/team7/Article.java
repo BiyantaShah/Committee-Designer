@@ -12,7 +12,6 @@ public class Article {
 	private String key; 
 	private String title; 
 	private int year;
-	private String month;
 	private String ee;
 
 	public Article () {
@@ -54,15 +53,6 @@ public class Article {
 	@XmlElement
 	public void setYear(int year) {
 		this.year = year;
-	}
-
-	public String getMonth() {
-		return month;
-	}
-
-	@XmlElement
-	public void setMonth(String month) {
-		this.month = month;
 	}
 
 	public String getEe() {

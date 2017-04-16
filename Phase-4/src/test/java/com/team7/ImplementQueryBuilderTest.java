@@ -410,16 +410,16 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testProperJoinFormation() throws SQLException{   
 		List<String> expected = new ArrayList<String>();
-  		expected.add(0, null);
+  		expected.add(0, "SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey GROUP BY a.name HAVING COUNT(*) >5");
   		expected.add(1, null);
-  		expected.add(2, null);
+  		expected.add(2, "SELECT ar.Author AS Author FROM  Article ar WHERE ar.journal= 'TSE'");
 		SearchParameter s1= new SearchParameter("JournalName", "=" ,"TSE", "AND");
 		SearchParameter s2= new SearchParameter("CountNoOfPapers", ">" ,"5",null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(s1);
   		searchCriteria.add(s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
-		//assertEquals(expected,queryFormed);  
+		assertEquals(expected,queryFormed);  
 	}
 	
 	@Test

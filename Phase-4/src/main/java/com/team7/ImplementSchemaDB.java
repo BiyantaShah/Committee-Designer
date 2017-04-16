@@ -35,29 +35,29 @@ public class ImplementSchemaDB implements SchemaDB {
 		try{
 			//Register JDBC driver
 			Class.forName(JDBC_DRIVER);
-
-
-			//selecting database created above
-//			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
-//			String userName = "root";
-//			String password = "9HTa~TZ?dyQWM4}";
 			
+			// Database properties for local DB
 			String db_url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
 			String userName = "root";
 			String password = "root";
 
-
+			// getting the connection to local host (only for local DB)
 			conn = DriverManager.getConnection(db_url, userName, password);
 			stmt = conn.createStatement();
 			
 //			sql = "DROP DATABASE IF EXISTS DBLP";
 //			stmt.executeUpdate(sql);
-//			System.out.println("Dblp database deleted successfully...");
 			
-			//Create Database
+			//Create Database for local DB
+			// On RDS you need to separately create the DB first and run the below code to create tables.
 			stmt = conn.createStatement();			      
 			sql = "CREATE DATABASE IF NOT EXISTS DBLP";
 			stmt.executeUpdate(sql);
+			
+			// Database properties for RDS
+//			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
+//			String userName = "root";
+//			String password = "9HTa~TZ?dyQWM4}";
 			
 			String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
 			conn = DriverManager.getConnection(connected_db, userName, password);
@@ -99,7 +99,6 @@ public class ImplementSchemaDB implements SchemaDB {
 			// Adding index to the paper key, making it faster during a join
 //			 sql = "ALTER TABLE Paper ADD INDEX keyP(paperKey)";
 //			 stmt.executeUpdate(sql);
-//			 System.out.println("Created index on Key in paper table...");
 
 			// creating author table
 			sql = "CREATE TABLE IF NOT EXISTS Author " +
@@ -114,19 +113,13 @@ public class ImplementSchemaDB implements SchemaDB {
 
 			stmt.executeUpdate(sql);
 
-			// Adding index to the paper key in author making it faster during a join
+			// Adding index to the paper key and name in author making it faster during a join
 //			 sql = "ALTER TABLE Author ADD INDEX keyA(paperKey)";
 //			 stmt.executeUpdate(sql);
-//			 System.out.println("Created index on Key in author table...");
-
-			//creating AuthorDetails table
-			sql = "CREATE TABLE IF NOT EXISTS Author_Details " +
-					"(id        INTEGER      AUTO_INCREMENT NOT NULL, " +
-					" name      VARCHAR(255), " + 
-					" url       TEXT, " + 
-					" PRIMARY   KEY(id))" ;
-
-			stmt.executeUpdate(sql);
+//			 
+//			 sql = "ALTER TABLE Author ADD INDEX keyA1(name)";
+//			 stmt.executeUpdate(sql);
+			
 
 			//creating Committees table
 			sql = "CREATE TABLE IF NOT EXISTS Committee " +
@@ -146,11 +139,14 @@ public class ImplementSchemaDB implements SchemaDB {
 					" title       TEXT, " + 
 					" journal	  VARCHAR(255), " +
 					" year        INTEGER, " + 
-					" month       VARCHAR(255), " + 
 					" ee          TEXT, "      +   
 					" PRIMARY     KEY(id))" ;
 
 			stmt.executeUpdate(sql);
+			
+			// Adding indexes in article table on author name for faster access
+//			sql = "ALTER TABLE Article ADD INDEX keyR(author)";
+//			stmt.executeUpdate(sql);
 			
 			// creating Favorites table
 			sql = "CREATE TABLE IF NOT EXISTS Favorite_list " +
@@ -187,11 +183,12 @@ public class ImplementSchemaDB implements SchemaDB {
 
 		Connection conn = null; 
 
-		//Database Properties
+		//Database Properties for RDS
 //		String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";
 //		String userName = "root";
 //		String password = "9HTa~TZ?dyQWM4}";
 		
+		// Database properties for local DB
 		String url = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
 		String userName = "root";
 		String password = "root";

@@ -48,7 +48,7 @@ public class LoginUI extends JFrame {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
 
 		System.setProperty("java.awt.headless", "true");
-		// Below was used to create database ,extract xml and insert data into tables
+		// Below was used to create database ,extract xml and csv data and insert data into tables
 
 //		File file = new File("input/dblp.xml");
 //		File comData = new File("input/committees/");
@@ -74,10 +74,9 @@ public class LoginUI extends JFrame {
 //			uni.ParseFiles(uniData); // parsing university data
 //			country.ParseFiles(countryData); // parsing universities and their country
 //			aff.ParseFiles(affData); // parsing the affiliated universities data
-//			hPage.ParseFiles(hPageData); // parsing homepage data
+//			hPage.ParseFiles(hPageData); // parsing home-page data
 //
 //		} catch (Exception e1) {
-//			// TODO Auto-generated catch block
 //			e1.printStackTrace();
 //		}
 
