@@ -5,13 +5,13 @@ public class UIConstants {
 	
 	// to maintain the 'session' for the user.
 	static String currentUser; 
-	static String currentuserRole;
+	static String currentUserRole;
 	static String currentUserConf;
 	
 	public UIConstants(String username, String role, String conference) {
 		// TODO Auto-generated constructor stub
 		currentUser = username;
-		currentuserRole = role;
+		currentUserRole = role;
 		currentUserConf = conference;
 	}
 

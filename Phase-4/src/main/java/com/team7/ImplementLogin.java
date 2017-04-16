@@ -38,7 +38,7 @@ public class ImplementLogin implements Login {
 				if (decryptPassword.equals(password)) {
 					// if inserted password is correct then allow the user to login
 					UIConstants.currentUser = username;
-					UIConstants.currentuserRole = role;
+					UIConstants.currentUserRole = role;
 					UIConstants.currentUserConf = conference;
 					return true;
 				}
@@ -75,7 +75,8 @@ public class ImplementLogin implements Login {
 	public String logout() {
 		// TODO Auto-generated method stub
 		UIConstants.currentUser = null;	
-		UIConstants.currentuserRole = null;
+		UIConstants.currentUserRole = null;
+		UIConstants.currentUserConf = null;
 		return "success";
 	}
 

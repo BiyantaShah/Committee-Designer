@@ -118,7 +118,7 @@ public class DisplayUI extends JFrame {
 
 		JButton btnCandidatesList = new JButton("Candidates List");
 		btnCandidatesList.setVisible(false);
-		if(UIConstants.currentuserRole.equals(UIConstants.HighestRole)){
+		if(UIConstants.currentUserRole.equals(UIConstants.HighestRole)){
 			btnCandidatesList.setVisible(true);
 		}
 		btnCandidatesList.setFont(new Font("Lucida Grande", Font.BOLD, 16));

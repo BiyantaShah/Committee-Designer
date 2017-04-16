@@ -431,12 +431,13 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	// Gets all details for authors
 	public String createQueryForAuthorDetails(Set<String> authors){
 
-		String query = "SELECT a.name AS Author, p.title As PaperTitle, p.confName AS Conference,"   
-				+ "p.year as Year FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey where a.name IN (";   	
+		String query = "SELECT a.name AS Author, p.title As PaperTitle, c.confName AS Committee, "   
+				+ "ar.title as ArticleTitle, a.url as Url FROM Author a LEFT JOIN Paper p ON a.paperKey = p.paperKey "
+				+ " LEFT JOIN Committee c on a.name=c.authorName LEFT JOIN Article ar on a.name=ar.author WHERE a.name IN (";   	
 		for(String author : authors){
 			query +="'" + author +"',";	
 		}     	
-		query = query.substring(0, query.length()-1) + ")"; 	
+		query = query.substring(0, query.length()-1) + ")" + " ORDER BY a.name"; 	
 		return query;  
 		
 	}

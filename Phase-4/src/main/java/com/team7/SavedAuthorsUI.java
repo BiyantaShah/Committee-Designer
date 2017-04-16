@@ -141,7 +141,7 @@ public class SavedAuthorsUI extends JFrame {
 		JButton btnCandidatesList = new JButton("Candidates List");
 		btnCandidatesList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnCandidatesList.setVisible(false);
-		if(UIConstants.currentuserRole.equals(UIConstants.HighestRole)){
+		if(UIConstants.currentUserRole.equals(UIConstants.HighestRole)){
 			btnCandidatesList.setVisible(true);
 		}
 		btnCandidatesList.setBounds(219, 10, 148, 34);
@@ -217,15 +217,18 @@ public class SavedAuthorsUI extends JFrame {
 
 		// To understand what each column name means in the UI
 		for (int column = 1; column <= columnCount; column++) {
+//			columnNames.add(metaData.getColumnName(column));
 			
 			if (metaData.getColumnName(column).equals("name"))			
 				columnNames.add("Author Name");
-			else if (metaData.getColumnName(column).equals("title"))
+			else if ((metaData.getColumnName(column).equals("title")) && column == 2)
 				columnNames.addElement("Paper Title");
+			else if ((metaData.getColumnName(column).equals("title")) && column == 4)
+				columnNames.addElement("Article Title");
 			else if (metaData.getColumnName(column).equals("confName"))
-				columnNames.addElement("Published in");
-			else if (metaData.getColumnName(column).equals("year"))
-				columnNames.addElement("Publication Year");
+				columnNames.addElement("Committee Name");
+			else if (metaData.getColumnName(column).equals("url"))
+				columnNames.addElement("Url");
 			
 		}
 		columnNames.add("Select");
@@ -250,7 +253,7 @@ public class SavedAuthorsUI extends JFrame {
 		    {
 			  //This causes all cells except of the last column
 			  // to be not editable
-		      return column == 4; 
+		      return column == 5; 
 		    }
 		};
 

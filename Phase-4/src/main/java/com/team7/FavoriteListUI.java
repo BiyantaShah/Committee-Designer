@@ -96,7 +96,7 @@ public class FavoriteListUI extends JFrame {
 
 		btnCandidatesList = new JButton("Candidates List");
 		btnCandidatesList.setVisible(false);
-		if(UIConstants.currentuserRole.equals("Program Chair")){
+		if(UIConstants.currentUserRole.equals("Program Chair")){
 			btnCandidatesList.setVisible(true);
 		}
 		btnCandidatesList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
