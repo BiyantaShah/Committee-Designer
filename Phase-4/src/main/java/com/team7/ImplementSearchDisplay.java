@@ -6,10 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -26,18 +26,48 @@ public class ImplementSearchDisplay implements SearchDisplay {
 	
 	} 
 	
+	// to extract a list of similar authors based on the given author
 	public Set<String> similarAuthor(String author) throws SQLException, IOException {
 		List<String> similarAuth = new ArrayList<String>();
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
-		String query = queryBuilderObject.createQueryForSimiliarAuthors(author);
+		String query = queryBuilderObject.createQueryForSimilarAuthors(author);
 		ResultSet similarResultSet = queryBuilderObject.sendQuery(query);
 		
 		while (similarResultSet.next()) {
 			similarAuth.add(similarResultSet.getString(1));
 		}
 		
-		return new HashSet<String>(similarAuth);
+		return new TreeSet<String>(similarAuth);
 		
+	}
+	
+	// to extract favorites for one author or from one conference
+	public Set<String> favAuthors(String attName, String attValue) throws SQLException, IOException {
+		List<String> favList = new ArrayList<String>();
+		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
+		String query = queryBuilderObject.createQueryForFavList(attName, attValue);
+		ResultSet favResultSet = queryBuilderObject.sendQuery(query);
+		
+		while (favResultSet.next()) {
+			favList.add(favResultSet.getString(1));
+		}
+		
+		return new TreeSet<String>(favList);
+	}
+	
+	// to extract favorites of program chair
+	public Set<String> listForCommittee(String userName) throws SQLException, IOException {
+		
+		List<String> CommList = new ArrayList<String>();
+		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
+		String query = queryBuilderObject.createQueryForCommitteeList(userName);
+		ResultSet CommResultSet = queryBuilderObject.sendQuery(query);
+		
+		while (CommResultSet.next()) {
+			CommList.add(CommResultSet.getString(1));
+		}
+		
+		return new TreeSet<String>(CommList);
 	}
  
 	// Returns the candidate details for each author selected by the user
@@ -134,4 +164,6 @@ public class ImplementSearchDisplay implements SearchDisplay {
 		}
 		return "success";
 	}
+
+
 }

@@ -13,7 +13,10 @@ public interface SchemaDB {
 	// Create connection to RDBMS 
 	public Connection getConnection() throws IOException;
 
-	//Insert the objects created to Database
+	//Insert the user object created to database
 	public boolean insertData(Object object_name) throws SQLException,IOException;
+	
+	// Insert the candidate list details into the database.
+	public boolean insertIntoCandidateList(String author) throws SQLException,IOException;
 
 }

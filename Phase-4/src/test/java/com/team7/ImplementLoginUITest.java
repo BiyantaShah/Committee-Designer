@@ -40,20 +40,20 @@ public class ImplementLoginUITest {
 	 * These tests are working on local machine but failing on Jenkins
 	 */
 
-	//	@Test
-	//	// Testing for when the username and password are correct
-	//	public void testLoginButton() {
-	//		login.userNameField.setText("shahbiyanta@gmail.com");
-	//		login.passwordField.setText("abc");
-	//		login.btnLogin.doClick();
-	//		// logout the user then
-	//		log.logout();
-	//	}
-	//	
-	//	@Test
-	//	// Testing for when the username and password are correct
-	//	public void testRegisterButton() {
-	//		login.btnNewUserClick.doClick();
-	//	}
+//		@Test
+//		// Testing for when the username and password are correct
+//		public void testLoginButton() {
+//			login.userNameField.setText("shahbiyanta@gmail.com");
+//			login.passwordField.setText("abc");
+//			login.btnLogin.doClick();
+//			// logout the user then
+//			log.logout();
+//		}
+//		
+//		@Test
+//		// Testing for when the username and password are correct
+//		public void testRegisterButton() {
+//			login.btnNewUserClick.doClick();
+//		}
 
 }

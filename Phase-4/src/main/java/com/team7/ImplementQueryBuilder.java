@@ -1,11 +1,11 @@
 package com.team7;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.io.IOException;
@@ -263,8 +263,8 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	// Getting the final result of the query.
 	public List<String> getResultForDisplay(List<String> searchQuery) throws SQLException, IOException{
 
-		List<String> finalResult = new ArrayList<String>();
-		List<String> intermediate = new ArrayList<String>();
+//		List<String> finalResult = new ArrayList<String>();
+//		List<String> intermediate = new ArrayList<String>();
 		List<String> paperAuthorResult = new ArrayList<String>();
 		List<String> committeeResult = new ArrayList<String>();
 		List<String> articleResult = new ArrayList<String>();
@@ -428,26 +428,24 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		}
 	}
 
-	// Gets all details for authors
+	// Gets all the publication details for authors
 	public String createQueryForAuthorDetails(Set<String> authors){
 
-		String query = "SELECT a.name AS Author, p.title As PaperTitle, p.confName AS Conference,"   
-				+ "p.year as Year FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey where a.name IN (";   	
+		String query = "SELECT * from (SELECT a.name AS Author, p.title AS PaperTitle, null AS ArticleTitle, a.url AS Url"
+				+ " FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE a.name IN (";   	
 		for(String author : authors){
 			query +="'" + author +"',";	
 		}     	
-		query = query.substring(0, query.length()-1) + ")"; 	
+		query = query.substring(0, query.length()-1) + ")" + " UNION SELECT a.name AS Author, null AS PaperTitle, ar.title AS ArticleTitle,"
+				+ " a.url AS Url FROM Author a INNER JOIN "
+				+ "Article ar ON a.name=ar.author WHERE a.name IN (";
+		for(String author : authors){
+			query +="'" + author +"',";	
+		}
+		query = query.substring(0, query.length()-1) + ")) as Author ORDER BY Author";
+		
 		return query;  
 		
-		/*String query = "SELECT a.name AS Author, p.title AS PaperTitle, com.confName as Conference, ar.journal as Journal, a.url as URL "
-				+ "FROM Author a FULL OUTER JOIN Paper p ON a.paperkey = p.paperKey FULL OUTER JOIN Committee com ON p.confName = com.confName FULL OUTER JOIN "
-				+ "Article ar on ar.title = p.title WHERE a.name in (";
-		
-		for(String author : authors){
-			query +="'" + author +"',";	
-		}     	
-		query = query.substring(0, query.length()-1) + ")"; 	
-		return null;*/
 	}
 	
 	private List<String> getGroupByQuery(SearchParameter groupByParameter){
@@ -464,7 +462,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	return queries;
 	}
 
-	public String createQueryForSimiliarAuthors(String author) {
+	public String createQueryForSimilarAuthors(String author) {
 		
 		String uniQuery = "select university from Author where name='"+author+"'";
 		ResultSet rs1;
@@ -563,10 +561,21 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			}
 		}
 		
-		Set<String> setWithUniqueValues = new HashSet<>(inter);
+		Set<String> setWithUniqueValues = new TreeSet<>(inter);
 		List<String> listWithUniqueValues = new ArrayList<>(setWithUniqueValues);
 		return listWithUniqueValues;
 		
 	}
+
+	public String createQueryForFavList(String attName, String attValue) {
+		String favQuery = "SELECT selectedAuthor FROM Favorite_list WHERE " + attName + "='"+attValue+"'" + " ORDER by selectedAuthor";
+		return favQuery;
+	}
+
+	public String createQueryForCommitteeList(String currentUser) {
+		String commQuery = "SELECT selectedAuthor from Candidate_list WHERE userName=" + "'"+currentUser + "'" + " ORDER by selectedAuthor";
+		return commQuery;
+	}
+
 }
 

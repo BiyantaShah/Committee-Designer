@@ -123,7 +123,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		ImplementQueryBuilder obj7 = new ImplementQueryBuilder();
   		List<String> queryFormed = obj7.createQuery(searchCriteria);
   		List<String> result = obj7.getResultForDisplay(queryFormed);			
-  		assertEquals("Yusuke Nishiguchi", result.get(0));
+  		assertTrue(result.contains("Yusuke Nishiguchi"));
 	}
 	
 	@Test
@@ -136,7 +136,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		ImplementQueryBuilder obj8 = new ImplementQueryBuilder();
   		List<String> queryFormed = obj8.createQuery(searchCriteria);
 		List<String> result = obj8.getResultForDisplay(queryFormed);	
-		assertEquals("Shahar Maoz", result.get(0));
+		assertEquals(2, result.size());
 	}
 	
 	@Test
@@ -232,7 +232,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(query9, queryFormed);
 		
 		List<String> result = obj20.getResultForDisplay(queryFormed);	
-		assertEquals("Anurag Mendhekar",result.get(0));   
+		assertTrue(result.contains("Anurag Mendhekar"));   
 	}
 	
 	@Test
@@ -244,7 +244,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<String> queryFormed = obj29.createQuery(searchCriteria);
 		
 		List<String> result = obj29.getResultForDisplay(queryFormed);
-		assertEquals("Steven Lucco",result.get(0)); 
+		assertTrue(result.contains("Steven Lucco")); 
 	}
 	
 	@Test
@@ -257,7 +257,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		ImplementQueryBuilder obj21 = new ImplementQueryBuilder();
 		List<String> queryFormed = obj21.createQuery(searchCriteria);
 		List<String> result = obj21.getResultForDisplay(queryFormed);
-		assertEquals("Brian Demsky",result.get(0)); 
+		assertTrue(result.contains("Brian Demsky")); 
 	}
 
 	@Test
@@ -364,7 +364,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		ImplementQueryBuilder obj31 = new ImplementQueryBuilder();
   		List<String> queryFormed = obj31.createQuery(searchCriteria);
   		List<String> result = obj31.getResultForDisplay(queryFormed);	
-		assertEquals("Christopher J. Hetmanski",result.get(0));  
+		assertTrue(result.contains("Christopher J. Hetmanski"));  
 	}
 	
 	@Test
@@ -374,7 +374,6 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(s1);
   		searchCriteria.add(s2);
-  		//searchCriteria.add(1,s3);
   		ImplementQueryBuilder obj30 = new ImplementQueryBuilder();
   		List<String> queryFormed = obj30.createQuery(searchCriteria);
   		List<String> result = obj30.getResultForDisplay(queryFormed);	
@@ -437,7 +436,6 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(s3);
   		ImplementQueryBuilder obj24 =new ImplementQueryBuilder();
   		List<String> queryFormed = obj24.createQuery(searchCriteria);
-  		System.out.println(queryFormed);
   		List<String> result = obj24.getResultForDisplay(queryFormed);	
 		assertEquals(377,result.size()); 
 	}

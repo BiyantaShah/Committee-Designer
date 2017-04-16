@@ -36,8 +36,8 @@ public class DisplayUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	// List of Authors whose candidate details are to be viewed
- 	Set<String> saveAuthors = new HashSet<String>();
- 	
+	Set<String> saveAuthors = new HashSet<String>();
+
 	JButton btnSavedAuthors;
 	JButton btnLogout;
 	JButton btnSearch; 
@@ -53,7 +53,7 @@ public class DisplayUI extends JFrame {
 		setTitle("SEARCH RESULTS");
 		setResizable(false);
 
-		setSize(1400,900);
+		setSize(UIConstants.width, UIConstants.height);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -69,12 +69,12 @@ public class DisplayUI extends JFrame {
 
 		JLabel lblSearchResults = new JLabel("SEARCH RESULTS");
 		lblSearchResults.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblSearchResults.setBounds(559, 62, 234, 28);
+		lblSearchResults.setBounds(510, 57, 234, 28);
 		panel.add(lblSearchResults);
 
 		btnLogout = new JButton("LogOut");
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnLogout.setBounds(1188, 10, 117, 34);
+		btnLogout.setBounds(1075, 10, 117, 34);
 		panel.add(btnLogout);
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -86,45 +86,52 @@ public class DisplayUI extends JFrame {
 				dispose();
 				LoginUI log = new LoginUI();
 				log.setVisible(true);
-				setSize(1400,900);
-				
+				setSize(UIConstants.width, UIConstants.height);
+
 				log.setLocationRelativeTo(null);
 			}
 		});
-		
+
 		JButton btnNewButton = new JButton("My Favorite List");
 		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnNewButton.setBounds(92, 10, 168, 34);
+		btnNewButton.setBounds(16, 10, 168, 34);
 		panel.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				FavoriteListUI fl;
-					fl = new FavoriteListUI();
+
+				ImplementSearchDisplay search = new ImplementSearchDisplay();
+				Set<String> favList;
+				try {
+					favList = search.favAuthors("userName", UIConstants.currentUser);
+					FavoriteListUI fl = new FavoriteListUI(favList);
 					dispose();
 					fl.setVisible(true);
-					fl.setSize(1400,900);
+					fl.setSize(UIConstants.width, UIConstants.height);
 					fl.setLocationRelativeTo(null);
+				} catch (SQLException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
 		});
 
 		JButton btnCandidatesList = new JButton("Candidates List");
 		btnCandidatesList.setVisible(false);
-		if(UIConstants.currentuserRole.equals(UIConstants.HighestRole)){
+		if(UIConstants.currentUserRole.equals(UIConstants.HighestRole)){
 			btnCandidatesList.setVisible(true);
 		}
 		btnCandidatesList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnCandidatesList.setBounds(272, 10, 129, 34);
+		btnCandidatesList.setBounds(196, 10, 157, 34);
 		panel.add(btnCandidatesList);
 		btnCandidatesList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					CandidateListUI cl = new CandidateListUI();
-					  dispose();
-					  cl.setVisible(true);
-					  cl.setSize(1400,900);
-					  cl.setLocationRelativeTo(null);
+					dispose();
+					cl.setVisible(true);
+					cl.setSize(UIConstants.width, UIConstants.height);
+					cl.setLocationRelativeTo(null);
 
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -137,9 +144,9 @@ public class DisplayUI extends JFrame {
 
 		btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSearch.setBounds(1059, 10, 117, 34);
+		btnSearch.setBounds(946, 10, 117, 34);
 		panel.add(btnSearch);
-				
+
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ButtonEditor.savedAuthors.clear();
@@ -147,19 +154,19 @@ public class DisplayUI extends JFrame {
 				SearchUI search = new SearchUI();
 				search.setVisible(true);
 
-				setSize(1400,900);
-				
+				setSize(UIConstants.width, UIConstants.height);
+
 				search.setLocationRelativeTo(null);				
 			}
 		});
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 150, 1394, 442);
+		panel_1.setBounds(0, 150, 1194, 442);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 
-		
+
 		try {
 			table = new JTable(buildTableModel(authors));
 			JTableHeader header = table.getTableHeader();
@@ -167,7 +174,7 @@ public class DisplayUI extends JFrame {
 
 			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 			centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-			
+
 			// Setting the values in the cells center aligned
 			for (int i=0; i< table.getColumnModel().getColumnCount(); i++) {
 				table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
@@ -177,10 +184,10 @@ public class DisplayUI extends JFrame {
 			table.getColumn("Save").setCellRenderer(new JTableButtonRenderer());
 			table.getColumn("Save").setCellEditor(
 					new ButtonEditor(new JCheckBox()));
-			
+
 			// Not allowing the columns to be dragged
 			table.getTableHeader().setReorderingAllowed(false);
-			
+
 			table.setPreferredScrollableViewportSize(new Dimension(550, 430));
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			JScrollPane scroll = new JScrollPane(table);
@@ -194,46 +201,52 @@ public class DisplayUI extends JFrame {
 		panel_2.setBounds(247, 605, 921, 55);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
-		
+
 		btnSimilarAuthors = new JButton("Similar Authors");
 		btnSimilarAuthors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int index = table.getSelectedRow();
-				String author = (String) model.getValueAt(index, 0);
 
-				try {
-					ImplementSearchDisplay search = new ImplementSearchDisplay();
-					Set<String> similarAuth = search.similarAuthor(author);
-					
-					SimilarAuthors sa = new SimilarAuthors(similarAuth);
-					
-					sa.setVisible(true);
-
-					setSize(1400,900);
-					similarAuth.clear();
-					
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				} catch (IOException e2) {
-					e2.printStackTrace();
+				if (index == -1) {
+					LoginUI log = new LoginUI();
+					log.messageShow("Please click on an author to find similar authors");
 				}
-				
-				
-				
-							
-				
+				else {
+
+					String author = (String) model.getValueAt(index, 0);
+
+					try {
+						ImplementSearchDisplay search = new ImplementSearchDisplay();
+						Set<String> similarAuth = search.similarAuthor(author);
+
+						SimilarAuthorsUI sa = new SimilarAuthorsUI(similarAuth);
+
+						sa.setVisible(true);
+
+						setSize(UIConstants.width, UIConstants.height);
+						similarAuth.clear();
+
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					} catch (IOException e2) {
+						e2.printStackTrace();
+					}
+
+
+				}
+
 			}
 		});
 		btnSimilarAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSimilarAuthors.setBounds(218, 6, 171, 29);
+		btnSimilarAuthors.setBounds(116, 6, 171, 29);
 		panel_2.add(btnSimilarAuthors);
 
 		btnSavedAuthors = new JButton("Candidate Details");
 
-//		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-//		btnSavedAuthors.setBounds(413, 13, 149, 34);
-//		panel_2.add(btnSavedAuthors);
+		//		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		//		btnSavedAuthors.setBounds(413, 13, 149, 34);
+		//		panel_2.add(btnSavedAuthors);
 
 		btnSavedAuthors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -241,7 +254,7 @@ public class DisplayUI extends JFrame {
 				saveAuthors = ButtonEditor.savedAuthors;
 
 				boolean flag = true;
-  
+
 				if (saveAuthors.size() == 0) {
 					LoginUI log = new LoginUI();
 					log.messageShow("Please select some authors to view details");
@@ -266,7 +279,7 @@ public class DisplayUI extends JFrame {
 					dispose();
 					SavedAuthorsUI saved = new SavedAuthorsUI(result);
 					saved.setVisible(true);
-					setSize(1400,900);
+					setSize(UIConstants.width, UIConstants.height);
 					saved.setLocationRelativeTo(null);
 
 				}
@@ -275,7 +288,7 @@ public class DisplayUI extends JFrame {
 		});
 
 		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSavedAuthors.setBounds(518, 6, 171, 29);
+		btnSavedAuthors.setBounds(431, 6, 171, 29);
 		panel_2.add(btnSavedAuthors);
 	}
 
@@ -299,7 +312,7 @@ public class DisplayUI extends JFrame {
 			vector.addElement("save");
 			data.addElement(vector);
 		}
-		
+
 		TableModel model = new DefaultTableModel(data, columnNames) {
 			/**
 			 * 
@@ -307,10 +320,10 @@ public class DisplayUI extends JFrame {
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int row, int column)
-		    {
-			  //This causes all cells in column 0 to be not editable
-		      return column == 1; 
-		    }
+			{
+				//This causes all cells in column 0 to be not editable
+				return column == 1; 
+			}
 		};
 
 		return model;		
