@@ -8,14 +8,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.JCheckBox;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 import org.junit.Test;
 
 public class ImplementSavedUITest {
 	
-	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Conference Chair", "ECOOP");
+	UIConstants u  = new UIConstants("shah.bi@husky.neu.edu", "Program Chair", "ECOOP");
 	Set<String> authors = new HashSet<String> (Arrays.asList("Shahar Maoz"));
 	SavedAuthorsUI saved;
 	ButtonEditor button = new ButtonEditor(new JCheckBox());
@@ -43,6 +41,30 @@ public class ImplementSavedUITest {
 		
 		saved = new SavedAuthorsUI(rs);		
 		saved.btnSearch.doClick();
+		saved.dispose();
+	}
+	
+	@Test
+	// Testing the favorite list button
+	public void testFavList() throws SQLException, IOException {
+		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
+		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
+		ResultSet rs = queryBuilderObject.sendQuery(query);
+		
+		saved = new SavedAuthorsUI(rs);
+		saved.btnFav.doClick();
+		saved.dispose();
+	}
+	
+	@Test
+	// testing the candidate list button
+	public void testCandidateList() throws SQLException, IOException {
+		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
+		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
+		ResultSet rs = queryBuilderObject.sendQuery(query);
+		
+		saved = new SavedAuthorsUI(rs);
+		saved.btnCandidatesList.doClick();
 		saved.dispose();
 	}
 	
