@@ -13,7 +13,6 @@ import java.sql.SQLException;
 public class ImplementAuthorAffData implements UniversityAuthorData {
 
 	public String ParseFiles(File csvFile) throws IOException, SQLException {
-		// TODO Auto-generated method stub
 		BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
@@ -53,7 +52,6 @@ public class ImplementAuthorAffData implements UniversityAuthorData {
         		return "success";
         	
         } catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
        

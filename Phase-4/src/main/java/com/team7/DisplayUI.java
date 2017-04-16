@@ -35,7 +35,8 @@ public class DisplayUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	// List of Authors whose candidate details are to be viewed
+	
+	// List of Authors whose publication details are to be viewed
 	Set<String> saveAuthors = new HashSet<String>();
 
 	JButton btnPubDetails;
@@ -67,7 +68,7 @@ public class DisplayUI extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JLabel lblSearchResults = new JLabel("SEARCH RESULTS");
+		JLabel lblSearchResults = new JLabel("Search Results");
 		lblSearchResults.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		lblSearchResults.setBounds(510, 57, 234, 28);
 		panel.add(lblSearchResults);
@@ -109,7 +110,6 @@ public class DisplayUI extends JFrame {
 					fl.setSize(UIConstants.width, UIConstants.height);
 					fl.setLocationRelativeTo(null);
 				} catch (SQLException | IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -134,7 +134,6 @@ public class DisplayUI extends JFrame {
 					cl.setLocationRelativeTo(null);
 
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -189,12 +188,16 @@ public class DisplayUI extends JFrame {
 			table.getTableHeader().setReorderingAllowed(false);
 
 			table.setPreferredScrollableViewportSize(new Dimension(550, 430));
+			
+			// disabling multiple selection of rows by the user
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			
 			JScrollPane scroll = new JScrollPane(table);
 			setVisible(true);
 			panel_1.add(scroll);
+			
 		} catch (SQLException e3) {
-			// TODO Auto-generated catch block
+			e3.printStackTrace();
 		}
 
 		JPanel panel_2 = new JPanel();
@@ -237,9 +240,7 @@ public class DisplayUI extends JFrame {
 						e2.printStackTrace();
 					}
 
-
 				}
-
 			}
 		});
 		btnSimilarAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
@@ -294,6 +295,7 @@ public class DisplayUI extends JFrame {
 						pub.setLocationRelativeTo(null);
 					}
 					else {
+						// pop up when no publication details are present for the author
 						LoginUI log = new LoginUI();
 						log.messageShow("No publication details for this author are present");
 					}

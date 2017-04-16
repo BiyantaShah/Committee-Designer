@@ -162,9 +162,9 @@ public class ImplementSchemaDB implements SchemaDB {
 			// creating Candidates List table
 			sql = "CREATE TABLE IF NOT EXISTS Candidate_list " +
 					"(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
-					" userName	  VARCHAR(255), " + 
+					" confName	  VARCHAR(255), " + 
 					" selectedAuthor	  VARCHAR(255), " +   
-					" UNIQUE (userName, selectedAuthor), "+
+					" UNIQUE (confName, selectedAuthor), "+
 					" PRIMARY     KEY(id))" ;
 
 			stmt.executeUpdate(sql);
@@ -205,6 +205,7 @@ public class ImplementSchemaDB implements SchemaDB {
 		return conn;
 	}
 
+	// Inserting data into the user table
 	public boolean insertData(Object object_name) throws SQLException, IOException {
 
 		Connection conn = getConnection();		
@@ -232,13 +233,54 @@ public class ImplementSchemaDB implements SchemaDB {
 		return true;
 	}
 	
+	// Inserting data into the Candidate List table
 	public boolean insertIntoCandidateList(String author) throws IOException, SQLException {
 		
 		Connection conn = getConnection();		
-		PreparedStatement candidDetails_stmt = conn.prepareStatement("insert into Candidate_list(userName,selectedAuthor) values(?,?)");
-		candidDetails_stmt.setString(1, UIConstants.currentUser);
+		PreparedStatement candidDetails_stmt = conn.prepareStatement("insert into Candidate_list(confName,selectedAuthor) values(?,?)");
+		candidDetails_stmt.setString(1, UIConstants.currentUserConf);
 		candidDetails_stmt.setString(2,author);							
 		candidDetails_stmt.executeUpdate();
+		return true;
+		
+	}
+	
+	// Deleting data from the Candidate List table
+	public boolean updateCandidateList(String author, String conference) throws IOException, SQLException {
+
+		Connection conn = getConnection();		
+		PreparedStatement candidDetails_stmt = conn.prepareStatement("Delete from Candidate_list where selectedAuthor=? and confName=?");
+		
+		candidDetails_stmt.setString(1,author);	
+		candidDetails_stmt.setString(2,conference);
+		
+		candidDetails_stmt.executeUpdate();
+		return true;
+
+	}
+
+	// Inserting data into the favorites list table
+	public boolean insertIntoFavList(String userName, String conference, String author) throws IOException, SQLException {
+		
+		Connection conn = getConnection();
+		PreparedStatement favList_stmt = conn.prepareStatement("insert into Favorite_list(userName,confName,selectedAuthor) values(?,?,?)");
+		favList_stmt.setString(1,userName);
+		favList_stmt.setString(2,conference);
+		favList_stmt.setString(3,author);
+
+		favList_stmt.executeUpdate();
+		return true;
+	}
+	
+	// Updating the favorites list table
+	public boolean updateFavList(String userName, String author) throws SQLException, IOException {
+		
+		Connection conn = getConnection();
+		PreparedStatement favList_stmt = conn.prepareStatement("Delete from Favorite_list where selectedAuthor=? and userName=?");
+		favList_stmt.setString(1,author);
+		favList_stmt.setString(2, userName);
+		
+		favList_stmt.executeUpdate();	
 		return true;
 		
 	}

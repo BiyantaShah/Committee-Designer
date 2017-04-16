@@ -165,7 +165,6 @@ public class RegisterUI extends JFrame {
 						res = register.createUser(userName,plainPwd,role,confName);
 						
 					} catch (Exception e1) { 
-						// TODO Auto-generated catch block
 						System.out.println("error");
 					} 
 

@@ -63,10 +63,9 @@ public class ImplementRegister implements Register {
 	
 
 	// checking for a valid email ID 
-	// (does not check whether the email ID is valid or not, 
+	// (does not check whether the email ID is registered valid ID or not, 
 	// that discretion is upon the user)
 	private boolean validEmailId(String userName) {
-		// TODO Auto-generated method stub
 
 		Pattern pattern;
 		Matcher matcher;
@@ -84,7 +83,7 @@ public class ImplementRegister implements Register {
 	
 
 
-	// checking if the user exists
+	// checking if the user exists in the database
 	public boolean verifyIfUserExists(String userName) throws SQLException, IOException {
 
 		ImplementSchemaDB db = new ImplementSchemaDB();

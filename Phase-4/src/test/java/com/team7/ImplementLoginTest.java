@@ -16,7 +16,7 @@ public class ImplementLoginTest extends TestCase{
      public void testLoginSuccess() throws SQLException, IOException {
 		
 		ImplementLogin login = new ImplementLogin();
-		Boolean res = login.login("xyz@gmail.com","132");
+		Boolean res = login.login("sravbiya@gmail.com","132");
 		Boolean val = true;
 		assertEquals(val,res);  
 		
@@ -24,18 +24,18 @@ public class ImplementLoginTest extends TestCase{
 	 
 	 	  
 	 @Test
-     //Test to verify a  if details are incorrect - should return false
+     //Test to verify a if details are incorrect - should return false
      public void testWrongPassword() throws SQLException, IOException {
 		
 		ImplementLogin login = new ImplementLogin();
-		Boolean res = login.login("xyz@gmail.com","123");
+		Boolean res = login.login("sravbiya@gmail.com","123");
 		Boolean val = false;
 		assertEquals(val,res);
 		
 	}
 	 
 	 @Test
-     //Test to verify a  unregistered user  - should return false
+     //Test to verify a  unregistered user - should return false
      public void testUnregisteredUser() throws SQLException, IOException {
 		
 		ImplementLogin login = new ImplementLogin();

@@ -185,10 +185,10 @@ public class LoginUI extends JFrame {
 								messageShow("User does not exist. Please register");
 							}
 						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
 					} catch (IOException e2) {
-						// TODO Auto-generated catch block
+						e2.printStackTrace();
 					}		
 
 				}
@@ -218,7 +218,6 @@ public class LoginUI extends JFrame {
 		final JDialog d = new JDialog(frame, msg, true);
 		d.setSize(500, 100);
 		d.setLocationRelativeTo(frame);
-
 
 		d.addWindowListener(null);
 		d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

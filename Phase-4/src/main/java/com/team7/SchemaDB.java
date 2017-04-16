@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 public interface SchemaDB {
 
-
 	// Creates database and tables
 	public void dbSetUp() throws ClassNotFoundException, SQLException,IOException;
 
@@ -18,5 +17,8 @@ public interface SchemaDB {
 	
 	// Insert the candidate list details into the database.
 	public boolean insertIntoCandidateList(String author) throws SQLException,IOException;
+	
+	// Insert data into favorites list
+	public boolean insertIntoFavList(String username, String conference, String author) throws IOException, SQLException;
 
 }

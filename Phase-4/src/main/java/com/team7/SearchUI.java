@@ -63,7 +63,7 @@ public class SearchUI extends JFrame {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public SearchUI() {
 
-		setTitle("Search UI");
+		setTitle("SEARCH");
 		setResizable(false);
 
 		setSize(UIConstants.width, UIConstants.height);

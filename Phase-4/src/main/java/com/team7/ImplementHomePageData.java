@@ -13,7 +13,6 @@ import java.sql.SQLException;
 public class ImplementHomePageData implements UniversityAuthorData {
 
 	public String ParseFiles(File csvFile) throws IOException, SQLException {
-		// TODO Auto-generated method stub
 
 		BufferedReader br = null;
 		String line = "";
@@ -54,7 +53,6 @@ public class ImplementHomePageData implements UniversityAuthorData {
         		return "success";
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		

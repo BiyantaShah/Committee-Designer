@@ -480,6 +480,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		return queries;
 		}
 
+	// getting the similar authors according to the same university
 	public String createQueryForSimilarAuthors(String author) {
 		
 		String uniQuery = "select university from Author where name='"+author+"'";
@@ -504,8 +505,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
-
-				
+		
 		return authQuery;
 	}
 	
@@ -585,13 +585,15 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		
 	}
 
+    // getting the favorites of the user
 	public String createQueryForFavList(String attName, String attValue) {
 		String favQuery = "SELECT selectedAuthor FROM Favorite_list WHERE " + attName + "='"+attValue+"'" + " ORDER by selectedAuthor";
 		return favQuery;
 	}
 
-	public String createQueryForCommitteeList(String currentUser) {
-		String commQuery = "SELECT selectedAuthor from Candidate_list WHERE userName=" + "'"+currentUser + "'" + " ORDER by selectedAuthor";
+	// getting the final candidate list
+	public String createQueryForCommitteeList(String conference) {
+		String commQuery = "SELECT selectedAuthor from Candidate_list WHERE confName=" + "'"+conference + "'" + " ORDER by selectedAuthor";
 		return commQuery;
 	}
 

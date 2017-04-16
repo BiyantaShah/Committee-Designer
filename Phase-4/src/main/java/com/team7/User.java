@@ -13,7 +13,6 @@ public class User {
 	}
 
     public User(String userName, String password, String role, String confName) {
-		// TODO Auto-generated constructor stub
     	this.userName = userName; //email id 
     	this.password = password;
     	this.role = role;

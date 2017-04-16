@@ -1,12 +1,9 @@
 package com.team7;
 
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,8 +26,8 @@ import javax.swing.table.TableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-
-
+// Class creating the user interface for the candidates 
+// selection by the Program chair
 public class CandidateListUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -122,15 +119,16 @@ public class CandidateListUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ImplementSearchDisplay search = new ImplementSearchDisplay();
 				Set<String> favList;
+				
 				try {
-					favList = search.favAuthors("userName",UIConstants.currentUser);
+					favList = search.favAuthors("userName", UIConstants.currentUser);
 					FavoriteListUI fl = new FavoriteListUI(favList);
 					dispose();
 					fl.setVisible(true);
 					fl.setSize(UIConstants.width, UIConstants.height);
 					fl.setLocationRelativeTo(null);
+					
 				} catch (SQLException | IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -138,8 +136,7 @@ public class CandidateListUI extends JFrame {
 
 
 
-		// first table
-
+		// favorites list table
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(16, 143, 578, 465);
 		contentPane.add(panel_1);
@@ -148,9 +145,7 @@ public class CandidateListUI extends JFrame {
 		ImplementSearchDisplay search = new ImplementSearchDisplay();
 		Set<String> favList;
 
-		try {
-
-			
+		try {	
 			favList = search.favAuthors("confName", UIConstants.currentUserConf);
 
 			table1 = new JTable(buildTableModel(favList));
@@ -165,9 +160,12 @@ public class CandidateListUI extends JFrame {
 				table1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer1);
 			}
 
-
+			// disabled draggable headers
 			table1.getTableHeader().setReorderingAllowed(false);
+			
 			table1.setPreferredScrollableViewportSize(new Dimension(550, 430));
+			
+			// disable multiple selection by users
 			table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 			JScrollPane scroll1 = new JScrollPane(table1);
@@ -212,7 +210,7 @@ public class CandidateListUI extends JFrame {
 
 		}
 
-		// second table
+		// final committee list table
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(606, 143, 578, 465);
@@ -222,7 +220,7 @@ public class CandidateListUI extends JFrame {
 		Set<String> candidateDetails;
 
 		try {
-			candidateDetails = search.listForCommittee(UIConstants.currentUser);
+			candidateDetails = search.listForCommittee(UIConstants.currentUserConf);
 
 			table2 = new JTable(buildTableModel(candidateDetails));
 			JTableHeader header2 = table2.getTableHeader();
@@ -236,9 +234,12 @@ public class CandidateListUI extends JFrame {
 				table2.getColumnModel().getColumn(i).setCellRenderer(centerRenderer2);
 			}
 
-
+			// disabling draggable headers
 			table2.getTableHeader().setReorderingAllowed(false);
+			
 			table2.setPreferredScrollableViewportSize(new Dimension(550, 430));
+			
+			// disabling multiple selection of rows by user
 			table2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 			JScrollPane scroll2 = new JScrollPane(table2);
@@ -310,12 +311,9 @@ public class CandidateListUI extends JFrame {
 					else{
 						String author = (String) model2.getValueAt(index, 0);
 						ImplementSchemaDB db =  new ImplementSchemaDB();
-						Connection conn;
 						try {
-							conn = db.getConnection();
-							PreparedStatement stmt = conn.prepareStatement("Delete from Candidate_list where selectedAuthor=?");								
-							stmt.setString(1,author);							
-							stmt.executeUpdate();		
+							// deleting the selected author from the Candidate_list of the current user.
+							db.updateCandidateList(author, UIConstants.currentUserConf);		
 							model2.removeRow(index);; 
 						} catch (IOException | SQLException e) {
 							e.printStackTrace();
@@ -354,8 +352,7 @@ public class CandidateListUI extends JFrame {
 
 			public boolean isCellEditable(int row, int column)
 			{
-				//This causes all cells except of the last column
-				// to be not editable
+				//This causes all cells of the table to not be editable
 				return false; 
 			}
 

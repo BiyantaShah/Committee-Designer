@@ -173,7 +173,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 	
 	@Test
-	public void testSecondUseCase() throws SQLException{    //add another test fetching result from DB
+	public void testSecondUseCase() throws SQLException{ 
 		List<String> query7 = new ArrayList<String>();
   		query7.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE p.title LIKE '%pointer%' OR  p.title LIKE '%analysis%' GROUP BY a.name HAVING COUNT(*) >=1");
   		query7.add(1,null);
@@ -192,7 +192,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	}
 	
 	@Test
-	public void testThirdUseCase() throws SQLException, IOException{    //add another test fetching result from DB
+	public void testThirdUseCase() throws SQLException, IOException{   
 		SearchParameter s1= new SearchParameter("Keyword", "LIKE" ,"pointer","AND");
 		SearchParameter s2= new SearchParameter("Committee.Year", "=" ,"2006", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -242,7 +242,6 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(s1);
   		ImplementQueryBuilder obj29 = new ImplementQueryBuilder();
 		List<String> queryFormed = obj29.createQuery(searchCriteria);
-		
 		List<String> result = obj29.getResultForDisplay(queryFormed);
 		assertTrue(result.contains("Steven Lucco")); 
 	}
@@ -332,7 +331,6 @@ public class ImplementQueryBuilderTest extends TestCase {
 		SearchParameter s1= new SearchParameter("Committee.ConfName", "=" ,"OOPSLA", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(s1);
-  		//searchCriteria.add(1,s2);
   		ImplementQueryBuilder obj31 = new ImplementQueryBuilder();
   		List<String> queryFormed = obj31.createQuery(searchCriteria);
   		List<String> result = obj31.getResultForDisplay(queryFormed);	
@@ -412,7 +410,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<String> expected = new ArrayList<String>();
   		expected.add(0, "SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey GROUP BY a.name HAVING COUNT(*) >5");
   		expected.add(1, null);
-  		expected.add(2, "SELECT ar.Author AS Author FROM  Article ar WHERE ar.journal= 'TSE'");
+  		expected.add(2, "SELECT ar.Author AS Author FROM  Article ar  WHERE ar.journal= 'TSE'");
 		SearchParameter s1= new SearchParameter("JournalName", "=" ,"TSE", "AND");
 		SearchParameter s2= new SearchParameter("CountNoOfPapers", ">" ,"5",null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -530,7 +528,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		ImplementQueryBuilder obj = new ImplementQueryBuilder();
   		List<String> queryFormed = obj.createQuery(searchCriteria);
   		List<String> result = obj.getResultForDisplay(queryFormed);	
-		assertEquals(12798,result.size()); 
+		assertEquals(5156,result.size()); 
 	}
 	
 	@Test
@@ -549,7 +547,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		ImplementQueryBuilder obj = new ImplementQueryBuilder();
   		List<String> queryFormed = obj.createQuery(searchCriteria);
   		List<String> result = obj.getResultForDisplay(queryFormed);	
-		assertEquals(12798,result.size()); 
+		assertEquals(5629,result.size()); 
 	}
 	
 	@Test
@@ -560,9 +558,8 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(s);
   		ImplementQueryBuilder obj = new ImplementQueryBuilder();
   		List<String> queryFormed = obj.createQuery(searchCriteria);
-  		System.out.println("*****"+queryFormed);
   		List<String> result = obj.getResultForDisplay(queryFormed);	
-		//assertEquals(12798,result.size()); 
+		assertEquals(452,result.size()); 
 	}
 	
 	@Test
@@ -577,9 +574,8 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(s2);
   		ImplementQueryBuilder obj = new ImplementQueryBuilder();
   		List<String> queryFormed = obj.createQuery(searchCriteria);
-  		System.out.println("#####"+queryFormed);
   		List<String> result = obj.getResultForDisplay(queryFormed);	
-		//assertEquals(12798,result.size()); 
+		assertEquals(32,result.size()); 
 	}
 	
 	@Test
@@ -600,8 +596,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		
   		ImplementQueryBuilder obj = new ImplementQueryBuilder();
   		List<String> queryFormed = obj.createQuery(searchCriteria);
-  		System.out.println("#####"+queryFormed);
   		List<String> result = obj.getResultForDisplay(queryFormed);	
-		//assertEquals(12798,result.size()); 
+		assertEquals(0,result.size()); 
 	}
 }

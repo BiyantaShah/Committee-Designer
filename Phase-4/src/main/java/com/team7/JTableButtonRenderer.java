@@ -22,7 +22,7 @@ public class JTableButtonRenderer extends JButton implements TableCellRenderer {
 
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
-		// TODO Auto-generated method stub
+
 		if (isSelected) {
 		      setForeground(table.getSelectionForeground());
 		      setBackground(table.getSelectionBackground());

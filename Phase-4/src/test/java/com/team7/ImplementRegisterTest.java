@@ -21,9 +21,9 @@ public class ImplementRegisterTest {
 		Connection conn = db.getConnection();
 		Statement stmt = conn.createStatement();
 
-		stmt.executeUpdate("delete from User where username='xyz@gmail.com'");
+		stmt.executeUpdate("delete from User where username='sravbiya@gmail.com'");
 
-		String res = user.createUser("xyz@gmail.com","132","Associate Editor","OOPSLA");
+		String res = user.createUser("sravbiya@gmail.com","132","Associate Editor","OOPSLA");
 
 		assertEquals("true",res);		
 
@@ -34,7 +34,7 @@ public class ImplementRegisterTest {
 	public void testUserExistsSuccess() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
-		String  res = user.createUser("xyz@gmail.com","132","Associate Editor","OOPSLA");
+		String  res = user.createUser("sravbiya@gmail.com","132","Associate Editor","OOPSLA");
 		assertEquals("exists",res);
 
 	}
@@ -67,7 +67,7 @@ public class ImplementRegisterTest {
 
 		ImplementRegister user = new ImplementRegister();
 
-		String res = user.createUser("bshah.com","132","Associate Editor","OOPSLA");
+		String res = user.createUser("sravbiya.com","132","Associate Editor","OOPSLA");
 
 		assertEquals("invalid email",res);		
 
@@ -80,7 +80,7 @@ public class ImplementRegisterTest {
 
 		ImplementRegister user = new ImplementRegister();
 
-		String res = user.createUser("bshah@gmail@.gcom","132","Associate Editor","OOPSLA");
+		String res = user.createUser("sravbiya@gmail@.gcom","132","Associate Editor","OOPSLA");
 
 		assertEquals("invalid email",res);		
 
@@ -93,7 +93,7 @@ public class ImplementRegisterTest {
 
 		ImplementRegister user = new ImplementRegister();
 
-		String res = user.createUser("bshah@gmail@com","132","Associate Editor","OOPSLA");
+		String res = user.createUser("sravbiya@gmail@com","132","Associate Editor","OOPSLA");
 
 		assertEquals("invalid email",res);		
 

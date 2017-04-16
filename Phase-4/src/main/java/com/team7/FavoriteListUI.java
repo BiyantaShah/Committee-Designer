@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Set;
 import java.util.Vector;
@@ -26,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
+// Class creates User interface for favorites list
 public class FavoriteListUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -104,13 +103,12 @@ public class FavoriteListUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					CandidateListUI cl = new CandidateListUI();
-					  dispose();
-					  cl.setVisible(true);
-					  cl.setSize(UIConstants.width,UIConstants.height);
-					  cl.setLocationRelativeTo(null);
+					dispose();
+					cl.setVisible(true);
+					cl.setSize(UIConstants.width,UIConstants.height);
+					cl.setLocationRelativeTo(null);
 
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}				
 			}
@@ -135,12 +133,12 @@ public class FavoriteListUI extends JFrame {
 				table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 			}
 
-
 			// Not allowing the columns to be dragged
 			table.getTableHeader().setReorderingAllowed(false);
 
 			table.setPreferredScrollableViewportSize(new Dimension(400, 300));
 
+			// Disabling multiple selection by the user
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			
 			JScrollPane scroll = new JScrollPane(table);
@@ -156,33 +154,35 @@ public class FavoriteListUI extends JFrame {
 
 					int index = table.getSelectedRow();
 					if (index == -1) {
+						// when no authors are selected and remove is pressed.
 						LoginUI log = new LoginUI();
 						log.messageShow("Please select an author to remove");
 					}
 					else{
 						String author = (String) model.getValueAt(index, 0);
 						ImplementSchemaDB db =  new ImplementSchemaDB();
-						Connection conn;
+						
 						try {
-							conn = db.getConnection();
-							PreparedStatement stmt = conn.prepareStatement("Delete from Favorite_list where selectedAuthor=?");								
-							stmt.setString(1,author);							
-							stmt.executeUpdate();		
-							model.removeRow(index);; 
+							db.updateFavList(UIConstants.currentUser, author);		
+							model.removeRow(index);
+							
 						} catch (IOException | SQLException e) {
 							e.printStackTrace();
 						}
 					}
 				}
 			});
+			
 			btnRemove.setBounds(546, 487, 97, 30);
 			contentPane.add(btnRemove);
-		} catch (SQLException e) {
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
-
+	
+	// rendering to the favorites list
 	public TableModel buildTableModel(Set<String> favList) throws SQLException {
 
 		Vector<String> columnNames = new Vector<String>();
@@ -206,8 +206,7 @@ public class FavoriteListUI extends JFrame {
 
 			public boolean isCellEditable(int row, int column)
 			{
-				//This causes all cells except of the last column
-				// to be not editable
+				//This causes all cells to be not editable
 				return false; 
 			}
 

@@ -46,10 +46,9 @@ public class ImplementSearchTest extends TestCase {
 	
 	
 	@Test
+	// Testing the similar authors function
 	public void testSimAuth() throws SQLException, IOException {
-		
 		Set<String> simAuth = new ImplementSearchDisplay().similarAuthor("Aniruddha S. Gokhale");
-		
 		assertEquals(6, simAuth.size());
 		
 	}

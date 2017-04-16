@@ -17,7 +17,7 @@ public class ButtonEditor extends DefaultCellEditor {
 
 	private String label;
 
-	// A set which stores names of authors who have been saved or selected
+	// A set which stores names of authors who are selected to view publication details
 	static Set<String> savedAuthors = new HashSet<String>();
 
 	String data;

@@ -31,6 +31,7 @@ import java.util.Set;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 
+// Class which displays the publication details of the author (Paper and articles , along with URL)
 public class AuthorPublicationDetailsUI extends JFrame {
 
 	/**
@@ -131,6 +132,7 @@ public class AuthorPublicationDetailsUI extends JFrame {
 					fl.setVisible(true);
 					fl.setSize(UIConstants.width, UIConstants.height);
 					fl.setLocationRelativeTo(null);
+					
 				} catch (SQLException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

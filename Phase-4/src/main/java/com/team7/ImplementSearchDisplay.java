@@ -56,11 +56,11 @@ public class ImplementSearchDisplay implements SearchDisplay {
 	}
 	
 	// to extract favorites of program chair
-	public Set<String> listForCommittee(String userName) throws SQLException, IOException {
+	public Set<String> listForCommittee(String conference) throws SQLException, IOException {
 		
 		List<String> CommList = new ArrayList<String>();
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
-		String query = queryBuilderObject.createQueryForCommitteeList(userName);
+		String query = queryBuilderObject.createQueryForCommitteeList(conference);
 		ResultSet CommResultSet = queryBuilderObject.sendQuery(query);
 		
 		while (CommResultSet.next()) {
@@ -149,6 +149,7 @@ public class ImplementSearchDisplay implements SearchDisplay {
 					sb.append(str + "\n");
 				}
 				
+				sb.append("\n");
 				sb.append("\n");
 				sb.append("Thank you");
 

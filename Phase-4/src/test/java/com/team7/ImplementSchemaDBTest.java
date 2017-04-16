@@ -84,15 +84,34 @@ public class ImplementSchemaDBTest extends TestCase {
 	public void testInsertCandidateListData() throws SQLException, IOException {
 
 		ImplementSchemaDB db = new ImplementSchemaDB();
-		Connection conn = new ImplementSchemaDB().getConnection();
-		Statement stmt = conn.createStatement();
 
 		boolean res = db.insertIntoCandidateList("Biyanta Shah");
 		
-		// delete the author after checking the session object is null or not
-		stmt.executeUpdate("delete from Candidate_list where userName='shah.bi@shah.bi' and selectedAuthor='Biyanta Shah'");
-		conn.close();
+		assertTrue(res);
+		
+		// delete the author
+		res = db.updateCandidateList("Biyanta Shah", UIConstants.currentUserConf);
+		
 		assertTrue(res);
 	}
+	
+	//Test Case to test Insert Data into favorites list
+	//Test will fail if connection object is null Or Insertion of Data Fails
+	@Test
+	public void testInsertUpdateFavListData() throws SQLException, IOException {
+
+		ImplementSchemaDB db = new ImplementSchemaDB();
+
+		// insert into fav list
+		boolean res = db.insertIntoFavList(UIConstants.currentUser, UIConstants.currentUserConf, "Biyanta Shah");
+
+		assertTrue(res);
+		
+		// delete the author 
+		res = db.updateFavList(UIConstants.currentUser, "Biyanta Shah");
+
+		assertTrue(res);
+	}
+	
 	
 }
