@@ -45,28 +45,28 @@ public class ImplementParseDatabase implements ParseDatabase {
 		// Information about the home-pages, authors, papers, conferences and 
 		// articles have been extracted and inserted into respective tables in the database
 
-		if(data.getWww() != null){
-
-			PreparedStatement statement_authorD =  conn.prepareStatement("insert into Author_Details(name,url) values (?,?)");
-
-			for(AuthorDetails auth : data.getWww()){
-
-				// If the author name and url is empty then do not insert
-				if(auth.getAuthor() != null && auth.getUrl() != null){
-
-					for(String name : auth.getAuthor())
-					{
-						statement_authorD.setString(1,name);
-						statement_authorD.setString(2,auth.getUrl());
-						statement_authorD.addBatch();
-					}					
-					if (++i % batchSize == 0){			
-						statement_authorD.executeBatch();
-					}
-				}
-			}	
-			statement_authorD.executeBatch();
-		}
+//		if(data.getWww() != null){
+//
+//			PreparedStatement statement_authorD =  conn.prepareStatement("insert into Author_Details(name,url) values (?,?)");
+//
+//			for(AuthorDetails auth : data.getWww()){
+//
+//				// If the author name and url is empty then do not insert
+//				if(auth.getAuthor() != null && auth.getUrl() != null){
+//
+//					for(String name : auth.getAuthor())
+//					{
+//						statement_authorD.setString(1,name);
+//						statement_authorD.setString(2,auth.getUrl());
+//						statement_authorD.addBatch();
+//					}					
+//					if (++i % batchSize == 0){			
+//						statement_authorD.executeBatch();
+//					}
+//				}
+//			}	
+//			statement_authorD.executeBatch();
+//		}
 
 		if (data.getInproceedings() != null) {
 
@@ -104,10 +104,10 @@ public class ImplementParseDatabase implements ParseDatabase {
 				// Inserting records into paper and authors only for the 4 
 				// required conferences
 				if(confName != null) {
-					if ((confName.equalsIgnoreCase("oopsla")) 
-							|| (confName.equalsIgnoreCase("pldi"))
-							|| (confName.equalsIgnoreCase("ecoop")) 
-							|| (confName.equalsIgnoreCase("icfp"))) {
+//					if ((confName.equalsIgnoreCase("oopsla")) 
+//							|| (confName.equalsIgnoreCase("pldi"))
+//							|| (confName.equalsIgnoreCase("ecoop")) 
+//							|| (confName.equalsIgnoreCase("icfp"))) {
 
 						statement_inproceedings.setString(1,paper.getTitle());
 						statement_inproceedings.setInt(2,paper.getYear());
@@ -131,7 +131,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 						if (++m % batchSize == 0) {
 							statement_author.executeBatch();
 						}
-					}
+//					}
 				}
 			}
 			statement_inproceedings.executeBatch();
@@ -165,7 +165,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 
 		if (data.getArticle() != null) {
 
-			PreparedStatement statement_article = conn.prepareStatement("insert into Article(author,title,journal,year,month,ee) values (?,?,?,?,?,?)");
+			PreparedStatement statement_article = conn.prepareStatement("insert into Article(author,title,journal,year,ee) values (?,?,?,?,?)");
 
 			for (Article article: data.getArticle()) {
 
@@ -206,8 +206,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 							statement_article.setString(2, article.getTitle());
 							statement_article.setString(3, journalName);
 							statement_article.setInt(4, article.getYear());
-							statement_article.setString(5, article.getMonth());
-							statement_article.setString(6, article.getEe());
+							statement_article.setString(5, article.getEe());
 
 							statement_article.addBatch();
 

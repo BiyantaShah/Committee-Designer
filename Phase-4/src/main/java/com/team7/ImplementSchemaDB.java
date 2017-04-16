@@ -99,7 +99,6 @@ public class ImplementSchemaDB implements SchemaDB {
 			// Adding index to the paper key, making it faster during a join
 //			 sql = "ALTER TABLE Paper ADD INDEX keyP(paperKey)";
 //			 stmt.executeUpdate(sql);
-//			 System.out.println("Created index on Key in paper table...");
 
 			// creating author table
 			sql = "CREATE TABLE IF NOT EXISTS Author " +
@@ -114,19 +113,21 @@ public class ImplementSchemaDB implements SchemaDB {
 
 			stmt.executeUpdate(sql);
 
-			// Adding index to the paper key in author making it faster during a join
+			// Adding index to the paper key and name in author making it faster during a join
 //			 sql = "ALTER TABLE Author ADD INDEX keyA(paperKey)";
 //			 stmt.executeUpdate(sql);
-//			 System.out.println("Created index on Key in author table...");
+//			 
+//			 sql = "ALTER TABLE Author ADD INDEX keyA1(name)";
+//			 stmt.executeUpdate(sql);
 
 			//creating AuthorDetails table
-			sql = "CREATE TABLE IF NOT EXISTS Author_Details " +
-					"(id        INTEGER      AUTO_INCREMENT NOT NULL, " +
-					" name      VARCHAR(255), " + 
-					" url       TEXT, " + 
-					" PRIMARY   KEY(id))" ;
-
-			stmt.executeUpdate(sql);
+//			sql = "CREATE TABLE IF NOT EXISTS Author_Details " +
+//					"(id        INTEGER      AUTO_INCREMENT NOT NULL, " +
+//					" name      VARCHAR(255), " + 
+//					" url       TEXT, " + 
+//					" PRIMARY   KEY(id))" ;
+//
+//			stmt.executeUpdate(sql);
 
 			//creating Committees table
 			sql = "CREATE TABLE IF NOT EXISTS Committee " +
@@ -146,11 +147,14 @@ public class ImplementSchemaDB implements SchemaDB {
 					" title       TEXT, " + 
 					" journal	  VARCHAR(255), " +
 					" year        INTEGER, " + 
-					" month       VARCHAR(255), " + 
 					" ee          TEXT, "      +   
 					" PRIMARY     KEY(id))" ;
 
 			stmt.executeUpdate(sql);
+			
+			// Adding indexes in article table on author name for faster access
+//			sql = "ALTER TABLE Article ADD INDEX keyR(author)";
+//			stmt.executeUpdate(sql);
 			
 			// creating Favorites table
 			sql = "CREATE TABLE IF NOT EXISTS Favorite_list " +

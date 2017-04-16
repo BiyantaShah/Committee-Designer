@@ -19,7 +19,7 @@ public class ImplementHomePageData implements UniversityAuthorData {
 		String line = "";
 		String cvsSplitBy = ",";
 
-		final int batchSize = 1000;
+		final int batchSize = 10000;
 		int i=0;
 
 		ImplementSchemaDB db = new ImplementSchemaDB();
