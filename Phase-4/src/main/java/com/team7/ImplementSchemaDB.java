@@ -162,6 +162,16 @@ public class ImplementSchemaDB implements SchemaDB {
 					" PRIMARY     KEY(id))" ;
 
 			stmt.executeUpdate(sql);
+			
+			// creating Candidates List table
+			sql = "CREATE TABLE IF NOT EXISTS Candidate_list " +
+					"(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
+					" userName	  VARCHAR(255), " + 
+					" selectedAuthor	  VARCHAR(255), " +   
+					" UNIQUE (userName, selectedAuthor), "+
+					" PRIMARY     KEY(id))" ;
+
+			stmt.executeUpdate(sql);
 
 
 		}catch(Exception se){
@@ -223,5 +233,16 @@ public class ImplementSchemaDB implements SchemaDB {
 		}
 		conn.close();
 		return true;
+	}
+	
+	public boolean insertIntoCandidateList(String author) throws IOException, SQLException {
+		
+		Connection conn = getConnection();		
+		PreparedStatement candidDetails_stmt = conn.prepareStatement("insert into Candidate_list(userName,selectedAuthor) values(?,?)");
+		candidDetails_stmt.setString(1, UIConstants.currentUser);
+		candidDetails_stmt.setString(2,author);							
+		candidDetails_stmt.executeUpdate();
+		return false;
+		
 	}
 }

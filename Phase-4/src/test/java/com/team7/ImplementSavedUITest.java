@@ -15,6 +15,7 @@ import org.junit.Test;
 
 public class ImplementSavedUITest {
 	
+	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Conference Chair", "ECOOP");
 	Set<String> authors = new HashSet<String> (Arrays.asList("Shahar Maoz"));
 	SavedAuthorsUI saved;
 	ButtonEditor button = new ButtonEditor(new JCheckBox());

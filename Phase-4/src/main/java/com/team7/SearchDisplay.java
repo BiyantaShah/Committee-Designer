@@ -20,4 +20,5 @@ public interface SearchDisplay {
 	
 	// similar Authors
 	public Set<String> similarAuthor(String author) throws SQLException, IOException;
+	
 }

@@ -1,10 +1,13 @@
 package com.team7;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 import org.junit.Test;
 
 public class ImplementSearchUITest {
 	
-	UIConstants u = new UIConstants("test@gmail.com","Program Chair");
+	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Conference Chair", "ECOOP");
 	SearchUI search = new SearchUI();
 	
 	@Test
@@ -19,14 +22,15 @@ public class ImplementSearchUITest {
 	
 	@Test
 	// Testing the logout button
-	public void testLogoutButton() {
+	public void testLogoutButton() throws SQLException, IOException {
 		search.btnLogout.doClick();
 		search.dispose();
 	}
 	
 	@Test
 	// Testing the submit button
-	public void testSubmitButton() {
+	public void testSubmitButton() throws SQLException, IOException {
+		System.out.println("Here");
 		search.btnNewButton.doClick();
 		search.dispose();
 	}

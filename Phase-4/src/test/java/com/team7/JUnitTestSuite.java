@@ -10,7 +10,7 @@ import org.junit.runners.Suite;
    ImplementCommitteesTest.class, SearchParameterTest.class, 
    ImplementLoginUITest.class, ImplementRegisterUITest.class,
    ImplementSearchUITest.class, ImplementDisplayUI.class, ImplementSavedUITest.class,
-   ImplementFavUI.class,
+   //ImplementFavUI.class,
    ImplementUniAuthorTest.class, ImplementUniCountryTest.class,
    ImplementHomePageTest.class, ImplementAuthorAffTest.class
 })
