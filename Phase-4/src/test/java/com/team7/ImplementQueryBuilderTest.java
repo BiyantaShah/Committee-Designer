@@ -511,8 +511,6 @@ public class ImplementQueryBuilderTest extends TestCase {
   		List<String> result = obj.getResultForDisplay(queryFormed);	
 		assertEquals(1,result.size()); 
 	} 
-	
-	
 
 	@Test
 	public void testThreeORSearchParameter() throws SQLException, IOException{   
@@ -534,4 +532,50 @@ public class ImplementQueryBuilderTest extends TestCase {
   		List<String> result = obj.getResultForDisplay(queryFormed);	
 		assertEquals(12798,result.size()); 
 	} 
+	
+	@Test
+	public void testToCoverAllFilters() throws SQLException, IOException{ 	
+  		List<String> expected = new ArrayList<String>();
+  		expected.add(0, null);
+  		expected.add(1, null);
+  		expected.add(2, null);
+  		 
+		SearchParameter s= new SearchParameter("Name","LIKE" ,"Frank","OR ");
+  		SearchParameter s1= new SearchParameter("ConfName", "=" ,"OOPSLA", "OR ");
+		SearchParameter s2= new SearchParameter("Committee.Year", ">" ,"1990", "OR ");
+		SearchParameter s3= new SearchParameter("Committee.Year", "<" ,"2000", null);
+	
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(s);
+  		searchCriteria.add(s1);	
+  		searchCriteria.add(s2);	
+  		searchCriteria.add(s3);		
+  		ImplementQueryBuilder obj = new ImplementQueryBuilder();
+  		List<String> queryFormed = obj.createQuery(searchCriteria);
+  		List<String> result = obj.getResultForDisplay(queryFormed);	
+		assertEquals(12798,result.size()); 
+	}
+	
+	@Test
+	public void testToCoverAllFilters2() throws SQLException, IOException{ 	
+  		List<String> expected = new ArrayList<String>();
+  		expected.add(0, null);
+  		expected.add(1, null);
+  		expected.add(2, null);
+  		 
+  		SearchParameter s= new SearchParameter("JournalName", "=" ,"tse", "OR ");
+  		SearchParameter s1= new SearchParameter("JournalName", "=" ,"pointer", "OR ");
+  		SearchParameter s2= new SearchParameter("Committee.ConfName", "=" ,"OOPSLA", " OR");
+  		SearchParameter s3= new SearchParameter("Committee.ConfName", "=" ,"TSE", null);
+  		
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(s);
+  		searchCriteria.add(s1);	
+  		searchCriteria.add(s2);	
+  		searchCriteria.add(s3);		
+  		ImplementQueryBuilder obj = new ImplementQueryBuilder();
+  		List<String> queryFormed = obj.createQuery(searchCriteria);
+  		List<String> result = obj.getResultForDisplay(queryFormed);	
+		assertEquals(12798,result.size()); 
+	}
 }
