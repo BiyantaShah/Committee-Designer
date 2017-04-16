@@ -9,7 +9,7 @@ import org.junit.runners.Suite;
    ImplementRegisterTest.class,ImplementSearchTest.class,ImplementQueryBuilderTest.class,ImplementLoginTest.class,ImplementParseDatabaseTest.class,ImplementSchemaDBTest.class,
    ImplementCommitteesTest.class, SearchParameterTest.class, 
    ImplementLoginUITest.class, ImplementRegisterUITest.class,
-   ImplementSearchUI.class, ImplementDisplayUI.class, ImplementSavedUITest.class,
+   ImplementSearchUITest.class, ImplementDisplayUI.class, ImplementSavedUITest.class,
    ImplementFavUI.class,
    ImplementUniAuthorTest.class, ImplementUniCountryTest.class,
    ImplementHomePageTest.class, ImplementAuthorAffTest.class

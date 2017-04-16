@@ -2,8 +2,9 @@ package com.team7;
 
 import org.junit.Test;
 
-public class ImplementSearchUI {
+public class ImplementSearchUITest {
 	
+	UIConstants u = new UIConstants("test@gmail.com","Program Chair");
 	SearchUI search = new SearchUI();
 	
 	@Test
