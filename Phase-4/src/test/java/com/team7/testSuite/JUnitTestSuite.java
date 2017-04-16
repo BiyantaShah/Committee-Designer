@@ -1,4 +1,4 @@
-package com.team7;
+package com.team7.testSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -12,12 +12,14 @@ import com.team7.parseTest.ImplementUniCountryTest;
 import com.team7.queryTest.ImplementQueryBuilderTest;
 import com.team7.queryTest.ImplementSearchTest;
 import com.team7.queryTest.SearchParameterTest;
-import com.team7.uiTest.ImplementFavUITest;
+import com.team7.uiTest.ImplementDisplayUI;
 import com.team7.uiTest.ImplementLoginTest;
 import com.team7.uiTest.ImplementLoginUITest;
 import com.team7.uiTest.ImplementPubDetailsUITest;
 import com.team7.uiTest.ImplementRegisterTest;
 import com.team7.uiTest.ImplementRegisterUITest;
+import com.team7.uiTest.ImplementSearchUI;
+import com.team7.uiTest.ImplementSimilarAuthorsUI;
 
 //JUnit Suite Test
 @RunWith(Suite.class)
@@ -26,8 +28,8 @@ import com.team7.uiTest.ImplementRegisterUITest;
    ImplementRegisterTest.class,ImplementSearchTest.class,ImplementQueryBuilderTest.class,ImplementLoginTest.class,ImplementParseDatabaseTest.class,ImplementSchemaDBTest.class,
    ImplementCommitteesTest.class, SearchParameterTest.class, 
    ImplementLoginUITest.class, ImplementRegisterUITest.class,
-   ImplementSearchUITest.class, ImplementDisplayUITest.class, ImplementPubDetailsUITest.class,
-   ImplementFavUITest.class,
+   ImplementSearchUI.class, ImplementDisplayUI.class, ImplementPubDetailsUITest.class, ImplementSimilarAuthorsUI.class,
+//   ImplementFavUI.class,
    ImplementUniAuthorTest.class, ImplementUniCountryTest.class,
    ImplementHomePageTest.class, ImplementAuthorAffTest.class
 })

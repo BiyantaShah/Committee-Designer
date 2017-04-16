@@ -5,6 +5,9 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
+import com.team7.ui.SearchUI;
+import com.team7.ui.UIConstants;
+
 public class ImplementSearchUITest {
 	
 	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Conference Chair", "ECOOP");
