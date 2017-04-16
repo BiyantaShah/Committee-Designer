@@ -42,31 +42,8 @@ public class ImplementParseDatabase implements ParseDatabase {
 		int j=0, k=0, l=0, m=0;
 
 		// Extracting required information from the dblp object
-		// Information about the home-pages, authors, papers, conferences and 
+		// Information about the authors, papers, conferences and 
 		// articles have been extracted and inserted into respective tables in the database
-
-//		if(data.getWww() != null){
-//
-//			PreparedStatement statement_authorD =  conn.prepareStatement("insert into Author_Details(name,url) values (?,?)");
-//
-//			for(AuthorDetails auth : data.getWww()){
-//
-//				// If the author name and url is empty then do not insert
-//				if(auth.getAuthor() != null && auth.getUrl() != null){
-//
-//					for(String name : auth.getAuthor())
-//					{
-//						statement_authorD.setString(1,name);
-//						statement_authorD.setString(2,auth.getUrl());
-//						statement_authorD.addBatch();
-//					}					
-//					if (++i % batchSize == 0){			
-//						statement_authorD.executeBatch();
-//					}
-//				}
-//			}	
-//			statement_authorD.executeBatch();
-//		}
 
 		if (data.getInproceedings() != null) {
 
@@ -104,10 +81,10 @@ public class ImplementParseDatabase implements ParseDatabase {
 				// Inserting records into paper and authors only for the 4 
 				// required conferences
 				if(confName != null) {
-//					if ((confName.equalsIgnoreCase("oopsla")) 
-//							|| (confName.equalsIgnoreCase("pldi"))
-//							|| (confName.equalsIgnoreCase("ecoop")) 
-//							|| (confName.equalsIgnoreCase("icfp"))) {
+					if ((confName.equalsIgnoreCase("oopsla")) 
+							|| (confName.equalsIgnoreCase("pldi"))
+							|| (confName.equalsIgnoreCase("ecoop")) 
+							|| (confName.equalsIgnoreCase("icfp"))) {
 
 						statement_inproceedings.setString(1,paper.getTitle());
 						statement_inproceedings.setInt(2,paper.getYear());
@@ -131,7 +108,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 						if (++m % batchSize == 0) {
 							statement_author.executeBatch();
 						}
-//					}
+					}
 				}
 			}
 			statement_inproceedings.executeBatch();

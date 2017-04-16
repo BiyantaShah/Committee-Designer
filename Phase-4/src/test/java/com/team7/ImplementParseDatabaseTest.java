@@ -12,28 +12,6 @@ import org.junit.Test;
 import junit.framework.TestCase;
 
 public class ImplementParseDatabaseTest extends TestCase{
-
-//	@Test
-//	public void testParseSuccessWww() throws JAXBException, SQLException, IOException {
-//		
-//		// to test the successful parsing of XML file
-//	    File file = new File("test.xml");
-//	    FileWriter writer = new FileWriter(file);
-//	    writer.write("<?xml version='1.0' encoding='ISO-8859-1'?><dblp><www><author>testing11</author><url>testing11</url></www></dblp>"); 
-//		writer.close();
-//	    ImplementParseDatabase parse = new ImplementParseDatabase();
-//		String result = parse.parseXml(file);
-//		assertEquals("success", result);
-//		
-//		// deleting the record inserted
-//		ImplementSchemaDB db = new ImplementSchemaDB();
-//		Connection conn = db.getConnection();
-//		Statement stmt = conn.createStatement();
-//		
-//		stmt.executeUpdate("delete from Author_Details where name='testing11'");
-//		
-//		file.delete();
-//	}
 	
 	@Test
 	public void testParseSuccessInproc() throws JAXBException, SQLException, IOException {

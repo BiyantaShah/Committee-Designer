@@ -201,7 +201,7 @@ public class ImplementQueryBuilderTest extends TestCase {
   		ImplementQueryBuilder obj12 = new ImplementQueryBuilder();
   		List<String> queryFormed = obj12.createQuery(searchCriteria);
   		List<String> result = obj12.getResultForDisplay(queryFormed);	
-		assertEquals(8,result.size());  
+		assertEquals(4,result.size());  
 	}
 	
 	@Test
@@ -532,6 +532,6 @@ public class ImplementQueryBuilderTest extends TestCase {
   		ImplementQueryBuilder obj = new ImplementQueryBuilder();
   		List<String> queryFormed = obj.createQuery(searchCriteria);
   		List<String> result = obj.getResultForDisplay(queryFormed);	
-		assertEquals(1206540,result.size()); 
+		assertEquals(12798,result.size()); 
 	} 
 }
