@@ -39,7 +39,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 		// getting connection to the database
 		Connection conn = db.getConnection();
 		final int batchSize = 10000; 
-		int i=0, j=0, k=0, l=0, m=0;
+		int j=0, k=0, l=0, m=0;
 
 		// Extracting required information from the dblp object
 		// Information about the home-pages, authors, papers, conferences and 

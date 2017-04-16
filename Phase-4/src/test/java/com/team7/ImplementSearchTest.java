@@ -50,7 +50,7 @@ public class ImplementSearchTest extends TestCase {
 		
 		Set<String> simAuth = new ImplementSearchDisplay().similarAuthor("Aniruddha S. Gokhale");
 		
-		assertEquals(6, simAuth.size());
+		assertEquals(18, simAuth.size());
 		
 	}
 

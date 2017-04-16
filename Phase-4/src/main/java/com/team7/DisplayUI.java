@@ -277,7 +277,7 @@ public class DisplayUI extends JFrame {
 					}
 
 					dispose();
-					SavedAuthorsUI saved = new SavedAuthorsUI(result);
+					AuthorPublicationDetailsUI saved = new AuthorPublicationDetailsUI(result);
 					saved.setVisible(true);
 					setSize(UIConstants.width, UIConstants.height);
 					saved.setLocationRelativeTo(null);
@@ -288,7 +288,7 @@ public class DisplayUI extends JFrame {
 		});
 
 		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSavedAuthors.setBounds(431, 6, 171, 29);
+		btnSavedAuthors.setBounds(395, 6, 171, 29);
 		panel_2.add(btnSavedAuthors);
 	}
 

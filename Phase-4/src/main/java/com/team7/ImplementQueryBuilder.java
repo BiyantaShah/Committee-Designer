@@ -493,7 +493,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	
     private List<String> getSequenceOfResults(List<String> paperAuthor, List<String> committee, List<String> article){
 		
-		for(Entry value :finalJoin.entrySet()){
+		for(Entry<String, String> value :finalJoin.entrySet()){
 			String key = (String) value.getKey();
 			int val = Integer.parseInt(value.getValue().toString().split(":")[1]);
 			
