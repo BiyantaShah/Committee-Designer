@@ -27,7 +27,7 @@ public class ImplementDisplayUITest {
 		Object [][] row = {{"author1", "save"}, {"author2", "save"}};
 		JTable table = new JTable(new DefaultTableModel(row, colNames));
 		button.getTableCellEditorComponent(table, "save", true, 1, 0);
-		display2.btnSavedAuthors.doClick();
+		display2.btnPubDetails.doClick();
 		display2.dispose();
 	}
 
@@ -48,7 +48,7 @@ public class ImplementDisplayUITest {
 	@Test
 	// Testing the pop up for empty candidate details
 	public void testCandidateDetailsEmpty() {
-		display1.btnSavedAuthors.doClick();
+		display1.btnPubDetails.doClick();
 		display1.dispose();
 	}
 

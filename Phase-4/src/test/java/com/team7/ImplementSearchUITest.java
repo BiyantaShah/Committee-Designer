@@ -30,7 +30,6 @@ public class ImplementSearchUITest {
 	@Test
 	// Testing the submit button
 	public void testSubmitButton() throws SQLException, IOException {
-		System.out.println("Here");
 		search.btnNewButton.doClick();
 		search.dispose();
 	}

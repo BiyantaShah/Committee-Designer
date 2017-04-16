@@ -31,7 +31,7 @@ import java.util.Set;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 
-public class SavedAuthorsUI extends JFrame {
+public class AuthorPublicationDetailsUI extends JFrame {
 
 	/**
 	 * 
@@ -42,15 +42,17 @@ public class SavedAuthorsUI extends JFrame {
 	JButton btnNewButton;
 	JButton btnSearch;
 	JButton btnSendEmail;
+	JButton btnCandidatesList;
+	JButton btnFav;
 
 	/**
 	 * Create the frame.
 	 * @throws SQLException  
 	 */
-	public SavedAuthorsUI(ResultSet result) {
+	public AuthorPublicationDetailsUI(ResultSet result) {
 
 		setVisible(true);
-		setTitle("SAVED AUTHORS");
+		setTitle("AUTHOR PUBLICATION DETAILS");
 		setResizable(false);
 
 		setSize(UIConstants.width, UIConstants.height);
@@ -67,9 +69,9 @@ public class SavedAuthorsUI extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JLabel lblSavedAuthors = new JLabel("Saved Authors");
+		JLabel lblSavedAuthors = new JLabel("Author Publication Details");
 		lblSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblSavedAuthors.setBounds(500, 81, 176, 28);
+		lblSavedAuthors.setBounds(444, 81, 274, 28);
 		panel.add(lblSavedAuthors);
 
 		JLabel lblNewLabel = new JLabel("To select authors for the committee, click \"select\" beside the row");
@@ -113,7 +115,7 @@ public class SavedAuthorsUI extends JFrame {
 		btnNewButton.setBounds(1059, 10, 117, 34);
 		panel.add(btnNewButton);
 		
-		JButton btnFav = new JButton("My Favorite List");
+		btnFav = new JButton("My Favorite List");
 		btnFav.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnFav.setBounds(31, 10, 176, 34);
 		panel.add(btnFav);
@@ -138,7 +140,7 @@ public class SavedAuthorsUI extends JFrame {
 			}
 		});
 		
-		JButton btnCandidatesList = new JButton("Candidates List");
+		btnCandidatesList = new JButton("Candidates List");
 		btnCandidatesList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnCandidatesList.setVisible(false);
 		if(UIConstants.currentUserRole.equals(UIConstants.HighestRole)){

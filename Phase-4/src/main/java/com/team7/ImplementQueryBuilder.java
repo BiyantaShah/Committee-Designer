@@ -21,7 +21,8 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	String whereClauseForCommittee = "";
 	String whereClauseForArticle = "";
 
-	String groupByClause = "";
+	String groupByClausePaperAuthor = "";
+	String groupByClauseArticle = "";
 	String queryPaperAuthor = null; 
 	String queryCommitte = null; 
 	String queryArticle = null;
@@ -55,8 +56,15 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			// if there is only one condition of grouping by the number of papers
 			if (searchParam.size() == 1 && searchParam.get(0).getSearchFilter() == "CountNoOfPapers") {
 				
-				return getGroupByQuery(searchParam.get(0));
+				return getGroupByPaperAuthorQuery(searchParam.get(0));
 			}
+			
+			// if there is only one condition of grouping by the number of papers
+			else if (searchParam.size() == 1 && searchParam.get(0).getSearchFilter() == "CountNoOfArticle") {
+							
+				return getGroupByArticleQuery(searchParam.get(0));
+			}
+			
 			else  {
 				formQueryParams(searchParam);
 
@@ -161,6 +169,23 @@ public class ImplementQueryBuilder implements QueryBuilder{
 				finalJoin.put("Author", join + ":" + count);
 				count ++;
 			}
+			}  
+			
+			if(s.getSearchFilter() == "CountNoOfArticles"){            	
+				// no validation needed for Keyword
+				// all characters are accepted
+				result = true;
+				
+				if(finalJoin.get("Article")!=null){
+					String join = s.getjoinFilter();
+					finalJoin.put("Article", join +":"+ count);
+					count++;
+				}
+				else{
+				String join= s.getjoinFilter();
+				finalJoin.put("Article", join + ":" + count);
+				count ++;
+			}
 			}    
 
 			if(s.getSearchFilter() == "Committee.Year" && Integer.parseInt(s.getSearchValue()) > 0){					
@@ -245,8 +270,8 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			whereClauseForPaperAuthor = whereClauseForPaperAuthor.substring(0, whereClauseForPaperAuthor.length()-5);
 		}   				
 
-		if(groupByClause.length()>0){
-			whereClauseForPaperAuthor += groupByClause;
+		if(groupByClausePaperAuthor.length()>0){
+			whereClauseForPaperAuthor += groupByClausePaperAuthor;
 		}
 
 		if(whereClauseForCommittee.length()>0){
@@ -256,15 +281,16 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 		if(whereClauseForArticle.length()>0){
 			whereClauseForArticle = whereClauseForArticle.substring(0, whereClauseForArticle.length()-5);   
-
+		}
+		
+		if(groupByClauseArticle.length()>0){
+			whereClauseForArticle += groupByClauseArticle;
 		}
 	}
 
 	// Getting the final result of the query.
 	public List<String> getResultForDisplay(List<String> searchQuery) throws SQLException, IOException{
 
-//		List<String> finalResult = new ArrayList<String>();
-//		List<String> intermediate = new ArrayList<String>();
 		List<String> paperAuthorResult = new ArrayList<String>();
 		List<String> committeeResult = new ArrayList<String>();
 		List<String> articleResult = new ArrayList<String>();
@@ -296,42 +322,6 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			}
 		} 
 
-
-		// The result sets which are not empty are intersected together
-		/*if (paperAuthorResult.size() != 0 && 
-				committeeResult.size() != 0 && 
-				articleResult.size() != 0 ) {
-			paperAuthorResult.retainAll(committeeResult);
-			paperAuthorResult.retainAll(articleResult);
-			intermediate = paperAuthorResult;
-		}
-		else if (paperAuthorResult.size() != 0 && 
-				committeeResult.size() != 0) {
-			paperAuthorResult.retainAll(committeeResult);
-			intermediate = paperAuthorResult;
-		}
-		else if (paperAuthorResult.size() != 0 && 
-				articleResult.size() != 0) {
-			paperAuthorResult.retainAll(articleResult);
-			intermediate = paperAuthorResult;
-		}
-		else if (committeeResult.size() != 0 && 
-				articleResult.size() != 0 ) {
-			committeeResult.retainAll(articleResult);
-			intermediate = committeeResult;
-		} 
-		else if (paperAuthorResult.size() != 0) {
-			intermediate = paperAuthorResult;
-		}
-		else if (committeeResult.size() != 0) {
-			intermediate = committeeResult;
-		}
-		else if (articleResult.size() != 0) {
-			intermediate = articleResult;
-		}
-
-		finalResult.addAll(new HashSet<String>(intermediate));
-		return finalResult;   */  
 		return getSequenceOfResults(paperAuthorResult,committeeResult,articleResult);
 	}
 
@@ -344,8 +334,12 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		return result;
 	}
 
-	private void formGroupClause(SearchParameter search){ 	
-		groupByClause = " GROUP BY " + AuthorTableAlias +".name HAVING COUNT(*) " + search.getSearchComparator() +search.getSearchValue();
+	private void formGroupByClausePaperAuthor(SearchParameter search){ 	
+		groupByClausePaperAuthor = " GROUP BY " + AuthorTableAlias +".name HAVING COUNT(*) " + search.getSearchComparator() +search.getSearchValue();
+	}
+	
+	private void formGroupByClauseArticle(SearchParameter search){ 	
+		groupByClauseArticle = " GROUP BY " + ArticleTableAlias +".author HAVING COUNT(*) " + search.getSearchComparator() +search.getSearchValue();
 	}
 
 	private void formPaperAuthorWhereClause(SearchParameter s){ 	
@@ -372,7 +366,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		} 
 
 		else if(s.getSearchFilter() == "CountNoOfPapers"){
-			formGroupClause(s);
+			formGroupByClausePaperAuthor(s);
+		}
+		
+		else if(s.getSearchFilter() == "CountNoOfArticles"){
+			formGroupByClauseArticle(s);
 		}
 
 	}
@@ -423,8 +421,14 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	private void getArticleQuery(){
 
 		if(whereClauseForArticle.length()>0){
-			queryArticle = "SELECT ar.Author AS Author FROM  Article ar WHERE ";  
-			queryArticle += whereClauseForArticle;
+			queryArticle = "SELECT ar.Author AS Author FROM  Article ar ";
+			
+			if(whereClauseForArticle.startsWith(" GROUP")){
+				queryArticle+= whereClauseForArticle;
+				}
+				else{	
+					queryArticle += " WHERE " + whereClauseForArticle;
+				}
 		}
 	}
 
@@ -448,12 +452,12 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		
 	}
 	
-	private List<String> getGroupByQuery(SearchParameter groupByParameter){
+	private List<String> getGroupByPaperAuthorQuery(SearchParameter groupByParameter){
 
-	formGroupClause(groupByParameter);
+	formGroupByClausePaperAuthor(groupByParameter);
 	
 	queryPaperAuthor = "SELECT a.name AS Author FROM " + formJoinCondition() +
-			groupByClause;
+			groupByClausePaperAuthor;
 	
 	queries.add(0, queryPaperAuthor);
 	queries.add(1, queryCommitte);
@@ -461,6 +465,20 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	
 	return queries;
 	}
+	
+	private List<String> getGroupByArticleQuery(SearchParameter groupByParameter){
+
+		formGroupByClausePaperAuthor(groupByParameter);
+		
+		queryPaperAuthor = "SELECT a.name AS Article FROM Article " +
+				groupByClauseArticle;
+		
+		queries.add(0, queryPaperAuthor);
+		queries.add(1, queryCommitte);
+		queries.add(2, queryArticle);
+		
+		return queries;
+		}
 
 	public String createQueryForSimilarAuthors(String author) {
 		
@@ -493,7 +511,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	
     private List<String> getSequenceOfResults(List<String> paperAuthor, List<String> committee, List<String> article){
 		
-		for(Entry value :finalJoin.entrySet()){
+		for(Entry<String, String> value :finalJoin.entrySet()){
 			String key = (String) value.getKey();
 			int val = Integer.parseInt(value.getValue().toString().split(":")[1]);
 			

@@ -76,7 +76,7 @@ public class SearchUI extends JFrame {
 
 		JLabel lblSearch = new JLabel("SEARCH");
 		lblSearch.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblSearch.setBounds(530, 69, 84, 32);
+		lblSearch.setBounds(559, 68, 84, 32);
 		contentPane.add(lblSearch);
 
 

@@ -13,7 +13,6 @@ public class dblp {
 
 	private List<Paper> inproceedings;
 	private List<Conference> proceedings;
-	private List<AuthorDetails> www;
 	private List<Article> article;
 
 	// getters and setters
@@ -43,16 +42,6 @@ public class dblp {
 	public void setArticle(List<Article> article) {
 		this.article = article;
 	}
-
-	public List<AuthorDetails> getWww() {
-		return www;
-	}
-
-	@XmlElement
-	public void setWww(List<AuthorDetails> www) {
-		this.www = www;
-	}
-
 
 }
 

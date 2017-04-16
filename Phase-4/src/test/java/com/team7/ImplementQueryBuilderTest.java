@@ -410,29 +410,25 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testProperJoinFormation() throws SQLException{   
 		List<String> expected = new ArrayList<String>();
-  		expected.add(0, null);
+  		expected.add(0, "SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey GROUP BY a.name HAVING COUNT(*) >5");
   		expected.add(1, null);
-  		expected.add(2, null);
+  		expected.add(2, "SELECT ar.Author AS Author FROM  Article ar WHERE ar.journal= 'TSE'");
 		SearchParameter s1= new SearchParameter("JournalName", "=" ,"TSE", "AND");
 		SearchParameter s2= new SearchParameter("CountNoOfPapers", ">" ,"5",null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(s1);
   		searchCriteria.add(s2);
   		List<String> queryFormed = new ImplementQueryBuilder().createQuery(searchCriteria);
-		//assertEquals(expected,queryFormed);  
+		assertEquals(expected,queryFormed);  
 	}
 	
 	@Test
 	public void testNew() throws SQLException, IOException{   
-		List<String> expected = new ArrayList<String>();
-  		expected.add(0, null);
-  		expected.add(1, null);
-  		expected.add(2, null);
+
   		SearchParameter s1= new SearchParameter("Committee.ConfName", "=" ,"OOPSLA", "OR ");
   		SearchParameter s3= new SearchParameter("Year", ">" ,"2017", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(s1);
-  		//searchCriteria.add(s2);
   		searchCriteria.add(s3);
   		ImplementQueryBuilder obj24 =new ImplementQueryBuilder();
   		List<String> queryFormed = obj24.createQuery(searchCriteria);
@@ -442,10 +438,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	
 	@Test
 	public void testNew2() throws SQLException, IOException{   
-		List<String> expected = new ArrayList<String>();
-  		expected.add(0, null);
-  		expected.add(1, null);
-  		expected.add(2, null);
+
   		SearchParameter s1= new SearchParameter("Committee.ConfName", "=" ,"OOPSLA", "AND");
   		SearchParameter s2= new SearchParameter("Year", ">" ,"2017", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -459,10 +452,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	
 	@Test
 	public void testNew3() throws SQLException, IOException{   
-		List<String> expected = new ArrayList<String>();
-  		expected.add(0, null);
-  		expected.add(1, null);
-  		expected.add(2, null);
+		
   		SearchParameter s1= new SearchParameter("Year", ">" ,"2017", "AND");
   		SearchParameter s2= new SearchParameter("Committee.ConfName", "=" ,"OOPSLA", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -476,10 +466,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	
 	@Test
 	public void testNew4() throws SQLException, IOException{   
-		List<String> expected = new ArrayList<String>();
-  		expected.add(0, null);
-  		expected.add(1, null);
-  		expected.add(2, null);
+
   		SearchParameter s1= new SearchParameter("Year", ">" ,"2017", "OR ");
   		SearchParameter s2= new SearchParameter("Committee.ConfName", "=" ,"OOPSLA", null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -493,10 +480,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	
 	@Test
 	public void testFourSearchParameter() throws SQLException, IOException{   
-		List<String> expected = new ArrayList<String>();
-  		expected.add(0, null);
-  		expected.add(1, null);
-  		expected.add(2, null);
+
   		SearchParameter s1= new SearchParameter("Year", ">" ,"2017", "OR ");
   		SearchParameter s2= new SearchParameter("Committee.ConfName", "=" ,"OOPSLA", "AND");
   		SearchParameter s3= new SearchParameter("Name", "LIKE" ,"Frank", "AND");
@@ -514,10 +498,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 
 	@Test
 	public void testThreeORSearchParameter() throws SQLException, IOException{   
-		List<String> expected = new ArrayList<String>();
-  		expected.add(0, null);
-  		expected.add(1, null);
-  		expected.add(2, null);
+
   		SearchParameter s1= new SearchParameter("Year", ">" ,"1990", "OR ");
   		SearchParameter s2= new SearchParameter("Committee.Year", ">" ,"1990", "OR ");
   		SearchParameter s3= new SearchParameter("Name", "LIKE" ,"Frank", "OR ");
@@ -535,10 +516,6 @@ public class ImplementQueryBuilderTest extends TestCase {
 	
 	@Test
 	public void testToCoverAllFilters() throws SQLException, IOException{ 	
-  		List<String> expected = new ArrayList<String>();
-  		expected.add(0, null);
-  		expected.add(1, null);
-  		expected.add(2, null);
   		 
 		SearchParameter s= new SearchParameter("Name","LIKE" ,"Frank","OR ");
   		SearchParameter s1= new SearchParameter("ConfName", "=" ,"OOPSLA", "OR ");
@@ -558,11 +535,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	
 	@Test
 	public void testToCoverAllFilters2() throws SQLException, IOException{ 	
-  		List<String> expected = new ArrayList<String>();
-  		expected.add(0, null);
-  		expected.add(1, null);
-  		expected.add(2, null);
-  		 
+
   		SearchParameter s= new SearchParameter("JournalName", "=" ,"tse", "OR ");
   		SearchParameter s1= new SearchParameter("JournalName", "=" ,"pointer", "OR ");
   		SearchParameter s2= new SearchParameter("Committee.ConfName", "=" ,"OOPSLA", " OR");
@@ -577,5 +550,58 @@ public class ImplementQueryBuilderTest extends TestCase {
   		List<String> queryFormed = obj.createQuery(searchCriteria);
   		List<String> result = obj.getResultForDisplay(queryFormed);	
 		assertEquals(12798,result.size()); 
+	}
+	
+	@Test
+	public void testToCountNoOfArticlesValid() throws SQLException, IOException{ 	
+
+  		SearchParameter s= new SearchParameter("CountNoOfArticles", ">" ,"3", null);  	
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(s);
+  		ImplementQueryBuilder obj = new ImplementQueryBuilder();
+  		List<String> queryFormed = obj.createQuery(searchCriteria);
+  		System.out.println("*****"+queryFormed);
+  		List<String> result = obj.getResultForDisplay(queryFormed);	
+		//assertEquals(12798,result.size()); 
+	}
+	
+	@Test
+	public void testToCountNoOfArticles() throws SQLException, IOException{ 	
+
+  		SearchParameter s= new SearchParameter("CountNoOfArticles", ">" ,"3", "AND");
+  		SearchParameter s1= new SearchParameter("JournalName", "=" ,"pointer", "OR ");
+  		SearchParameter s2= new SearchParameter("Name","LIKE" ,"Frank", null);
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(s);
+  		searchCriteria.add(s1);
+  		searchCriteria.add(s2);
+  		ImplementQueryBuilder obj = new ImplementQueryBuilder();
+  		List<String> queryFormed = obj.createQuery(searchCriteria);
+  		System.out.println("#####"+queryFormed);
+  		List<String> result = obj.getResultForDisplay(queryFormed);	
+		//assertEquals(12798,result.size()); 
+	}
+	
+	@Test
+	public void testToCountNoOfArticles3() throws SQLException, IOException{ 	
+
+  		SearchParameter s1= new SearchParameter("JournalName", "=" ,"pointer", "AND");
+  		SearchParameter s2= new SearchParameter("Name","LIKE" ,"Frank", "OR ");
+  		SearchParameter s3= new SearchParameter("CountNoOfArticles", ">" ,"3", "AND");
+  		SearchParameter s4= new SearchParameter("Year", ">" ,"2000", "AND");
+  		SearchParameter s5= new SearchParameter("CountNoOfPapers", ">" ,"3", null);
+  		
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(s1);
+  		searchCriteria.add(s2);
+  		searchCriteria.add(s3);
+  		searchCriteria.add(s4);
+  		searchCriteria.add(s5);
+  		
+  		ImplementQueryBuilder obj = new ImplementQueryBuilder();
+  		List<String> queryFormed = obj.createQuery(searchCriteria);
+  		System.out.println("#####"+queryFormed);
+  		List<String> result = obj.getResultForDisplay(queryFormed);	
+		//assertEquals(12798,result.size()); 
 	}
 }
