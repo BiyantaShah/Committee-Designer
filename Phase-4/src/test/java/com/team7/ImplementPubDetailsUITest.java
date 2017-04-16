@@ -51,7 +51,7 @@ public class ImplementPubDetailsUITest {
 		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
 		ResultSet rs = queryBuilderObject.sendQuery(query);
 		
-		saved = new SavedAuthorsUI(rs);
+		saved = new AuthorPublicationDetailsUI(rs);
 		saved.btnFav.doClick();
 		saved.dispose();
 	}
@@ -63,7 +63,7 @@ public class ImplementPubDetailsUITest {
 		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
 		ResultSet rs = queryBuilderObject.sendQuery(query);
 		
-		saved = new SavedAuthorsUI(rs);
+		saved = new AuthorPublicationDetailsUI(rs);
 		saved.btnCandidatesList.doClick();
 		saved.dispose();
 	}

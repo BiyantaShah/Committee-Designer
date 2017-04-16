@@ -126,17 +126,11 @@ public class DisplayUI extends JFrame {
 		panel.add(btnCandidatesList);
 		btnCandidatesList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					CandidateListUI cl = new CandidateListUI();
-					dispose();
-					cl.setVisible(true);
-					cl.setSize(UIConstants.width, UIConstants.height);
-					cl.setLocationRelativeTo(null);
-
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				CandidateListUI cl = new CandidateListUI();
+				dispose();
+				cl.setVisible(true);
+				cl.setSize(UIConstants.width, UIConstants.height);
+				cl.setLocationRelativeTo(null);
 
 			}
 		});

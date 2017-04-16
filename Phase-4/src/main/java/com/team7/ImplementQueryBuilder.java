@@ -477,6 +477,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		queries.add(1, queryCommitte);
 		queries.add(2, queryArticle);
 		
+		System.out.println("here"+queries);
 		return queries;
 		}
 

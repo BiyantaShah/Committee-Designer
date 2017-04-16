@@ -555,14 +555,14 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testToCountNoOfArticlesValid() throws SQLException, IOException{ 	
 
-  		SearchParameter s= new SearchParameter("CountNoOfArticles", ">" ,"3", null);  	
+  		SearchParameter s= new SearchParameter("CountNoOfArticles", ">" ,"0", null);  	
   		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(s);
   		ImplementQueryBuilder obj = new ImplementQueryBuilder();
   		List<String> queryFormed = obj.createQuery(searchCriteria);
   		System.out.println("*****"+queryFormed);
   		List<String> result = obj.getResultForDisplay(queryFormed);	
-		//assertEquals(12798,result.size()); 
+		assertEquals(12798,result.size()); 
 	}
 	
 	@Test
