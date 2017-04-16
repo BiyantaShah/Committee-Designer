@@ -12,26 +12,34 @@ import com.team7.parseTest.ImplementUniCountryTest;
 import com.team7.queryTest.ImplementQueryBuilderTest;
 import com.team7.queryTest.ImplementSearchTest;
 import com.team7.queryTest.SearchParameterTest;
-import com.team7.uiTest.ImplementDisplayUI;
+import com.team7.uiTest.ImplementDisplayUITest;
+import com.team7.uiTest.ImplementFavUITest;
 import com.team7.uiTest.ImplementLoginTest;
 import com.team7.uiTest.ImplementLoginUITest;
 import com.team7.uiTest.ImplementPubDetailsUITest;
 import com.team7.uiTest.ImplementRegisterTest;
 import com.team7.uiTest.ImplementRegisterUITest;
-import com.team7.uiTest.ImplementSearchUI;
-import com.team7.uiTest.ImplementSimilarAuthorsUI;
+import com.team7.uiTest.ImplementSearchUITest;
+import com.team7.uiTest.ImplementSimilarAuthorsUITest;
 
 //JUnit Suite Test
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({ 
-   ImplementRegisterTest.class,ImplementSearchTest.class,ImplementQueryBuilderTest.class,ImplementLoginTest.class,ImplementParseDatabaseTest.class,ImplementSchemaDBTest.class,
-   ImplementCommitteesTest.class, SearchParameterTest.class, 
-   ImplementLoginUITest.class, ImplementRegisterUITest.class,
-   ImplementSearchUI.class, ImplementDisplayUI.class, ImplementPubDetailsUITest.class, ImplementSimilarAuthorsUI.class,
-//   ImplementFavUI.class,
-   ImplementUniAuthorTest.class, ImplementUniCountryTest.class,
-   ImplementHomePageTest.class, ImplementAuthorAffTest.class
+	
+   ImplementAuthorAffTest.class,ImplementCommitteesTest.class,	
+   ImplementHomePageTest.class,ImplementParseDatabaseTest.class,
+   ImplementSchemaDBTest.class,ImplementUniAuthorTest.class,
+   ImplementUniCountryTest.class,
+
+   ImplementQueryBuilderTest.class,ImplementSearchTest.class,
+   SearchParameterTest.class, 
+
+   ImplementDisplayUITest.class,ImplementFavUITest.class, 
+   ImplementLoginTest.class,ImplementLoginUITest.class,
+   ImplementPubDetailsUITest.class,ImplementRegisterTest.class, 
+   ImplementRegisterUITest.class,ImplementSearchUITest.class,  
+   ImplementSimilarAuthorsUITest.class,
 })
 
 public class JUnitTestSuite {

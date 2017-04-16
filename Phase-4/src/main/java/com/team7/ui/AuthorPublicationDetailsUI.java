@@ -126,7 +126,7 @@ public class AuthorPublicationDetailsUI extends JFrame {
 		btnFav.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ImplementSearchDisplay search = new ImplementSearchDisplay();
-				Set<String> favList;
+				Set<String> favList; 
 				try {
 					favList = search.favAuthors("userName", UIConstants.currentUser);
 					FavoriteListUI fl = new FavoriteListUI(favList);
@@ -154,16 +154,11 @@ public class AuthorPublicationDetailsUI extends JFrame {
 		panel.add(btnCandidatesList);
 		btnCandidatesList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					CandidateListUI cl = new CandidateListUI();
-					  dispose();
-					  cl.setVisible(true);
-					  cl.setSize(UIConstants.width, UIConstants.height);
-					  cl.setLocationRelativeTo(null);
-
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				CandidateListUI cl = new CandidateListUI();
+				  dispose();
+				  cl.setVisible(true);
+				  cl.setSize(UIConstants.width, UIConstants.height);
+				  cl.setLocationRelativeTo(null);
 			}
 		});
 		

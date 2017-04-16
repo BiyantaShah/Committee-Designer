@@ -44,7 +44,7 @@ public class CandidateListUI extends JFrame {
 
 
 
-	public CandidateListUI() throws IOException {
+	public CandidateListUI(){
 
 		setTitle("CANDIDATE LIST OF THE PROGRAM CHAIR");
 		setResizable(false);
@@ -209,7 +209,7 @@ public class CandidateListUI extends JFrame {
 					}
 				}
 			});
-		}catch (SQLException e2) {
+		}catch (SQLException | IOException e2 ) {
 
 
 		}
@@ -326,7 +326,7 @@ public class CandidateListUI extends JFrame {
 				}
 			});
 
-		}catch (SQLException e2) {
+		}catch (SQLException | IOException e2) {
 
 		}
 

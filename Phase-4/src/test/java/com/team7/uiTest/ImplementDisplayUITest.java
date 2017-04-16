@@ -14,7 +14,7 @@ import com.team7.ui.ButtonEditor;
 import com.team7.ui.DisplayUI;
 import com.team7.ui.UIConstants;
 
-public class ImplementDisplayUI {
+public class ImplementDisplayUITest {
 	
 	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Conference Chair", "ECOOP");
 

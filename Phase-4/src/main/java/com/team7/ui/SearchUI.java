@@ -58,7 +58,8 @@ public class SearchUI extends JFrame {
 	List<SearchParameter> finalList = new ArrayList<SearchParameter>();
 	LoginUI log = new LoginUI();
 	ImplementSearchDisplay sd = new ImplementSearchDisplay();
-    int count = 0;
+	int countP = 0;
+	int countA = 0;
 
 	/**
 	 * Create the frame.
@@ -70,7 +71,7 @@ public class SearchUI extends JFrame {
 		setResizable(false);
 
 		setSize(UIConstants.width, UIConstants.height);
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -107,6 +108,7 @@ public class SearchUI extends JFrame {
 		Criteria.put("Committee Year","Committee.Year");
 		Criteria.put("Committee Conf Name", "Committee.ConfName");
 		Criteria.put("Conference Name", "ConfName");
+		Criteria.put("Count Of Articles", "CountNoOfArticles");
 		Criteria.put("Count Of Papers", "CountNoOfPapers");
 		Criteria.put("Keyword in Title", "Keyword");
 		Criteria.put("Paper Published Year", "Year");
@@ -240,7 +242,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_1.addItem("LIKE");
 					ComparatorComboBox_1.addItem("NOT LIKE");
 
-				}else if(CriteriaComboBox_1.getSelectedItem() == "Committee Year" || CriteriaComboBox_1.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_1.getSelectedItem() == "Paper Published Year" ){
+				}else if(CriteriaComboBox_1.getSelectedItem() == "Committee Year" || CriteriaComboBox_1.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_1.getSelectedItem() == "Paper Published Year"|| CriteriaComboBox_1.getSelectedItem() == "Count Of Articles"){
 
 					ComparatorComboBox_1.addItem(">");
 					ComparatorComboBox_1.addItem("<");
@@ -305,7 +307,7 @@ public class SearchUI extends JFrame {
 				q2 = true;
 
 			}
- 
+
 		});
 
 		//label for join comparator
@@ -357,7 +359,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_2.addItem("LIKE");
 					ComparatorComboBox_2.addItem("NOT LIKE");
 
-				}else if(CriteriaComboBox_2.getSelectedItem() == "Committee Year" || CriteriaComboBox_2.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_2.getSelectedItem() == "Paper Published Year" ){
+				}else if(CriteriaComboBox_2.getSelectedItem() == "Committee Year" || CriteriaComboBox_2.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_2.getSelectedItem() == "Paper Published Year" || CriteriaComboBox_2.getSelectedItem() == "Count Of Articles" ){
 
 					ComparatorComboBox_2.addItem(">");
 					ComparatorComboBox_2.addItem("<");
@@ -478,7 +480,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_3.addItem("LIKE");
 					ComparatorComboBox_3.addItem("NOT LIKE");
 
-				}else if(CriteriaComboBox_3.getSelectedItem() == "Committee Year" || CriteriaComboBox_3.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_3.getSelectedItem() == "Paper Published Year" ){
+				}else if(CriteriaComboBox_3.getSelectedItem() == "Committee Year" || CriteriaComboBox_3.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_3.getSelectedItem() == "Paper Published Year" || CriteriaComboBox_3.getSelectedItem() == "Count Of Articles"){
 
 					ComparatorComboBox_3.addItem(">");
 					ComparatorComboBox_3.addItem("<");
@@ -594,7 +596,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_4.addItem("LIKE");
 					ComparatorComboBox_4.addItem("NOT LIKE");
 
-				}else if(CriteriaComboBox_4.getSelectedItem() == "Committee Year" || CriteriaComboBox_4.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_4.getSelectedItem() == "Paper Published Year" ){
+				}else if(CriteriaComboBox_4.getSelectedItem() == "Committee Year" || CriteriaComboBox_4.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_4.getSelectedItem() == "Paper Published Year" || CriteriaComboBox_4.getSelectedItem() == "Count Of Articles"){
 
 					ComparatorComboBox_4.addItem(">");
 					ComparatorComboBox_4.addItem("<");
@@ -709,7 +711,7 @@ public class SearchUI extends JFrame {
 					ComparatorComboBox_5.addItem("LIKE");
 					ComparatorComboBox_5.addItem("NOT LIKE");
 
-				}else if(CriteriaComboBox_5.getSelectedItem() == "Committee Year" || CriteriaComboBox_5.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_5.getSelectedItem() == "Paper Published Year" ){
+				}else if(CriteriaComboBox_5.getSelectedItem() == "Committee Year" || CriteriaComboBox_5.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_5.getSelectedItem() == "Paper Published Year" || CriteriaComboBox_5.getSelectedItem() == "Count Of Articles"){
 
 					ComparatorComboBox_5.addItem(">");
 					ComparatorComboBox_5.addItem("<");
@@ -776,6 +778,8 @@ public class SearchUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				boolean error = false;
+				countP = 0;
+				countA = 0;
 				finalList.clear();
 
 				if(q1 == true){ 
@@ -793,7 +797,7 @@ public class SearchUI extends JFrame {
 							String s = sp1.getSearchValue().replaceAll("'", "\\\\'");
 							sp1.setSearchValue(s);
 						}
-						
+
 						if(sp1.getSearchValue().contains("%")){
 							String s = sp1.getSearchValue().replaceAll("%", "\\\\%");
 							sp1.setSearchValue(s);
@@ -813,17 +817,24 @@ public class SearchUI extends JFrame {
 						}
 					}
 
-					if(CriteriaComboBox_1.getSelectedItem() == "Count Of Papers"){
-						count += 1;
+					if(CriteriaComboBox_1.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_1.getSelectedItem() == "Count Of Articles"){
+
+						if((CriteriaComboBox_1.getSelectedItem() == "Count Of Papers"))
+							countP += 1;
+						else
+							countA +=1;
+
 						if(!NumberUtils.isNumber(sp1.getSearchValue())){
 							error = true;
-							log.messageShow("Please enter a valid paper count in first row"); 
+							log.messageShow("Please enter a valid count in first row"); 
 						}
-						try {
-						   Integer.parseInt(sp1.getSearchValue());
-						} catch (NumberFormatException e1) {
-							error = true;
-							log.messageShow("Please enter valid number");
+						else{
+							try {
+								Integer.parseInt(sp1.getSearchValue());
+							} catch (NumberFormatException e1) {
+								error = true;
+								log.messageShow("Please enter valid number");
+							}
 						}
 					}
 
@@ -847,7 +858,7 @@ public class SearchUI extends JFrame {
 							String s = sp2.getSearchValue().replaceAll("'", "\\\\'");
 							sp2.setSearchValue(s);
 						}
-						
+
 						if(sp2.getSearchValue().contains("%")){
 							String s = sp2.getSearchValue().replaceAll("%", "\\\\%");
 							sp2.setSearchValue(s);
@@ -868,20 +879,27 @@ public class SearchUI extends JFrame {
 						}
 					}
 
-					if(CriteriaComboBox_2.getSelectedItem() == "Count Of Papers"){
-						count += 1;
+					if(CriteriaComboBox_2.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_2.getSelectedItem() == "Count Of Articles"){
+
+						if(CriteriaComboBox_2.getSelectedItem() == "Count Of Papers")
+							countP += 1;
+						else
+							countA += 1;
+
 						if(!NumberUtils.isNumber(sp2.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in second row"); 
 						}
-						
-						try {
-							   Integer.parseInt(sp2.getSearchValue());
+						else{
+							try {
+
+								Integer.parseInt(sp2.getSearchValue());
+
 							} catch (NumberFormatException e1) {
 								error = true;
 								log.messageShow("Please enter valid number in second row");
 							}
-
+						}
 					}
 
 					if(!error){
@@ -905,7 +923,7 @@ public class SearchUI extends JFrame {
 							String s = sp3.getSearchValue().replaceAll("'", "\\\\'");
 							sp3.setSearchValue(s);
 						}
-						
+
 						if(sp3.getSearchValue().contains("%")){
 							String s = sp3.getSearchValue().replaceAll("%", "\\\\%");
 							sp3.setSearchValue(s);
@@ -926,20 +944,25 @@ public class SearchUI extends JFrame {
 						}
 					}
 
-					if(CriteriaComboBox_3.getSelectedItem() == "Count Of Papers"){
-						count += 1;
+					if(CriteriaComboBox_3.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_3.getSelectedItem()== "Count Of Articles"){
+
+						if(CriteriaComboBox_3.getSelectedItem() == "Count Of Papers")
+							countP += 1;
+						else
+							countA +=1;
+
 						if(!NumberUtils.isNumber(sp3.getSearchValue())){
 							error = true;
-							log.messageShow("Please enter a valid paper count in third row"); 
+							log.messageShow("Please enter a valid count in third row"); 
 						}
-						
-						try {
-							   Integer.parseInt(sp3.getSearchValue());
+						else{
+							try {
+								Integer.parseInt(sp3.getSearchValue());
 							} catch (NumberFormatException e1) {
 								error = true;
 								log.messageShow("Please enter valid number in third row");
 							}
-
+						}
 					}
 
 					if(!error){
@@ -962,7 +985,7 @@ public class SearchUI extends JFrame {
 							String s = sp4.getSearchValue().replaceAll("'", "\\\\'");
 							sp4.setSearchValue(s);
 						}
-						
+
 						if(sp4.getSearchValue().contains("%")){
 							String s = sp4.getSearchValue().replaceAll("%", "\\\\%");
 							sp4.setSearchValue(s);
@@ -983,26 +1006,32 @@ public class SearchUI extends JFrame {
 						}
 					}
 
-					if(CriteriaComboBox_4.getSelectedItem() == "Count Of Papers"){
-						count += 1;
+					if(CriteriaComboBox_4.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_4.getSelectedItem()== "Count Of Articles"){
+						
+						if(CriteriaComboBox_4.getSelectedItem() == "Count Of Papers")
+						    countP += 1;
+						else
+							countA += 1;
+						
 						if(!NumberUtils.isNumber(sp4.getSearchValue())){
 							error = true;
-							log.messageShow("Please enter a valid paper count in fourth row"); 
+							log.messageShow("Please enter a valid count in fourth row"); 
 						}
+						else{
 						try {
-							   Integer.parseInt(sp4.getSearchValue());
-							} catch (NumberFormatException e1) {
-								error = true;
-								log.messageShow("Please enter valid number in fourth row");
-							}
-
+							Integer.parseInt(sp4.getSearchValue());
+						} catch (NumberFormatException e1) {
+							error = true;
+							log.messageShow("Please enter valid number in fourth row");
+						}
+						}
 					}
 					if(!error){
 						finalList.add(sp4);
 					}
 
 				}
- 
+
 				if(q5 == true){
 					sp5.setSearchFilter(Criteria.get(CriteriaComboBox_5.getSelectedItem()));
 					sp5.setSearchComparator ((String) ComparatorComboBox_5.getSelectedItem());
@@ -1017,7 +1046,7 @@ public class SearchUI extends JFrame {
 							String s = sp5.getSearchValue().replaceAll("'", "\\\\'");
 							sp5.setSearchValue(s);
 						}
-						
+
 						if(sp5.getSearchValue().contains("%")){
 							String s = sp5.getSearchValue().replaceAll("%", "\\\\%");
 							sp5.setSearchValue(s);
@@ -1037,31 +1066,40 @@ public class SearchUI extends JFrame {
 						}
 					}
 
-					if(CriteriaComboBox_5.getSelectedItem() == "Count Of Papers"){
-						count += 1;
+					if(CriteriaComboBox_5.getSelectedItem() == "Count Of Papers" || CriteriaComboBox_5.getSelectedItem()== "Count Of Articles"){
+						
+						if(CriteriaComboBox_5.getSelectedItem() == "Count Of Papers")					
+						    countP += 1;
+						else
+							countA += 1;
+						
 						if(!NumberUtils.isNumber(sp5.getSearchValue())){
 							error = true;
 							log.messageShow("Please enter a valid paper count in fifth row"); 
 						}
-						
+						else{ 
 						try {
-							   Integer.parseInt(sp5.getSearchValue());
-							} catch (NumberFormatException e1) {
-								error = true;
-								log.messageShow("Please enter valid number in fifth row");
-							}
-
+							Integer.parseInt(sp5.getSearchValue());
+						} catch (NumberFormatException e1) {
+							error = true;
+							log.messageShow("Please enter valid number in fifth row");
+						}
+						}
 					}	
 
 					if(!error){
 						finalList.add(sp5);
 					}
 				}
-				
-				if(count > 1){
-					count = 0;
+
+				if(countP > 1){
+					countP = 0;
 					finalList.clear();
 					log.messageShow("Please limit Count Of Papers search criteria to once");
+				}else if(countA > 1){
+					countP = 0;
+					finalList.clear();
+					log.messageShow("Please limit Count Of Articles search criteria to once");
 				}
 
 				if(finalList.size() != 0 && error == false) {
@@ -1096,7 +1134,7 @@ public class SearchUI extends JFrame {
 				}				   
 			}
 		});
-		
+
 		JButton btnFav = new JButton("My Favorite List");
 		btnFav.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnFav.setBounds(23, 13, 183, 35);
@@ -1104,7 +1142,7 @@ public class SearchUI extends JFrame {
 
 		btnFav.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				ImplementSearchDisplay search = new ImplementSearchDisplay();
 				Set<String> favList;
 				try {
@@ -1131,18 +1169,12 @@ public class SearchUI extends JFrame {
 		contentPane.add(btnCandidatesList);
 		btnCandidatesList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				try {
-					CandidateListUI cl = new CandidateListUI();
-					  dispose();
-					  cl.setVisible(true);
-					  cl.setSize(UIConstants.width, UIConstants.height);
-					  cl.setLocationRelativeTo(null);
 
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				CandidateListUI cl = new CandidateListUI();
+				dispose();
+				cl.setVisible(true);
+				cl.setSize(UIConstants.width, UIConstants.height);
+				cl.setLocationRelativeTo(null);
 			}
 		});
 
@@ -1151,7 +1183,7 @@ public class SearchUI extends JFrame {
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnLogout.setBounds(1064, 13, 117, 34);
 		contentPane.add(btnLogout);
-				
+
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// make the currentUser null and redirect to login page

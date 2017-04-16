@@ -30,7 +30,7 @@ public class AddToFavoriteList extends DefaultCellEditor {
 		button.setOpaque(true);
 	}
 	private static final long serialVersionUID = 1L;
-
+ 
 	// extracts information about the row where the button is clicked
 	public Component getTableCellEditorComponent(JTable table, Object value,
 			boolean isSelected, int row, int column) {

@@ -31,11 +31,11 @@ public class FavoriteListUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	JButton btnLogout;
-	JButton btnSearch;
-	JTable table;
-	JButton btnRemove;
-	JButton btnCandidatesList;
+	public JButton btnLogout;
+	public JButton btnSearch;
+	public JTable table;
+	public JButton btnRemove;
+	public JButton btnCandidatesList;
 
 	public FavoriteListUI(Set<String> favList) {
 		
@@ -103,16 +103,11 @@ public class FavoriteListUI extends JFrame {
 		panel.add(btnCandidatesList);
 		btnCandidatesList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					CandidateListUI cl = new CandidateListUI();
-					dispose();
-					cl.setVisible(true);
-					cl.setSize(UIConstants.width,UIConstants.height);
-					cl.setLocationRelativeTo(null);
-
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}				
+				CandidateListUI cl = new CandidateListUI();
+				  dispose();
+				  cl.setVisible(true);
+				  cl.setSize(UIConstants.width,UIConstants.height);
+				  cl.setLocationRelativeTo(null);				
 			}
 		});
 
@@ -201,7 +196,7 @@ public class FavoriteListUI extends JFrame {
 			data.add(vector);
 		}
 
-
+ 
 		TableModel model = new DefaultTableModel(data, columnNames) {
 
 			private static final long serialVersionUID = 1L;

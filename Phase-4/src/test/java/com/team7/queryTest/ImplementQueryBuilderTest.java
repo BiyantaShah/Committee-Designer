@@ -556,7 +556,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 	@Test
 	public void testToCountNoOfArticlesValid() throws SQLException, IOException{ 	
 
-  		SearchParameter s= new SearchParameter("CountNoOfArticles", ">" ,"3", null);  	
+  		SearchParameter s= new SearchParameter("CountNoOfArticles", ">" ,"0", null);  	
   		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
   		searchCriteria.add(s);
   		ImplementQueryBuilder obj = new ImplementQueryBuilder();

@@ -39,31 +39,31 @@ public class ImplementSchemaDB implements SchemaDB {
 		try{
 			//Register JDBC driver
 			Class.forName(JDBC_DRIVER);
-			
-			// Database properties for local DB
-			String db_url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
+
+
+			//selecting database created above
+			String db_url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
 			String userName = "root";
-			String password = "root";
+			String password = "9HTa~TZ?dyQWM4}";
+			
+//			String db_url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
+//			String userName = "root";
+//			String password = "root";
 
 			// getting the connection to local host (only for local DB)
 			conn = DriverManager.getConnection(db_url, userName, password);
 			stmt = conn.createStatement();
-			
-//			sql = "DROP DATABASE IF EXISTS DBLP";
-//			stmt.executeUpdate(sql);
-			
+			 			
 			//Create Database for local DB
 			// On RDS you need to separately create the DB first and run the below code to create tables.
 			stmt = conn.createStatement();			      
 			sql = "CREATE DATABASE IF NOT EXISTS DBLP";
 			stmt.executeUpdate(sql);
+			  
+			// Database properties for RDS 
+			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
 			
-			// Database properties for RDS
-//			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
-//			String userName = "root";
-//			String password = "9HTa~TZ?dyQWM4}";
-			
-			String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
+//			String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
 			conn = DriverManager.getConnection(connected_db, userName, password);
 			stmt = conn.createStatement();
 
@@ -187,15 +187,15 @@ public class ImplementSchemaDB implements SchemaDB {
 
 		Connection conn = null; 
 
-		//Database Properties for RDS
-//		String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";
-//		String userName = "root";
-//		String password = "9HTa~TZ?dyQWM4}";
-		
-		// Database properties for local DB
-		String url = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
+		//Database Properties
+		String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";		
 		String userName = "root";
-		String password = "root";
+		String password = "9HTa~TZ?dyQWM4}";
+
+		// Database properties for local DB		
+//		String url = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
+//		String userName = "root";
+//		String password = "root";
 
 
 		try {
