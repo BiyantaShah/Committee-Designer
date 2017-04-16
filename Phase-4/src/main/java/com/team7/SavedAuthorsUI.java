@@ -120,12 +120,20 @@ public class SavedAuthorsUI extends JFrame {
 		
 		btnFav.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ImplementSearchDisplay search = new ImplementSearchDisplay();
+				Set<String> favList;
+				try {
+					favList = search.favAuthors("userName", UIConstants.currentUser);
+					FavoriteListUI fl = new FavoriteListUI(favList);
+					dispose();
+					fl.setVisible(true);
+					fl.setSize(UIConstants.width, UIConstants.height);
+					fl.setLocationRelativeTo(null);
+				} catch (SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
-				FavoriteListUI fl = new FavoriteListUI();
-				dispose();
-				fl.setVisible(true);
-				fl.setSize(UIConstants.width, UIConstants.height);
-				fl.setLocationRelativeTo(null);
 				
 			}
 		});

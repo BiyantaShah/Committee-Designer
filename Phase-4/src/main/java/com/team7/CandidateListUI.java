@@ -122,11 +122,19 @@ public class CandidateListUI extends JFrame {
 		panel.add(btnMyFavoriteList);
 		btnMyFavoriteList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FavoriteListUI fl = new FavoriteListUI();
-				dispose();
-				fl.setVisible(true);
-				fl.setSize(UIConstants.width,UIConstants.height);
-				fl.setLocationRelativeTo(null);
+				ImplementSearchDisplay search = new ImplementSearchDisplay();
+				Set<String> favList;
+				try {
+					favList = search.favAuthors("userName",UIConstants.currentUser);
+					FavoriteListUI fl = new FavoriteListUI(favList);
+					dispose();
+					fl.setVisible(true);
+					fl.setSize(UIConstants.width, UIConstants.height);
+					fl.setLocationRelativeTo(null);
+				} catch (SQLException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -139,17 +147,15 @@ public class CandidateListUI extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		ImplementSchemaDB db =  new ImplementSchemaDB();
-		Connection conn = db.getConnection();
-		PreparedStatement p;
-		ResultSet rs;
+		ImplementSearchDisplay search = new ImplementSearchDisplay();
+		Set<String> favList;
 
 		try {
 
-			p = conn.prepareStatement("select selectedAuthor from Favorite_list order by selectedAuthor");
-			rs = p.executeQuery();
+			
+			favList = search.favAuthors("confName", UIConstants.currentUserConf);
 
-			table1 = new JTable(buildTableModel(rs));
+			table1 = new JTable(buildTableModel(favList));
 			JTableHeader header1 = table1.getTableHeader();
 			header1.setDefaultRenderer(new HeaderRenderer(table1));
 
@@ -181,7 +187,6 @@ public class CandidateListUI extends JFrame {
 
 					DefaultTableModel model2 = (DefaultTableModel) table2.getModel();
 
-					//System.out.println(table1.getSelectedRows()[0]);
 					int index = table1.getSelectedRow();
 					if (index == -1) {
 						LoginUI log = new LoginUI();
@@ -190,15 +195,13 @@ public class CandidateListUI extends JFrame {
 					else{
 						String author = (String) model.getValueAt(index, 0);
 						ImplementSchemaDB db =  new ImplementSchemaDB();
-						Connection conn;
 						try {
-							conn = db.getConnection();
-							PreparedStatement stmt = conn.prepareStatement("insert into Candidate_list(selectedAuthor) values(?)");								
-							stmt.setString(1,author);							
-							stmt.executeUpdate();	
+							db.insertIntoCandidateList(author);
+								
 							Object rows[] = new Object[1];
 							rows[0] = model.getValueAt(index, 0); 
 							model2.addRow(rows);
+							
 						} catch (IOException | SQLException e1) {
 							LoginUI log = new LoginUI();
 							log.messageShow("Author already included in the list");
@@ -207,7 +210,7 @@ public class CandidateListUI extends JFrame {
 				}
 			});
 		}catch (SQLException e2) {
-			
+
 
 		}
 
@@ -217,12 +220,13 @@ public class CandidateListUI extends JFrame {
 		panel_2.setBounds(606, 143, 578, 465);
 		contentPane.add(panel_2);
 		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		Set<String> candidateDetails;
 
 		try {
-			p = conn.prepareStatement("select selectedAuthor from Candidate_list");
-			rs = p.executeQuery();
+			candidateDetails = search.listForCommittee(UIConstants.currentUser);
 
-			table2 = new JTable(buildTableModel(rs));
+			table2 = new JTable(buildTableModel(candidateDetails));
 			JTableHeader header2 = table2.getTableHeader();
 			header2.setDefaultRenderer(new HeaderRenderer(table2));
 
@@ -329,26 +333,18 @@ public class CandidateListUI extends JFrame {
 	}
 
 
-	private TableModel buildTableModel(ResultSet rs) throws SQLException {
-
-		ResultSetMetaData metaData = rs.getMetaData();
+	private TableModel buildTableModel(Set<String> favList) throws SQLException {
 
 		Vector<String> columnNames = new Vector<String>();
-
-		final int columnCount = metaData.getColumnCount();
-
-		// To understand what each column name means in the UI
-		for (int column = 1; column <= columnCount; column++) {
-
-			if (metaData.getColumnName(column).equals("selectedAuthor"))			
-				columnNames.add("Author Name");			
-		}
+			
+		columnNames.add("Author Name");			
+		
 
 		Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-		while (rs.next()) {
+		for (String author : favList) {
 			Vector<Object> vector = new Vector<Object>();
-			for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-				vector.add(rs.getObject(columnIndex));     
+			for (int columnIndex = 1; columnIndex <= 1; columnIndex++) {
+				vector.add(author);     
 			}
 			data.add(vector);
 		}

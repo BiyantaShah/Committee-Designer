@@ -16,11 +16,11 @@ public class ImplementLogin implements Login {
 	String secretKey = "SECRETKEY"; // used for decryption of the password
 
 	public boolean login(String username, String password) throws SQLException, IOException {
-
+		
 		ImplementSchemaDB db = new ImplementSchemaDB();
 		Connection conn = db.getConnection(); 
-
-		String sql = "select password,role from User where username = " + '"'+username +'"';
+		
+		String sql = "select password,role,confName from User where username = " + '"'+username +'"';
 	
 		PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -29,7 +29,9 @@ public class ImplementLogin implements Login {
 
 			String plainText = rs.getString(1);
 			String role = rs.getString(2);
+			String conference = rs.getString(3);
 			String decryptPassword = decryptPassword(plainText,secretKey);
+			
 
 			if(!decryptPassword.equals("failure")){
 				
@@ -37,6 +39,7 @@ public class ImplementLogin implements Login {
 					// if inserted password is correct then allow the user to login
 					UIConstants.currentUser = username;
 					UIConstants.currentuserRole = role;
+					UIConstants.currentUserConf = conference;
 					return true;
 				}
 				else { 

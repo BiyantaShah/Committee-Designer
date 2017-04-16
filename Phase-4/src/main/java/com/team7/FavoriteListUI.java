@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -37,7 +38,7 @@ public class FavoriteListUI extends JFrame {
 	JButton btnRemove;
 	JButton btnCandidatesList;
 
-	public FavoriteListUI() {
+	public FavoriteListUI(Set<String> favList) {
 		
 		setVisible(true);
 		setTitle("Favorite List");
@@ -123,13 +124,8 @@ public class FavoriteListUI extends JFrame {
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		try {
-			ImplementSchemaDB db =  new ImplementSchemaDB();
-			Connection conn = db.getConnection();
 
-			PreparedStatement p = conn.prepareStatement("select selectedAuthor from Favorite_list where username='"+UIConstants.currentUser+"'" + "order by selectedAuthor");
-			ResultSet rs = p.executeQuery();
-
-			table = new JTable(buildTableModel(rs));
+			table = new JTable(buildTableModel(favList));
 			JTableHeader header = table.getTableHeader();
 			header.setDefaultRenderer(new HeaderRenderer(table));
 
@@ -183,32 +179,24 @@ public class FavoriteListUI extends JFrame {
 			});
 			btnRemove.setBounds(546, 487, 97, 30);
 			contentPane.add(btnRemove);
-		} catch (SQLException | IOException e2) {
+		} catch (SQLException e) {
 			
 		}
 	}
 
 
-	public TableModel buildTableModel(ResultSet rs) throws SQLException {
-
-		ResultSetMetaData metaData = rs.getMetaData();
+	public TableModel buildTableModel(Set<String> favList) throws SQLException {
 
 		Vector<String> columnNames = new Vector<String>();
-
-		final int columnCount = metaData.getColumnCount();
-
-		// To understand what each column name means in the UI
-		for (int column = 1; column <= columnCount; column++) {
-
-			if (metaData.getColumnName(column).equals("selectedAuthor"))			
-				columnNames.add("Author Name");			
-		}
+			
+		columnNames.add("Author Name");			
+		
 
 		Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-		while (rs.next()) {
+		for(String author : favList) {
 			Vector<Object> vector = new Vector<Object>();
-			for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-				vector.add(rs.getObject(columnIndex));     
+			for (int columnIndex = 1; columnIndex <= 1; columnIndex++) {
+				vector.add(author);     
 			}
 			data.add(vector);
 		}

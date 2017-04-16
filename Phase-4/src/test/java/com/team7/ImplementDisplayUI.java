@@ -11,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
 import org.junit.Test;
 
 public class ImplementDisplayUI {
+	
+	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Conference Chair", "ECOOP");
 
 	List<String> auth = Arrays.asList("author1", "author2");
 
@@ -30,8 +32,8 @@ public class ImplementDisplayUI {
 	}
 
 	@Test
-	// Testing logout button
-	public void testLogout() {
+	// Testing the logout button
+	public void testLogoutButton() {
 		display1.btnLogout.doClick();
 		display1.dispose();
 	}

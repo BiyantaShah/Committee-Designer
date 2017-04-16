@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
@@ -1101,11 +1102,19 @@ public class SearchUI extends JFrame {
 		btnFav.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				FavoriteListUI fl = new FavoriteListUI();
-				dispose();
-				fl.setVisible(true);
-				fl.setSize(UIConstants.width, UIConstants.height);
-				fl.setLocationRelativeTo(null);
+				ImplementSearchDisplay search = new ImplementSearchDisplay();
+				Set<String> favList;
+				try {
+					favList = search.favAuthors("userName", UIConstants.currentUser);
+					FavoriteListUI fl = new FavoriteListUI(favList);
+					dispose();
+					fl.setVisible(true);
+					fl.setSize(UIConstants.width, UIConstants.height);
+					fl.setLocationRelativeTo(null);
+				} catch (SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 

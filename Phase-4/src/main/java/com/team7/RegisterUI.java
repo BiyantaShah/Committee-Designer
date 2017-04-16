@@ -174,6 +174,7 @@ public class RegisterUI extends JFrame {
 						//set current user to session
 						UIConstants.currentUser = userName;
 						UIConstants.currentuserRole = role;
+						UIConstants.currentuserRole = confName;
 						
 						//connect to search page
 						dispose();
