@@ -14,7 +14,7 @@ import com.team7.queryEngine.ImplementQueryBuilder;
 import com.team7.ui.SimilarAuthorsUI;
 import com.team7.ui.UIConstants;
 
-public class ImplementSimilarAuthorsUI {
+public class ImplementSimilarAuthorsUITest {
 	
 	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Conference Chair", "ECOOP");
 	SimilarAuthorsUI similar;

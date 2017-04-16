@@ -20,22 +20,26 @@ import com.team7.uiTest.ImplementPubDetailsUITest;
 import com.team7.uiTest.ImplementRegisterTest;
 import com.team7.uiTest.ImplementRegisterUITest;
 import com.team7.uiTest.ImplementSearchUITest;
-import com.team7.uiTest.ImplementSimilarAuthorsUI;
+import com.team7.uiTest.ImplementSimilarAuthorsUITest;
 
 //JUnit Suite Test
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({ 
-   ImplementRegisterTest.class,ImplementSearchTest.class,
-   ImplementQueryBuilderTest.class,ImplementLoginTest.class,
-   ImplementParseDatabaseTest.class,ImplementSchemaDBTest.class,
-   ImplementCommitteesTest.class, SearchParameterTest.class, 
-   ImplementLoginUITest.class, ImplementRegisterUITest.class,
-   ImplementSearchUITest.class, ImplementDisplayUITest.class, 
-   ImplementPubDetailsUITest.class, ImplementSimilarAuthorsUI.class,
-   ImplementFavUITest.class,ImplementUniAuthorTest.class, 
+	
+   ImplementAuthorAffTest.class,ImplementCommitteesTest.class,	
+   ImplementHomePageTest.class,ImplementParseDatabaseTest.class,
+   ImplementSchemaDBTest.class,ImplementUniAuthorTest.class,
    ImplementUniCountryTest.class,
-   ImplementHomePageTest.class, ImplementAuthorAffTest.class
+
+   ImplementQueryBuilderTest.class,ImplementSearchTest.class,
+   SearchParameterTest.class, 
+
+   ImplementDisplayUITest.class,ImplementFavUITest.class, 
+   ImplementLoginTest.class,ImplementLoginUITest.class,
+   ImplementPubDetailsUITest.class,ImplementRegisterTest.class, 
+   ImplementRegisterUITest.class,ImplementSearchUITest.class,  
+   ImplementSimilarAuthorsUITest.class,
 })
 
 public class JUnitTestSuite {
