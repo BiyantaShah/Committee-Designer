@@ -242,7 +242,7 @@ public class ImplementSchemaDB implements SchemaDB {
 		candidDetails_stmt.setString(1, UIConstants.currentUser);
 		candidDetails_stmt.setString(2,author);							
 		candidDetails_stmt.executeUpdate();
-		return false;
+		return true;
 		
 	}
 }

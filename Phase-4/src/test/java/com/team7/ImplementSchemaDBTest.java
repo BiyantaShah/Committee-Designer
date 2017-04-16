@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class ImplementSchemaDBTest extends TestCase {
 
- 
+	UIConstants u  = new UIConstants("shah.bi@shah.bi", "Program Chair", "ECOOP");
 	//Test Case to test the DB Connection
 	//Test will fail if connection object is null
 	@Test
@@ -77,5 +77,22 @@ public class ImplementSchemaDBTest extends TestCase {
 			User test = new User();	
 			db.insertData(test);	  
 	} 
+	
+	//Test Case to test Insert Data into candidate list
+	//Test will fail if connection object is null Or Insertion of Data Fails
+	@Test
+	public void testInsertCandidateListData() throws SQLException, IOException {
+
+		ImplementSchemaDB db = new ImplementSchemaDB();
+		Connection conn = new ImplementSchemaDB().getConnection();
+		Statement stmt = conn.createStatement();
+
+		boolean res = db.insertIntoCandidateList("Biyanta Shah");
+		
+		// delete the author after checking the session object is null or not
+		stmt.executeUpdate("delete from Candidate_list where userName='shah.bi@shah.bi' and selectedAuthor='Biyanta Shah'");
+		conn.close();
+		assertTrue(res);
+	}
 	
 }
