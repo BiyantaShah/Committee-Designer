@@ -50,9 +50,9 @@ public class ImplementSchemaDB implements SchemaDB {
 			
 			//Create Database for local DB
 			// On RDS you need to separately create the DB first and run the below code to create tables.
-//			stmt = conn.createStatement();			      
-//			sql = "CREATE DATABASE IF NOT EXISTS DBLP";
-//			stmt.executeUpdate(sql);
+			stmt = conn.createStatement();			      
+			sql = "CREATE DATABASE IF NOT EXISTS DBLP";
+			stmt.executeUpdate(sql);
 			
 			// Database properties for RDS
 //			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";

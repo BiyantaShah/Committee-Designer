@@ -38,7 +38,7 @@ public class DisplayUI extends JFrame {
 	// List of Authors whose candidate details are to be viewed
 	Set<String> saveAuthors = new HashSet<String>();
 
-	JButton btnSavedAuthors;
+	JButton btnPubDetails;
 	JButton btnLogout;
 	JButton btnSearch; 
 	JButton btnSimilarAuthors;
@@ -219,13 +219,17 @@ public class DisplayUI extends JFrame {
 					try {
 						ImplementSearchDisplay search = new ImplementSearchDisplay();
 						Set<String> similarAuth = search.similarAuthor(author);
-
-						SimilarAuthorsUI sa = new SimilarAuthorsUI(similarAuth);
-
-						sa.setVisible(true);
-
-						setSize(UIConstants.width, UIConstants.height);
-						similarAuth.clear();
+						
+						if (similarAuth.size() == 0) {
+							LoginUI log = new LoginUI();
+							log.messageShow("No similar authors for "+author+ " present");
+						}
+						else {
+							SimilarAuthorsUI sa = new SimilarAuthorsUI(similarAuth);
+							sa.setVisible(true);
+							setSize(UIConstants.width, UIConstants.height);
+							similarAuth.clear();
+						}
 
 					} catch (SQLException e1) {
 						e1.printStackTrace();
@@ -242,13 +246,9 @@ public class DisplayUI extends JFrame {
 		btnSimilarAuthors.setBounds(116, 6, 171, 29);
 		panel_2.add(btnSimilarAuthors);
 
-		btnSavedAuthors = new JButton("Candidate Details");
+		btnPubDetails = new JButton("Candidate Details");
 
-		//		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		//		btnSavedAuthors.setBounds(413, 13, 149, 34);
-		//		panel_2.add(btnSavedAuthors);
-
-		btnSavedAuthors.addActionListener(new ActionListener() {
+		btnPubDetails.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// List of authors who have been saved by the user
 				saveAuthors = ButtonEditor.savedAuthors;
@@ -262,34 +262,50 @@ public class DisplayUI extends JFrame {
 				} 
 				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 				ResultSet result = null;
+				int resEmpty = 0;
 				if (flag == true) {		
 					// candidate details will give all the details of the authors present in 
 					// the saved list
 					try {
 						result = searchDisplay.candidateDetails(saveAuthors);
 
+						// if the author is not present in the subset DB then 
+						// no publication details will be available
+						while (result.next()) {
+							resEmpty++;				
+						}	
+						// after traversing through the result set, set its position to the first row.
+						result.beforeFirst();
+						
 						// clearing the list once its displayed.
 						saveAuthors.clear();
+						
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
-
-					dispose();
-					AuthorPublicationDetailsUI saved = new AuthorPublicationDetailsUI(result);
-					saved.setVisible(true);
-					setSize(UIConstants.width, UIConstants.height);
-					saved.setLocationRelativeTo(null);
+				
+					if (resEmpty > 0) {
+						dispose();
+						AuthorPublicationDetailsUI pub = new AuthorPublicationDetailsUI(result);
+						pub.setVisible(true);
+						setSize(UIConstants.width, UIConstants.height);
+						pub.setLocationRelativeTo(null);
+					}
+					else {
+						LoginUI log = new LoginUI();
+						log.messageShow("No publication details for this author are present");
+					}
 
 				}
 
 			}
 		});
 
-		btnSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSavedAuthors.setBounds(395, 6, 171, 29);
-		panel_2.add(btnSavedAuthors);
+		btnPubDetails.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnPubDetails.setBounds(395, 6, 171, 29);
+		panel_2.add(btnPubDetails);
 	}
 
 	// rendering the data obtained from the query engine into a tabular format 
