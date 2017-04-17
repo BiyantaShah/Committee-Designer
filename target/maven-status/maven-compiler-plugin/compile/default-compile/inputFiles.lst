@@ -1,14 +1,44 @@
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/main/java/com/team7/JUnitTestSuite.java
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/main/java/com/team7/Publications.java
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/main/java/com/team7/Author.java
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/test/java/com/team7/TestJunit.java
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/main/java/com/team7/Journal.java
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/main/java/com/team7/Login.java
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/main/java/com/team7/ParseDatabase.java
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/main/java/com/team7/Search.java
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/main/java/com/team7/QueryBuilder.java
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/test/java/com/team7/SearchJunit.java
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/main/java/com/team7/SchemaDB.java
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/main/java/com/team7/Article.java
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/main/java/com/team7/User.java
-/Users/vivekmalik/Documents/MSD 5500/Project/team7/src/main/java/com/team7/DriverClass.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\SimilarAuthorsUI.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\parsing\Author.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\parsing\ImplementUniCountryData.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\interfaces\QueryBuilder.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\abstractDesignFactory\XmlFactory.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\interfaces\Register.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\parsing\ImplementUniversityAuthorData.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\queryEngine\SearchParameter.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\FavoriteListUI.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\JTableButtonRenderer.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\interfaces\SearchDisplay.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\abstractDesignFactory\TextFactory.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\parsing\ImplementCommittees.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\ImplementRegister.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\interfaces\SchemaDB.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\parsing\Article.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\AuthorPublicationDetailsUI.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\abstractDesignFactory\FactoryProducer.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\RegisterUI.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\interfaces\ParseXml.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\HeaderRenderer.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\parsing\ImplementSchemaDB.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\parsing\User.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\abstractDesignFactory\CsvFactory.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\interfaces\ParseCsvFiles.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\parsing\Paper.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\ImplementLogin.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\parsing\dblp.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\interfaces\ParseTextFile.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\parsing\Conference.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\parsing\ImplementParseDatabase.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\queryEngine\ImplementSearchDisplay.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\LoginUI.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\SearchUI.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\AddToFavoriteList.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\parsing\ImplementHomePageData.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\ButtonEditor.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\parsing\ImplementAuthorAffData.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\UIConstants.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\queryEngine\ImplementQueryBuilder.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\CandidateListUI.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\abstractDesignFactory\AbstractParseFactory.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\interfaces\Login.java
+C:\Users\beera\Documents\GitHub\team7\Phase-4\src\main\java\com\team7\ui\DisplayUI.java

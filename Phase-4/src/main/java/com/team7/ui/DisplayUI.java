@@ -173,7 +173,7 @@ public class DisplayUI extends JFrame {
 		});
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 150, 1194, 442);
+		panel_1.setBounds(0, 150, 1194, 458);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -213,7 +213,7 @@ public class DisplayUI extends JFrame {
 		}
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(247, 605, 921, 55);
+		panel_2.setBounds(247, 621, 921, 56);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
