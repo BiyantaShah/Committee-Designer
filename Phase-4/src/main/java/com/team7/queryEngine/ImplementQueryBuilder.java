@@ -33,6 +33,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 	private static String AuthorTable = "Author";
 	private static String PaperTable = "Paper";
+	private static String ArticleTable = "Article";
 
 	private static String AuthorTableAlias = "a";
 	private static String PaperTableAlias = "p";
@@ -65,6 +66,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 			
 			// if there is only one condition of grouping by the number of articles
 			else if (searchParam.size() == 1 && searchParam.get(0).getSearchFilter() == "CountNoOfArticles") {		
+				
 				return getGroupByArticleQuery(searchParam.get(0));
 			}
 			
@@ -342,7 +344,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	}
 	
 	private void formGroupByClauseArticle(SearchParameter search){ 	
-		groupByClauseArticle = " GROUP BY " + ArticleTableAlias +".author HAVING COUNT(*) " + search.getSearchComparator() +search.getSearchValue();
+		groupByClauseArticle = " GROUP BY " + AuthorTableAlias +".name HAVING COUNT(*) " + search.getSearchComparator() +search.getSearchValue();
 	}
 
 	private void formPaperAuthorWhereClause(SearchParameter s){ 	
@@ -385,6 +387,14 @@ public class ImplementQueryBuilder implements QueryBuilder{
 				AuthorTableAlias+ ".paperKey = " + PaperTableAlias + ".paperKey";		
 	}
 
+	private String formJoinConditionArticle(){
+
+		return AuthorTable+ " " + AuthorTableAlias+ " INNER JOIN " +
+				ArticleTable+ " " + ArticleTableAlias+ " ON " +
+				AuthorTableAlias+ ".articleKey = " + ArticleTableAlias + ".articleKey";		
+	}
+
+	
 	private void formCommitteeWhereClause(SearchParameter s){  	
 
 		if(s.getSearchFilter() == "Committee.ConfName"){
@@ -424,7 +434,8 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	private void getArticleQuery(){
 
 		if(whereClauseForArticle.length()>0){
-			queryArticle = "SELECT ar.Author AS Author FROM  Article ar ";
+			String joinCondition = formJoinConditionArticle();
+			queryArticle = "SELECT a.name AS Author FROM " + joinCondition;
 			
 			if(whereClauseForArticle.startsWith(" GROUP")){
 				queryArticle+= whereClauseForArticle;
@@ -445,7 +456,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		}     	
 		query = query.substring(0, query.length()-1) + ")" + " UNION SELECT a.name AS Author, null AS PaperTitle, ar.title AS ArticleTitle,"
 				+ " a.url AS Url FROM Author a INNER JOIN "
-				+ "Article ar ON a.name=ar.author WHERE a.name IN (";
+				+ "Article ar ON a.articleKey=ar.articleKey WHERE a.name IN (";
 		for(String author : authors){
 			query +="'" + author +"',";	
 		}
@@ -473,14 +484,13 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 		formGroupByClauseArticle(groupByParameter);
 		
-		queryArticle = "SELECT ar.author AS Author FROM Article as " +ArticleTableAlias +
+		queryArticle = "SELECT a.name AS Author FROM " + formJoinConditionArticle() +
 				groupByClauseArticle;
 		
 		queries.add(0, queryPaperAuthor);
 		queries.add(1, queryCommitte);
 		queries.add(2, queryArticle);
 		
-		System.out.println("here"+queries);
 		return queries;
 		}
 

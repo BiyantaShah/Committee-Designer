@@ -48,13 +48,13 @@ public class ImplementSchemaDB implements SchemaDB {
 
 
 			//selecting database created above
-			String db_url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
-			String userName = "root";
-			String password = "9HTa~TZ?dyQWM4}";
-			
-//			String db_url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
+//			String db_url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
 //			String userName = "root";
-//			String password = "root";
+//			String password = "9HTa~TZ?dyQWM4}";
+			
+			String db_url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
+			String userName = "root";
+			String password = "root";
 
 			// getting the connection to local host (only for local DB)
 			conn = DriverManager.getConnection(db_url, userName, password);
@@ -67,9 +67,9 @@ public class ImplementSchemaDB implements SchemaDB {
 			stmt.executeUpdate(sql);
 			  
 			// Database properties for RDS 
-			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
+//			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
 			
-//			String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
+			String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
 			conn = DriverManager.getConnection(connected_db, userName, password);
 			stmt = conn.createStatement();
 
@@ -115,6 +115,7 @@ public class ImplementSchemaDB implements SchemaDB {
 					"(id        INTEGER      AUTO_INCREMENT NOT NULL, " +
 					" name      VARCHAR(255), " + 
 					" paperKey  VARCHAR(255), " +
+					" articleKey VARCHAR(255), " +
 					" university  VARCHAR(255), " +
 					" uniRegion   VARCHAR(255), " +
 					" affiliatedUni VARCHAR(255), "+
@@ -123,11 +124,11 @@ public class ImplementSchemaDB implements SchemaDB {
 
 			stmt.executeUpdate(sql);
 
-			// Adding index to the paper key and name in author making it faster during a join
+			// Adding index to the paper key and articleKey in author making it faster during a join
 //			 sql = "ALTER TABLE Author ADD INDEX keyA(paperKey)";
 //			 stmt.executeUpdate(sql);
 //			 
-//			 sql = "ALTER TABLE Author ADD INDEX keyA1(name)";
+//			 sql = "ALTER TABLE Author ADD INDEX keyA1(articleKey)";
 //			 stmt.executeUpdate(sql);
 			
 
@@ -144,20 +145,20 @@ public class ImplementSchemaDB implements SchemaDB {
 
 			// creating Article table
 			sql = "CREATE TABLE IF NOT EXISTS Article " +
-					"(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
-					" author	  VARCHAR(255), " +
+					"(id          INTEGER      AUTO_INCREMENT NOT NULL, " +	
 					" title       TEXT, " + 
 					" journal	  VARCHAR(255), " +
 					" year        INTEGER, " + 
-					" ee          TEXT, "      +   
+					" ee          TEXT, "      + 
+					" articleKey	  VARCHAR(255), " +
 					" PRIMARY     KEY(id))" ;
 
 			stmt.executeUpdate(sql);
 			
-			// Adding indexes in article table on author name for faster access
-//			sql = "ALTER TABLE Article ADD INDEX keyR(author)";
+			// Adding indexes in article table on articleKey for faster access
+//			sql = "ALTER TABLE Article ADD INDEX keyR(articleKey)";
 //			stmt.executeUpdate(sql);
-//			
+			
 			// creating Favorites table
 			sql = "CREATE TABLE IF NOT EXISTS Favorite_list " +
 					"(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
