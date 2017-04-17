@@ -12,6 +12,7 @@ import com.team7.parseTest.ImplementUniCountryTest;
 import com.team7.queryTest.ImplementQueryBuilderTest;
 import com.team7.queryTest.ImplementSearchTest;
 import com.team7.queryTest.SearchParameterTest;
+import com.team7.uiTest.ImplementCandidateListUITest;
 import com.team7.uiTest.ImplementDisplayUITest;
 import com.team7.uiTest.ImplementFavUITest;
 import com.team7.uiTest.ImplementLoginTest;
@@ -27,19 +28,22 @@ import com.team7.uiTest.ImplementSimilarAuthorsUITest;
 
 @Suite.SuiteClasses({ 
 	
+   //Parsing tests	
    ImplementAuthorAffTest.class,ImplementCommitteesTest.class,	
    ImplementHomePageTest.class,ImplementParseDatabaseTest.class,
    ImplementSchemaDBTest.class,ImplementUniAuthorTest.class,
    ImplementUniCountryTest.class,
 
+   //Query Builder tests
    ImplementQueryBuilderTest.class,ImplementSearchTest.class,
    SearchParameterTest.class, 
 
-   ImplementDisplayUITest.class,ImplementFavUITest.class, 
-   ImplementRegisterTest.class, ImplementRegisterUITest.class,
-   ImplementLoginTest.class,ImplementLoginUITest.class,
-   ImplementPubDetailsUITest.class, ImplementSearchUITest.class,  
-   ImplementSimilarAuthorsUITest.class,
+   //UI Tests
+   ImplementCandidateListUITest.class,ImplementDisplayUITest.class,
+   ImplementFavUITest.class, ImplementRegisterTest.class, 
+   ImplementRegisterUITest.class,ImplementLoginTest.class,
+   ImplementLoginUITest.class,ImplementPubDetailsUITest.class, 
+   ImplementSearchUITest.class,ImplementSimilarAuthorsUITest.class,
 })
 
 public class JUnitTestSuite {

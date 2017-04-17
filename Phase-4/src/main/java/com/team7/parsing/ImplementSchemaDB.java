@@ -81,7 +81,7 @@ public class ImplementSchemaDB implements SchemaDB {
 					" role     VARCHAR(255), " + 
 					" confName VARCHAR(255),"+
 					" PRIMARY  KEY(id))"; 
-
+ 
 			stmt.executeUpdate(sql);
 
 			//creating conference table

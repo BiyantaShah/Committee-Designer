@@ -72,7 +72,7 @@ public class FavoriteListUI extends JFrame {
 				search.setVisible(true);
 				search.setSize(UIConstants.width,UIConstants.height);
 				search.setLocationRelativeTo(null);				
-			}
+			} 
 		});
 
 		btnLogout = new JButton("LogOut");
@@ -92,7 +92,7 @@ public class FavoriteListUI extends JFrame {
 				log.setLocationRelativeTo(null);
 			}
 		});
-
+ 
 		btnCandidatesList = new JButton("Candidates List");
 		btnCandidatesList.setVisible(false);
 		if(UIConstants.currentUserRole.equals("Program Chair")){
