@@ -4,20 +4,23 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
-                sh 'mvn clean'
+                sh 'mvn clean compile'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+            wrap([$class: 'Xvnc', useXauthority: true]) {
+                    sh 'mvn clean test'
+                }
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                wrap([$class: 'Xvnc', useXauthority: true]) {
+                    sh 'mvn clean package'
+                    archiveArtifacts artifacts: '*/target/.jar, */target/site//.', fingerprint: true
+                }
             }
         }
     }
 }
-
