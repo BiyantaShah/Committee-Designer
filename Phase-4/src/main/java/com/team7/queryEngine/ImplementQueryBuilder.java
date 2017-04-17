@@ -63,9 +63,8 @@ public class ImplementQueryBuilder implements QueryBuilder{
 				return getGroupByPaperAuthorQuery(searchParam.get(0));
 			}
 			
-			// if there is only one condition of grouping by the number of papers
-			else if (searchParam.size() == 1 && searchParam.get(0).getSearchFilter() == "CountNoOfArticle") {
-							
+			// if there is only one condition of grouping by the number of articles
+			else if (searchParam.size() == 1 && searchParam.get(0).getSearchFilter() == "CountNoOfArticles") {		
 				return getGroupByArticleQuery(searchParam.get(0));
 			}
 			
@@ -472,9 +471,9 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	
 	private List<String> getGroupByArticleQuery(SearchParameter groupByParameter){
 
-		formGroupByClausePaperAuthor(groupByParameter);
+		formGroupByClauseArticle(groupByParameter);
 		
-		queryPaperAuthor = "SELECT a.name AS Article FROM Article " +
+		queryArticle = "SELECT ar.author AS Author FROM Article as " +ArticleTableAlias +
 				groupByClauseArticle;
 		
 		queries.add(0, queryPaperAuthor);

@@ -6,6 +6,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.team7.parsing.ImplementAuthorAffData;
+import com.team7.parsing.ImplementCommittees;
+import com.team7.parsing.ImplementHomePageData;
+import com.team7.parsing.ImplementParseDatabase;
+import com.team7.parsing.ImplementSchemaDB;
+import com.team7.parsing.ImplementUniCountryData;
+import com.team7.parsing.ImplementUniversityAuthorData;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
