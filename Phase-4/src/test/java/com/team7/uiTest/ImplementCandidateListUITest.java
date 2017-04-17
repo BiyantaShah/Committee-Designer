@@ -57,30 +57,26 @@ public class ImplementCandidateListUITest {
 		//testing remove after selecting author
 		ImplementSchemaDB db = new ImplementSchemaDB();
 		Connection conn = db.getConnection();
-		PreparedStatement stmt = conn.prepareStatement("Select *  from Candidate_list where confName='ECOOP'");
+		PreparedStatement stmt = conn.prepareStatement("Select selectedAuthor from Candidate_list where confName='ECOOP'");
 		ResultSet rs = stmt.executeQuery();
 		canList.table2 = new JTable(buildTableModel(rs));
 		canList.model2 = (DefaultTableModel) canList.table2.getModel();
 		
 		for (int i = canList.table2.getModel().getRowCount() - 1; i >= 0; --i) {
-	        for (int j = canList.table2.getModel().getColumnCount() - 1; j >= 0; --j) {
-	            if (canList.table2.getModel().getValueAt(i, j).equals("Sravani Beeram")) {
+	            if (canList.table2.getModel().getValueAt(i, 0).equals("Sravani Beeram")) {
 	            	
 	            	//selecting author
-	            	canList.table2.setRowSelectionInterval(i,0);
+	            	canList.table2.setRowSelectionInterval(i,i);
 	            	
 	            	//testing sendEmail button after selecting an author
 	            	canList.btnSendEmail.doClick();
 	            	
 	            	//testing remove button after selecting an author
 	            	canList.btnRemove.doClick();
-	            	break;
-	            }
+	        		canList.dispose();
+	            
 	        }
-	    }
-
-		canList.dispose();
-		
+	    }		
 	}	
 	
 	public static DefaultTableModel buildTableModel(ResultSet rs)

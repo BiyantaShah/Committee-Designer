@@ -275,7 +275,7 @@ public class CandidateListUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				for (int count = 0; count < model2.getRowCount(); count++){
-					  sendMail.add(model2.getValueAt(count,2).toString());
+					  sendMail.add(model2.getValueAt(count,0).toString());
 					}
 
 				Boolean flag = true;
@@ -320,7 +320,7 @@ public class CandidateListUI extends JFrame {
 						log.messageShow("Please select an author to remove");
 					}
 					else{
-						String author = (String) model2.getValueAt(index,2);
+						String author = (String) model2.getValueAt(index,0);
 						ImplementSchemaDB db =  new ImplementSchemaDB();
 						try {
 							// deleting the selected author from the Candidate_list of the current user.

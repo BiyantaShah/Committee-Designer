@@ -72,7 +72,7 @@ public class FavoriteListUI extends JFrame {
 				search.setVisible(true);
 				search.setSize(UIConstants.width,UIConstants.height);
 				search.setLocationRelativeTo(null);				
-			}
+			} 
 		});
 
 		btnLogout = new JButton("LogOut");
