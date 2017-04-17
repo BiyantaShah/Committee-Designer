@@ -8,13 +8,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.team7.interfaces.UniversityAuthorData;
+import com.team7.interfaces.ParseCsvFiles;
 
 // Parsing the csv file provided in csrankings.org
 // extracting information about home page url of author.
-public class ImplementHomePageData implements UniversityAuthorData {
+public class ImplementHomePageData implements ParseCsvFiles {
 
-	public String ParseFiles(File csvFile) throws IOException, SQLException {
+	File csvFile;
+	
+	public ImplementHomePageData(File file) {
+		this.csvFile = file;
+	}
+	
+	public String parseCsv() throws IOException, SQLException {
 
 		BufferedReader br = null;
 		String line = "";
@@ -31,7 +37,7 @@ public class ImplementHomePageData implements UniversityAuthorData {
 
 		try {
 
-			br = new BufferedReader(new FileReader(csvFile));
+			br = new BufferedReader(new FileReader(this.csvFile));
 			while ((line = br.readLine()) != null) {
 
 				// use comma as separator

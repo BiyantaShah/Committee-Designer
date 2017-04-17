@@ -15,15 +15,19 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import com.team7.interfaces.ParseDatabase;
+import com.team7.interfaces.ParseXml;
 
-public class ImplementParseDatabase implements ParseDatabase {
+public class ImplementParseDatabase implements ParseXml {
 
 	ImplementSchemaDB db = new ImplementSchemaDB(); 
+	File xmlFile;
 
+	public ImplementParseDatabase(File file) {
+		this.xmlFile = file;
+	}
 	// Parsing the dblp.xml to extract required data, 
 	// converting into java objects and inserting into the database
-	public String parseXml(File file) throws JAXBException, SQLException, IOException {
+	public String parseXml() throws JAXBException, SQLException, IOException {
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(dblp.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -36,7 +40,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 		System.setProperty("jdk.xml.entityExpansionLimit","0");
 
 		// Creating the dblp object from the xml file.
-		dblp data = (dblp)  jaxbUnmarshaller.unmarshal(file);
+		dblp data = (dblp)  jaxbUnmarshaller.unmarshal(this.xmlFile);
 
 		// getting connection to the database
 		Connection conn = db.getConnection();

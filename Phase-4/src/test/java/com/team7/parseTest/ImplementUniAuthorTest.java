@@ -11,23 +11,28 @@ import java.sql.Statement;
 
 import org.junit.Test;
 
+import com.team7.interfaces.AbstractParseFactory;
+import com.team7.interfaces.FactoryProducer;
+import com.team7.interfaces.ParseCsvFiles;
 import com.team7.parsing.ImplementSchemaDB;
-import com.team7.parsing.ImplementUniversityAuthorData;
 
 public class ImplementUniAuthorTest {
+	
+	AbstractParseFactory csvFac = FactoryProducer.getFactory("CSV");
 	
 	@Test
 	// to test the successful parsing of CSV file
 	public void testParseSuccess() throws IOException, SQLException {
 		
-		File file = new File("test.csv");
+		File file = new File("input/testUni.csv");
 	    FileWriter writer = new FileWriter(file);
 	    writer.write("name,dept\n"
 	    		+ "Testing,Test Uni");
 	    
 	    writer.close();
-	    ImplementUniversityAuthorData parse = new ImplementUniversityAuthorData();
-		String result = parse.ParseFiles(file);
+	    
+	    ParseCsvFiles p = csvFac.getCsv("input/testUni.csv");
+		String result = p.parseCsv();
 		assertEquals("success", result);
 		
 		// deleting the record inserted
@@ -43,12 +48,12 @@ public class ImplementUniAuthorTest {
 	@Test
 	// to test the parsing of an empty CSV file
 	public void parseEmpty() throws IOException, SQLException {
-		File file = new File("test.csv");
+		File file = new File("input/testUni.csv");
 		FileWriter writer = new FileWriter(file);
 		writer.close();
 		
-		ImplementUniversityAuthorData parse = new ImplementUniversityAuthorData();
-		String result = parse.ParseFiles(file);
+		ParseCsvFiles p = csvFac.getCsv("input/testUni.csv");
+		String result = p.parseCsv();
 		assertEquals("No data", result);
 		file.delete();
 	}
