@@ -41,7 +41,7 @@ public class ImplementParseDatabase implements ParseDatabase {
 		// getting connection to the database
 		Connection conn = db.getConnection();
 		final int batchSize = 10000; 
-		int j=0, k=0, l=0, m=0;
+		int i=0, j=0, k=0, l=0, m=0;
 
 		// Extracting required information from the dblp object
 		// Information about the authors, papers, conferences and 
@@ -144,7 +144,9 @@ public class ImplementParseDatabase implements ParseDatabase {
 
 		if (data.getArticle() != null) {
 
-			PreparedStatement statement_article = conn.prepareStatement("insert into Article(author,title,journal,year,ee) values (?,?,?,?,?)");
+			PreparedStatement statement_article = conn.prepareStatement("insert into Article(title,journal,year,ee,articleKey) values (?,?,?,?,?)");
+			PreparedStatement statement_author = conn.prepareStatement("insert into Author(name,articleKey) values (?,?)");
+
 
 			for (Article article: data.getArticle()) {
 
@@ -180,22 +182,31 @@ public class ImplementParseDatabase implements ParseDatabase {
 					if (journalName.equalsIgnoreCase("tse") || 
 							journalName.equalsIgnoreCase("toplas")) {
 						
+						statement_article.setString(1, article.getTitle());
+						statement_article.setString(2, journalName);
+						statement_article.setInt(3, article.getYear());
+						statement_article.setString(4, article.getEe());
+						statement_article.setString(5, article.getKey());
+						statement_article.addBatch();
+						
 						for (String author: article.getAuthor()) {
-							statement_article.setString(1, author);
-							statement_article.setString(2, article.getTitle());
-							statement_article.setString(3, journalName);
-							statement_article.setInt(4, article.getYear());
-							statement_article.setString(5, article.getEe());
+							statement_author.setString(1, author);
+							statement_author.setString(2, article.getKey());
+							
+							statement_author.addBatch();
+						}
+						if (++l % batchSize == 0){
+							statement_article.executeBatch();
+						}
 
-							statement_article.addBatch();
-
-							if (++l % batchSize == 0)
-								statement_article.executeBatch();
+						if (++i% batchSize == 0) {
+							statement_author.executeBatch();
 						}
 					}
 				}
 			}
 			statement_article.executeBatch();
+			statement_author.executeBatch();
 		}
 
 

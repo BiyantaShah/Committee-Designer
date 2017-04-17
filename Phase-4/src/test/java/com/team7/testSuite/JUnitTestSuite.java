@@ -36,9 +36,9 @@ import com.team7.uiTest.ImplementSimilarAuthorsUITest;
    SearchParameterTest.class, 
 
    ImplementDisplayUITest.class,ImplementFavUITest.class, 
+   ImplementRegisterTest.class, ImplementRegisterUITest.class,
    ImplementLoginTest.class,ImplementLoginUITest.class,
-   ImplementPubDetailsUITest.class,ImplementRegisterTest.class, 
-   ImplementRegisterUITest.class,ImplementSearchUITest.class,  
+   ImplementPubDetailsUITest.class, ImplementSearchUITest.class,  
    ImplementSimilarAuthorsUITest.class,
 })
 
