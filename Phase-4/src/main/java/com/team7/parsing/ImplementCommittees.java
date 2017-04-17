@@ -12,13 +12,20 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.team7.interfaces.Committees;
+import com.team7.interfaces.ParseTextFile;
 
-public class ImplementCommittees implements Committees {
+public class ImplementCommittees implements ParseTextFile {
+	
+	File textFile;
+	
+	public ImplementCommittees(File file) {
+		this.textFile = file;
+	}
+	
 
 	// parsing the files in the committee folder and 
 	// extracting needed information from it
-	public String ParseFiles(File textFile) throws IOException, SQLException {
+	public String parseText() throws IOException, SQLException {
 		// TODO Auto-generated method stub
 
 		ImplementSchemaDB db = new ImplementSchemaDB();
@@ -33,9 +40,9 @@ public class ImplementCommittees implements Committees {
 
 		final int batchSize = 1000;
 		int i=0;
-		if(textFile.list().length > 0 ){
+		if(this.textFile.list().length > 0 ){
 
-			for(File fName : textFile.listFiles()){
+			for(File fName : this.textFile.listFiles()){
 
 				BufferedReader bf = new BufferedReader(new FileReader(fName));		
 				String fileName = fName.getName();	

@@ -8,14 +8,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.team7.interfaces.UniversityAuthorData;
+import com.team7.interfaces.ParseCsvFiles;
 
 //Parsing the csv file provided in csrankings.org
 //extracting information about regions of each university.
-public class ImplementUniCountryData implements UniversityAuthorData {
+public class ImplementUniCountryData implements ParseCsvFiles {
 
-	public String ParseFiles(File csvFile) throws IOException, SQLException {
-		// TODO Auto-generated method stub
+	File csvFile;
+	
+	public ImplementUniCountryData(File file) {
+		this.csvFile = file;
+	}
+	public String parseCsv() throws IOException, SQLException {
 
 		BufferedReader br = null;
 		String line = "";
@@ -32,7 +36,7 @@ public class ImplementUniCountryData implements UniversityAuthorData {
 
 		try {
 
-			br = new BufferedReader(new FileReader(csvFile));
+			br = new BufferedReader(new FileReader(this.csvFile));
 			while ((line = br.readLine()) != null) {
 
 				// use comma as separator

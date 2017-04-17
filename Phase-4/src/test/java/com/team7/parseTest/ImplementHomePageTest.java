@@ -11,23 +11,27 @@ import java.sql.Statement;
 
 import org.junit.Test;
 
-import com.team7.parsing.ImplementHomePageData;
+import com.team7.interfaces.AbstractParseFactory;
+import com.team7.interfaces.FactoryProducer;
+import com.team7.interfaces.ParseCsvFiles;
 import com.team7.parsing.ImplementSchemaDB;
 
 public class ImplementHomePageTest {
+	
+	AbstractParseFactory csvFac = FactoryProducer.getFactory("CSV");
 	
 	@Test
 	// to test the successful parsing of CSV file
 	public void testParseSuccess() throws IOException, SQLException {
 		
-		File file = new File("test.csv");
+		File file = new File("input/testHome.csv");
 	    FileWriter writer = new FileWriter(file);
 	    writer.write("name,homepage\n"
 	    		+ "Test page,Test page");
 	    
 	    writer.close();
-	    ImplementHomePageData parse = new ImplementHomePageData();
-		String result = parse.ParseFiles(file);
+	    ParseCsvFiles parse = csvFac.getCsv("input/testHome.csv");
+		String result = parse.parseCsv();
 		assertEquals("success", result);
 		
 		// deleting the record inserted
@@ -43,12 +47,12 @@ public class ImplementHomePageTest {
 	@Test
 	// to test the parsing of an empty CSV file
 	public void parseEmpty() throws IOException, SQLException {
-		File file = new File("test.csv");
+		File file = new File("input/testHome.csv");
 		FileWriter writer = new FileWriter(file);
 		writer.close();
 		
-		ImplementHomePageData parse = new ImplementHomePageData();
-		String result = parse.ParseFiles(file);
+		ParseCsvFiles parse = csvFac.getCsv("input/testHome.csv");
+		String result = parse.parseCsv();
 		assertEquals("No data", result);
 		file.delete();
 	}
