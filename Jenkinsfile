@@ -16,11 +16,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                wrap([$class: 'Xvnc', useXauthority: true]) {
-                    sh 'mvn clean package'
-                    archiveArtifacts artifacts: '*/target/.jar, */target/site//.', fingerprint: true
-                }
+ 					echo 'Deploying....'    
+ 	            }
             }
-        }
     }
 }
