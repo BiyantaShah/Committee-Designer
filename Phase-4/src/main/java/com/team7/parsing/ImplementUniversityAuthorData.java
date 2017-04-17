@@ -10,16 +10,29 @@ import java.sql.SQLException;
 
 import com.team7.interfaces.ParseCsvFiles;
 
+
 // Parsing the csv file provided in csrankings.org
+/**
+ * The Class ImplementUniversityAuthorData.
+ */
 // extracting information about school of author.
 public class ImplementUniversityAuthorData implements ParseCsvFiles{
 
+	/** The csv file. */
 	File csvFile;
 	
+	/**
+	 * Instantiates a new implement university author data.
+	 *
+	 * @param file the file
+	 */
 	public ImplementUniversityAuthorData(File file) {
 		this.csvFile = file;
 	}
 	
+	/* 
+	 * @see com.team7.interfaces.ParseCsvFiles#parseCsv()
+	 */
 	public String parseCsv() throws IOException, SQLException {
 		BufferedReader br = null;
         String line = "";

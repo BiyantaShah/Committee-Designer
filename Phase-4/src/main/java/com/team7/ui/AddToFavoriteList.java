@@ -11,26 +11,44 @@ import javax.swing.JTable;
 
 import com.team7.parsing.ImplementSchemaDB;
 
+/**
+ * The Class AddToFavoriteList.
+ */
 // Adding each author selected to the favorite list
 public class AddToFavoriteList extends DefaultCellEditor {
 
+	/** The button. */
 	protected JButton button;
 
+	/** The label. */
 	private String label;
 
+	/** The log. */
 	LoginUI log = new LoginUI();
 	
+	/** The data. */
 	String data;
 
+	/** The is pushed. */
 	private boolean isPushed;
 
+	/**
+	 * Instantiates a new adds the to favorite list.
+	 *
+	 * @param checkBox the check box
+	 */
 	public AddToFavoriteList(JCheckBox checkBox) {
 		super(checkBox);
 		button = new JButton();
 		button.setOpaque(true);
 	}
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
  
+	/* (non-Javadoc)
+	 * @see javax.swing.DefaultCellEditor#getTableCellEditorComponent(javax.swing.JTable, java.lang.Object, boolean, int, int)
+	 */
 	// extracts information about the row where the button is clicked
 	public Component getTableCellEditorComponent(JTable table, Object value,
 			boolean isSelected, int row, int column) {
@@ -62,6 +80,9 @@ public class AddToFavoriteList extends DefaultCellEditor {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see javax.swing.DefaultCellEditor#getCellEditorValue()
+	 */
 	public Object getCellEditorValue() {
 		if (isPushed) {}
 		return new String(label);

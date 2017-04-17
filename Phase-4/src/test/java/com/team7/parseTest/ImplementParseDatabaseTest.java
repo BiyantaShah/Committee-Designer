@@ -10,17 +10,28 @@ import java.sql.Statement;
 import javax.xml.bind.JAXBException;
 import org.junit.Test;
 
-import com.team7.interfaces.AbstractParseFactory;
-import com.team7.interfaces.FactoryProducer;
+import com.team7.abstractDesignFactory.AbstractParseFactory;
+import com.team7.abstractDesignFactory.FactoryProducer;
 import com.team7.interfaces.ParseXml;
 import com.team7.parsing.ImplementSchemaDB;
 
 import junit.framework.TestCase;
 
+/**
+ * The Class ImplementParseDatabaseTest.
+ */
 public class ImplementParseDatabaseTest extends TestCase{
 	
+	/** The xml fac. */
 	AbstractParseFactory xmlFac = FactoryProducer.getFactory("XML");
 	
+	/**
+	 * Test parse success inproc.
+	 *
+	 * @throws JAXBException the JAXB exception
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testParseSuccessInproc() throws JAXBException, SQLException, IOException {
 		
@@ -71,6 +82,13 @@ public class ImplementParseDatabaseTest extends TestCase{
 	}
 	
 	
+	/**
+	 * Test parse success proc.
+	 *
+	 * @throws JAXBException the JAXB exception
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testParseSuccessProc() throws JAXBException, SQLException, IOException {
 		
@@ -110,6 +128,13 @@ public class ImplementParseDatabaseTest extends TestCase{
 		file.delete();
 	}
 	
+	/**
+	 * Test parse success article.
+	 *
+	 * @throws JAXBException the JAXB exception
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testParseSuccessArticle() throws JAXBException, SQLException, IOException {
 		

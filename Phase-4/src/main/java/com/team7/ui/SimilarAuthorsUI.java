@@ -20,17 +20,24 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
+/**
+ * The Class SimilarAuthorsUI.
+ */
 public class SimilarAuthorsUI extends JFrame {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The table. */
 	JTable table;
 
 	/**
 	 * Create the frame.
+	 *
+	 * @param similarAuthors the similar authors
 	 */
 	public SimilarAuthorsUI(Set<String> similarAuthors) {
 		
@@ -44,7 +51,7 @@ public class SimilarAuthorsUI extends JFrame {
 		contentPane.setLayout(null); 
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 6, 700, 103);
+		panel.setBounds(0, 6, 700, 78);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -54,7 +61,7 @@ public class SimilarAuthorsUI extends JFrame {
 		panel.add(lblSavedAuthors);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 121, 700, 284);
+		panel_1.setBounds(0, 97, 694, 318);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -82,6 +89,13 @@ public class SimilarAuthorsUI extends JFrame {
 
 	}
 
+	/**
+	 * Builds the table model.
+	 *
+	 * @param similarAuthors the similar authors
+	 * @return the table model
+	 * @throws SQLException the SQL exception
+	 */
 	private TableModel buildTableModel(Set<String> similarAuthors) throws SQLException {
 		
 		Vector<String> columnNames = new Vector<String>();

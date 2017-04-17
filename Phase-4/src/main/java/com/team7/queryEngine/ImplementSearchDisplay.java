@@ -18,8 +18,14 @@ import com.team7.interfaces.SearchDisplay;
 import com.team7.parsing.ImplementSchemaDB;
 
 
+/**
+ * The Class ImplementSearchDisplay.
+ */
 public class ImplementSearchDisplay implements SearchDisplay {
 
+	/* 
+	 * @see com.team7.interfaces.SearchDisplay#search(java.util.List)
+	 */
 	// Keeps track of all filter criteria and their values
 	public List<String> search(List<SearchParameter> searchParameter) throws SQLException, IOException {
 		
@@ -29,6 +35,9 @@ public class ImplementSearchDisplay implements SearchDisplay {
 	
 	} 
 	
+	/* 
+	 * @see com.team7.interfaces.SearchDisplay#similarAuthor(java.lang.String)
+	 */
 	// to extract a list of similar authors based on the given author
 	public Set<String> similarAuthor(String author) throws SQLException, IOException {
 		List<String> similarAuth = new ArrayList<String>();
@@ -44,6 +53,15 @@ public class ImplementSearchDisplay implements SearchDisplay {
 		
 	}
 	
+	/**
+	 * Favorite authors.
+	 *
+	 * @param attName the  name
+	 * @param attValue the  value
+	 * @return the sets the
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	// to extract favorites for one author or from one conference
 	public Set<String> favAuthors(String attName, String attValue) throws SQLException, IOException {
 		List<String> favList = new ArrayList<String>();
@@ -58,6 +76,14 @@ public class ImplementSearchDisplay implements SearchDisplay {
 		return new TreeSet<String>(favList);
 	}
 	
+	/**
+	 * List for committee.
+	 *
+	 * @param conference the conference
+	 * @return the sets the
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	// to extract favorites of program chair
 	public Set<String> listForCommittee(String conference) throws SQLException, IOException {
 		
@@ -73,6 +99,9 @@ public class ImplementSearchDisplay implements SearchDisplay {
 		return new TreeSet<String>(CommList);
 	}
  
+	/* 
+	 * @see com.team7.interfaces.SearchDisplay#candidateDetails(java.util.Set)
+	 */
 	// Returns the candidate details for each author selected by the user
 	public ResultSet candidateDetails(Set<String> authors) throws SQLException, IOException {
 		
@@ -83,6 +112,9 @@ public class ImplementSearchDisplay implements SearchDisplay {
 		
 	}
 
+	/* 
+	 * @see com.team7.interfaces.SearchDisplay#sendEmail(java.util.Set, java.lang.String)
+	 */
 	// sends an email to the users with the list of finalized authors
 	public String sendEmail(Set<String> authors, String userName) throws SQLException, IOException {
 		// TODO Auto-generated method stub

@@ -14,16 +14,29 @@ import com.team7.ui.ButtonEditor;
 import com.team7.ui.DisplayUI;
 import com.team7.ui.UIConstants;
 
+/**
+ * The Class ImplementDisplayUITest.
+ */
 public class ImplementDisplayUITest {
 	
+	/** The u. */
 	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Conference Chair", "ECOOP");
 
+	/** The auth. */
 	List<String> auth = Arrays.asList("author1", "author2");
 
+	/** The display 1. */
 	DisplayUI display1 = new DisplayUI(new ArrayList<String>());
+	
+	/** The display 2. */
 	DisplayUI display2 = new DisplayUI(auth);
+	
+	/** The button. */
 	ButtonEditor button = new ButtonEditor(new JCheckBox());
 
+	/**
+	 * Test candidate details.
+	 */
 	@Test
 	// Testing whether the candidate details shows up some records
 	public void testCandidateDetails() {
@@ -35,6 +48,9 @@ public class ImplementDisplayUITest {
 		display2.dispose();
 	}
 
+	/**
+	 * Test logout button.
+	 */
 	@Test
 	// Testing the logout button
 	public void testLogoutButton() {
@@ -42,6 +58,9 @@ public class ImplementDisplayUITest {
 		display1.dispose();
 	}
 
+	/**
+	 * Test search UI.
+	 */
 	@Test
 	// Testing the SearchUI function
 	public void testSearchUI() {
@@ -49,6 +68,9 @@ public class ImplementDisplayUITest {
 		display2.dispose();
 	}
 
+	/**
+	 * Test candidate details empty.
+	 */
 	@Test
 	// Testing the pop up for empty candidate details
 	public void testCandidateDetailsEmpty() {

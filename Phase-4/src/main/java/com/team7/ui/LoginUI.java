@@ -8,8 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.xml.bind.JAXBException;
 
-import com.team7.interfaces.AbstractParseFactory;
-import com.team7.interfaces.FactoryProducer;
+import com.team7.abstractDesignFactory.AbstractParseFactory;
+import com.team7.abstractDesignFactory.FactoryProducer;
 import com.team7.interfaces.ParseCsvFiles;
 import com.team7.interfaces.ParseTextFile;
 import com.team7.interfaces.ParseXml;
@@ -36,29 +36,48 @@ import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
+/**
+ * The Class LoginUI.
+ */
 // LoginUI window
 public class LoginUI extends JFrame {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The content pane. */
 	public JPanel contentPane;
+	
+	/** The user name field. */
 	public JTextField userNameField;
+	
+	/** The password field. */
 	public JPasswordField passwordField;
+	
+	/** The btn login. */
 	public JButton btnLogin;
+	
+	/** The btn new user click. */
 	public JButton btnNewUserClick; 
 
+	/** The user name. */
 	public String userName;	
+	
+	/** The password. */
 	public String password;
 
+	/** The frame. */
 	static LoginUI frame; 
 
 
 	/**
 	 * Launch the application.
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
-	 * @throws IOException 
-	 * @throws JAXBException 
+	 *
+	 * @param args the arguments
+	 * @throws ClassNotFoundException the class not found exception
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws JAXBException the JAXB exception
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException, JAXBException {
 
@@ -120,7 +139,6 @@ public class LoginUI extends JFrame {
 	 */
 	public LoginUI() {
 
-		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		pack();
 		setSize(UIConstants.width, UIConstants.height);
 		setResizable(false);
@@ -171,7 +189,7 @@ public class LoginUI extends JFrame {
 				userName = userNameField.getText();
 				String plainText = new String(passwordField.getPassword());
 
-				if (userName.equals("")) //username should not be empty
+				if (userName.equals("")) //userName should not be empty
 					messageShow("Please enter username");
 				else if (plainText.equals(""))
 					messageShow("Please enter password"); // password should not be empty
@@ -215,6 +233,7 @@ public class LoginUI extends JFrame {
 		}
 				);
 
+		//To register new user
 		btnNewUserClick = new JButton("New User? Click to Register");
 		btnNewUserClick.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnNewUserClick.setBounds(483, 369, 287, 34);
@@ -232,6 +251,11 @@ public class LoginUI extends JFrame {
 		});
 	} 
 
+	/**
+	 * Message show.
+	 *
+	 * @param msg the msg
+	 */
 	public void messageShow (String msg) {
 
 		final JDialog d = new JDialog(frame, msg, true);
@@ -241,7 +265,7 @@ public class LoginUI extends JFrame {
 		d.addWindowListener(null);
 		d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
-		Timer timer = new Timer(3000, new ActionListener() { // 3 sec
+		Timer timer = new Timer(3000, new ActionListener() { // closes error dialog in 3 sec
 			public void actionPerformed(ActionEvent e) {
 				d.setVisible(false);
 				d.dispose();

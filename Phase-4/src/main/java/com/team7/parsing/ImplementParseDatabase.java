@@ -17,15 +17,29 @@ import javax.xml.bind.Unmarshaller;
 
 import com.team7.interfaces.ParseXml;
 
+/**
+ * The Class ImplementParseDatabase.
+ */
 public class ImplementParseDatabase implements ParseXml {
 
+	/** The db. */
 	ImplementSchemaDB db = new ImplementSchemaDB(); 
+	
+	/** The xml file. */
 	File xmlFile;
 
+	/**
+	 * Instantiates a new implement parse database.
+	 *
+	 * @param file the file
+	 */
 	public ImplementParseDatabase(File file) {
 		this.xmlFile = file;
 	}
 	// Parsing the dblp.xml to extract required data, 
+	/* 
+	 * @see com.team7.interfaces.ParseXml#parseXml()
+	 */
 	// converting into java objects and inserting into the database
 	public String parseXml() throws JAXBException, SQLException, IOException {
 
@@ -217,6 +231,13 @@ public class ImplementParseDatabase implements ParseXml {
 		return "success";
 	}
 
+	/**
+	 * Checks if is UTF 8 mis interpreted.
+	 *
+	 * @param input the input
+	 * @param encoding the encoding
+	 * @return true, if is UTF 8 mis interpreted
+	 */
 	// to check for UTF 8 misinterpreted characters.
 	private boolean isUTF8MisInterpreted(String input, String encoding) {
 		// TODO Auto-generated method stub

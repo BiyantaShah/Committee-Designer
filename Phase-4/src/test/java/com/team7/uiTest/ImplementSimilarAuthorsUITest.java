@@ -14,11 +14,23 @@ import com.team7.queryEngine.ImplementQueryBuilder;
 import com.team7.ui.SimilarAuthorsUI;
 import com.team7.ui.UIConstants;
 
+/**
+ * The Class ImplementSimilarAuthorsUITest.
+ */
 public class ImplementSimilarAuthorsUITest {
 	
+	/** The u. */
 	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Conference Chair", "ECOOP");
+	
+	/** The similar. */
 	SimilarAuthorsUI similar;
 	
+	/**
+	 * Test sim auth.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	// testing similar authors table
 	public void testSimAuth() throws SQLException, IOException {

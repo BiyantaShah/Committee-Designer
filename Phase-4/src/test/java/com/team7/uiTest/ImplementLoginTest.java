@@ -10,10 +10,19 @@ import org.junit.Test;
 import com.team7.ui.ImplementLogin;
 
 
+/**
+ * The Class ImplementLoginTest.
+ */
 public class ImplementLoginTest extends TestCase{
 
 	
-	 @Test
+	 /**
+ 	 * Test login success.
+ 	 *
+ 	 * @throws SQLException the SQL exception
+ 	 * @throws IOException Signals that an I/O exception has occurred.
+ 	 */
+ 	@Test
 	 //Test to verify a valid registered user - should return true and enter the search page
      public void testLoginSuccess() throws SQLException, IOException {
 		
@@ -25,7 +34,13 @@ public class ImplementLoginTest extends TestCase{
 	}  
 	 
 	 	  
-	 @Test
+	 /**
+ 	 * Test wrong password.
+ 	 *
+ 	 * @throws SQLException the SQL exception
+ 	 * @throws IOException Signals that an I/O exception has occurred.
+ 	 */
+ 	@Test
      //Test to verify a if details are incorrect - should return false
      public void testWrongPassword() throws SQLException, IOException {
 		
@@ -36,7 +51,13 @@ public class ImplementLoginTest extends TestCase{
 		
 	}
 	 
-	 @Test
+	 /**
+ 	 * Test unregistered user.
+ 	 *
+ 	 * @throws SQLException the SQL exception
+ 	 * @throws IOException Signals that an I/O exception has occurred.
+ 	 */
+ 	@Test
      //Test to verify a  unregistered user - should return false
      public void testUnregisteredUser() throws SQLException, IOException {
 		
@@ -49,7 +70,12 @@ public class ImplementLoginTest extends TestCase{
 
 	 
 	 
-	 @Test
+	 /**
+ 	 * Test pwd decryption success.
+ 	 *
+ 	 * @throws SQLException the SQL exception
+ 	 */
+ 	@Test
 	 //Test to verify a valid registered user - should return true and enter the search page
      public void testPwdDecryptionSuccess() throws SQLException {
 		
@@ -59,7 +85,12 @@ public class ImplementLoginTest extends TestCase{
 		
 	} 
 	 
-	 @Test
+	 /**
+ 	 * Test pwd decryption failure.
+ 	 *
+ 	 * @throws SQLException the SQL exception
+ 	 */
+ 	@Test
 	 //Test to verify a valid registered user - should return true and enter the search page
      public void testPwdDecryptionFailure() throws SQLException {
 		
@@ -69,7 +100,10 @@ public class ImplementLoginTest extends TestCase{
 		 
 	} 
  	  
-	 @Test
+	 /**
+ 	 * Test logout success.
+ 	 */
+ 	@Test
      //Test to verify successful logout - should return success
      public void testLogoutSuccess() {
 		

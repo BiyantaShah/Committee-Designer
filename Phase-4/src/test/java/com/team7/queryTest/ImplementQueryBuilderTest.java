@@ -13,11 +13,17 @@ import com.team7.queryEngine.SearchParameter;
 
 import junit.framework.TestCase;
 
+/**
+ * The Class ImplementQueryBuilderTest.
+ */
 public class ImplementQueryBuilderTest extends TestCase {
 
 	// Testing queries of different types
 	 
-  	@Test
+  	/**
+	 * Test valid author name.
+	 */
+	@Test
 	public void testValidAuthorName(){ 	
   		List<String> query1 = new ArrayList<String>();
   		query1.add(0,"SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey WHERE a.Name='Michael Ley' ");
@@ -32,6 +38,9 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(query1, queryFormed);
 	}
   	
+	/**
+	 * Test valid years active.
+	 */
 	@Test
 	public void testValidYearsActive(){	
 		
@@ -48,6 +57,9 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(query2, queryFormed);
 	}
 
+	/**
+	 * Test invalid years active.
+	 */
 	@Test
 	public void testInvalidYearsActive(){	
 		List<String> expected = new ArrayList<String>();
@@ -64,6 +76,9 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(expected, queryFormed);
 	}
 
+	/**
+	 * Test valid keyword.
+	 */
 	@Test
 	public void testValidKeyword(){	
 		
@@ -80,6 +95,9 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(query3, queryFormed);
 	}
 	
+	/**
+	 * Test diff filter.
+	 */
 	@Test
 	public void testDiffFilter(){
 		
@@ -98,6 +116,9 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(query4, queryFormed);
 	}
 	
+	/**
+	 * Test valid multiple keyword.
+	 */
 	@Test
 	public void testValidMultipleKeyword(){
 		
@@ -116,6 +137,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(query5, queryFormed);
 	}
 	
+	/**
+	 * Test send query.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testSendQuery() throws SQLException, IOException{	
 		SearchParameter s1= new SearchParameter("Name", "=" ,"Petra Ludewig","OR ");
@@ -129,6 +156,12 @@ public class ImplementQueryBuilderTest extends TestCase {
   		assertTrue(result.contains("Yusuke Nishiguchi"));
 	}
 	
+	/**
+	 * Test multiple author search.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testMultipleAuthorSearch() throws SQLException, IOException{
 		SearchParameter s1= new SearchParameter("Name", "=" ,"Shahar Maoz","OR ");
@@ -142,6 +175,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(2, result.size());
 	}
 	
+	/**
+	 * Test multiple author invalid search.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testMultipleAuthorInvalidSearch() throws SQLException, IOException{
 		SearchParameter s1= new SearchParameter("Name", "=" ,"ABC","AND");
@@ -155,6 +194,11 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(0, result.size());
 	}
 	
+	/**
+	 * Test first use case.
+	 *
+	 * @throws SQLException the SQL exception
+	 */
 	@Test
 	public void testFirstUseCase() throws SQLException{    //add another test fetching result from DB
 		
@@ -175,6 +219,11 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(query6, queryFormed);
 	}
 	
+	/**
+	 * Test second use case.
+	 *
+	 * @throws SQLException the SQL exception
+	 */
 	@Test
 	public void testSecondUseCase() throws SQLException{ 
 		List<String> query7 = new ArrayList<String>();
@@ -194,6 +243,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(query7, queryFormed);
 	}
 	
+	/**
+	 * Test third use case.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testThirdUseCase() throws SQLException, IOException{   
 		SearchParameter s1= new SearchParameter("Keyword", "LIKE" ,"pointer","AND");
@@ -207,6 +262,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(4,result.size());  
 	}
 	
+	/**
+	 * Test no duplicate author name.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testNoDuplicateAuthorName() throws SQLException, IOException{
   		 
@@ -220,6 +281,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(1, Collections.frequency(result, "William Pugh"));  
 	}
 	
+	/**
+	 * Test like clause author name.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testLikeClauseAuthorName() throws SQLException, IOException{ 	
   		List<String> query9= new ArrayList<String>();
@@ -238,6 +305,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertTrue(result.contains("Anurag Mendhekar"));   
 	}
 	
+	/**
+	 * Test count of papers.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testCountOfPapers() throws SQLException, IOException{ 
   		SearchParameter s1= new SearchParameter("CountNoOfPapers", ">=" ,"2",null);
@@ -249,6 +322,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertTrue(result.contains("Steven Lucco")); 
 	}
 	
+	/**
+	 * Test query with journal.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testQueryWithJournal() throws SQLException, IOException{ 	
   		SearchParameter s1= new SearchParameter("Name", "=" ,"Brian Demsky","AND");
@@ -262,6 +341,9 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertTrue(result.contains("Brian Demsky")); 
 	}
 
+	/**
+	 * Test in valid conf name.
+	 */
 	@Test
 	public void testInValidConfName(){ 	
   		List<String> expected = new ArrayList<String>();
@@ -276,6 +358,9 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(expected, queryFormed);
 	}
 	
+	/**
+	 * Test in valid year.
+	 */
 	@Test
 	public void testInValidYear(){ 	
   		List<String> expected = new ArrayList<String>();
@@ -290,6 +375,9 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(expected, queryFormed);
 	}
 	
+	/**
+	 * Test in valid committee year.
+	 */
 	@Test
 	public void testInValidCommitteeYear(){ 	
   		List<String> expected = new ArrayList<String>();
@@ -304,6 +392,9 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(expected, queryFormed);
 	}
 	
+	/**
+	 * Test in valid journal name.
+	 */
 	@Test
 	public void testInValidJournalName(){ 	
   		List<String> expected = new ArrayList<String>();
@@ -318,6 +409,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(expected, queryFormed);
 	}
 	
+	/**
+	 * Test query with just journal.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testQueryWithJustJournal() throws SQLException, IOException{ 	
   	  	SearchParameter s1= new SearchParameter("JournalName", "=" ,"tse", null);
@@ -329,6 +426,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(5337,result.size()); 
 	}
 
+	/**
+	 * Test committee name.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testCommitteeName() throws SQLException, IOException{   
 		SearchParameter s1= new SearchParameter("Committee.ConfName", "=" ,"OOPSLA", null);
@@ -340,6 +443,11 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(377,result.size());  
 	}
 	
+	/**
+	 * Test in valid committe name.
+	 *
+	 * @throws SQLException the SQL exception
+	 */
 	@Test
 	public void testInValidCommitteName() throws SQLException{    
 		List<String> expected = new ArrayList<String>();
@@ -353,6 +461,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(expected,queryFormed);  
 	}
 	
+	/**
+	 * Test all three tables use case.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testAllThreeTablesUseCase() throws SQLException, IOException{   
 		SearchParameter s1= new SearchParameter("Keyword", "LIKE" ,"pointer","AND");
@@ -368,6 +482,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertTrue(result.contains("Christopher J. Hetmanski"));  
 	}
 	
+	/**
+	 * Test committee and article use case.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testCommitteeAndArticleUseCase() throws SQLException, IOException{   
 		SearchParameter s1= new SearchParameter("Committee.Year", "=" ,"2006", null);
@@ -382,6 +502,11 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(5415,result.size());  
 	}
 	
+	/**
+	 * Test invalid search paremeter.
+	 *
+	 * @throws SQLException the SQL exception
+	 */
 	@Test
 	public void testInvalidSearchParemeter() throws SQLException{   
 		List<String> expected = new ArrayList<String>();
@@ -395,6 +520,11 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(expected,queryFormed);  
 	}
 	
+	/**
+	 * Test invalid committee search paremeter.
+	 *
+	 * @throws SQLException the SQL exception
+	 */
 	@Test
 	public void testInvalidCommitteeSearchParemeter() throws SQLException{   
 		List<String> expected = new ArrayList<String>();
@@ -408,6 +538,11 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(expected,queryFormed);  
 	}
 	
+	/**
+	 * Test proper join formation.
+	 *
+	 * @throws SQLException the SQL exception
+	 */
 	@Test
 	public void testProperJoinFormation() throws SQLException{   
 		List<String> expected = new ArrayList<String>();
@@ -423,6 +558,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(expected,queryFormed);  
 	}
 	
+	/**
+	 * Test new.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testNew() throws SQLException, IOException{   
 
@@ -437,6 +578,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(377,result.size()); 
 	}
 	
+	/**
+	 * Test new 2.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testNew2() throws SQLException, IOException{   
 
@@ -451,6 +598,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(0,result.size()); 
 	}
 	
+	/**
+	 * Test new 3.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testNew3() throws SQLException, IOException{   
 		
@@ -465,6 +618,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(0,result.size()); 
 	}
 	
+	/**
+	 * Test new 4.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testNew4() throws SQLException, IOException{   
 
@@ -479,6 +638,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(377,result.size()); 
 	} 
 	
+	/**
+	 * Test four search parameter.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testFourSearchParameter() throws SQLException, IOException{   
 
@@ -497,6 +662,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(1,result.size()); 
 	} 
 
+	/**
+	 * Test three OR search parameter.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testThreeORSearchParameter() throws SQLException, IOException{   
 
@@ -515,6 +686,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(12798,result.size()); 
 	} 
 	
+	/**
+	 * Test to cover all filters.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testToCoverAllFilters() throws SQLException, IOException{ 	
   		 
@@ -534,6 +711,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(5156,result.size()); 
 	}
 	
+	/**
+	 * Test to cover all filters 2.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testToCoverAllFilters2() throws SQLException, IOException{ 	
 
@@ -553,6 +736,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(5629,result.size()); 
 	}
 	
+	/**
+	 * Test to count no of articles valid.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testToCountNoOfArticlesValid() throws SQLException, IOException{ 	
 
@@ -565,6 +754,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(6603,result.size()); 
 	}
 	
+	/**
+	 * Test to count no of articles journal.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testToCountNoOfArticlesJournal() throws SQLException, IOException{ 	
 
@@ -579,6 +774,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(5336,result.size()); 
 	}
 	
+	/**
+	 * Test to count no of articles.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testToCountNoOfArticles() throws SQLException, IOException{ 	
 
@@ -595,6 +796,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(32,result.size()); 
 	}
 	
+	/**
+	 * Test to count no of articles 3.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testToCountNoOfArticles3() throws SQLException, IOException{ 	
 
@@ -617,6 +824,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(0,result.size()); 
 	}
 	
+	/**
+	 * Test count articles only.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testCountArticlesOnly() throws SQLException, IOException {
 		
@@ -630,6 +843,12 @@ public class ImplementQueryBuilderTest extends TestCase {
 		assertEquals(452,result.size()); 
 	}
 	
+	/**
+	 * Test count articles with author name.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testCountArticlesWithAuthorName() throws SQLException, IOException {
 		

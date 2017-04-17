@@ -5,10 +5,20 @@ import org.junit.Test;
 import com.team7.ui.ImplementLogin;
 import com.team7.ui.LoginUI;
 
+/**
+ * The Class ImplementLoginUITest.
+ */
 public class ImplementLoginUITest {
+
+	/** The login. */
 	LoginUI login = new LoginUI();
+
+	/** The log. */
 	ImplementLogin log = new ImplementLogin();
 
+	/**
+	 * Test login button invalid 1.
+	 */
 	@Test
 	// Tests when username is empty
 	public void testLoginButtonInvalid1() {
@@ -16,6 +26,9 @@ public class ImplementLoginUITest {
 		login.btnLogin.doClick();
 	}
 
+	/**
+	 * Test login button invalid 2.
+	 */
 	@Test
 	// Tests when password is empty
 	public void testLoginButtonInvalid2() {
@@ -23,6 +36,9 @@ public class ImplementLoginUITest {
 		login.btnLogin.doClick();
 	}
 
+	/**
+	 * Test login button invalid 3.
+	 */
 	@Test
 	//Tests when user does not exist
 	public void testLoginButtonInvalid3() {
@@ -31,6 +47,9 @@ public class ImplementLoginUITest {
 		login.btnLogin.doClick();
 	}
 
+	/**
+	 * Test login button invalid 4.
+	 */
 	@Test
 	// Tests when credentials are not correct
 	public void testLoginButtonInvalid4() {
@@ -39,24 +58,20 @@ public class ImplementLoginUITest {
 		login.btnLogin.doClick();
 	}
 
-	/*
-	 * These tests are working on local machine but failing on Jenkins
-	 */
+	@Test
+	// Testing for when the username and password are correct
+	public void testLoginButton() {
+		login.userNameField.setText("shahbiyanta@gmail.com");
+		login.passwordField.setText("abc");
+		login.btnLogin.doClick();
+		// logout the user then
+		log.logout();
+	}
 
-//		@Test
-//		// Testing for when the username and password are correct
-//		public void testLoginButton() {
-//			login.userNameField.setText("shahbiyanta@gmail.com");
-//			login.passwordField.setText("abc");
-//			login.btnLogin.doClick();
-//			// logout the user then
-//			log.logout();
-//		}
-//		
-//		@Test
-//		// Testing for when the username and password are correct
-//		public void testRegisterButton() {
-//			login.btnNewUserClick.doClick();
-//		}
+	@Test
+	// Testing for when the username and password are correct
+	public void testRegisterButton() {
+		login.btnNewUserClick.doClick();
+	}
 
 }

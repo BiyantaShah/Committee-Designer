@@ -17,10 +17,17 @@ import com.team7.interfaces.Register;
 import com.team7.parsing.ImplementSchemaDB;
 import com.team7.parsing.User;
 
+/**
+ * The Class ImplementRegister.
+ */
 public class ImplementRegister implements Register {
 
+	/** The base 64. */
 	private static Base64 base64 = new Base64(true);
 
+	/* (non-Javadoc)
+	 * @see com.team7.interfaces.Register#createUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
 	public String createUser(String userName, String plainPass, String role, String confName) throws SQLException, IOException{
 
 		//including an escape character if string contains '
@@ -49,6 +56,9 @@ public class ImplementRegister implements Register {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.team7.interfaces.Register#encryptPassword(java.lang.String, java.lang.String)
+	 */
 	public String encryptPassword(String plainPass,String secretKey) {
 
 		// encrypt the password
@@ -68,6 +78,12 @@ public class ImplementRegister implements Register {
 
 	// checking for a valid email ID 
 	// (does not check whether the email ID is registered valid ID or not, 
+	/**
+	 * Valid email id.
+	 *
+	 * @param userName the user name
+	 * @return true, if successful
+	 */
 	// that discretion is upon the user)
 	private boolean validEmailId(String userName) {
 
@@ -85,6 +101,9 @@ public class ImplementRegister implements Register {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see com.team7.interfaces.Register#verifyIfUserExists(java.lang.String)
+	 */
 	// checking if the user exists in the database
 	public boolean verifyIfUserExists(String userName) throws SQLException, IOException {
 

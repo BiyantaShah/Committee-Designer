@@ -14,10 +14,17 @@ import org.apache.commons.codec.binary.Base64;
 import com.team7.interfaces.Login;
 import com.team7.parsing.ImplementSchemaDB;
 
+/**
+ * The Class ImplementLogin.
+ */
 public class ImplementLogin implements Login {
 
+	/** The secret key. */
 	String secretKey = "SECRETKEY"; // used for decryption of the password
 
+	/* (non-Javadoc)
+	 * @see com.team7.interfaces.Login#login(java.lang.String, java.lang.String)
+	 */
 	public boolean login(String username, String password) throws SQLException, IOException {
 		
 		ImplementSchemaDB db = new ImplementSchemaDB();
@@ -55,6 +62,9 @@ public class ImplementLogin implements Login {
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see com.team7.interfaces.Login#decryptPassword(java.lang.String, java.lang.String)
+	 */
 	public String decryptPassword(String plainText,String secretKey){
  
 		try { 
@@ -75,6 +85,9 @@ public class ImplementLogin implements Login {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.team7.interfaces.Login#logout()
+	 */
 	public String logout() {
 		// TODO Auto-generated method stub
 		UIConstants.currentUser = null;	

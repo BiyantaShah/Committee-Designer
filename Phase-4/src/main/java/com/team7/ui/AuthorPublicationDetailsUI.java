@@ -33,24 +33,40 @@ import java.util.Set;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 
+/**
+ * The Class AuthorPublicationDetailsUI.
+ */
 // Class which displays the publication details of the author (Paper and articles , along with URL)
 public class AuthorPublicationDetailsUI extends JFrame {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The send mail. */
 	Set<String> sendMail = new HashSet<String>();
+	
+	/** The btn new button. */
 	public JButton btnNewButton;
+	
+	/** The btn search. */
 	public JButton btnSearch;
+	
+	/** The btn send email. */
 	public JButton btnSendEmail;
+	
+	/** The btn candidates list. */
 	public JButton btnCandidatesList;
+	
+	/** The btn fav. */
 	public JButton btnFav;
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException  
+	 *
+	 * @param result the result
 	 */
 	public AuthorPublicationDetailsUI(ResultSet result) {
 
@@ -77,8 +93,8 @@ public class AuthorPublicationDetailsUI extends JFrame {
 		lblSavedAuthors.setBounds(444, 81, 274, 28);
 		panel.add(lblSavedAuthors);
 
-		JLabel lblNewLabel = new JLabel("To select authors for the committee, click \"select\" beside the row");
-		lblNewLabel.setBounds(381, 133, 433, 16);
+		JLabel lblNewLabel = new JLabel("To select authors for the committee, click \"Add to Favorite list\" beside the row");
+		lblNewLabel.setBounds(381, 133, 513, 16);
 		panel.add(lblNewLabel);
 
 		btnSearch = new JButton("Search UI");
@@ -87,7 +103,6 @@ public class AuthorPublicationDetailsUI extends JFrame {
 		panel.add(btnSearch);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ButtonEditor.savedAuthors.clear();
 				dispose();
 				SearchUI search = new SearchUI();
 				search.setVisible(true);
@@ -99,9 +114,11 @@ public class AuthorPublicationDetailsUI extends JFrame {
 		});
 
 		btnNewButton = new JButton("LogOut");
+		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnNewButton.setBounds(1059, 10, 117, 34);
+		panel.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ButtonEditor.savedAuthors.clear();
 				// make the currentUser null and redirect to login page
 				ImplementLogin login = new ImplementLogin();
 				login.logout();
@@ -114,15 +131,11 @@ public class AuthorPublicationDetailsUI extends JFrame {
 				log.setLocationRelativeTo(null);
 			}
 		});
-		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnNewButton.setBounds(1059, 10, 117, 34);
-		panel.add(btnNewButton);
 		
 		btnFav = new JButton("My Favorite List");
 		btnFav.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnFav.setBounds(31, 10, 176, 34);
-		panel.add(btnFav);
-		
+		panel.add(btnFav);		
 		btnFav.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ImplementSearchDisplay search = new ImplementSearchDisplay();
@@ -136,11 +149,8 @@ public class AuthorPublicationDetailsUI extends JFrame {
 					fl.setLocationRelativeTo(null);
 					
 				} catch (SQLException | IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-				
-				
+				}								
 			}
 		});
 		
@@ -150,7 +160,7 @@ public class AuthorPublicationDetailsUI extends JFrame {
 		if(UIConstants.currentUserRole.equals(UIConstants.HighestRole)){
 			btnCandidatesList.setVisible(true);
 		}
-		btnCandidatesList.setBounds(219, 10, 148, 34);
+		btnCandidatesList.setBounds(219, 10, 163, 34);
 		panel.add(btnCandidatesList);
 		btnCandidatesList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -183,8 +193,8 @@ public class AuthorPublicationDetailsUI extends JFrame {
 			}
 	 		
 			// Rendering a button for each table row
-			table.getColumn("Select").setCellRenderer(new JTableButtonRenderer());
-			table.getColumn("Select").setCellEditor(
+			table.getColumn("").setCellRenderer(new JTableButtonRenderer());
+			table.getColumn("").setCellEditor(
 					new AddToFavoriteList(new JCheckBox()));
 			
 			// Not allowing the columns to be dragged
@@ -207,8 +217,14 @@ public class AuthorPublicationDetailsUI extends JFrame {
 
 	}
 
+	/**
+	 * Builds the table model.
+	 *
+	 * @param rs the rs
+	 * @return the table model
+	 * @throws SQLException the SQL exception
+	 */
 	public TableModel buildTableModel(ResultSet rs) throws SQLException {
-		// TODO Auto-generated method stub
 
 		ResultSetMetaData metaData = rs.getMetaData();
 
@@ -220,7 +236,7 @@ public class AuthorPublicationDetailsUI extends JFrame {
 			columnNames.add(metaData.getColumnName(column));
 			
 		}
-		columnNames.add("Select");
+		columnNames.add("");
 
 		Vector<Vector<Object>> data = new Vector<Vector<Object>>();
 		while (rs.next()) {
@@ -234,14 +250,11 @@ public class AuthorPublicationDetailsUI extends JFrame {
 				}
 				 
 			}
-			vector.add("select");
+			vector.add("Add to Favorite list");
 			data.add(vector);
 		}
 		
 		TableModel model = new DefaultTableModel(data, columnNames) {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int row, int column)

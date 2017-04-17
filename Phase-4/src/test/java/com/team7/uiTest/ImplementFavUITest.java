@@ -13,11 +13,20 @@ import com.team7.ui.AddToFavoriteList;
 import com.team7.ui.FavoriteListUI;
 import com.team7.ui.UIConstants;
 
+/**
+ * The Class ImplementFavUITest.
+ */
 public class ImplementFavUITest {
 	
+	/** The u. */
 	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Program Chair", "ECOOP");
+	
+	/** The button. */
 	AddToFavoriteList button = new AddToFavoriteList(new JCheckBox());
 	
+	/**
+	 * Test candidate details.
+	 */
 	@SuppressWarnings({ "unchecked" })
 	@Test
 	// Testing whether the candidate details shows up some records
@@ -49,6 +58,9 @@ public class ImplementFavUITest {
 		favList.dispose();
 	}  
  
+	/**
+	 * Test logout.
+	 */
 	@Test
 	// Testing logout button
 	public void testLogout() {
@@ -59,6 +71,9 @@ public class ImplementFavUITest {
 		favList.dispose();
 	}
  	
+	/**
+	 * Test search UI.
+	 */
 	@Test
 	// Testing the SearchUI function
 	public void testSearchUI() {
@@ -69,6 +84,9 @@ public class ImplementFavUITest {
 		favList.dispose();
 	}
 	
+	/**
+	 * Test candidate list UI.
+	 */
 	@Test
 	// Testing the Candidate list 
 	public void testCandidateListUI() {

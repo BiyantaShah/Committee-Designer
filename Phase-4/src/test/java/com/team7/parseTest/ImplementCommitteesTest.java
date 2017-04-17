@@ -11,17 +11,27 @@ import java.sql.Statement;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-import com.team7.interfaces.AbstractParseFactory;
-import com.team7.interfaces.FactoryProducer;
+import com.team7.abstractDesignFactory.AbstractParseFactory;
+import com.team7.abstractDesignFactory.FactoryProducer;
 import com.team7.interfaces.ParseTextFile;
 import com.team7.parsing.ImplementSchemaDB;
 
 import junit.framework.TestCase;
 
+/**
+ * The Class ImplementCommitteesTest.
+ */
 public class ImplementCommitteesTest extends TestCase {
 	
+	/** The txt fac. */
 	AbstractParseFactory txtFac = FactoryProducer.getFactory("TXT");
 
+	/**
+	 * Test parse success.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SQLException the SQL exception
+	 */
 	// Test case for successful parsing
 	@Test
 	public void testParseSuccess() throws IOException, SQLException {
@@ -65,6 +75,12 @@ public class ImplementCommitteesTest extends TestCase {
 	
 	}  
 	
+	/**
+	 * Test empty directory.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SQLException the SQL exception
+	 */
 	// Test case for empty directory 
 	@Test
 	public void testEmptyDirectory() throws IOException, SQLException {

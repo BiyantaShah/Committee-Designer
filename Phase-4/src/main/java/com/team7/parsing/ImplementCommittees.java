@@ -14,16 +14,28 @@ import java.util.regex.Pattern;
 
 import com.team7.interfaces.ParseTextFile;
 
+/**
+ * The Class ImplementCommittees.
+ */
 public class ImplementCommittees implements ParseTextFile {
 	
+	/** The text file. */
 	File textFile;
 	
+	/**
+	 * Instantiates a new implement committees.
+	 *
+	 * @param file the file
+	 */
 	public ImplementCommittees(File file) {
 		this.textFile = file;
 	}
 	
 
 	// parsing the files in the committee folder and 
+	/* 
+	 * @see com.team7.interfaces.ParseTextFile#parseText()
+	 */
 	// extracting needed information from it
 	public String parseText() throws IOException, SQLException {
 		// TODO Auto-generated method stub

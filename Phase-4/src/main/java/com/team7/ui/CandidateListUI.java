@@ -31,28 +31,58 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 // Class creating the user interface for the candidates 
+/**
+ * The Class CandidateListUI.
+ */
 // selection by the Program chair
 public class CandidateListUI extends JFrame {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The content pane. */
 	private JPanel contentPane;
 
+	/** The table 1. */
 	public JTable table1; 
+	
+	/** The table 2. */
 	public JTable table2;
+	
+	/** The panel 3. */
 	JPanel panel_3 = new JPanel();
 	
+	/** The btn searchui. */
 	public JButton btnSearchui;
+	
+	/** The btn logout. */
 	public JButton btnLogout;
+	
+	/** The btn my favorite list. */
 	public JButton btnMyFavoriteList;
+	
+	/** The button select. */
 	public JButton buttonSelect;
+	
+	/** The btn remove. */
 	public JButton btnRemove;
+	
+	/** The btn send email. */
 	public JButton btnSendEmail;
+    
+    /** The fav list. */
     public Set<String> favList;
+    
+    /** The model. */
     public DefaultTableModel model;
+	
+	/** The model 2. */
 	public DefaultTableModel model2 ;
 
 
+	/**
+	 * Instantiates a new candidate list UI.
+	 */
 	public CandidateListUI(){
 
 		setTitle("CANDIDATE LIST OF THE PROGRAM CHAIR");
@@ -64,7 +94,6 @@ public class CandidateListUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
 
 
 		
@@ -82,15 +111,16 @@ public class CandidateListUI extends JFrame {
 
 		JLabel lblSelectedCandidates = new JLabel("Selected Candidates");
 		lblSelectedCandidates.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		lblSelectedCandidates.setBounds(182, 91, 176, 16);
+		lblSelectedCandidates.setBounds(224, 91, 176, 16);
 		panel.add(lblSelectedCandidates);
 
 
 		JLabel lblFinalCandidates = new JLabel("Final Candidates");
 		lblFinalCandidates.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		lblFinalCandidates.setBounds(797, 91, 141, 16);
+		lblFinalCandidates.setBounds(839, 91, 134, 16);
 		panel.add(lblFinalCandidates);
 		
+		//Button to Logout of application
 		btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnLogout.setBounds(1065, 6, 117, 34);
@@ -109,6 +139,7 @@ public class CandidateListUI extends JFrame {
 		});
 
 		
+		//Button for SearchUI screen
 		btnSearchui = new JButton("SearchUI");
 		btnSearchui.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSearchui.setBounds(932, 6, 117, 34);
@@ -123,6 +154,7 @@ public class CandidateListUI extends JFrame {
 			}
 		});
 		
+		//Button for Favorite list screen
 		btnMyFavoriteList = new JButton("My Favorite List");
 		btnMyFavoriteList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnMyFavoriteList.setBounds(17, 6, 176, 34);
@@ -222,7 +254,6 @@ public class CandidateListUI extends JFrame {
 		}
 
 		// final committee list table
-
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(606, 143, 578, 465);
 		contentPane.add(panel_2);
@@ -264,10 +295,10 @@ public class CandidateListUI extends JFrame {
 			contentPane.add(panel_3);
 			panel_3.setLayout(null);
 
-
+            //Button to send email
 			btnSendEmail = new JButton("Send Email");
 			btnSendEmail.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-			btnSendEmail.setBounds(539, 50, 117, 29);
+			btnSendEmail.setBounds(539, 50, 149, 29);
 			panel_3.add(btnSendEmail);
 			Set<String> sendMail = new HashSet<String>();
 
@@ -295,7 +326,6 @@ public class CandidateListUI extends JFrame {
         					log.messageShow("Email sent successfully");
                         }
 					}  catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (SQLException e1) {
 						
@@ -306,10 +336,10 @@ public class CandidateListUI extends JFrame {
 
 
 
- 
+            //Button to remove an author from candidate list
 			btnRemove = new JButton("Remove");
 			btnRemove.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-			btnRemove.setBounds(855, 6, 117, 29);
+			btnRemove.setBounds(855, 6, 102, 29);
 			panel_3.add(btnRemove);
 			btnRemove.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -340,6 +370,13 @@ public class CandidateListUI extends JFrame {
 	}
 
 
+	/**
+	 * Builds the table model.
+	 *
+	 * @param favList the fav list
+	 * @return the table model
+	 * @throws SQLException the SQL exception
+	 */
 	public TableModel buildTableModel(Set<String> favList) throws SQLException {
 
 		Vector<String> columnNames = new Vector<String>();

@@ -14,10 +14,19 @@ import com.team7.ui.UIConstants;
 import junit.framework.TestCase;
 import org.junit.Test;
 
+/**
+ * The Class ImplementSchemaDBTest.
+ */
 public class ImplementSchemaDBTest extends TestCase {
 
+	/** The u. */
 	UIConstants u  = new UIConstants("shah.bi@shah.bi", "Program Chair", "ECOOP");
 	//Test Case to test the DB Connection
+	/**
+	 * Test A get connection.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	//Test will fail if connection object is null
 	@Test
 	public void testAGetConnection() throws IOException {
@@ -27,6 +36,13 @@ public class ImplementSchemaDBTest extends TestCase {
 	}
 
 	//Test Case to test Create Table
+	/**
+	 * Test B set up.
+	 *
+	 * @throws ClassNotFoundException the class not found exception
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	// Test will fail if connection object is null Or Creation of Table Fails
 	@Test
 	public void testBSetUp() throws ClassNotFoundException, SQLException, IOException {
@@ -46,6 +62,12 @@ public class ImplementSchemaDBTest extends TestCase {
 	}
 
 	//Test Case to test Insert Data
+	/**
+	 * Test insert data.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	//Test will fail if connection object is null Or Insertion of Data Fails
 	@Test
 	public void testInsertData() throws SQLException, IOException {
@@ -62,6 +84,12 @@ public class ImplementSchemaDBTest extends TestCase {
 		
 	}
 	
+	/**
+	 * Test insert data 2.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	//Test Case to check to verify object other than user during insertion
 	@Test
 	public void testInsertData2() throws SQLException, IOException {
@@ -71,6 +99,12 @@ public class ImplementSchemaDBTest extends TestCase {
 		assertEquals(false, res);
 	}
 	
+	/**
+	 * Test expected exception.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	//Test Case to verify exception if data is not valid
 	@Test(expected = SQLException.class)
 	public void testExpectedException() throws SQLException, IOException {
@@ -80,6 +114,12 @@ public class ImplementSchemaDBTest extends TestCase {
 	} 
 	
 	//Test Case to test Insert Data into candidate list
+	/**
+	 * Test insert candidate list data.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	//Test will fail if connection object is null Or Insertion of Data Fails
 	@Test
 	public void testInsertCandidateListData() throws SQLException, IOException {
@@ -97,6 +137,12 @@ public class ImplementSchemaDBTest extends TestCase {
 	} 
 	
 	//Test Case to test Insert Data into favorites list
+	/**
+	 * Test insert update fav list data.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	//Test will fail if connection object is null Or Insertion of Data Fails
 	@Test
 	public void testInsertUpdateFavListData() throws SQLException, IOException {
