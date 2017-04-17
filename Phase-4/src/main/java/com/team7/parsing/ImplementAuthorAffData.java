@@ -8,13 +8,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.team7.interfaces.UniversityAuthorData;
+import com.team7.interfaces.ParseCsvFiles;
 
 //Parsing the csv file provided in csrankings.org
 //extracting information about affiliated universities of author.
-public class ImplementAuthorAffData implements UniversityAuthorData {
+public class ImplementAuthorAffData implements ParseCsvFiles {
+	
+	File csvFile;
+	
+	public ImplementAuthorAffData(File file) {
+		this.csvFile = file;
+	}
 
-	public String ParseFiles(File csvFile) throws IOException, SQLException {
+	public String parseCsv() throws IOException, SQLException {
+		
 		BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
@@ -30,15 +37,15 @@ public class ImplementAuthorAffData implements UniversityAuthorData {
         
         try {
         	
-        	br = new BufferedReader(new FileReader(csvFile));
+        	br = new BufferedReader(new FileReader(this.csvFile));
         	while ((line = br.readLine()) != null) {
 
         		// use comma as separator
         		String[] affiliated = line.split(cvsSplitBy);
-        		
+
         		if (affiliated[1].equals("affiliation")) // the header row ignored
         			continue;
-        		
+
         		stmt.setString(1, affiliated[1]);
         		stmt.setString(2, affiliated[0]);
         		stmt.addBatch();
@@ -46,7 +53,6 @@ public class ImplementAuthorAffData implements UniversityAuthorData {
         		if (++i % batchSize == 0){ 
 					stmt.executeBatch();  
 				}
-        		
         	}
         	stmt.executeBatch();
 			br.close();

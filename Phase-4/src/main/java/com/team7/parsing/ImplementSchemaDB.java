@@ -46,7 +46,6 @@ public class ImplementSchemaDB implements SchemaDB {
 			//Register JDBC driver
 			Class.forName(JDBC_DRIVER);
 
-
 			//selecting database created above
 //			String db_url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
 //			String userName = "root";

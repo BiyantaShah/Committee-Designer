@@ -6,7 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.xml.bind.JAXBException;
 
+import com.team7.interfaces.AbstractParseFactory;
+import com.team7.interfaces.FactoryProducer;
+import com.team7.interfaces.ParseCsvFiles;
+import com.team7.interfaces.ParseTextFile;
+import com.team7.interfaces.ParseXml;
 import com.team7.parsing.ImplementAuthorAffData;
 import com.team7.parsing.ImplementCommittees;
 import com.team7.parsing.ImplementHomePageData;
@@ -54,41 +60,45 @@ public class LoginUI extends JFrame {
 	 * @throws IOException 
 	 * @throws JAXBException 
 	 */
-	public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException, JAXBException {
 
 		System.setProperty("java.awt.headless", "true");
-		// Below was used to create database ,extract xml and csv data and insert data into tables
-
-//		File file = new File("input/dblp.xml");
-//		File comData = new File("input/committees/");
-//		File uniData = new File("input/generate-author-info.csv");
-//		File countryData = new File("input/country-info.csv");	
-//		File affData = new File("input/faculty-affiliations.csv");
-//		File hPageData = new File("input/homepages.csv");
-//
-//		// Parsing the xml and csv to create objects
-//		ImplementParseDatabase parse = new ImplementParseDatabase();
+		
+		
 //		ImplementSchemaDB db=new ImplementSchemaDB();
-//		ImplementCommittees com = new ImplementCommittees();
-//		ImplementUniversityAuthorData uni = new ImplementUniversityAuthorData();
-//		ImplementUniCountryData country = new ImplementUniCountryData();
-//		ImplementAuthorAffData aff = new ImplementAuthorAffData();
-//		ImplementHomePageData hPage = new ImplementHomePageData();
+//		db.dbSetUp();
 //
-//		try {
-//			
-//			db.dbSetUp();   //set up initial database
-//			parse.parseXml(file);	//parse xml data
-//			com.ParseFiles(comData); //parse committee data
-//			uni.ParseFiles(uniData); // parsing university data
-//			country.ParseFiles(countryData); // parsing universities and their country
-//			aff.ParseFiles(affData); // parsing the affiliated universities data
-//			hPage.ParseFiles(hPageData); // parsing home-page data
-//
-//		} catch (Exception e1) {
-//			e1.printStackTrace();
-//		}
-
+//		// Extracting the XML file and inserting data into DB
+//		AbstractParseFactory xmlFactory = FactoryProducer.getFactory("XML");
+//		
+//		ParseXml parse = xmlFactory.getXml("input/dblp.xml");
+//		parse.parseXml();
+//		
+//		// Extracting the CSV file and inserting data into DB
+//		AbstractParseFactory csvFactory = FactoryProducer.getFactory("CSV");
+//		
+//		// author and their universities
+//		ParseCsvFiles uniData = csvFactory.getCsv("input/generate-author-info.csv");
+//		uniData.parseCsv();
+//		
+//		// university and their regions
+//		ParseCsvFiles countryData = csvFactory.getCsv("input/country-info.csv");
+//		countryData.parseCsv();
+//		
+//		// authors and affiliated universities
+//		ParseCsvFiles affData = csvFactory.getCsv("input/faculty-affiliations.csv");
+//		affData.parseCsv();
+//		
+//		// authors and their home page urls
+//		ParseCsvFiles hPageData = csvFactory.getCsv("input/homepages.csv");
+//		hPageData.parseCsv();
+//		
+//		// Extracting the files from Committee folder and inserting data into DB
+//		AbstractParseFactory txtFactory = FactoryProducer.getFactory("TXT");
+//		
+//		ParseTextFile comData = txtFactory.getText("input/committees/");
+//		comData.parseText();
+		
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

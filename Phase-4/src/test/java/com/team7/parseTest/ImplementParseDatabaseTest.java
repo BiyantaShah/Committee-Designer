@@ -10,18 +10,22 @@ import java.sql.Statement;
 import javax.xml.bind.JAXBException;
 import org.junit.Test;
 
-import com.team7.parsing.ImplementParseDatabase;
+import com.team7.interfaces.AbstractParseFactory;
+import com.team7.interfaces.FactoryProducer;
+import com.team7.interfaces.ParseXml;
 import com.team7.parsing.ImplementSchemaDB;
 
 import junit.framework.TestCase;
 
 public class ImplementParseDatabaseTest extends TestCase{
 	
+	AbstractParseFactory xmlFac = FactoryProducer.getFactory("XML");
+	
 	@Test
 	public void testParseSuccessInproc() throws JAXBException, SQLException, IOException {
 		
 		// to test the successful parsing of XML file
-	    File file = new File("test.xml");
+	    File file = new File("msdxml.xml");
 	    FileWriter writer = new FileWriter(file);
 	    writer.write("<?xml version='1.0' encoding='ISO-8859-1'?><dblp><inproceedings key='conf/oopsla/1111'><author>testing11</author>"
 	    		+ "<title>testing11</title><pages>15151</pages>"
@@ -48,8 +52,10 @@ public class ImplementParseDatabaseTest extends TestCase{
 	    		+ "<year>11116</year>"
 	    		+ "</inproceedings></dblp>"); 
 		writer.close();
-	    ImplementParseDatabase parse = new ImplementParseDatabase();
-		String result = parse.parseXml(file);
+		
+		ParseXml parse = xmlFac.getXml("msdxml.xml");
+		String result = parse.parseXml();
+	   
 		assertEquals("success", result);
 		
 		// deleting the record inserted
@@ -69,7 +75,7 @@ public class ImplementParseDatabaseTest extends TestCase{
 	public void testParseSuccessProc() throws JAXBException, SQLException, IOException {
 		
 		// to test the successful parsing of XML file
-	    File file = new File("test.xml");
+	    File file = new File("msdxml.xml");
 	    FileWriter writer = new FileWriter(file);
 	    writer.write("<?xml version='1.0' encoding='ISO-8859-1'?><dblp><proceedings key='conf/oopsla/111g'>"
 	    		+ "<title>testing11</title>"
@@ -88,8 +94,10 @@ public class ImplementParseDatabaseTest extends TestCase{
 	    		+ "<booktitle>icfp</booktitle>"
 	    		+ "</proceedings></dblp>"); 
 		writer.close();
-	    ImplementParseDatabase parse = new ImplementParseDatabase();
-		String result = parse.parseXml(file);
+		
+		ParseXml parse = xmlFac.getXml("msdxml.xml");
+		String result = parse.parseXml();
+		
 		assertEquals("success", result);
 		
 		// deleting the record inserted
@@ -106,7 +114,7 @@ public class ImplementParseDatabaseTest extends TestCase{
 	public void testParseSuccessArticle() throws JAXBException, SQLException, IOException {
 		
 		// to test the successful parsing of XML file
-	    File file = new File("test.xml");
+	    File file = new File("msdxml.xml");
 	    FileWriter writer = new FileWriter(file);
 	    writer.write("<?xml version='1.0' encoding='ISO-8859-1'?><dblp><article key='journals/tse/1111'>"
 	    		+ "<author>testing11</author>"
@@ -143,8 +151,9 @@ public class ImplementParseDatabaseTest extends TestCase{
 	    		+ "<ee>testing11</ee>"
 	    		+ "</article></dblp>"); 
 		writer.close();
-	    ImplementParseDatabase parse = new ImplementParseDatabase();
-		String result = parse.parseXml(file);
+		
+		ParseXml parse = xmlFac.getXml("msdxml.xml");
+		String result = parse.parseXml();
 		assertEquals("success", result);
 		
 		// deleting the record inserted

@@ -11,12 +11,16 @@ import java.sql.Statement;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-import com.team7.parsing.ImplementCommittees;
+import com.team7.interfaces.AbstractParseFactory;
+import com.team7.interfaces.FactoryProducer;
+import com.team7.interfaces.ParseTextFile;
 import com.team7.parsing.ImplementSchemaDB;
 
 import junit.framework.TestCase;
 
 public class ImplementCommitteesTest extends TestCase {
+	
+	AbstractParseFactory txtFac = FactoryProducer.getFactory("TXT");
 
 	// Test case for successful parsing
 	@Test
@@ -45,8 +49,9 @@ public class ImplementCommitteesTest extends TestCase {
 	    writer4.write("test"); 	    
 		writer4.close();
 		
-		ImplementCommittees com = new ImplementCommittees();
-		String result = com.ParseFiles(test);
+		ParseTextFile parse = txtFac.getText("input/committes");
+		String result = parse.parseText();
+		
 		assertEquals("success", result); 
 				
 		FileUtils.deleteDirectory(test);
@@ -67,8 +72,8 @@ public class ImplementCommitteesTest extends TestCase {
 		File test = new File("input/committes/");
 		test.mkdirs();
 		
-		ImplementCommittees com = new ImplementCommittees();
-		String result = com.ParseFiles(test);
+		ParseTextFile parse = txtFac.getText("input/committes");
+		String result = parse.parseText();
 		assertEquals("No data", result);
 		FileUtils.deleteDirectory(test);		
 		

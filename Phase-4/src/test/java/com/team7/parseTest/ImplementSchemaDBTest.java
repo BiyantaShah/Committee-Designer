@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.jcabi.jdbc.JdbcSession;
 import com.team7.parsing.Author;
 import com.team7.parsing.ImplementSchemaDB;
 import com.team7.parsing.User;
