@@ -146,7 +146,7 @@ public class CandidateListUI extends JFrame {
 			}
 		});
 
-
+ 
 
 		// favorites list table
 		JPanel panel_1 = new JPanel();
