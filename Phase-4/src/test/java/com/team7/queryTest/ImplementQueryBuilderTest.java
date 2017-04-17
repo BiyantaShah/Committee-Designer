@@ -615,4 +615,18 @@ public class ImplementQueryBuilderTest extends TestCase {
   		List<String> result = obj.getResultForDisplay(queryFormed);	
 		assertEquals(452,result.size()); 
 	}
+	
+	@Test
+	public void testCountArticlesWithAuthorName() throws SQLException, IOException {
+		
+		SearchParameter s1= new SearchParameter("CountNoOfArticles", ">" ,"3", null);
+		SearchParameter s2= new SearchParameter("Name","LIKE" ,"Frank", "OR ");
+		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(s1);
+  		searchCriteria.add(s2);
+  		ImplementQueryBuilder obj = new ImplementQueryBuilder();
+  		List<String> queryFormed = obj.createQuery(searchCriteria);
+  		List<String> result = obj.getResultForDisplay(queryFormed);	
+		assertEquals(0,result.size()); 
+	}
 }
