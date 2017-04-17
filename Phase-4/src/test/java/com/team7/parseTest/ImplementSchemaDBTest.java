@@ -37,12 +37,13 @@ public class ImplementSchemaDBTest extends TestCase {
 		Connection conn = new ImplementSchemaDB().getConnection();
 		PreparedStatement  test = conn.prepareStatement("show tables");
      	test.executeQuery();
-
-		JdbcSession sessionObject = new JdbcSession(conn)
-					.sql("show tables")
-					.execute();
-		assertNotNull(sessionObject);		
-		conn.close(); 
+     	
+     	boolean res = true;
+     	if (conn.equals(null)) {
+     		res = false;
+     	}
+     	
+     	assertTrue(res);
 	}
 
 	//Test Case to test Insert Data
@@ -56,14 +57,10 @@ public class ImplementSchemaDBTest extends TestCase {
 		// delete the user before inserting it every time
 		stmt.executeUpdate("delete from User where username='test@test.com'");		
 		User test = new User("test@test.com","test","editor","OOPSLA");	
-		db.insertData(test);
+		boolean res = db.insertData(test);
+
+		assertTrue(res);
 		
-		assertNotNull(conn);
-			JdbcSession sessionObject = new JdbcSession(conn)
-					.sql("select id from User where userName like 'test@test.com'")
-					.execute();
-		assertNotNull(sessionObject);
-		conn.close();
 	}
 	
 	//Test Case to check to verify object other than user during insertion

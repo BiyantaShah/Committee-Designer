@@ -39,11 +39,11 @@ import com.team7.uiTest.ImplementSimilarAuthorsUITest;
    SearchParameterTest.class, 
 
    //UI Tests
-   ImplementCandidateListUITest.class,ImplementDisplayUITest.class,ImplementFavUITest.class, 
-   ImplementLoginTest.class,ImplementLoginUITest.class,
-   ImplementPubDetailsUITest.class,ImplementRegisterTest.class, 
-   ImplementRegisterUITest.class,ImplementSearchUITest.class,  
-   ImplementSimilarAuthorsUITest.class,
+   ImplementCandidateListUITest.class,ImplementDisplayUITest.class,
+   ImplementFavUITest.class, ImplementRegisterTest.class, 
+   ImplementRegisterUITest.class,ImplementLoginTest.class,
+   ImplementLoginUITest.class,ImplementPubDetailsUITest.class, 
+   ImplementSearchUITest.class,ImplementSimilarAuthorsUITest.class,
 })
 
 public class JUnitTestSuite {

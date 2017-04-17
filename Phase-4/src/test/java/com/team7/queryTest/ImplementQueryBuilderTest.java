@@ -413,7 +413,7 @@ public class ImplementQueryBuilderTest extends TestCase {
 		List<String> expected = new ArrayList<String>();
   		expected.add(0, "SELECT a.name AS Author FROM Author a INNER JOIN Paper p ON a.paperKey = p.paperKey GROUP BY a.name HAVING COUNT(*) >5");
   		expected.add(1, null);
-  		expected.add(2, "SELECT ar.Author AS Author FROM  Article ar  WHERE ar.journal= 'TSE'");
+  		expected.add(2, "SELECT a.name AS Author FROM Author a INNER JOIN Article ar ON a.articleKey = ar.articleKey WHERE ar.journal= 'TSE'");
 		SearchParameter s1= new SearchParameter("JournalName", "=" ,"TSE", "AND");
 		SearchParameter s2= new SearchParameter("CountNoOfPapers", ">" ,"5",null);
 		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
@@ -562,7 +562,21 @@ public class ImplementQueryBuilderTest extends TestCase {
   		ImplementQueryBuilder obj = new ImplementQueryBuilder();
   		List<String> queryFormed = obj.createQuery(searchCriteria);
   		List<String> result = obj.getResultForDisplay(queryFormed);	
-		assertEquals(452,result.size()); 
+		assertEquals(6603,result.size()); 
+	}
+	
+	@Test
+	public void testToCountNoOfArticlesJournal() throws SQLException, IOException{ 	
+
+		SearchParameter s1= new SearchParameter("JournalName", "=" ,"TSE", "OR "); 
+  		SearchParameter s2= new SearchParameter("CountNoOfArticles", ">" ,"0", null);  	
+  		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(s1);
+  		searchCriteria.add(s2);
+  		ImplementQueryBuilder obj = new ImplementQueryBuilder();
+  		List<String> queryFormed = obj.createQuery(searchCriteria);
+  		List<String> result = obj.getResultForDisplay(queryFormed);	
+		assertEquals(5336,result.size()); 
 	}
 	
 	@Test
@@ -597,6 +611,33 @@ public class ImplementQueryBuilderTest extends TestCase {
   		searchCriteria.add(s4);
   		searchCriteria.add(s5);
   		
+  		ImplementQueryBuilder obj = new ImplementQueryBuilder();
+  		List<String> queryFormed = obj.createQuery(searchCriteria);
+  		List<String> result = obj.getResultForDisplay(queryFormed);	
+		assertEquals(0,result.size()); 
+	}
+	
+	@Test
+	public void testCountArticlesOnly() throws SQLException, IOException {
+		
+		SearchParameter s1= new SearchParameter("CountNoOfArticles", ">" ,"3", null);
+		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(s1);
+  		
+  		ImplementQueryBuilder obj = new ImplementQueryBuilder();
+  		List<String> queryFormed = obj.createQuery(searchCriteria);
+  		List<String> result = obj.getResultForDisplay(queryFormed);	
+		assertEquals(452,result.size()); 
+	}
+	
+	@Test
+	public void testCountArticlesWithAuthorName() throws SQLException, IOException {
+		
+		SearchParameter s1= new SearchParameter("CountNoOfArticles", ">" ,"3", null);
+		SearchParameter s2= new SearchParameter("Name","LIKE" ,"Frank", "OR ");
+		List<SearchParameter> searchCriteria = new ArrayList<SearchParameter>();
+  		searchCriteria.add(s1);
+  		searchCriteria.add(s2);
   		ImplementQueryBuilder obj = new ImplementQueryBuilder();
   		List<String> queryFormed = obj.createQuery(searchCriteria);
   		List<String> result = obj.getResultForDisplay(queryFormed);	

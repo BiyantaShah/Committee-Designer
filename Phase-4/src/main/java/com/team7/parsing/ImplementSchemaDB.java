@@ -22,9 +22,15 @@ import java.sql.PreparedStatement;
  *  hence they won't be created again.
  */
 
+/*
+ * We have implemented the Singleton Design Pattern here, formerly the connection object was instantiated 
+ * every time we needed to fetch a query result from the DB. Using Singleton Design Pattern we only create the
+ * object of 'Connection' once and use it everywhere.
+ */
 public class ImplementSchemaDB implements SchemaDB { 
 
 	Properties props;
+	static Connection conn; 
 
 	// creating  DB and its initial skeleton 
 	public void dbSetUp() throws ClassNotFoundException, SQLException, IOException{
@@ -61,9 +67,9 @@ public class ImplementSchemaDB implements SchemaDB {
 			stmt.executeUpdate(sql);
 			  
 			// Database properties for RDS 
-			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
+//			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
 			
-//			String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
+			String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
 			conn = DriverManager.getConnection(connected_db, userName, password);
 			stmt = conn.createStatement();
 
@@ -109,6 +115,7 @@ public class ImplementSchemaDB implements SchemaDB {
 					"(id        INTEGER      AUTO_INCREMENT NOT NULL, " +
 					" name      VARCHAR(255), " + 
 					" paperKey  VARCHAR(255), " +
+					" articleKey VARCHAR(255), " +
 					" university  VARCHAR(255), " +
 					" uniRegion   VARCHAR(255), " +
 					" affiliatedUni VARCHAR(255), "+
@@ -117,11 +124,11 @@ public class ImplementSchemaDB implements SchemaDB {
 
 			stmt.executeUpdate(sql);
 
-			// Adding index to the paper key and name in author making it faster during a join
+			// Adding index to the paper key and articleKey in author making it faster during a join
 //			 sql = "ALTER TABLE Author ADD INDEX keyA(paperKey)";
 //			 stmt.executeUpdate(sql);
 //			 
-//			 sql = "ALTER TABLE Author ADD INDEX keyA1(name)";
+//			 sql = "ALTER TABLE Author ADD INDEX keyA1(articleKey)";
 //			 stmt.executeUpdate(sql);
 			
 
@@ -138,18 +145,18 @@ public class ImplementSchemaDB implements SchemaDB {
 
 			// creating Article table
 			sql = "CREATE TABLE IF NOT EXISTS Article " +
-					"(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
-					" author	  VARCHAR(255), " +
+					"(id          INTEGER      AUTO_INCREMENT NOT NULL, " +	
 					" title       TEXT, " + 
 					" journal	  VARCHAR(255), " +
 					" year        INTEGER, " + 
-					" ee          TEXT, "      +   
+					" ee          TEXT, "      + 
+					" articleKey	  VARCHAR(255), " +
 					" PRIMARY     KEY(id))" ;
 
 			stmt.executeUpdate(sql);
 			
-			// Adding indexes in article table on author name for faster access
-//			sql = "ALTER TABLE Article ADD INDEX keyR(author)";
+			// Adding indexes in article table on articleKey for faster access
+//			sql = "ALTER TABLE Article ADD INDEX keyR(articleKey)";
 //			stmt.executeUpdate(sql);
 			
 			// creating Favorites table
@@ -179,33 +186,33 @@ public class ImplementSchemaDB implements SchemaDB {
 			se.printStackTrace(); 
 
 		}
-		conn.close();
 
 	}
 
 	public Connection getConnection() throws IOException {
 
-		Connection conn = null; 
 
-		//Database Properties
-//		String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";		
-//		String userName = "root";
-//		String password = "9HTa~TZ?dyQWM4}";
+		if (conn == null) {
+			//Database Properties for RDS
+//			String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";
+//			String userName = "root";
+//			String password = "9HTa~TZ?dyQWM4}";
+			
+			// Database properties for local DB
+			String url = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
+			String userName = "root";
+			String password = "root";
 
-		// Database properties for local DB		
-		String url = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
-		String userName = "root";
-		String password = "root";
+			try {
 
+				conn = DriverManager.getConnection(url, userName, password);
 
-		try {
+			} catch (SQLException e) {
 
-			conn = DriverManager.getConnection(url, userName, password);
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
+				e.printStackTrace();
+			}
 		}
+		
 		return conn;
 	}
 
@@ -230,10 +237,9 @@ public class ImplementSchemaDB implements SchemaDB {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			return false;
 		}
-		conn.close();
+		
 		return true;
 	}
 	
