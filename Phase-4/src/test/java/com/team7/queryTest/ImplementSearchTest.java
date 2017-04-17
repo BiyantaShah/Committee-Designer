@@ -15,9 +15,19 @@ import com.team7.queryEngine.SearchParameter;
 
 import junit.framework.TestCase;
 
+
+/**
+ * The Class ImplementSearchTest.
+ */
 public class ImplementSearchTest extends TestCase {
 	
 	
+	/**
+	 * Test search valid.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	// Testing the final query result
 	@Test
 	public void testSearchValid() throws SQLException, IOException {
@@ -31,6 +41,12 @@ public class ImplementSearchTest extends TestCase {
 
 	} 
 		
+	/**
+	 * Test candidate details.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	// Valid candidate details extracted
 	@Test
 	public void testCandidateDetails() throws SQLException, IOException {   
@@ -48,6 +64,12 @@ public class ImplementSearchTest extends TestCase {
 	} 
 	
 	
+	/**
+	 * Test sim auth.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	// Testing the similar authors function
 	public void testSimAuth() throws SQLException, IOException {
@@ -57,6 +79,12 @@ public class ImplementSearchTest extends TestCase {
 	}
 
 	
+	/**
+	 * Test send email valid.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	// Email sent successfully
 	@Test
 	public void testSendEmailValid() throws SQLException, IOException {

@@ -22,6 +22,9 @@ import java.sql.PreparedStatement;
  *  hence they won't be created again.
  */
 
+/**
+ * The Class ImplementSchemaDB.
+ */
 /*
  * We have implemented the Singleton Design Pattern here, formerly the connection object was instantiated 
  * every time we needed to fetch a query result from the DB. Using Singleton Design Pattern we only create the
@@ -29,9 +32,15 @@ import java.sql.PreparedStatement;
  */
 public class ImplementSchemaDB implements SchemaDB { 
 
+	/** The props. */
 	Properties props;
+	
+	/** The conn. */
 	static Connection conn; 
 
+	/*
+	 * @see com.team7.interfaces.SchemaDB#dbSetUp()
+	 */
 	// creating  DB and its initial skeleton 
 	public void dbSetUp() throws ClassNotFoundException, SQLException, IOException{
 
@@ -46,37 +55,38 @@ public class ImplementSchemaDB implements SchemaDB {
 			//Register JDBC driver
 			Class.forName(JDBC_DRIVER);
 
-			//selecting database created above
-//			String db_url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
+			// creating a connection for local DB 
+//			String db_url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
 //			String userName = "root";
-//			String password = "9HTa~TZ?dyQWM4}";
-			
-			String db_url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
-			String userName = "root";
-			String password = "root";
+//			String password = "root";
 
 			// getting the connection to local host (only for local DB)
-			conn = DriverManager.getConnection(db_url, userName, password);
-			stmt = conn.createStatement();
+//			conn = DriverManager.getConnection(db_url, userName, password);
+//			stmt = conn.createStatement();
 			 			
-			//Create Database for local DB
+			// Create Database for local DB
 			// On RDS you need to separately create the DB first and run the below code to create tables.
-			stmt = conn.createStatement();			      
-			sql = "CREATE DATABASE IF NOT EXISTS DBLP";
-			stmt.executeUpdate(sql);
+//			stmt = conn.createStatement();			      
+//			sql = "CREATE DATABASE IF NOT EXISTS DBLP";
+//			stmt.executeUpdate(sql);
 			  
 			// Database properties for RDS 
-//			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
+			String connected_db = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
+			String userName = "root";
+			String password = "9HTa~TZ?dyQWM4}";
 			
-			String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
+			// For local DB
+//			String connected_db = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
+			
+			// Connect to the DB
 			conn = DriverManager.getConnection(connected_db, userName, password);
 			stmt = conn.createStatement();
 
 			//creating user table
 			sql = "CREATE TABLE IF NOT EXISTS User " +
 					"(id       INTEGER      AUTO_INCREMENT NOT NULL, " +
-					" username VARCHAR(255) UNIQUE, " + 
-					" password VARCHAR(255), " + 
+					" username VARCHAR(255) UNIQUE NOT NULL, " + 
+					" password VARCHAR(255) NOT NULL, " + 
 					" role     VARCHAR(255), " + 
 					" confName VARCHAR(255),"+
 					" PRIMARY  KEY(id))"; 
@@ -188,19 +198,22 @@ public class ImplementSchemaDB implements SchemaDB {
 
 	}
 
+	/* 
+	 * @see com.team7.interfaces.SchemaDB#getConnection()
+	 */
 	public Connection getConnection() throws IOException {
 
 
 		if (conn == null) {
 			//Database Properties for RDS
-//			String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";
-//			String userName = "root";
-//			String password = "9HTa~TZ?dyQWM4}";
+			String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";
+			String userName = "root";
+			String password = "9HTa~TZ?dyQWM4}";
 			
 			// Database properties for local DB
-			String url = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
-			String userName = "root";
-			String password = "root";
+//			String url = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
+//			String userName = "root";
+//			String password = "root";
 
 			try {
 
@@ -215,6 +228,9 @@ public class ImplementSchemaDB implements SchemaDB {
 		return conn;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.team7.interfaces.SchemaDB#insertData(java.lang.Object)
+	 */
 	// Inserting data into the user table
 	public boolean insertData(Object object_name) throws SQLException, IOException {
 
@@ -242,6 +258,9 @@ public class ImplementSchemaDB implements SchemaDB {
 		return true;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.team7.interfaces.SchemaDB#insertIntoCandidateList(java.lang.String)
+	 */
 	// Inserting data into the Candidate List table
 	public boolean insertIntoCandidateList(String author) throws IOException, SQLException {
 		
@@ -254,6 +273,15 @@ public class ImplementSchemaDB implements SchemaDB {
 		
 	}
 	
+	/**
+	 * Update candidate list.
+	 *
+	 * @param author the author
+	 * @param conference the conference
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SQLException the SQL exception
+	 */
 	// Deleting data from the Candidate List table
 	public boolean updateCandidateList(String author, String conference) throws IOException, SQLException {
 
@@ -268,6 +296,9 @@ public class ImplementSchemaDB implements SchemaDB {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.team7.interfaces.SchemaDB#insertIntoFavList(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	// Inserting data into the favorites list table
 	public boolean insertIntoFavList(String userName, String conference, String author) throws IOException, SQLException {
 		
@@ -281,6 +312,15 @@ public class ImplementSchemaDB implements SchemaDB {
 		return true;
 	}
 	
+	/**
+	 * Update fav list.
+	 *
+	 * @param userName the user name
+	 * @param author the author
+	 * @return true, if successful
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	// Updating the favorites list table
 	public boolean updateFavList(String userName, String author) throws SQLException, IOException {
 		

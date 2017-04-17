@@ -8,11 +8,20 @@ import org.junit.Test;
 import com.team7.ui.SearchUI;
 import com.team7.ui.UIConstants;
 
+/**
+ * The Class ImplementSearchUITest.
+ */
 public class ImplementSearchUITest {
 	
+	/** The u. */
 	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Conference Chair", "ECOOP");
+	
+	/** The search. */
 	SearchUI search = new SearchUI();
 	
+	/**
+	 * Test new row button.
+	 */
 	@Test
 	// Testing the new button in each row
 	public void testNewRowButton() {
@@ -23,6 +32,12 @@ public class ImplementSearchUITest {
 		search.dispose();
 	}
 	
+	/**
+	 * Test logout button.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	// Testing the logout button
 	public void testLogoutButton() throws SQLException, IOException {
@@ -30,6 +45,12 @@ public class ImplementSearchUITest {
 		search.dispose();
 	}
 	
+	/**
+	 * Test submit button.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	// Testing the submit button
 	public void testSubmitButton() throws SQLException, IOException {

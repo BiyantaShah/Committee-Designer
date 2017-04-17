@@ -1,5 +1,5 @@
 package com.team7.uiTest;
- 
+
 import static org.junit.Assert.*;
 
 import java.io.IOException;
@@ -12,8 +12,16 @@ import org.junit.Test;
 import com.team7.parsing.ImplementSchemaDB;
 import com.team7.ui.ImplementRegister;
 
+/**
+ * The Class ImplementRegisterTest.
+ */
 public class ImplementRegisterTest { 
 
+	/**
+	 * Test create user success.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	//Test to verify a successful user registration - should return true
 	public void testCreateUserSuccess() throws Exception {
@@ -31,7 +39,12 @@ public class ImplementRegisterTest {
 		assertEquals("true",res);		
 
 	}  
-	
+
+	/**
+	 * Test user exists success.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	//Test to verify a successful user registration - should return exists
 	public void testUserExistsSuccess() throws Exception {
@@ -41,28 +54,43 @@ public class ImplementRegisterTest {
 		assertEquals("exists",res);
 
 	}
-	
+
+	/**
+	 * Test pwd encryption success.
+	 *
+	 * @throws SQLException the SQL exception
+	 */
 	@Test
 	//Test to successful encryption of password
 	public void testPwdEncryptionSuccess() throws SQLException {
 
 		ImplementRegister user = new ImplementRegister();
 		String res;
-			res = user.encryptPassword("123","SECRETKEY");
-			int len = res.length();
-		    assertEquals(len,13);
+		res = user.encryptPassword("123","SECRETKEY");
+		int len = res.length();
+		assertEquals(len,13);
 	}
-	
-	
+
+
+	/**
+	 * Test pwd encryption failure.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void testPwdEncryptionFailure() throws Exception {
-	    
+
 		ImplementRegister user = new ImplementRegister();		
 		assertEquals("failure",user.encryptPassword("123",""));	
-		
+
 	}  
-	  
-	
+
+
+	/**
+	 * Test create user failure.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	//Test to verify a unsuccessful user registration - should return invalid email
 	// When email ID does not contain "@"
@@ -76,6 +104,11 @@ public class ImplementRegisterTest {
 
 	}
 
+	/**
+	 * Test create user failure 1.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	//Test to verify a unsuccessful user registration - should return invalid email
 	// When email ID does not contain .com or .edu as the domain
@@ -89,6 +122,11 @@ public class ImplementRegisterTest {
 
 	}
 
+	/**
+	 * Test create user failure 2.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	//Test to verify a unsuccessful user registration - should return invalid email
 	// When email ID contain 2 "@"
@@ -102,6 +140,11 @@ public class ImplementRegisterTest {
 
 	}
 
+	/**
+	 * Test create user failure 3.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	//Test to verify a unsuccessful user registration - should return invalid email
 	// When email ID does contain domain name
@@ -114,7 +157,12 @@ public class ImplementRegisterTest {
 		assertEquals("invalid email",res);		
 
 	}
-	
+
+	/**
+	 * Test create user failure 4.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	//Test to verify a unsuccessful user registration - should return invalid email
 	// When contains multiple userNames
@@ -129,6 +177,12 @@ public class ImplementRegisterTest {
 	}
 
 
+	/**
+	 * Test verify user exists failure.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	//Test to verify a successful user registration - should return success
 	public void testVerifyUserExistsFailure() throws SQLException, IOException {

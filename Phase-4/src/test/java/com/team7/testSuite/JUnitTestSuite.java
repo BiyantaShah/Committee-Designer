@@ -23,6 +23,9 @@ import com.team7.uiTest.ImplementRegisterUITest;
 import com.team7.uiTest.ImplementSearchUITest;
 import com.team7.uiTest.ImplementSimilarAuthorsUITest;
 
+/**
+ * The Class JUnitTestSuite.
+ */
 //JUnit Suite Test
 @RunWith(Suite.class)
 

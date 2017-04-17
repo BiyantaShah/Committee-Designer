@@ -10,10 +10,17 @@ import org.junit.Test;
 import com.team7.parsing.ImplementSchemaDB;
 import com.team7.ui.RegisterUI;
 
+/**
+ * The Class ImplementRegisterUITest.
+ */
 public class ImplementRegisterUITest  {
 	
+	/** The reg. */
 	RegisterUI reg = new RegisterUI();
 	
+	/**
+	 * Test reg user empty.
+	 */
 	@Test
 	// Testing the user name field being empty
 	public void testRegUserEmpty() {
@@ -22,6 +29,9 @@ public class ImplementRegisterUITest  {
 		reg.dispose();
 	}
 	
+	/**
+	 * Test reg pass empty.
+	 */
 	@Test
 	// Testing the password field being empty
 	public void testRegPassEmpty() {
@@ -30,6 +40,9 @@ public class ImplementRegisterUITest  {
 		reg.dispose();
 	}
 	
+	/**
+	 * Test reg user exists.
+	 */
 	@Test
 	// Testing the user already exists 
 	public void testRegUserExists() {
@@ -39,6 +52,9 @@ public class ImplementRegisterUITest  {
 		reg.dispose();
 	}
 	
+	/**
+	 * Test reg user email invalid.
+	 */
 	@Test
 	// Testing the invalid email 
 	public void testRegUserEmailInvalid() {
@@ -48,6 +64,12 @@ public class ImplementRegisterUITest  {
 		reg.dispose();
 	}
 	
+	/**
+	 * Test reg button.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	// Testing the register button
 	public void testRegButton() throws SQLException, IOException {
@@ -63,6 +85,12 @@ public class ImplementRegisterUITest  {
 		reg.dispose();
 	}
 	
+	/**
+	 * Testblank username.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	// Testing the register button with blank in the username
 	public void testblankUsername() throws SQLException, IOException {
@@ -71,6 +99,12 @@ public class ImplementRegisterUITest  {
 		reg.btnRegister.doClick();
 	}
 	
+	/**
+	 * Testblank password.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	// Testing the register button with blank in the password
 	public void testblankPassword() throws SQLException, IOException {
@@ -79,6 +113,12 @@ public class ImplementRegisterUITest  {
 		reg.btnRegister.doClick();
 	}
 	
+	/**
+	 * Test username length.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	// Testing the register button with user name length > 50
 	public void testUsernameLength() throws SQLException, IOException {
@@ -87,6 +127,11 @@ public class ImplementRegisterUITest  {
 		reg.btnRegister.doClick();
 	}
 	
+	/**
+	 * Test login button.
+	 *
+	 * @throws SQLException the SQL exception
+	 */
 	@Test
 	// Testing the register button
 	public void testLoginButton() throws SQLException {

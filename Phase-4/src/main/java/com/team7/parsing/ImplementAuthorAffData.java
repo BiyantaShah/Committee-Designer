@@ -11,15 +11,27 @@ import java.sql.SQLException;
 import com.team7.interfaces.ParseCsvFiles;
 
 //Parsing the csv file provided in csrankings.org
+/**
+ * The Class ImplementAuthorAffData.
+ */
 //extracting information about affiliated universities of author.
 public class ImplementAuthorAffData implements ParseCsvFiles {
 	
+	/** The csv file. */
 	File csvFile;
 	
+	/**
+	 * Instantiates a new implement author aff data.
+	 *
+	 * @param file the file
+	 */
 	public ImplementAuthorAffData(File file) {
 		this.csvFile = file;
 	}
 
+	/* 
+	 * @see com.team7.interfaces.ParseCsvFiles#parseCsv()
+	 */
 	public String parseCsv() throws IOException, SQLException {
 		
 		BufferedReader br = null;

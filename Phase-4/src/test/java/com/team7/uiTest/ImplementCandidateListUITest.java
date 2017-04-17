@@ -18,11 +18,23 @@ import com.team7.parsing.ImplementSchemaDB;
 import com.team7.ui.CandidateListUI;
 import com.team7.ui.UIConstants;
 
+/**
+ * The Class ImplementCandidateListUITest.
+ */
 public class ImplementCandidateListUITest {
 
+	/** The u. */
 	UIConstants u  = new UIConstants("shahbiyanta@gmail.com", "Program Chair", "ECOOP");
+	
+	/** The can list. */
 	CandidateListUI canList = new CandidateListUI();
 
+	/**
+	 * Test.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SQLException the SQL exception
+	 */
 	@Test
 	public void test() throws IOException, SQLException {
 		
@@ -79,6 +91,13 @@ public class ImplementCandidateListUITest {
 	    }		
 	}	
 	
+	/**
+	 * Builds the table model.
+	 *
+	 * @param rs the rs
+	 * @return the default table model
+	 * @throws SQLException the SQL exception
+	 */
 	public static DefaultTableModel buildTableModel(ResultSet rs)
 	        throws SQLException {
 
@@ -106,6 +125,9 @@ public class ImplementCandidateListUITest {
 	}
 	
  	
+	/**
+	 * Test logout.
+	 */
 	@Test	
 	// Testing logout button
 	public void testLogout() {		
@@ -113,6 +135,9 @@ public class ImplementCandidateListUITest {
 		canList.dispose();
 	}
  	
+	/**
+	 * Test search UI.
+	 */
 	@Test
 	// Testing the SearchUI function
 	public void testSearchUI() {
@@ -120,6 +145,9 @@ public class ImplementCandidateListUITest {
 		canList.dispose();
 	}
 	
+	/**
+	 * Test favorite lis UI.
+	 */
 	@Test
 	// Testing the Candidate list 
 	public void testFavoriteLisUI() {

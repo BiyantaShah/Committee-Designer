@@ -26,17 +26,38 @@ import javax.swing.table.TableModel;
 
 import com.team7.parsing.ImplementSchemaDB;
 
+/**
+ * The Class FavoriteListUI.
+ */
 // Class creates User interface for favorites list
 public class FavoriteListUI extends JFrame {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The btn logout. */
 	public JButton btnLogout;
+	
+	/** The btn search. */
 	public JButton btnSearch;
+	
+	/** The table. */
 	public JTable table;
+	
+	/** The btn remove. */
 	public JButton btnRemove;
+	
+	/** The btn candidates list. */
 	public JButton btnCandidatesList;
 
+	/**
+	 * Instantiates a new favorite list UI.
+	 *
+	 * @param favList the fav list
+	 */
 	public FavoriteListUI(Set<String> favList) {
 		
 		setVisible(true);
@@ -60,6 +81,7 @@ public class FavoriteListUI extends JFrame {
 		lblSavedAuthors.setBounds(499, 61, 197, 34);
 		panel.add(lblSavedAuthors);
 
+		//button for searchUI screen
 		btnSearch = new JButton("Search UI");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSearch.setBounds(950, 13, 117, 34);
@@ -75,6 +97,7 @@ public class FavoriteListUI extends JFrame {
 			} 
 		});
 
+		//button to logout of application
 		btnLogout = new JButton("LogOut");
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnLogout.setBounds(1071, 13, 117, 34);
@@ -93,6 +116,7 @@ public class FavoriteListUI extends JFrame {
 			}
 		});
  
+		//button to view final Candidates list
 		btnCandidatesList = new JButton("Candidates List");
 		btnCandidatesList.setVisible(false);
 		if(UIConstants.currentUserRole.equals("Program Chair")){
@@ -179,6 +203,13 @@ public class FavoriteListUI extends JFrame {
 	}
 
 	
+	/**
+	 * Builds the table model.
+	 *
+	 * @param favList the fav list
+	 * @return the table model
+	 * @throws SQLException the SQL exception
+	 */
 	// rendering to the favorites list
 	public TableModel buildTableModel(Set<String> favList) throws SQLException {
 

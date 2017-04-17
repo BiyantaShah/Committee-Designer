@@ -26,39 +26,92 @@ import java.util.Set;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
+/**
+ * The Class SearchUI.
+ */
 // Search Criteria page is created here
 @SuppressWarnings("serial")
 public class SearchUI extends JFrame { 
 
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The Value field 1. */
 	private JTextField ValueField_1;
+	
+	/** The Value field 2. */
 	private JTextField ValueField_2;
+	
+	/** The Value field 3. */
 	private JTextField ValueField_3;
+	
+	/** The Value field 4. */
 	private JTextField ValueField_4;
+	
+	/** The Value field 5. */
 	private JTextField ValueField_5;
+	
+	/** The New row button 1. */
 	public JButton NewRowButton_1;
+	
+	/** The New row button 2. */
 	public JButton NewRowButton_2; 
+	
+	/** The New row button 3. */
 	public JButton NewRowButton_3;
+	
+	/** The New row button 4. */
 	public JButton NewRowButton_4;
+	
+	/** The btn logout. */
 	public JButton btnLogout;
+	
+	/** The btn new button. */
 	public JButton btnNewButton; // submit button
 
+	/** The sp 1. */
 	SearchParameter sp1 = new SearchParameter();
+	
+	/** The sp 2. */
 	SearchParameter sp2 = new SearchParameter();
+	
+	/** The sp 3. */
 	SearchParameter sp3 = new SearchParameter();
+	
+	/** The sp 4. */
 	SearchParameter sp4 = new SearchParameter();
+	
+	/** The sp 5. */
 	SearchParameter sp5 = new SearchParameter();
 
+	/** The q 1. */
 	boolean q1 = true;
+	
+	/** The q 2. */
 	boolean q2 = false;
+	
+	/** The q 3. */
 	boolean q3 = false;
+	
+	/** The q 4. */
 	boolean q4 = false;
+	
+	/** The q 5. */
 	boolean q5 = false;
 
+	/** The final list. */
 	List<SearchParameter> finalList = new ArrayList<SearchParameter>();
+	
+	/** The log. */
 	LoginUI log = new LoginUI();
+	
+	/** The sd. */
 	ImplementSearchDisplay sd = new ImplementSearchDisplay();
+	
+	/** The count P. */
 	int countP = 0;
+	
+	/** The count A. */
 	int countA = 0;
 
 	/**
@@ -214,7 +267,6 @@ public class SearchUI extends JFrame {
 		panel_1.add(CriteriaComboBox_1);
 
 		CriteriaComboBox_1.setSelectedItem(keys.toArray()[0]);
-		//sp1.searchFilter = Criteria.get(CriteriaComboBox_1.getSelectedItem());
 		ComparatorComboBox_1.addItem("=");
 		ComparatorComboBox_1.addItem("!=");
 		ComparatorComboBox_1.addItem("LIKE");
@@ -1117,10 +1169,8 @@ public class SearchUI extends JFrame {
 							flag = false;
 						}
 					} catch (SQLException e2) {
-						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}					
 					DisplayUI display;
@@ -1153,7 +1203,6 @@ public class SearchUI extends JFrame {
 					fl.setSize(UIConstants.width, UIConstants.height);
 					fl.setLocationRelativeTo(null);
 				} catch (SQLException | IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

@@ -32,24 +32,41 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
+/**
+ * The Class DisplayUI.
+ */
 // Search display results page is created here.
 public class DisplayUI extends JFrame {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The content pane. */
 	private JPanel contentPane;
 	
+	/** The save authors. */
 	// List of Authors whose publication details are to be viewed
 	Set<String> saveAuthors = new HashSet<String>();
 
+	/** The btn pub details. */
 	public JButton btnPubDetails;
+	
+	/** The btn logout. */
 	public JButton btnLogout;
+	
+	/** The btn search. */
 	public JButton btnSearch; 
+	
+	/** The btn similar authors. */
 	public JButton btnSimilarAuthors;
+	
+	/** The table. */
 	JTable table;
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException 
+	 *
+	 * @param authors the authors
 	 */
 	public DisplayUI(List<String> authors) {
 
@@ -161,7 +178,6 @@ public class DisplayUI extends JFrame {
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 
-
 		try {
 			table = new JTable(buildTableModel(authors));
 			JTableHeader header = table.getTableHeader();
@@ -176,8 +192,8 @@ public class DisplayUI extends JFrame {
 			}
 
 			// Rendering a button for each table row
-			table.getColumn("Save").setCellRenderer(new JTableButtonRenderer());
-			table.getColumn("Save").setCellEditor(
+			table.getColumn("").setCellRenderer(new JTableButtonRenderer());
+			table.getColumn("").setCellEditor(
 					new ButtonEditor(new JCheckBox()));
 
 			// Not allowing the columns to be dragged
@@ -202,6 +218,9 @@ public class DisplayUI extends JFrame {
 		panel_2.setLayout(null);
 
 		btnSimilarAuthors = new JButton("Similar Authors");
+		btnSimilarAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnSimilarAuthors.setBounds(116, 6, 171, 29);
+		panel_2.add(btnSimilarAuthors);
 		btnSimilarAuthors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -239,12 +258,11 @@ public class DisplayUI extends JFrame {
 				}
 			}
 		});
-		btnSimilarAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnSimilarAuthors.setBounds(116, 6, 171, 29);
-		panel_2.add(btnSimilarAuthors);
 
 		btnPubDetails = new JButton("Candidate Details");
-
+		btnPubDetails.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		btnPubDetails.setBounds(395, 6, 171, 29);
+		panel_2.add(btnPubDetails);
 		btnPubDetails.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// List of authors who have been saved by the user
@@ -301,18 +319,22 @@ public class DisplayUI extends JFrame {
 			}
 		});
 
-		btnPubDetails.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		btnPubDetails.setBounds(395, 6, 171, 29);
-		panel_2.add(btnPubDetails);
 	}
 
+	/**
+	 * Builds the table model.
+	 *
+	 * @param authors the authors
+	 * @return the table model
+	 * @throws SQLException the SQL exception
+	 */
 	// rendering the data obtained from the query engine into a tabular format 
 	private TableModel buildTableModel(List<String> authors) throws SQLException {
 
 		Vector<String> columnNames = new Vector<String>();
 
 		columnNames.add("Author Name");
-		columnNames.add("Save");
+		columnNames.add("");
 
 		Vector<Vector<Object>> data = new Vector<Vector<Object>>();
 
@@ -323,7 +345,7 @@ public class DisplayUI extends JFrame {
 			for (int columnIndex= 1; columnIndex <=1; columnIndex++) {
 				vector.add(author);
 			}
-			vector.addElement("save");
+			vector.addElement("Select for Details");
 			data.addElement(vector);
 		}
 

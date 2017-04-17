@@ -18,42 +18,82 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * The Class ImplementQueryBuilder.
+ */
 // This class represents the query engine
 public class ImplementQueryBuilder implements QueryBuilder{
 
+	/** The where clause for paper author. */
 	String whereClauseForPaperAuthor = "";
+	
+	/** The where clause for committee. */
 	String whereClauseForCommittee = "";
+	
+	/** The where clause for article. */
 	String whereClauseForArticle = "";
 
+	/** The group by clause paper author. */
 	String groupByClausePaperAuthor = "";
+	
+	/** The group by clause article. */
 	String groupByClauseArticle = "";
+	
+	/** The query paper author. */
 	String queryPaperAuthor = null; 
+	
+	/** The query Committee */
 	String queryCommitte = null; 
+	
+	/** The query article. */
 	String queryArticle = null;
 
+	/** The Author table. */
 	private static String AuthorTable = "Author";
+	
+	/** The Paper table. */
 	private static String PaperTable = "Paper";
+	
+	/** The Article table. */
 	private static String ArticleTable = "Article";
 
+	/** The Author table alias. */
 	private static String AuthorTableAlias = "a";
+	
+	/** The Paper table alias. */
 	private static String PaperTableAlias = "p";
+	
+	/** The Committee table alias. */
 	private static String CommitteeTableAlias = "c";
+	
+	/** The Article table alias. */
 	private static String ArticleTableAlias = "ar";
 	
+	/** The count. */
 	private static int count;
 	
+	/** The final join. */
 	private static HashMap<String, String> finalJoin;
+	
+	/** The query order. */
 	String[] queryOrder = new String[5];
 
+	/** The queries. */
 	List<String> queries = new ArrayList<String>();
 	
 	
+	/**
+	 * Instantiates a new implement query builder.
+	 */
 	public ImplementQueryBuilder(){
 		finalJoin = new HashMap<String, String>();
 		count =0;
 	}
 	
 	// creates queries for all the incoming search parameters and their values 
+	/* (non-Javadoc)
+	 * @see com.team7.interfaces.QueryBuilder#createQuery(java.util.List)
+	 */
 	// from the UI
 	public List<String> createQuery(List<SearchParameter> searchParam) {
 		if(validateQuery(searchParam)){
@@ -86,6 +126,9 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		return queries;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.team7.interfaces.QueryBuilder#validateQuery(java.util.List)
+	 */
 	// validates whether the search parameters are valid values or not
 	public boolean validateQuery(List<SearchParameter> searchParam) {        	
 		boolean result = false;
@@ -247,6 +290,12 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		return result;
 	}
 
+	/**
+	 * Check validity of search parameters.
+	 *
+	 * @param searchParameter the search parameter
+	 * @return true, if successful
+	 */
 	private boolean checkValidityOfSearchParameters(String searchParameter){
 
 		Pattern p = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
@@ -254,6 +303,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		return m.find();
 	}
 
+	/**
+	 * Form query params.
+	 *
+	 * @param searchParam the search param
+	 */
 	// forming the where clause of the query from the parameters obtained.       
 	private void formQueryParams(List<SearchParameter> searchParam){
 
@@ -293,6 +347,14 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		}
 	}
 
+	/**
+	 * Gets the result for display.
+	 *
+	 * @param searchQuery the search query
+	 * @return the result for display
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	// Getting the final result of the query.
 	public List<String> getResultForDisplay(List<String> searchQuery) throws SQLException, IOException{
 
@@ -330,6 +392,9 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		return getSequenceOfResults(paperAuthorResult,committeeResult,articleResult);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.team7.interfaces.QueryBuilder#sendQuery(java.lang.String)
+	 */
 	// making a connection with the DB
 	public ResultSet sendQuery(String searchQuery) throws SQLException, IOException {
 		ImplementSchemaDB implementSchemaObj = new ImplementSchemaDB();
@@ -339,14 +404,29 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		return result;
 	}
 
+	/**
+	 * Form group by clause paper author.
+	 *
+	 * @param search the search
+	 */
 	private void formGroupByClausePaperAuthor(SearchParameter search){ 	
 		groupByClausePaperAuthor = " GROUP BY " + AuthorTableAlias +".name HAVING COUNT(*) " + search.getSearchComparator() +search.getSearchValue();
 	}
 	
+	/**
+	 * Form group by clause article.
+	 *
+	 * @param search the search
+	 */
 	private void formGroupByClauseArticle(SearchParameter search){ 	
 		groupByClauseArticle = " GROUP BY " + AuthorTableAlias +".name HAVING COUNT(*) " + search.getSearchComparator() +search.getSearchValue();
 	}
 
+	/**
+	 * Form paper author where clause.
+	 *
+	 * @param s the s
+	 */
 	private void formPaperAuthorWhereClause(SearchParameter s){ 	
 
 		if(s.getSearchFilter() == "Keyword"){
@@ -380,6 +460,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 	}
 
+	/**
+	 * Form join condition.
+	 *
+	 * @return the string
+	 */
 	private String formJoinCondition(){
 
 		return AuthorTable+ " " + AuthorTableAlias+ " INNER JOIN " +
@@ -387,6 +472,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
 				AuthorTableAlias+ ".paperKey = " + PaperTableAlias + ".paperKey";		
 	}
 
+	/**
+	 * Form join condition article.
+	 *
+	 * @return the string
+	 */
 	private String formJoinConditionArticle(){
 
 		return AuthorTable+ " " + AuthorTableAlias+ " INNER JOIN " +
@@ -395,6 +485,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	}
 
 	
+	/**
+	 * Form committee where clause.
+	 *
+	 * @param s the s
+	 */
 	private void formCommitteeWhereClause(SearchParameter s){  	
 
 		if(s.getSearchFilter() == "Committee.ConfName"){
@@ -407,6 +502,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		} 
 	}
 
+	/**
+	 * Gets the committe query.
+	 *
+	 * @return the committe query
+	 */
 	private void getCommitteQuery(){
 
 		if(whereClauseForCommittee.length()>0){
@@ -415,6 +515,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		}
 	}
 	
+	/**
+	 * Gets the paper author query.
+	 *
+	 * @return the paper author query
+	 */
 	private void getPaperAuthorQuery(){ 
 
 		if (whereClauseForPaperAuthor.length() > 0) {
@@ -431,6 +536,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		}
 	}
 
+	/**
+	 * Gets the article query.
+	 *
+	 * @return the article query
+	 */
 	private void getArticleQuery(){
 
 		if(whereClauseForArticle.length()>0){
@@ -446,6 +556,12 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		}
 	}
 
+	/**
+	 * Creates the query for author details.
+	 *
+	 * @param authors the authors
+	 * @return the string
+	 */
 	// Gets all the publication details for authors
 	public String createQueryForAuthorDetails(Set<String> authors){
 
@@ -466,6 +582,12 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		
 	}
 	
+	/**
+	 * Gets the group by paper author query.
+	 *
+	 * @param groupByParameter the group by parameter
+	 * @return the group by paper author query
+	 */
 	private List<String> getGroupByPaperAuthorQuery(SearchParameter groupByParameter){
 
 	formGroupByClausePaperAuthor(groupByParameter);
@@ -480,6 +602,12 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	return queries;
 	}
 	
+	/**
+	 * Gets the group by article query.
+	 *
+	 * @param groupByParameter the group by parameter
+	 * @return the group by article query
+	 */
 	private List<String> getGroupByArticleQuery(SearchParameter groupByParameter){
 
 		formGroupByClauseArticle(groupByParameter);
@@ -494,6 +622,12 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		return queries;
 		}
 
+	/**
+	 * Creates the query for similar authors.
+	 *
+	 * @param author the author
+	 * @return the string
+	 */
 	// getting the similar authors according to the same university
 	public String createQueryForSimilarAuthors(String author) {
 		
@@ -523,6 +657,14 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		return authQuery;
 	}
 	
+    /**
+     * Gets the sequence of results.
+     *
+     * @param paperAuthor the paper author
+     * @param committee the committee
+     * @param article the article
+     * @return the sequence of results
+     */
     private List<String> getSequenceOfResults(List<String> paperAuthor, List<String> committee, List<String> article){
 		
 		for(Entry<String, String> value :finalJoin.entrySet()){
@@ -599,12 +741,25 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		
 	}
 
+    /**
+     * Creates the query for fav list.
+     *
+     * @param attName the att name
+     * @param attValue the att value
+     * @return the string
+     */
     // getting the favorites of the user
 	public String createQueryForFavList(String attName, String attValue) {
 		String favQuery = "SELECT selectedAuthor FROM Favorite_list WHERE " + attName + "='"+attValue+"'" + " ORDER by selectedAuthor";
 		return favQuery;
 	}
 
+	/**
+	 * Creates the query for committee list.
+	 *
+	 * @param conference the conference
+	 * @return the string
+	 */
 	// getting the final candidate list
 	public String createQueryForCommitteeList(String conference) {
 		String commQuery = "SELECT selectedAuthor from Candidate_list WHERE confName=" + "'"+conference + "'" + " ORDER by selectedAuthor";

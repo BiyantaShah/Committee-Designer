@@ -11,15 +11,25 @@ import java.sql.Statement;
 
 import org.junit.Test;
 
-import com.team7.interfaces.AbstractParseFactory;
-import com.team7.interfaces.FactoryProducer;
+import com.team7.abstractDesignFactory.AbstractParseFactory;
+import com.team7.abstractDesignFactory.FactoryProducer;
 import com.team7.interfaces.ParseCsvFiles;
 import com.team7.parsing.ImplementSchemaDB;
 
+/**
+ * The Class ImplementUniCountryTest.
+ */
 public class ImplementUniCountryTest {
 	
+	/** The csv fac. */
 	AbstractParseFactory csvFac = FactoryProducer.getFactory("CSV");
 	
+	/**
+	 * Test parse success.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SQLException the SQL exception
+	 */
 	@Test
 	// to test the successful parsing of CSV file
 	public void testParseSuccess() throws IOException, SQLException {
@@ -45,6 +55,12 @@ public class ImplementUniCountryTest {
 		file.delete();
 	}
 	
+	/**
+	 * Parses the empty.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SQLException the SQL exception
+	 */
 	@Test
 	// to test the parsing of an empty CSV file
 	public void parseEmpty() throws IOException, SQLException {

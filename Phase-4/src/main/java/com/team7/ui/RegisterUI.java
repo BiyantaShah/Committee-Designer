@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -18,25 +17,45 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
+/**
+ * The Class RegisterUI.
+ */
 // Register UI window
 @SuppressWarnings("serial")
 public class RegisterUI extends JFrame {
 
+	/** The content pane. */
 	public JPanel contentPane;
+	
+	/** The UserName T field. */
 	public JTextField UsernameTField;
+	
+	/** The password field. */
 	public JPasswordField passwordField; 
+	
+	/** The register button. */
 	public JButton btnRegister; 
+	
+	/** The  login button. */
 	public JButton btnLogin;
 
+	/** The user name. */
 	String userName;
+	
+	/** The password. */
 	String password;
+	
+	/** The role. */
 	String role; 
+	
+	/** The conference name. */
 	String confName;
+	
+	/** The log. */
 	LoginUI log = new LoginUI();
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException  
 	 */
 	@SuppressWarnings("unchecked")
 	public RegisterUI() {
@@ -191,7 +210,7 @@ public class RegisterUI extends JFrame {
 					}
 				}}});
 		
-		
+		//button to login screen
 		btnLogin = new JButton("Login");
 		btnLogin.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnLogin.setBounds(1028, 13, 117, 34);
@@ -205,7 +224,5 @@ public class RegisterUI extends JFrame {
 				 log.setLocationRelativeTo(null);
 			}
 		});
-
-
 	}
 }
