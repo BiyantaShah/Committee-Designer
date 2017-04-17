@@ -92,7 +92,7 @@ public class FavoriteListUI extends JFrame {
 				log.setLocationRelativeTo(null);
 			}
 		});
-
+ 
 		btnCandidatesList = new JButton("Candidates List");
 		btnCandidatesList.setVisible(false);
 		if(UIConstants.currentUserRole.equals("Program Chair")){

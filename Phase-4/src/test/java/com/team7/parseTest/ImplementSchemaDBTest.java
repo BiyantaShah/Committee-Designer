@@ -98,7 +98,7 @@ public class ImplementSchemaDBTest extends TestCase {
 		res = db.updateCandidateList("Biyanta Shah", UIConstants.currentUserConf);
 		
 		assertTrue(res);
-	}
+	} 
 	
 	//Test Case to test Insert Data into favorites list
 	//Test will fail if connection object is null Or Insertion of Data Fails

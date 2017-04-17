@@ -38,10 +38,19 @@ public class CandidateListUI extends JFrame {
 
 	private JPanel contentPane;
 
-	JTable table1;
-	JTable table2;
+	public JTable table1; 
+	public JTable table2;
 	JPanel panel_3 = new JPanel();
-
+	
+	public JButton btnSearchui;
+	public JButton btnLogout;
+	public JButton btnMyFavoriteList;
+	public JButton buttonSelect;
+	public JButton btnRemove;
+	public JButton btnSendEmail;
+    public Set<String> favList;
+    public DefaultTableModel model;
+	public DefaultTableModel model2 ;
 
 
 	public CandidateListUI(){
@@ -57,7 +66,6 @@ public class CandidateListUI extends JFrame {
 		contentPane.setLayout(null);
 
 
-		DefaultTableModel model2 ;
 
 		
 		JPanel panel = new JPanel();
@@ -83,7 +91,7 @@ public class CandidateListUI extends JFrame {
 		lblFinalCandidates.setBounds(797, 91, 141, 16);
 		panel.add(lblFinalCandidates);
 		
-		JButton btnLogout = new JButton("Logout");
+		btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnLogout.setBounds(1065, 6, 117, 34);
 		panel.add(btnLogout);		
@@ -101,7 +109,7 @@ public class CandidateListUI extends JFrame {
 		});
 
 		
-		JButton btnSearchui = new JButton("SearchUI");
+		btnSearchui = new JButton("SearchUI");
 		btnSearchui.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSearchui.setBounds(932, 6, 117, 34);
 		panel.add(btnSearchui);
@@ -115,7 +123,7 @@ public class CandidateListUI extends JFrame {
 			}
 		});
 		
-		JButton btnMyFavoriteList = new JButton("My Favorite List");
+		btnMyFavoriteList = new JButton("My Favorite List");
 		btnMyFavoriteList.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnMyFavoriteList.setBounds(17, 6, 176, 34);
 		panel.add(btnMyFavoriteList);
@@ -147,7 +155,7 @@ public class CandidateListUI extends JFrame {
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		ImplementSearchDisplay search = new ImplementSearchDisplay();
-		Set<String> favList;
+		
 
 		try {	
 			favList = search.favAuthors("confName", UIConstants.currentUserConf);
@@ -176,23 +184,22 @@ public class CandidateListUI extends JFrame {
 			setVisible(true);
 			panel_1.add(scroll1);
 
-			DefaultTableModel model = (DefaultTableModel) table1.getModel();
+			model = (DefaultTableModel) table1.getModel();
 
-			JButton button = new JButton("Select");
-			button.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-			button.setBounds(216, 5, 97, 30);
-			panel_3.add(button);
-			button.addActionListener(new ActionListener() {
+			buttonSelect = new JButton("Select");
+			buttonSelect.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+			buttonSelect.setBounds(216, 5, 97, 30);
+			panel_3.add(buttonSelect);
+			buttonSelect.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
-					DefaultTableModel model2 = (DefaultTableModel) table2.getModel();
-
+					model2 = (DefaultTableModel) table2.getModel();
 					int index = table1.getSelectedRow();
 					if (index == -1) {
 						LoginUI log = new LoginUI();
 						log.messageShow("Please select an author");
 					}
-					else{
+					else{ 
 						String author = (String) model.getValueAt(index, 0);
 						ImplementSchemaDB db =  new ImplementSchemaDB();
 						try {
@@ -258,7 +265,7 @@ public class CandidateListUI extends JFrame {
 			panel_3.setLayout(null);
 
 
-			JButton btnSendEmail = new JButton("Send Email");
+			btnSendEmail = new JButton("Send Email");
 			btnSendEmail.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 			btnSendEmail.setBounds(539, 50, 117, 29);
 			panel_3.add(btnSendEmail);
@@ -268,7 +275,7 @@ public class CandidateListUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				for (int count = 0; count < model2.getRowCount(); count++){
-					  sendMail.add(model2.getValueAt(count, 0).toString());
+					  sendMail.add(model2.getValueAt(count,2).toString());
 					}
 
 				Boolean flag = true;
@@ -299,8 +306,8 @@ public class CandidateListUI extends JFrame {
 
 
 
-
-			JButton btnRemove = new JButton("Remove");
+ 
+			btnRemove = new JButton("Remove");
 			btnRemove.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 			btnRemove.setBounds(855, 6, 117, 29);
 			panel_3.add(btnRemove);
@@ -313,7 +320,7 @@ public class CandidateListUI extends JFrame {
 						log.messageShow("Please select an author to remove");
 					}
 					else{
-						String author = (String) model2.getValueAt(index, 0);
+						String author = (String) model2.getValueAt(index,2);
 						ImplementSchemaDB db =  new ImplementSchemaDB();
 						try {
 							// deleting the selected author from the Candidate_list of the current user.
@@ -333,7 +340,7 @@ public class CandidateListUI extends JFrame {
 	}
 
 
-	private TableModel buildTableModel(Set<String> favList) throws SQLException {
+	public TableModel buildTableModel(Set<String> favList) throws SQLException {
 
 		Vector<String> columnNames = new Vector<String>();
 			

@@ -22,7 +22,7 @@ public class ImplementFavUITest {
 	@Test
 	// Testing whether the candidate details shows up some records
 	public void testCandidateDetails() {
-		@SuppressWarnings("rawtypes")
+		@SuppressWarnings("rawtypes") 
 		Set<String> fav = new HashSet(); 
 		fav.add("Bernhard Rumpe");
 		FavoriteListUI favList = new FavoriteListUI(fav);
@@ -44,7 +44,7 @@ public class ImplementFavUITest {
 		favList.btnRemove.doClick();
 		
 		//select an author to remove
-		favList.table.setRowSelectionInterval(0,0);
+		favList.table.setRowSelectionInterval(0,0); 
 		favList.btnRemove.doClick();
 		favList.dispose();
 	}  
@@ -71,11 +71,11 @@ public class ImplementFavUITest {
 	
 	@Test
 	// Testing the Candidate list 
-	public void testRemoveEmpty() {
+	public void testCandidateListUI() {
 		Set<String> fav = new HashSet<String>();
 		fav.add("Bernhard Rumpe");
 		FavoriteListUI favList = new FavoriteListUI(fav);
 		favList.btnCandidatesList.doClick();
 		favList.dispose();
-	}
+	} 
 }

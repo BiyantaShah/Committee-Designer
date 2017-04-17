@@ -181,7 +181,7 @@ public class AuthorPublicationDetailsUI extends JFrame {
 			for (int i=0; i< table.getColumnModel().getColumnCount(); i++) {
 				table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 			}
-			
+	 		
 			// Rendering a button for each table row
 			table.getColumn("Select").setCellRenderer(new JTableButtonRenderer());
 			table.getColumn("Select").setCellEditor(

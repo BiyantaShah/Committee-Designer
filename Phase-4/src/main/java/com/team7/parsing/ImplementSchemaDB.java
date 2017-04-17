@@ -42,13 +42,13 @@ public class ImplementSchemaDB implements SchemaDB {
 
 
 			//selecting database created above
-			String db_url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
-			String userName = "root";
-			String password = "9HTa~TZ?dyQWM4}";
-			
-//			String db_url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
+//			String db_url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP";
 //			String userName = "root";
-//			String password = "root";
+//			String password = "9HTa~TZ?dyQWM4}";
+			
+			String db_url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
+			String userName = "root";
+			String password = "root";
 
 			// getting the connection to local host (only for local DB)
 			conn = DriverManager.getConnection(db_url, userName, password);
@@ -75,7 +75,7 @@ public class ImplementSchemaDB implements SchemaDB {
 					" role     VARCHAR(255), " + 
 					" confName VARCHAR(255),"+
 					" PRIMARY  KEY(id))"; 
-
+ 
 			stmt.executeUpdate(sql);
 
 			//creating conference table
@@ -188,14 +188,14 @@ public class ImplementSchemaDB implements SchemaDB {
 		Connection conn = null; 
 
 		//Database Properties
-		String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";		
-		String userName = "root";
-		String password = "9HTa~TZ?dyQWM4}";
+//		String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";		
+//		String userName = "root";
+//		String password = "9HTa~TZ?dyQWM4}";
 
 		// Database properties for local DB		
-//		String url = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
-//		String userName = "root";
-//		String password = "root";
+		String url = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
+		String userName = "root";
+		String password = "root";
 
 
 		try {
