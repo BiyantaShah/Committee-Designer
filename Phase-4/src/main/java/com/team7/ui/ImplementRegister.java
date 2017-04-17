@@ -85,8 +85,6 @@ public class ImplementRegister implements Register {
 	}
 	
 	
-
-
 	// checking if the user exists in the database
 	public boolean verifyIfUserExists(String userName) throws SQLException, IOException {
 

@@ -22,9 +22,15 @@ import java.sql.PreparedStatement;
  *  hence they won't be created again.
  */
 
+/*
+ * We have implemented the Singleton Design Pattern here, formerly the connection object was instantiated 
+ * every time we needed to fetch a query result from the DB. Using Singleton Design Pattern we only create the
+ * object of 'Connection' once and use it everywhere.
+ */
 public class ImplementSchemaDB implements SchemaDB { 
 
 	Properties props;
+	static Connection conn; 
 
 	// creating  DB and its initial skeleton 
 	public void dbSetUp() throws ClassNotFoundException, SQLException, IOException{
@@ -151,7 +157,7 @@ public class ImplementSchemaDB implements SchemaDB {
 			// Adding indexes in article table on author name for faster access
 //			sql = "ALTER TABLE Article ADD INDEX keyR(author)";
 //			stmt.executeUpdate(sql);
-			
+//			
 			// creating Favorites table
 			sql = "CREATE TABLE IF NOT EXISTS Favorite_list " +
 					"(id          INTEGER      AUTO_INCREMENT NOT NULL, " +
@@ -179,33 +185,33 @@ public class ImplementSchemaDB implements SchemaDB {
 			se.printStackTrace(); 
 
 		}
-		conn.close();
 
 	}
 
 	public Connection getConnection() throws IOException {
 
-		Connection conn = null; 
+		if (conn == null) {
+			//Database Properties for RDS
+//			String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";
+//			String userName = "root";
+//			String password = "9HTa~TZ?dyQWM4}";
+			
+			// Database properties for local DB
+			String url = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
+			String userName = "root";
+			String password = "root";
 
-		//Database Properties for RDS
-//		String url = "jdbc:mysql://root.c9pxnh8wqisg.us-west-2.rds.amazonaws.com:3306/DBLP?useServerPrepStmts=false&rewriteBatchedStatements=true";
-//		String userName = "root";
-//		String password = "9HTa~TZ?dyQWM4}";
-		
-		// Database properties for local DB
-		String url = "jdbc:mysql://localhost/DBLP?verifyServerCertificate=false&useSSL=true&useServerPrepStmts=false&rewriteBatchedStatements=true";
-		String userName = "root";
-		String password = "root";
 
+			try {
 
-		try {
+				conn = DriverManager.getConnection(url, userName, password);
 
-			conn = DriverManager.getConnection(url, userName, password);
+			} catch (SQLException e) {
 
-		} catch (SQLException e) {
-
-			e.printStackTrace();
+				e.printStackTrace();
+			}
 		}
+		
 		return conn;
 	}
 
@@ -230,10 +236,9 @@ public class ImplementSchemaDB implements SchemaDB {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			return false;
 		}
-		conn.close();
+		
 		return true;
 	}
 	
