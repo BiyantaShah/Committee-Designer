@@ -1,10 +1,11 @@
 package com.team7.queryEngine;
 
-// This class contains the search criteria, values, comparator and join conditions
+// 
 /**
  * The Class SearchParameter.
- */
-// The object of this class is sent to the query engine to create the query.
+ * This class contains the search criteria, values, comparator and join conditions
+ * The object of this class is sent to the query engine to create the query.
+ */ 
 public class SearchParameter {
 	
 	/** The search filter. */

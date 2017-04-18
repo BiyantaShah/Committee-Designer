@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 /**
  * The Interface ParseTextFile.
+ * An interface for the parsing of the files in the committees folder.
  */
-// An interface for the parsing of the files in the committees folder.
 public interface ParseTextFile {
 
 	/**

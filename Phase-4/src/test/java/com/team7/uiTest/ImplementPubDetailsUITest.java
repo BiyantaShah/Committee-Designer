@@ -40,7 +40,6 @@ public class ImplementPubDetailsUITest {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	// Testing logout button
 	public void testLogoutButton() throws SQLException, IOException {
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
 		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
@@ -60,7 +59,6 @@ public class ImplementPubDetailsUITest {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	// Testing searchUI button
 	public void testSearchButton() throws SQLException, IOException {
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
 		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
@@ -78,7 +76,6 @@ public class ImplementPubDetailsUITest {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	// Testing the favorite list button
 	public void testFavList() throws SQLException, IOException {
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
 		String query = queryBuilderObject.createQueryForAuthorDetails(authors);
@@ -96,7 +93,6 @@ public class ImplementPubDetailsUITest {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	// testing the candidate list button
 	public void testCandidateList() throws SQLException, IOException {
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();
 		String query = queryBuilderObject.createQueryForAuthorDetails(authors);

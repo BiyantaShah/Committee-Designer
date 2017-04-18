@@ -9,8 +9,8 @@ import javax.swing.table.TableCellRenderer;
 
 /**
  * The Class HeaderRenderer.
+ * This class is used to render the headers of the table in the center
  */
-// This class is used to render the headers of the table in the center
 public class HeaderRenderer implements TableCellRenderer {
 
 	/** The renderer. */

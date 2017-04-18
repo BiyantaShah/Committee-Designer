@@ -28,8 +28,8 @@ import com.team7.parsing.ImplementSchemaDB;
 
 /**
  * The Class FavoriteListUI.
- */
-// Class creates User interface for favorites list
+ * Class creates User interface for favorites list
+ */ 
 public class FavoriteListUI extends JFrame {
 
 	/** The Constant serialVersionUID. */
@@ -78,11 +78,11 @@ public class FavoriteListUI extends JFrame {
 
 		JLabel lblSavedAuthors = new JLabel("My Favorite List");
 		lblSavedAuthors.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblSavedAuthors.setBounds(499, 61, 197, 34);
+		lblSavedAuthors.setBounds(516, 61, 197, 34);
 		panel.add(lblSavedAuthors);
 
 		//button for searchUI screen
-		btnSearch = new JButton("Search UI");
+		btnSearch = new JButton("Search");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSearch.setBounds(950, 13, 117, 34);
 		panel.add(btnSearch);
@@ -136,7 +136,7 @@ public class FavoriteListUI extends JFrame {
 		});
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 129, 1182, 330);
+		panel_1.setBounds(40, 134, 1154, 325);
 		contentPane.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -205,12 +205,12 @@ public class FavoriteListUI extends JFrame {
 	
 	/**
 	 * Builds the table model.
+	 * rendering to the favorites list
 	 *
 	 * @param favList the fav list
 	 * @return the table model
 	 * @throws SQLException the SQL exception
-	 */
-	// rendering to the favorites list
+	 */ 
 	public TableModel buildTableModel(Set<String> favList) throws SQLException {
 
 		Vector<String> columnNames = new Vector<String>();

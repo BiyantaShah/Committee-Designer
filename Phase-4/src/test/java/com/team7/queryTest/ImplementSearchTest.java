@@ -28,7 +28,6 @@ public class ImplementSearchTest extends TestCase {
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	// Testing the final query result
 	@Test
 	public void testSearchValid() throws SQLException, IOException {
 		
@@ -47,7 +46,6 @@ public class ImplementSearchTest extends TestCase {
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	// Valid candidate details extracted
 	@Test
 	public void testCandidateDetails() throws SQLException, IOException {   
 		Set<String> authorList = new HashSet<String>();
@@ -65,13 +63,12 @@ public class ImplementSearchTest extends TestCase {
 	
 	
 	/**
-	 * Test sim auth.
+	 * Test sim auth. (similar authors)
 	 *
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	// Testing the similar authors function
 	public void testSimAuth() throws SQLException, IOException {
 		Set<String> simAuth = new ImplementSearchDisplay().similarAuthor("Aniruddha S. Gokhale");
 		assertEquals(7, simAuth.size());
@@ -84,8 +81,7 @@ public class ImplementSearchTest extends TestCase {
 	 *
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	// Email sent successfully
+	 */	
 	@Test
 	public void testSendEmailValid() throws SQLException, IOException {
 		Set<String> authors = new HashSet<String>();

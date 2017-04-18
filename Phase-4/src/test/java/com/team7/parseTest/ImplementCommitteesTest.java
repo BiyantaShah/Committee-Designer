@@ -28,11 +28,11 @@ public class ImplementCommitteesTest extends TestCase {
 
 	/**
 	 * Test parse success.
+	 * Test case for successful parsing
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws SQLException the SQL exception
 	 */
-	// Test case for successful parsing
 	@Test
 	public void testParseSuccess() throws IOException, SQLException {
 		
@@ -77,11 +77,11 @@ public class ImplementCommitteesTest extends TestCase {
 	
 	/**
 	 * Test empty directory.
+	 * Test case for empty directory 
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws SQLException the SQL exception
 	 */
-	// Test case for empty directory 
 	@Test
 	public void testEmptyDirectory() throws IOException, SQLException {
 		

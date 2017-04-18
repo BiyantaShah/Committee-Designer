@@ -26,12 +26,12 @@ public class ImplementUniCountryTest {
 	
 	/**
 	 * Test parse success.
+	 * to test the successful parsing of CSV file
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws SQLException the SQL exception
 	 */
-	@Test
-	// to test the successful parsing of CSV file
+	@Test 
 	public void testParseSuccess() throws IOException, SQLException {
 		
 		File file = new File("input/testCountry.csv");
@@ -57,12 +57,12 @@ public class ImplementUniCountryTest {
 	
 	/**
 	 * Parses the empty.
+	 * to test the parsing of an empty CSV file
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws SQLException the SQL exception
 	 */
-	@Test
-	// to test the parsing of an empty CSV file
+	@Test 
 	public void parseEmpty() throws IOException, SQLException {
 		File file = new File("input/testCountry.csv");
 		FileWriter writer = new FileWriter(file);

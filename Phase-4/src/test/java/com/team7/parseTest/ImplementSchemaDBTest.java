@@ -21,13 +21,15 @@ public class ImplementSchemaDBTest extends TestCase {
 
 	/** The u. */
 	UIConstants u  = new UIConstants("shah.bi@shah.bi", "Program Chair", "ECOOP");
-	//Test Case to test the DB Connection
+	
 	/**
 	 * Test A get connection.
+	 * 
+	 * Test Case to test the DB Connection
+	 * Test will fail if connection object is null
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	//Test will fail if connection object is null
 	@Test
 	public void testAGetConnection() throws IOException {
 		Connection conn = null;
@@ -35,15 +37,18 @@ public class ImplementSchemaDBTest extends TestCase {
 		assertNotNull(conn);
 	}
 
-	//Test Case to test Create Table
+	//
 	/**
 	 * Test B set up.
+	 * 
+	 * Test Case to test Create Table
+	 * Test will fail if connection object is null 
 	 *
 	 * @throws ClassNotFoundException the class not found exception
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	// Test will fail if connection object is null Or Creation of Table Fails
+	// 
 	@Test
 	public void testBSetUp() throws ClassNotFoundException, SQLException, IOException {
 
@@ -61,14 +66,16 @@ public class ImplementSchemaDBTest extends TestCase {
      	assertTrue(res);
 	}
 
-	//Test Case to test Insert Data
+	//
 	/**
 	 * Test insert data.
+	 * 
+	 * Test Case to test Insert Data
+	 * Test will fail if connection object is null
 	 *
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	//Test will fail if connection object is null Or Insertion of Data Fails
 	@Test
 	public void testInsertData() throws SQLException, IOException {
 
@@ -86,11 +93,11 @@ public class ImplementSchemaDBTest extends TestCase {
 	
 	/**
 	 * Test insert data 2.
+	 * Test Case to check to verify object other than user during insertion
 	 *
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	//Test Case to check to verify object other than user during insertion
 	@Test
 	public void testInsertData2() throws SQLException, IOException {
 	    Author auth = new Author("Test", "testKey");
@@ -101,11 +108,11 @@ public class ImplementSchemaDBTest extends TestCase {
 	
 	/**
 	 * Test expected exception.
+	 * Test Case to verify exception if data is not valid
 	 *
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	//Test Case to verify exception if data is not valid
 	@Test(expected = SQLException.class)
 	public void testExpectedException() throws SQLException, IOException {
 			ImplementSchemaDB db = new ImplementSchemaDB();
@@ -113,14 +120,12 @@ public class ImplementSchemaDBTest extends TestCase {
 			db.insertData(test);	  
 	} 
 	
-	//Test Case to test Insert Data into candidate list
 	/**
 	 * Test insert candidate list data.
 	 *
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	//Test will fail if connection object is null Or Insertion of Data Fails
 	@Test
 	public void testInsertCandidateListData() throws SQLException, IOException {
 

@@ -26,10 +26,10 @@ public class ImplementFavUITest {
 	
 	/**
 	 * Test candidate details.
+	 * Testing whether the candidate details shows up some records
 	 */
 	@SuppressWarnings({ "unchecked" })
-	@Test
-	// Testing whether the candidate details shows up some records
+	@Test 
 	public void testCandidateDetails() {
 		@SuppressWarnings("rawtypes") 
 		Set<String> fav = new HashSet(); 
@@ -62,7 +62,6 @@ public class ImplementFavUITest {
 	 * Test logout.
 	 */
 	@Test
-	// Testing logout button
 	public void testLogout() {
 		Set<String> fav = new HashSet<String>();
 		fav.add("Bernhard Rumpe");
@@ -75,7 +74,6 @@ public class ImplementFavUITest {
 	 * Test search UI.
 	 */
 	@Test
-	// Testing the SearchUI function
 	public void testSearchUI() {
 		Set<String> fav = new HashSet<String>();
 		fav.add("Bernhard Rumpe");
@@ -87,8 +85,7 @@ public class ImplementFavUITest {
 	/**
 	 * Test candidate list UI.
 	 */
-	@Test
-	// Testing the Candidate list 
+	@Test 
 	public void testCandidateListUI() {
 		Set<String> fav = new HashSet<String>();
 		fav.add("Bernhard Rumpe");

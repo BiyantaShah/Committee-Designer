@@ -20,8 +20,8 @@ import java.sql.Statement;
 
 /**
  * The Class ImplementQueryBuilder.
- */
-// This class represents the query engine
+ * This class represents the query engine
+ */ 
 public class ImplementQueryBuilder implements QueryBuilder{
 
 	/** The where clause for paper author. */
@@ -90,11 +90,10 @@ public class ImplementQueryBuilder implements QueryBuilder{
 		count =0;
 	}
 	
-	// creates queries for all the incoming search parameters and their values 
+	// creates queries for all the incoming search parameters and their values from the UI 
 	/* (non-Javadoc)
 	 * @see com.team7.interfaces.QueryBuilder#createQuery(java.util.List)
 	 */
-	// from the UI
 	public List<String> createQuery(List<SearchParameter> searchParam) {
 		if(validateQuery(searchParam)){
 			
@@ -115,7 +114,7 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 				getPaperAuthorQuery();
 
-				getCommitteQuery();	
+				getCommitteeQuery();	
 
 				getArticleQuery();
 			}
@@ -503,11 +502,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
 	}
 
 	/**
-	 * Gets the committe query.
+	 * Gets the committee query.
 	 *
-	 * @return the committe query
+	 * @return the committee query
 	 */
-	private void getCommitteQuery(){
+	private void getCommitteeQuery(){
 
 		if(whereClauseForCommittee.length()>0){
 			queryCommitte = "SELECT c.AuthorName AS Author FROM  Committee c WHERE ";  
@@ -558,11 +557,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 	/**
 	 * Creates the query for author details.
+	 * Gets all the publication details for authors
 	 *
 	 * @param authors the authors
 	 * @return the string
 	 */
-	// Gets all the publication details for authors
 	public String createQueryForAuthorDetails(Set<String> authors){
 
 		String query = "SELECT * from (SELECT a.name AS Author, p.title AS PaperTitle, null AS ArticleTitle, a.url AS Url"
@@ -624,11 +623,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 	/**
 	 * Creates the query for similar authors.
+	 * getting the similar authors according to the same university
 	 *
 	 * @param author the author
 	 * @return the string
-	 */
-	// getting the similar authors according to the same university
+	 */ 
 	public String createQueryForSimilarAuthors(String author) {
 		
 		String uniQuery = "select university from Author where name='"+author+"'";
@@ -743,12 +742,12 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
     /**
      * Creates the query for fav list.
+     * getting the favorites of the user
      *
      * @param attName the att name
      * @param attValue the att value
      * @return the string
-     */
-    // getting the favorites of the user
+     */ 
 	public String createQueryForFavList(String attName, String attValue) {
 		String favQuery = "SELECT selectedAuthor FROM Favorite_list WHERE " + attName + "='"+attValue+"'" + " ORDER by selectedAuthor";
 		return favQuery;
@@ -756,11 +755,11 @@ public class ImplementQueryBuilder implements QueryBuilder{
 
 	/**
 	 * Creates the query for committee list.
+	 * getting the final candidate list
 	 *
 	 * @param conference the conference
 	 * @return the string
 	 */
-	// getting the final candidate list
 	public String createQueryForCommitteeList(String conference) {
 		String commQuery = "SELECT selectedAuthor from Candidate_list WHERE confName=" + "'"+conference + "'" + " ORDER by selectedAuthor";
 		return commQuery;

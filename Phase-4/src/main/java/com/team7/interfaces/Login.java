@@ -10,14 +10,14 @@ public interface Login {
 		
 	/**
 	 * Login.
+	 * Login to the application by validating the userName and password
 	 *
 	 * @param username the username
 	 * @param password the password
 	 * @return true, if successful
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	// Login to the application by validating the userName and password	 
+	 */	 
 	public boolean login(String username, String password) throws SQLException,IOException;
 	
 	

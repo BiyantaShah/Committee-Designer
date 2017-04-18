@@ -38,8 +38,8 @@ import javax.swing.JPasswordField;
 
 /**
  * The Class LoginUI.
- */
-// LoginUI window
+ * LoginUI window
+ */ 
 public class LoginUI extends JFrame {
 
 	/** The Constant serialVersionUID. */
@@ -83,6 +83,10 @@ public class LoginUI extends JFrame {
 
 		System.setProperty("java.awt.headless", "true");
 		
+		/*
+		 * The below commented lines are used for parsing. For parsing the data again, you 
+		 * need to uncomment these. Refer to the Installation Instructions for more details
+		 */
 		
 //		ImplementSchemaDB db=new ImplementSchemaDB();
 //		db.dbSetUp();

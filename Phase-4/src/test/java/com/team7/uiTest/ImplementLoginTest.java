@@ -18,12 +18,13 @@ public class ImplementLoginTest extends TestCase{
 	
 	 /**
  	 * Test login success.
+ 	 * 
+ 	 * Test to verify a valid registered user - should return true and enter the search page
  	 *
  	 * @throws SQLException the SQL exception
  	 * @throws IOException Signals that an I/O exception has occurred.
  	 */
  	@Test
-	 //Test to verify a valid registered user - should return true and enter the search page
      public void testLoginSuccess() throws SQLException, IOException {
 		
 		ImplementLogin login = new ImplementLogin();
@@ -36,12 +37,13 @@ public class ImplementLoginTest extends TestCase{
 	 	  
 	 /**
  	 * Test wrong password.
+ 	 * 
+ 	 * Test to verify a if details are incorrect - should return false
  	 *
  	 * @throws SQLException the SQL exception
  	 * @throws IOException Signals that an I/O exception has occurred.
  	 */
  	@Test
-     //Test to verify a if details are incorrect - should return false
      public void testWrongPassword() throws SQLException, IOException {
 		
 		ImplementLogin login = new ImplementLogin();
@@ -53,12 +55,13 @@ public class ImplementLoginTest extends TestCase{
 	 
 	 /**
  	 * Test unregistered user.
+ 	 * 
+ 	 * Test to verify a  unregistered user - should return false
  	 *
  	 * @throws SQLException the SQL exception
  	 * @throws IOException Signals that an I/O exception has occurred.
  	 */
  	@Test
-     //Test to verify a  unregistered user - should return false
      public void testUnregisteredUser() throws SQLException, IOException {
 		
 		ImplementLogin login = new ImplementLogin();
@@ -76,7 +79,6 @@ public class ImplementLoginTest extends TestCase{
  	 * @throws SQLException the SQL exception
  	 */
  	@Test
-	 //Test to verify a valid registered user - should return true and enter the search page
      public void testPwdDecryptionSuccess() throws SQLException {
 		
 		ImplementLogin login = new ImplementLogin();
@@ -91,7 +93,6 @@ public class ImplementLoginTest extends TestCase{
  	 * @throws SQLException the SQL exception
  	 */
  	@Test
-	 //Test to verify a valid registered user - should return true and enter the search page
      public void testPwdDecryptionFailure() throws SQLException {
 		
 		ImplementLogin login = new ImplementLogin();
@@ -104,7 +105,6 @@ public class ImplementLoginTest extends TestCase{
  	 * Test logout success.
  	 */
  	@Test
-     //Test to verify successful logout - should return success
      public void testLogoutSuccess() {
 		
 		ImplementLogin login = new ImplementLogin();

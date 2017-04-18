@@ -117,7 +117,7 @@ public class CandidateListUI extends JFrame {
 
 		JLabel lblFinalCandidates = new JLabel("Final Candidates");
 		lblFinalCandidates.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-		lblFinalCandidates.setBounds(839, 91, 134, 16);
+		lblFinalCandidates.setBounds(818, 91, 155, 16);
 		panel.add(lblFinalCandidates);
 		
 		//Button to Logout of application
@@ -140,7 +140,7 @@ public class CandidateListUI extends JFrame {
 
 		
 		//Button for SearchUI screen
-		btnSearchui = new JButton("SearchUI");
+		btnSearchui = new JButton("Search");
 		btnSearchui.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSearchui.setBounds(932, 6, 117, 34);
 		panel.add(btnSearchui);

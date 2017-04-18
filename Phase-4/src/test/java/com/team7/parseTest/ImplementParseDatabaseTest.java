@@ -26,7 +26,7 @@ public class ImplementParseDatabaseTest extends TestCase{
 	AbstractParseFactory xmlFac = FactoryProducer.getFactory("XML");
 	
 	/**
-	 * Test parse success inproc.
+	 * Test parse success of inproceedings.
 	 *
 	 * @throws JAXBException the JAXB exception
 	 * @throws SQLException the SQL exception
@@ -83,7 +83,7 @@ public class ImplementParseDatabaseTest extends TestCase{
 	
 	
 	/**
-	 * Test parse success proc.
+	 * Test parse success proceedings.
 	 *
 	 * @throws JAXBException the JAXB exception
 	 * @throws SQLException the SQL exception

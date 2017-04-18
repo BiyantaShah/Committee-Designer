@@ -314,14 +314,14 @@ public class ImplementSchemaDB implements SchemaDB {
 	
 	/**
 	 * Update fav list.
-	 *
+	 * Updating the favorites list table
 	 * @param userName the user name
 	 * @param author the author
 	 * @return true, if successful
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	// Updating the favorites list table
+	
 	public boolean updateFavList(String userName, String author) throws SQLException, IOException {
 		
 		Connection conn = getConnection();

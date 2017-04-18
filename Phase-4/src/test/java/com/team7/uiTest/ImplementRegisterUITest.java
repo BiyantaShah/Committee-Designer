@@ -20,9 +20,10 @@ public class ImplementRegisterUITest  {
 	
 	/**
 	 * Test reg user empty.
+	 * 
+	 * Testing the user name field being empty
 	 */
 	@Test
-	// Testing the user name field being empty
 	public void testRegUserEmpty() {
 		reg.passwordField.setText("abc");
 		reg.btnRegister.doClick();
@@ -31,9 +32,9 @@ public class ImplementRegisterUITest  {
 	
 	/**
 	 * Test reg pass empty.
+	 * Testing the password field being empty
 	 */
-	@Test
-	// Testing the password field being empty
+	@Test 
 	public void testRegPassEmpty() {
 		reg.UsernameTField.setText("sravani.beeram@gmail.com");
 		reg.btnRegister.doClick();
@@ -42,9 +43,9 @@ public class ImplementRegisterUITest  {
 	
 	/**
 	 * Test reg user exists.
+	 * Testing the user already exists 
 	 */
 	@Test
-	// Testing the user already exists 
 	public void testRegUserExists() {
 		reg.UsernameTField.setText("shahbiyanta@gmail.com");
 		reg.passwordField.setText("abc");
@@ -54,9 +55,9 @@ public class ImplementRegisterUITest  {
 	
 	/**
 	 * Test reg user email invalid.
+	 * Testing the invalid email 
 	 */
-	@Test
-	// Testing the invalid email 
+	@Test 
 	public void testRegUserEmailInvalid() {
 		reg.UsernameTField.setText("shahbiyanta@@gmail.com");
 		reg.passwordField.setText("abc");
@@ -66,12 +67,12 @@ public class ImplementRegisterUITest  {
 	
 	/**
 	 * Test reg button.
+	 * Testing the register button
 	 *
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	// Testing the register button
 	public void testRegButton() throws SQLException, IOException {
 		reg.UsernameTField.setText("sravani.beeram@gmail.com");
 		reg.passwordField.setText("abc");
@@ -92,9 +93,21 @@ public class ImplementRegisterUITest  {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	// Testing the register button with blank in the username
 	public void testblankUsername() throws SQLException, IOException {
 		reg.UsernameTField.setText(" ");
+		reg.passwordField.setText("abc");
+		reg.btnRegister.doClick();
+	}
+	
+	/**
+	 * TestQuotes username.
+	 *
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testQuotesUsername() throws SQLException, IOException {
+		reg.UsernameTField.setText("\"");
 		reg.passwordField.setText("abc");
 		reg.btnRegister.doClick();
 	}
@@ -106,7 +119,6 @@ public class ImplementRegisterUITest  {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	// Testing the register button with blank in the password
 	public void testblankPassword() throws SQLException, IOException {
 		reg.UsernameTField.setText("sravani.beeram@gmail.com");
 		reg.passwordField.setText(" ");
@@ -120,7 +132,6 @@ public class ImplementRegisterUITest  {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	// Testing the register button with user name length > 50
 	public void testUsernameLength() throws SQLException, IOException {
 		reg.UsernameTField.setText("1234567494928gdhst39hdfsdgfhsgjhdfdgashdgf@gmail.com");
 		reg.passwordField.setText("abc");
@@ -133,7 +144,6 @@ public class ImplementRegisterUITest  {
 	 * @throws SQLException the SQL exception
 	 */
 	@Test
-	// Testing the register button
 	public void testLoginButton() throws SQLException {
 		reg.btnLogin.doClick();
 		reg.dispose();

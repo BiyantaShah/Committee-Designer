@@ -38,7 +38,6 @@ public class ImplementDisplayUITest {
 	 * Test candidate details.
 	 */
 	@Test
-	// Testing whether the candidate details shows up some records
 	public void testCandidateDetails() {
 		String[] colNames = {"Name", "Save"};
 		Object [][] row = {{"author1", "save"}, {"author2", "save"}};
@@ -52,7 +51,6 @@ public class ImplementDisplayUITest {
 	 * Test logout button.
 	 */
 	@Test
-	// Testing the logout button
 	public void testLogoutButton() {
 		display1.btnLogout.doClick();
 		display1.dispose();
@@ -62,7 +60,6 @@ public class ImplementDisplayUITest {
 	 * Test search UI.
 	 */
 	@Test
-	// Testing the SearchUI function
 	public void testSearchUI() {
 		display2.btnSearch.doClick();
 		display2.dispose();
@@ -72,7 +69,6 @@ public class ImplementDisplayUITest {
 	 * Test candidate details empty.
 	 */
 	@Test
-	// Testing the pop up for empty candidate details
 	public void testCandidateDetailsEmpty() {
 		display1.btnPubDetails.doClick();
 		display1.dispose();

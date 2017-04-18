@@ -89,7 +89,6 @@ public class ImplementLogin implements Login {
 	 * @see com.team7.interfaces.Login#logout()
 	 */
 	public String logout() {
-		// TODO Auto-generated method stub
 		UIConstants.currentUser = null;	
 		UIConstants.currentUserRole = null;
 		UIConstants.currentUserConf = null;

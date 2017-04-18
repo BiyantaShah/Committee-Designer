@@ -154,7 +154,7 @@ public class DisplayUI extends JFrame {
 		});
 
 
-		btnSearch = new JButton("Search UI");
+		btnSearch = new JButton("Search");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSearch.setBounds(946, 10, 117, 34);
 		panel.add(btnSearch);

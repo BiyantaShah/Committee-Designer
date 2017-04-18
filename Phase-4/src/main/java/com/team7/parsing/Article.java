@@ -7,8 +7,9 @@ import javax.xml.bind.annotation.XmlElement;
 
 /**
  * The Class Article.
+ * This class gives information about the article (authors, title, date of publishing)
  */
-// This class gives information about the article (authors, title, date of publishing)
+
 public class Article {
 
 	/** The author. */

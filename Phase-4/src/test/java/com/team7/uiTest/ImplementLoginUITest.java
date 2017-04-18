@@ -18,9 +18,9 @@ public class ImplementLoginUITest {
 
 	/**
 	 * Test login button invalid 1.
+	 * Tests when username is empty
 	 */
-	@Test
-	// Tests when username is empty
+	@Test 
 	public void testLoginButtonInvalid1() {
 		login.passwordField.setText("abc");
 		login.btnLogin.doClick();
@@ -28,9 +28,9 @@ public class ImplementLoginUITest {
 
 	/**
 	 * Test login button invalid 2.
+	 * Tests when password is empty
 	 */
-	@Test
-	// Tests when password is empty
+	@Test 
 	public void testLoginButtonInvalid2() {
 		login.userNameField.setText("shahbiyanta@gmail.com");
 		login.btnLogin.doClick();
@@ -38,9 +38,9 @@ public class ImplementLoginUITest {
 
 	/**
 	 * Test login button invalid 3.
+	 * Tests when user does not exist
 	 */
 	@Test
-	//Tests when user does not exist
 	public void testLoginButtonInvalid3() {
 		login.userNameField.setText("shah@gmail.com");
 		login.passwordField.setText("123");
@@ -49,17 +49,20 @@ public class ImplementLoginUITest {
 
 	/**
 	 * Test login button invalid 4.
+	 * Tests when credentials are not correct
 	 */
-	@Test
-	// Tests when credentials are not correct
+	@Test 
 	public void testLoginButtonInvalid4() {
 		login.userNameField.setText("xyz@gmail.com");
 		login.passwordField.setText("biy");
 		login.btnLogin.doClick();
 	}
-
+	
+	/**
+	 * Test login button 
+	 * Tests when the username and password are correct
+	 */
 	@Test
-	// Testing for when the username and password are correct
 	public void testLoginButton() {
 		login.userNameField.setText("shahbiyanta@gmail.com");
 		login.passwordField.setText("abc");
@@ -68,8 +71,11 @@ public class ImplementLoginUITest {
 		log.logout();
 	}
 
+	/**
+	 * Test Register button 
+	 * Testing for when the username and password are correct
+	 */
 	@Test
-	// Testing for when the username and password are correct
 	public void testRegisterButton() {
 		login.btnNewUserClick.doClick();
 	}

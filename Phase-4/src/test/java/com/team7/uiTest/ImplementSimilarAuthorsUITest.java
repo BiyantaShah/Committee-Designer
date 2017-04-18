@@ -27,12 +27,12 @@ public class ImplementSimilarAuthorsUITest {
 	
 	/**
 	 * Test sim auth.
+	 * testing insertion of authors into similar authors table
 	 *
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	// testing similar authors table
 	public void testSimAuth() throws SQLException, IOException {
 		List<String> similarAuth = new ArrayList<String>();
 		ImplementQueryBuilder queryBuilderObject = new ImplementQueryBuilder();

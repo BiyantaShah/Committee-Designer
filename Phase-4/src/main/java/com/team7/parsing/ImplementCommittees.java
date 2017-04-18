@@ -32,11 +32,10 @@ public class ImplementCommittees implements ParseTextFile {
 	}
 	
 
-	// parsing the files in the committee folder and 
+	// parsing the files in the committee folder and extracting needed information from it
 	/* 
 	 * @see com.team7.interfaces.ParseTextFile#parseText()
 	 */
-	// extracting needed information from it
 	public String parseText() throws IOException, SQLException {
 		// TODO Auto-generated method stub
 
