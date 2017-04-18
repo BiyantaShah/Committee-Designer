@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import com.team7.abstractDesignFactory.AbstractParseFactory;
@@ -34,6 +35,9 @@ public class ImplementUniAuthorTest {
 	@Test
 	public void testParseSuccess() throws IOException, SQLException {
 		
+		File test = new File("input");
+	    test.mkdirs();
+	    
 		File file = new File("input/testUni.csv");
 	    FileWriter writer = new FileWriter(file);
 	    writer.write("name,dept\n"
@@ -44,6 +48,8 @@ public class ImplementUniAuthorTest {
 	    ParseCsvFiles p = csvFac.getCsv("input/testUni.csv");
 		String result = p.parseCsv();
 		assertEquals("success", result);
+		
+		FileUtils.deleteDirectory(test);
 		
 		// deleting the record inserted
 		ImplementSchemaDB db = new ImplementSchemaDB();
@@ -64,12 +70,18 @@ public class ImplementUniAuthorTest {
 	 */
 	@Test
 	public void parseEmpty() throws IOException, SQLException {
+		File test = new File("input");
+	    test.mkdirs();
+	    
 		File file = new File("input/testUni.csv");
 		FileWriter writer = new FileWriter(file);
 		writer.close();
 		
 		ParseCsvFiles p = csvFac.getCsv("input/testUni.csv");
 		String result = p.parseCsv();
+		
+		FileUtils.deleteDirectory(test);
+		
 		assertEquals("No data", result);
 		file.delete();
 	}
