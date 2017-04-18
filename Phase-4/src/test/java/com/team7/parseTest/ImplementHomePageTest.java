@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import com.team7.abstractDesignFactory.AbstractParseFactory;
@@ -33,7 +34,9 @@ public class ImplementHomePageTest {
 	 */
 	@Test
 	public void testParseSuccess() throws IOException, SQLException {
-		
+		File test = new File("input");
+	    test.mkdirs();
+	    
 		File file = new File("input/testHome.csv");
 	    FileWriter writer = new FileWriter(file);
 	    writer.write("name,homepage\n"
@@ -43,6 +46,8 @@ public class ImplementHomePageTest {
 	    ParseCsvFiles parse = csvFac.getCsv("input/testHome.csv");
 		String result = parse.parseCsv();
 		assertEquals("success", result);
+		
+		FileUtils.deleteDirectory(test);
 		
 		// deleting the record inserted
 		ImplementSchemaDB db = new ImplementSchemaDB();
@@ -63,12 +68,18 @@ public class ImplementHomePageTest {
 	 */
 	@Test
 	public void parseEmpty() throws IOException, SQLException {
+		File test = new File("input");
+	    test.mkdirs();
+	    
 		File file = new File("input/testHome.csv");
 		FileWriter writer = new FileWriter(file);
 		writer.close();
 		
 		ParseCsvFiles parse = csvFac.getCsv("input/testHome.csv");
 		String result = parse.parseCsv();
+		
+		FileUtils.deleteDirectory(test);
+		
 		assertEquals("No data", result);
 		file.delete();
 	}
