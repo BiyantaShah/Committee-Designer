@@ -57,11 +57,7 @@ public class ImplementCandidateListUITest {
 		//testing inserting already inserted author
 		canList.buttonSelect.doClick();
 
-		//clicking send email button without selecting author
-		canList.model2 = new DefaultTableModel();
-    	canList.btnSendEmail.doClick();
-
-
+		
 		//clicking remove button without selecting author
     	canList.btnRemove.doClick();
     	
@@ -80,7 +76,7 @@ public class ImplementCandidateListUITest {
 	            	//selecting author
 	            	canList.table2.setRowSelectionInterval(i,i);
 	            	
-	            	//testing sendEmail button after selecting an author
+	            	//testing sendEmail button
 	            	canList.btnSendEmail.doClick();
 	            	
 	            	//testing remove button after selecting an author

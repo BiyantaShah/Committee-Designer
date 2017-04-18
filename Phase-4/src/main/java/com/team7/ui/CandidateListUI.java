@@ -315,7 +315,7 @@ public class CandidateListUI extends JFrame {
 					LoginUI log = new LoginUI();
 					log.messageShow("Please select some authors for your committee");
 					flag = false;
-				}
+				} 
 				
 				ImplementSearchDisplay searchDisplay = new ImplementSearchDisplay();
 				if (flag == true) {
@@ -355,7 +355,7 @@ public class CandidateListUI extends JFrame {
 						try {
 							// deleting the selected author from the Candidate_list of the current user.
 							db.updateCandidateList(author, UIConstants.currentUserConf);		
-							model2.removeRow(index);; 
+							model2.removeRow(index); 
 						} catch (IOException | SQLException e) {
 							e.printStackTrace();
 						}
