@@ -10,6 +10,7 @@ public interface Register {
 
 	/**
 	 * Creates the user.
+	 * Create a new user, if not present
 	 *
 	 * @param userName the user name
 	 * @param password the password
@@ -19,18 +20,17 @@ public interface Register {
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	//Create a new user, if not present
 	public String createUser(String userName, String password, String role, String confName) throws SQLException,IOException;
 
 	/**
 	 * Verify if user exists.
+	 * Check if user already exists
 	 *
 	 * @param userName the user name
 	 * @return true, if successful
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	// Check if user already exists
 	public boolean verifyIfUserExists(String userName) throws SQLException,IOException;
 	
 	/**
@@ -40,7 +40,6 @@ public interface Register {
 	 * @param secretKey the secret key
 	 * @return the string
 	 */
-	//Encrypts password
 	public String encryptPassword(String plainPass,String secretKey);
 
 }

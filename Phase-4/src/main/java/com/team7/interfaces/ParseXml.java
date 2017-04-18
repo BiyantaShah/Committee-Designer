@@ -12,12 +12,12 @@ public interface ParseXml {
 	
 	/**
 	 * Parses the xml.
+	 * Parses XML to human readable format 
 	 *
 	 * @return the string
 	 * @throws JAXBException the JAXB exception
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	//Parses XML to human readable format 
 	public String parseXml() throws JAXBException, SQLException,IOException;
 }

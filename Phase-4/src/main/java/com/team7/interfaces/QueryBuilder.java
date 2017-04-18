@@ -12,33 +12,34 @@ import com.team7.queryEngine.SearchParameter;
  */
 public interface QueryBuilder {
 
-	// createQuery method receives a List for search parameters
+	
 	/**
 	 * Creates the query.
+	 * createQuery method receives a List for search parameters
+	 * Returns a List of queries which will be joined for the final result
 	 *
 	 * @param searchParam the search param
 	 * @return the list
-	 */
-	// Returns a List of queries which will be joined for the final result
+	 */ 
 	public List<String> createQuery(List<SearchParameter> searchParam);
 
 	/**
 	 * Validate query.
+	 * validate the query and look for evil inputs for enhanced security
 	 *
 	 * @param searchParam the search param
 	 * @return true, if successful
 	 */
-	//validate the query and look for evil inputs for enhanced security 	
 	public boolean validateQuery(List<SearchParameter> searchParam);
 
 	/**
 	 * Send query.
+	 * sends the query to Database and fetches results
 	 *
 	 * @param searchQuery the search query
 	 * @return the result set
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	// send the query to Database
 	public ResultSet sendQuery(String searchQuery) throws SQLException,IOException;
 }

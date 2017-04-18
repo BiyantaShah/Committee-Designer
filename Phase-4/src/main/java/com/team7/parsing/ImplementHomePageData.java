@@ -10,11 +10,11 @@ import java.sql.SQLException;
 
 import com.team7.interfaces.ParseCsvFiles;
 
-// Parsing the csv file provided in csrankings.org
+
 /**
  * The Class ImplementHomePageData.
- */
-// extracting information about home page url of author.
+ * Extracting information about home page url of author.
+ */ 
 public class ImplementHomePageData implements ParseCsvFiles {
 
 	/** The csv file. */

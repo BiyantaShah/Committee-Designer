@@ -5,12 +5,14 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-// This class represents the root element of the xml file.
-// Contains objects of all the tags whose information is required.
+
 /**
  * The Class dblp.
+ * This class represents the root element of the xml file.
+ * Contains objects of all the tags whose information is required.
+ * Information of all these objects will be extracted by JAXB parser.
  */
-// Information of all these objects will be extracted by JAXB parser.
+ 
 @XmlRootElement
 public class dblp {
 

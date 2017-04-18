@@ -10,11 +10,10 @@ import java.sql.SQLException;
 
 import com.team7.interfaces.ParseCsvFiles;
 
-//Parsing the csv file provided in csrankings.org
 /**
  * The Class ImplementUniCountryData.
+ * Extracting information about regions of each university.
  */
-//extracting information about regions of each university.
 public class ImplementUniCountryData implements ParseCsvFiles {
 
 	/** The csv file. */

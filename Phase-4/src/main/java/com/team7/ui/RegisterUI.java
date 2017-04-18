@@ -162,6 +162,9 @@ public class RegisterUI extends JFrame {
 				if(userName.equals("")) {
 					log.messageShow("Please enter user name");
 				} 
+				else if (userName.contains("\"")) {
+					log.messageShow("Username cannot contain double quotes");
+				}
 				else if (userName.contains(" ")) {
 					log.messageShow("Username cannot contain blank spaces");
 				}

@@ -129,7 +129,6 @@ public class ImplementCandidateListUITest {
 	 * Test logout.
 	 */
 	@Test	
-	// Testing logout button
 	public void testLogout() {		
 		canList.btnLogout.doClick();
 		canList.dispose();
@@ -139,7 +138,6 @@ public class ImplementCandidateListUITest {
 	 * Test search UI.
 	 */
 	@Test
-	// Testing the SearchUI function
 	public void testSearchUI() {
 		canList.btnSearchui.doClick();
 		canList.dispose();
@@ -148,8 +146,7 @@ public class ImplementCandidateListUITest {
 	/**
 	 * Test favorite lis UI.
 	 */
-	@Test
-	// Testing the Candidate list 
+	@Test 
 	public void testFavoriteLisUI() {
 		canList.btnMyFavoriteList.doClick();
 		canList.dispose();

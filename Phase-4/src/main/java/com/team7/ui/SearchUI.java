@@ -28,8 +28,8 @@ import java.awt.Font;
 
 /**
  * The Class SearchUI.
+ * Search Criteria page is created here
  */
-// Search Criteria page is created here
 @SuppressWarnings("serial")
 public class SearchUI extends JFrame { 
 

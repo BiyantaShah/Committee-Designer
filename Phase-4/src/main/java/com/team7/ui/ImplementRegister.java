@@ -78,13 +78,13 @@ public class ImplementRegister implements Register {
 
 	// checking for a valid email ID 
 	// (does not check whether the email ID is registered valid ID or not, 
+	// that discretion is upon the user)
 	/**
 	 * Valid email id.
 	 *
 	 * @param userName the user name
 	 * @return true, if successful
 	 */
-	// that discretion is upon the user)
 	private boolean validEmailId(String userName) {
 
 		Pattern pattern;

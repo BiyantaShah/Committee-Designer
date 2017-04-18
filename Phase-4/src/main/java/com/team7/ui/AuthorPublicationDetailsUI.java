@@ -35,8 +35,8 @@ import java.awt.event.ActionEvent;
 
 /**
  * The Class AuthorPublicationDetailsUI.
- */
-// Class which displays the publication details of the author (Paper and articles , along with URL)
+ * Class which displays the publication details of the author (Paper and articles , along with URL)
+ */ 
 public class AuthorPublicationDetailsUI extends JFrame {
 
 	/** The Constant serialVersionUID. */
@@ -94,10 +94,10 @@ public class AuthorPublicationDetailsUI extends JFrame {
 		panel.add(lblSavedAuthors);
 
 		JLabel lblNewLabel = new JLabel("To select authors for the committee, click \"Add to Favorite list\" beside the row");
-		lblNewLabel.setBounds(381, 133, 513, 16);
+		lblNewLabel.setBounds(331, 133, 513, 16);
 		panel.add(lblNewLabel);
 
-		btnSearch = new JButton("Search UI");
+		btnSearch = new JButton("Search");
 		btnSearch.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		btnSearch.setBounds(930, 10, 117, 34);
 		panel.add(btnSearch);

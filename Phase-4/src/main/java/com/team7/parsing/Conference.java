@@ -5,8 +5,8 @@ import javax.xml.bind.annotation.XmlElement;
 
 /**
  * The Class Conference.
- */
-// This class contains information about the conferences ( title, extra information about it)
+ * This class contains information about the conferences ( title, extra information about it)
+ */ 
 public class Conference {
 
 	/** The booktitle. */

@@ -2,8 +2,8 @@ package com.team7.parsing;
 
 /**
  * The Class User.
+ * This class contains information about the users of the application 
  */
-// This class contains information about the users of the application 
 public class User {
 
 	/** The user name. */

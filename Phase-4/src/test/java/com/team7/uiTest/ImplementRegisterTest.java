@@ -19,11 +19,11 @@ public class ImplementRegisterTest {
 
 	/**
 	 * Test create user success.
+	 * Test to verify a successful user registration - should return true
 	 *
 	 * @throws Exception the exception
 	 */
 	@Test
-	//Test to verify a successful user registration - should return true
 	public void testCreateUserSuccess() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
@@ -42,11 +42,11 @@ public class ImplementRegisterTest {
 
 	/**
 	 * Test user exists success.
+	 * Test to verify a successful user registration - should return exists
 	 *
 	 * @throws Exception the exception
 	 */
 	@Test
-	//Test to verify a successful user registration - should return exists
 	public void testUserExistsSuccess() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
@@ -57,11 +57,11 @@ public class ImplementRegisterTest {
 
 	/**
 	 * Test pwd encryption success.
+	 * Test to successful encryption of password
 	 *
 	 * @throws SQLException the SQL exception
 	 */
 	@Test
-	//Test to successful encryption of password
 	public void testPwdEncryptionSuccess() throws SQLException {
 
 		ImplementRegister user = new ImplementRegister();
@@ -88,12 +88,14 @@ public class ImplementRegisterTest {
 
 	/**
 	 * Test create user failure.
+	 * 
+	 * Test to verify a unsuccessful user registration - should return invalid email
+	 * When email ID does not contain "@"
 	 *
 	 * @throws Exception the exception
 	 */
 	@Test
-	//Test to verify a unsuccessful user registration - should return invalid email
-	// When email ID does not contain "@"
+	
 	public void testCreateUserFailure() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
@@ -106,12 +108,11 @@ public class ImplementRegisterTest {
 
 	/**
 	 * Test create user failure 1.
+	 * Test to verify a unsuccessful user registration - should return invalid email
 	 *
 	 * @throws Exception the exception
 	 */
 	@Test
-	//Test to verify a unsuccessful user registration - should return invalid email
-	// When email ID does not contain .com or .edu as the domain
 	public void testCreateUserFailure1() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
@@ -124,12 +125,12 @@ public class ImplementRegisterTest {
 
 	/**
 	 * Test create user failure 2.
+	 * Test to verify a unsuccessful user registration - should return invalid email
+	 * When email ID contain 2 "@"
 	 *
 	 * @throws Exception the exception
 	 */
 	@Test
-	//Test to verify a unsuccessful user registration - should return invalid email
-	// When email ID contain 2 "@"
 	public void testCreateUserFailure2() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
@@ -142,12 +143,12 @@ public class ImplementRegisterTest {
 
 	/**
 	 * Test create user failure 3.
+	 * Test to verify a unsuccessful user registration - should return invalid email
+	 * When email ID does contain domain name
 	 *
 	 * @throws Exception the exception
 	 */
-	@Test
-	//Test to verify a unsuccessful user registration - should return invalid email
-	// When email ID does contain domain name
+	@Test 
 	public void testCreateUserFailure3() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
@@ -160,12 +161,12 @@ public class ImplementRegisterTest {
 
 	/**
 	 * Test create user failure 4.
+	 * Test to verify a unsuccessful user registration - should return invalid email
+	 * When contains multiple userNames
 	 *
 	 * @throws Exception the exception
 	 */
-	@Test
-	//Test to verify a unsuccessful user registration - should return invalid email
-	// When contains multiple userNames
+	@Test 
 	public void testCreateUserFailure4() throws Exception {
 
 		ImplementRegister user = new ImplementRegister();
@@ -180,11 +181,12 @@ public class ImplementRegisterTest {
 	/**
 	 * Test verify user exists failure.
 	 *
+	 * Test to verify a successful user registration - should return success
+	 * 
 	 * @throws SQLException the SQL exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	//Test to verify a successful user registration - should return success
 	public void testVerifyUserExistsFailure() throws SQLException, IOException {
 
 		ImplementRegister user = new ImplementRegister();

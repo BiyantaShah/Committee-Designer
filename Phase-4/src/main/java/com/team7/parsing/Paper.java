@@ -7,8 +7,8 @@ import javax.xml.bind.annotation.XmlElement;
 
 /**
  * The Class Paper.
- */
-// Contains information about the paper (authors, title , pages etc.)
+ * Contains information about the paper (authors, title , pages etc.)
+ */ 
 public class Paper {
 
 	/** The author. */

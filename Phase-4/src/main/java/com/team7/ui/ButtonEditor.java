@@ -12,8 +12,8 @@ import javax.swing.JTable;
 
 /**
  * The Class ButtonEditor.
+ * This class renders buttons into the table
  */
-// This class renders buttons into the table
 public class ButtonEditor extends DefaultCellEditor {
 
 	/** The button. */

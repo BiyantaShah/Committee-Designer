@@ -36,11 +36,11 @@ public class ImplementParseDatabase implements ParseXml {
 	public ImplementParseDatabase(File file) {
 		this.xmlFile = file;
 	}
-	// Parsing the dblp.xml to extract required data, 
+	// Parsing the dblp.xml to extract required data,
+	// converting into java objects and inserting into the database 
 	/* 
 	 * @see com.team7.interfaces.ParseXml#parseXml()
-	 */
-	// converting into java objects and inserting into the database
+	 */ 
 	public String parseXml() throws JAXBException, SQLException, IOException {
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(dblp.class);

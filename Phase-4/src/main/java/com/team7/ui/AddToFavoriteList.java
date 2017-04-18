@@ -13,8 +13,8 @@ import com.team7.parsing.ImplementSchemaDB;
 
 /**
  * The Class AddToFavoriteList.
- */
-// Adding each author selected to the favorite list
+ * Adding each author selected to the favorite list
+ */ 
 public class AddToFavoriteList extends DefaultCellEditor {
 
 	/** The button. */

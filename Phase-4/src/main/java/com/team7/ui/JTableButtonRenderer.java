@@ -10,8 +10,8 @@ import javax.swing.table.TableCellRenderer;
 
 /**
  * The Class JTableButtonRenderer.
- */
-// Renders each cell at the center
+ * Renders each cell at the center
+ */ 
 public class JTableButtonRenderer extends JButton implements TableCellRenderer {
 
 	/** The Constant serialVersionUID. */

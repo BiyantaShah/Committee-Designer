@@ -10,11 +10,12 @@ import java.sql.SQLException;
 
 import com.team7.interfaces.ParseCsvFiles;
 
-//Parsing the csv file provided in csrankings.org
+
 /**
  * The Class ImplementAuthorAffData.
+ * Extracting information about affiliated universities of author.
  */
-//extracting information about affiliated universities of author.
+
 public class ImplementAuthorAffData implements ParseCsvFiles {
 	
 	/** The csv file. */

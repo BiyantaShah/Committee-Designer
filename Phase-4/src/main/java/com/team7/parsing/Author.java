@@ -2,8 +2,8 @@ package com.team7.parsing;
 
 /**
  * The Class Author.
+ * This class gives information about the Author (name and the papers written)
  */
-// This class gives information about the Author (name and the papers written)
 public class Author {
 
 	/** The name. */

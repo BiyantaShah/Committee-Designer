@@ -39,7 +39,6 @@ public class ImplementSearchUITest {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	// Testing the logout button
 	public void testLogoutButton() throws SQLException, IOException {
 		search.btnLogout.doClick();
 		search.dispose();
@@ -52,7 +51,6 @@ public class ImplementSearchUITest {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	// Testing the submit button
 	public void testSubmitButton() throws SQLException, IOException {
 		search.btnNewButton.doClick();
 		search.dispose();
