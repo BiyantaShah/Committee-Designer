@@ -37,7 +37,7 @@ public class ImplementAuthorAffTest {
 	@Test 
 	public void testParseSuccess() throws IOException, SQLException {
 		
-		File test = new File("input/");
+		File test = new File("input");
 	    test.mkdirs();
 		
 		File file = new File("input/testAff.csv");
@@ -72,7 +72,7 @@ public class ImplementAuthorAffTest {
 	 */
 	@Test
 	public void parseEmpty() throws IOException, SQLException {
-		File test = new File("input/");
+		File test = new File("input");
 	    test.mkdirs();
 	    
 		File file = new File("input/testAff.csv");
